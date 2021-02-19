@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>sever端口占用，localhost:4000无响应</title>
+      <link href="2021/02/19/sever%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%EF%BC%8Clocalhost-4000%E6%97%A0%E5%93%8D%E5%BA%94/"/>
+      <url>2021/02/19/sever%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%EF%BC%8Clocalhost-4000%E6%97%A0%E5%93%8D%E5%BA%94/</url>
+      
+        <content type="html"><![CDATA[<p>这种情况一般是因为4000端口被占用，使用下面的命令更改端口号为5000<br>然后浏览器输入<a href="http://localhost:5000/">http://localhost:5000/</a></p><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo s -p <span class="hljs-number">50001</span><br></code></pre></td></tr></table></figure><p>可是每次这样设置会很麻烦（如果4000端口被占用）</p><p><strong>解决办法：</strong><br>在站点配置文件加入</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">5000</span><br>  <span class="hljs-attr">compress:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">header:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Git常用命令</title>
       <link href="2021/02/19/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
       <url>2021/02/19/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>

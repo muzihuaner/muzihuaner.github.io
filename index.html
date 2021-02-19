@@ -135,6 +135,45 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://quickso.cn">
+                    
+                    快点搜
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://huangenet.cn">
+                    
+                    欢哥互联
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://zhiurl.cn">
+                    
+                    知链短链
+                  </a>
+                
+              </div>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
@@ -186,6 +225,44 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/19/sever%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%EF%BC%8Clocalhost-4000%E6%97%A0%E5%93%8D%E5%BA%94/">sever端口占用，localhost:4000无响应</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/19/sever%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%EF%BC%8Clocalhost-4000%E6%97%A0%E5%93%8D%E5%BA%94/">
+          
+          
+            
+          
+          这种情况一般是因为4000端口被占用，使用下面的命令更改端口号为5000然后浏览器输入http://localhost:5000/
+1$ hexo s -p 50001
+可是每次这样设置会很麻烦（如果4000端口被占用）
+解决办法：在站点配置文件加入
+1234server:  port: 5000  compress: true  header: true
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-19 23:17" pubdate>
+              2021-02-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
 
   <div class="row mx-auto index-card">
     
@@ -505,7 +582,7 @@ Markdown 是一种轻量级标记语言，学习成本也不需要太多，且�
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-      <div> <p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> &amp;  <a target="_blank" rel="noopener external nofollow noreferrer" href="https://vercel.com/" data-pjax-state="">Vercel</a> 托管</p> </div> <a href="https://myquicklinks.vercel.app/" target="blank" title="快链-友链接力"> <img src="https://cdn.jsdelivr.net/gh/muzihuaner/QuickLinks@main/assets/QuickLinks.gif" srcset="/img/loading.gif" alt="快链-友链接力" width="120"> </a> <div class="copyright"> <p><a href="/">Copyright © 2021 欢哥科技</a></p> </div> 
+      <div> <p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> &amp;  <a target="_blank" rel="noopener external nofollow noreferrer" href="https://vercel.com/" data-pjax-state="">Vercel</a> 托管</p> </div> <a href="https://myquicklinks.vercel.app/" target="blank" title="快链-友链接力"> <img src="https://cdn.jsdelivr.net/gh/muzihuaner/QuickLinks@main/assets/QuickLinks.gif" srcset="/img/loading.gif" alt="快链-友链接力" width="120"> </a><br> <div class="copyright"> <p><a href="/">Copyright © 2021 欢哥科技</a></p> </div> 
   </div>
   
   <div class="statistics">
