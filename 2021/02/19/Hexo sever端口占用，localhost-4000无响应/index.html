@@ -17,7 +17,7 @@
   <meta name="description" content="点滴记忆：你知道的越多，你不知道的越多。">
   <meta name="author" content="木子欢儿">
   <meta name="keywords" content="博客">
-  <title>利用CloudFlare Worker 免费部署 JSProxy 服务 - 点滴记忆</title>
+  <title>Hexo sever端口占用，localhost:4000无响应 - 点滴记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="利用CloudFlare Worker 免费部署 JSProxy 服务">
+            <span class="h2" id="subtitle" title="Hexo sever端口占用，localhost:4000无响应">
               
             </span>
 
@@ -223,8 +223,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-20 09:38" pubdate>
-        2021年2月20日 上午
+      <time datetime="2021-02-19 23:17" pubdate>
+        2021年2月19日 晚上
       </time>
     </span>
   
@@ -235,7 +235,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      476 字
+      83 字
     </span>
   
 
@@ -245,7 +245,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      1
        分钟
     </span>
   
@@ -275,33 +275,14 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">利用CloudFlare Worker 免费部署 JSProxy 服务</h1>
+            <h1 style="display: none">Hexo sever端口占用，localhost:4000无响应</h1>
             
             <div class="markdown-body">
-              <p>SProxy 一个基于浏览器端 JS 实现的在线代理，这里不多介绍！</p>
-<p>本文主要介绍一下利用<code>CloudFlare Worker</code> 来搭建一个JSProxy服务。</p>
-<p><code>CloudFlare Worker</code> 是 CloudFlare 的边缘计算服务。开发者可通过 JavaScript 对 CDN 进行编程，从而能灵活处理 HTTP 请求。这使得很多任务可在 CDN 上完成，无需自己的服务器参与。</p>
-<p><code>CloudFlare Worker</code>免费服务，支持每天10 万次免费请求！基本也够用了！</p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210220094111.png" srcset="/img/loading.gif"></p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>1、<a target="_blank" rel="noopener" href="https://www.cloudfalre.com/">Cloudflare</a>账号*1；<br>2、<a target="_blank" rel="noopener" href="https://github.com/EtherDream/jsproxy">GitHub上一个大佬开源的项目</a>；<br>最终得到：一个可用于应急或者日常使用的的网页端在线代理。</p>
-<h2 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h2><p>1）打开 <a target="_blank" rel="noopener" href="https://51.ruyo.net/go/index.html?u=https://workers.cloudflare.com">https://workers.cloudflare.com</a>，登陆上你的 Cloudflare 账号激活 Workers 服务</p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210220094317.png" srcset="/img/loading.gif"></p>
-<p>然后创建一个 Workers【Create a Worker】</p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210220094512.png" srcset="/img/loading.gif"></p>
-<p>2）修改一下子域名，创建出来的域名格式 自定义的内容.Cloudflare用户名.workers.dev</p>
-<p>3）复制<a target="_blank" rel="noopener" href="https://github.com/EtherDream/jsproxy/tree/master/cf-worker"> index.js</a> 的内容到左侧代码（Script）区域</p>
-<p>代码备份：<a target="_blank" rel="noopener" href="https://github.com/muzihuaner/jsproxy/tree/master/cf-worker">点我进入</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210220094715.png" srcset="/img/loading.gif"></p>
-<p>4）先点击【Run】右侧看执行效果，再点击 【Save and deploy】 部署代码</p>
-<p>5）届时你可以访问你的站点<a target="_blank" rel="noopener" href="https://xxx.子域名.workers.dev查看效果/">https://xxx.子域名.workers.dev查看效果</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/image-20210220095128535.png" srcset="/img/loading.gif" alt="image-20210220095128535"></p>
-<p>进入站点后将线路选择切换为当前站点即可使用</p>
-<p> 特别提示：浏览网站的时候，有时候会提示加载不安全脚本，点击允许即可！</p>
-<p>演示站点：<a target="_blank" rel="noopener" href="https://vpn.hgnet.workers.dev/">点击进入</a></p>
-<h2 id="绑定自己的域名（可有可无）"><a href="#绑定自己的域名（可有可无）" class="headerlink" title="绑定自己的域名（可有可无）"></a>绑定自己的域名（可有可无）</h2><p>1、确保自己在Cloudflare下托管的有域名；<br>2、选择Workers选项；<br>3、点击添加路由；</p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210220095347.png" srcset="/img/loading.gif"></p>
-<p>4、输入信息；<br>5、将部署好的在线代理网站域名（这个是Cloudflare分配给你的）CNAME指向到你自己的域名，即添加DNS记录中的CNAME模式，文本框填Cloudflare分配给你的域名；<br>6、即可访问自己的域名来访问在线代理。</p>
-
+              <p>这种情况一般是因为4000端口被占用，使用下面的命令更改端口号为5000<br>然后浏览器输入<a target="_blank" rel="noopener" href="http://localhost:5000/">http://localhost:5000/</a></p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">$ hexo <span class="hljs-keyword">server</span> -p <span class="hljs-number">5000</span><br></code></pre></td></tr></table></figure>
+<p>可是每次这样设置会很麻烦（如果4000端口被占用）</p>
+<p><strong>解决办法：</strong><br>在站点配置文件加入</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">5000</span><br>  <span class="hljs-attr">compress:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">header:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -310,7 +291,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%95%99%E7%A8%8B/">教程</a>
+                      <a class="hover-with-bg" href="/categories/%E4%BB%A3%E7%A0%81/">代码</a>
                     
                   </div>
                 
@@ -318,9 +299,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/CloudFlare/">CloudFlare</a>
-                    
-                      <a class="hover-with-bg" href="/tags/JSProxy/">JSProxy</a>
+                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
                     
                   </div>
                 
@@ -333,9 +312,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/20/%E5%BF%AB%E9%93%BE-%E5%8F%8B%E9%93%BE%E6%8E%A5%E5%8A%9B/">
+                      <a href="/2021/02/20/%E5%88%A9%E7%94%A8CloudFlare%20Worker%20%E5%85%8D%E8%B4%B9%E9%83%A8%E7%BD%B2%20JSProxy%20%E6%9C%8D%E5%8A%A1/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">快链-友链接力</span>
+                        <span class="hidden-mobile">利用CloudFlare Worker 免费部署 JSProxy 服务</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -343,8 +322,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/19/Hexo%20sever%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%EF%BC%8Clocalhost-4000%E6%97%A0%E5%93%8D%E5%BA%94/">
-                        <span class="hidden-mobile">Hexo sever端口占用，localhost:4000无响应</span>
+                      <a href="/2021/02/19/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">Git常用命令</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
