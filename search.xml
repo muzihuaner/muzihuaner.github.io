@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>利用CloudFlare Worker 免费部署 JSProxy 服务</title>
+      <link href="2021/02/20/%E5%88%A9%E7%94%A8CloudFlare%20Worker%20%E5%85%8D%E8%B4%B9%E9%83%A8%E7%BD%B2%20JSProxy%20%E6%9C%8D%E5%8A%A1/"/>
+      <url>2021/02/20/%E5%88%A9%E7%94%A8CloudFlare%20Worker%20%E5%85%8D%E8%B4%B9%E9%83%A8%E7%BD%B2%20JSProxy%20%E6%9C%8D%E5%8A%A1/</url>
+      
+        <content type="html"><![CDATA[<p>SProxy 一个基于浏览器端 JS 实现的在线代理，这里不多介绍！</p><p>本文主要介绍一下利用<code>CloudFlare Worker</code> 来搭建一个JSProxy服务。</p><p><code>CloudFlare Worker</code> 是 CloudFlare 的边缘计算服务。开发者可通过 JavaScript 对 CDN 进行编程，从而能灵活处理 HTTP 请求。这使得很多任务可在 CDN 上完成，无需自己的服务器参与。</p><p><code>CloudFlare Worker</code>免费服务，支持每天10 万次免费请求！基本也够用了！</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210220094111.png"></p><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>1、<a href="https://www.cloudfalre.com/">Cloudflare</a>账号*1；<br>2、<a href="https://github.com/EtherDream/jsproxy">GitHub上一个大佬开源的项目</a>；<br>最终得到：一个可用于应急或者日常使用的的网页端在线代理。</p><h2 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h2><p>1）打开 <a href="https://51.ruyo.net/go/index.html?u=https://workers.cloudflare.com">https://workers.cloudflare.com</a>，登陆上你的 Cloudflare 账号激活 Workers 服务</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210220094317.png"></p><p>然后创建一个 Workers【Create a Worker】</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210220094512.png"></p><p>2）修改一下子域名，创建出来的域名格式 自定义的内容.Cloudflare用户名.workers.dev</p><p>3）复制<a href="https://github.com/EtherDream/jsproxy/tree/master/cf-worker"> index.js</a> 的内容到左侧代码（Script）区域</p><p>代码备份：<a href="https://github.com/muzihuaner/jsproxy/tree/master/cf-worker">点我进入</a></p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210220094715.png"></p><p>4）先点击【Run】右侧看执行效果，再点击 【Save and deploy】 部署代码</p><p>5）届时你可以访问你的站点<a href="https://xxx.子域名.workers.dev查看效果/">https://xxx.子域名.workers.dev查看效果</a></p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/image-20210220095128535.png" alt="image-20210220095128535"></p><p>进入站点后将线路选择切换为当前站点即可使用</p><p> 特别提示：浏览网站的时候，有时候会提示加载不安全脚本，点击允许即可！</p><p>演示站点：<a href="https://vpn.hgnet.workers.dev/">点击进入</a></p><h2 id="绑定自己的域名（可有可无）"><a href="#绑定自己的域名（可有可无）" class="headerlink" title="绑定自己的域名（可有可无）"></a>绑定自己的域名（可有可无）</h2><p>1、确保自己在Cloudflare下托管的有域名；<br>2、选择Workers选项；<br>3、点击添加路由；</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210220095347.png"></p><p>4、输入信息；<br>5、将部署好的在线代理网站域名（这个是Cloudflare分配给你的）CNAME指向到你自己的域名，即添加DNS记录中的CNAME模式，文本框填Cloudflare分配给你的域名；<br>6、即可访问自己的域名来访问在线代理。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CloudFlare </tag>
+            
+            <tag> JSProxy </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>sever端口占用，localhost:4000无响应</title>
       <link href="2021/02/19/sever%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%EF%BC%8Clocalhost-4000%E6%97%A0%E5%93%8D%E5%BA%94/"/>
       <url>2021/02/19/sever%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%EF%BC%8Clocalhost-4000%E6%97%A0%E5%93%8D%E5%BA%94/</url>
