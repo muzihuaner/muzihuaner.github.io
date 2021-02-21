@@ -6,7 +6,7 @@
   <link href="https://blog.quickso.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.quickso.cn/"/>
-  <updated>2021-02-21T07:29:28.697Z</updated>
+  <updated>2021-02-21T11:09:28.453Z</updated>
   <id>https://blog.quickso.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>钉钉内网穿透，免费高速的内网穿透工具</title>
+    <link href="https://blog.quickso.cn/2021/02/21/%E9%92%89%E9%92%89%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%85%8D%E8%B4%B9%E9%AB%98%E9%80%9F%E7%9A%84%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B7%A5%E5%85%B7/"/>
+    <id>https://blog.quickso.cn/2021/02/21/%E9%92%89%E9%92%89%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%85%8D%E8%B4%B9%E9%AB%98%E9%80%9F%E7%9A%84%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B7%A5%E5%85%B7/</id>
+    <published>2021-02-21T10:57:06.000Z</published>
+    <updated>2021-02-21T11:09:28.453Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="什么是内网穿透？"><a href="#什么是内网穿透？" class="headerlink" title="什么是内网穿透？"></a>什么是内网穿透？</h4><p>就是让你个人电脑内建立的网站，在外网可以访问，例如你的手机，其他电脑等。</p><p>例如你在电脑部署了一个web服务器，你在浏览器访问127.0.0.1可以打开这个网站，但是你用手机访问127.0.0.1却打不开。那是因为你这个ip地址不是公网ip，只能在你的电脑访问，你需要将127.0.0.1暴露出去，即需要有一个公网ip，别人访问公网ip即可访问网站。</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210221185812.png"></p><p>假设你的电脑是A，你的手机是B，你有一台拥有公网ip的服务器C，显然B想知道A里面有什么，是有一堵墙阻挡住了，这是防火墙。我们的目的就是绕过防火墙，即需要C来协助。</p><p>A可以和C进行信息交换，因为C是公网的，大家可以访问C，所以B也可以和C进行信息交换，如果B想和A联系，B先和C联系，C再和A联系，那么B就可以间接联系到A了，即C作为A和B的中介，也称为代理。</p><h4 id="如何实现内网穿透？"><a href="#如何实现内网穿透？" class="headerlink" title="如何实现内网穿透？"></a>如何实现内网穿透？</h4><p>市面上的内网穿透软件、工具很多，收费的有花生壳、向日葵、免费的有frp、ngrok，其中frp、ngrok是需要一些搭建基础的，对小白不友好啊，但是钉钉把ngrok进行了封装，小白也可以上手，下面给大家介绍钉钉这款内网穿透工具如何使用</p><h4 id="内网穿透之HTTP穿透"><a href="#内网穿透之HTTP穿透" class="headerlink" title="内网穿透之HTTP穿透"></a>内网穿透之HTTP穿透</h4><p>鉴于很多开发者在临时体验开发时往往没有公网域名或者公网IP，本工具提供了一个公网代理服务，目的是方便开发测试。</p><p>本工具不保证稳定性，仅适用于开发测试阶段，禁止当作公网域名使用。如线上应用使用本工具造成稳定性问题，后果由自己承担。如使用本工具传播违法不良信息，钉钉将追究法律责任。</p><h4 id="内网穿透示意图"><a href="#内网穿透示意图" class="headerlink" title="内网穿透示意图"></a>内网穿透示意图</h4><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210221190114.png"></p><h4 id="场景介绍"><a href="#场景介绍" class="headerlink" title="场景介绍"></a>场景介绍</h4><p>案例一：ISV三方企业小程序的回调地址必须是公网域名或IP，对于大部分开发者来说，开发者无法在本地调试远程代码，对于回调URL校验不通过之类的问题无法追踪，只能不断远程部署查看log日志来调试修改。</p><p>案例二：企业通讯录同步过程中需要注册一个公网域名(或IP)的回调地址，用来接收钉钉上的企业通讯录信息变更。</p><p>内网穿透工具可以实现将一个公网域名映射到本地的localhost域名</p><p>github地址：<a href="https://github.com/open-dingtalk/pierced">https://github.com/open-dingtalk/pierced</a></p><h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><h6 id="一、下载程序"><a href="#一、下载程序" class="headerlink" title="一、下载程序"></a>一、下载程序</h6><p>从上面github地址里下载程序，或者直接用<code>git clone</code></p><p>这里以Linux系统为例</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/open-dingtalk/</span>pierced.git<br>cd pierced<span class="hljs-regexp">/linux/</span><br></code></pre></td></tr></table></figure><h6 id="二、启动程序"><a href="#二、启动程序" class="headerlink" title="二、启动程序"></a>二、启动程序</h6><p>Linux、Mac下用系统终端，Windows下要用CMD，Powershell不知为何运行不了。</p><p>执行<code>./ding -config=./ding.cfg -subdomain=域名前缀 端口</code>，这里以Linux系统为例</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">chmod +x ./ding<br>./ding <span class="hljs-attribute">-config</span>=./ding.cfg <span class="hljs-attribute">-subdomain</span>=huange 8080<br></code></pre></td></tr></table></figure><p>参数说明：</p><table><thead><tr><th>参数</th><th>说明</th></tr></thead><tbody><tr><td>-config</td><td>内网穿透的配置文件，按命令照示例固定为钉钉提供的./ding.cfg，无需修改</td></tr><tr><td>-subdomain</td><td>您需要使用的域名前缀，该前缀将会匹配到“vaiwan.com”前面，例如你的subdomain是abcde，启动工具后会将abcde.vaiwan.com映射到本地。</td></tr><tr><td>端口</td><td>您需要代理的本地服务http-server端口，例如你本地端口为8080等</td></tr></tbody></table><h6 id="三、启动成功"><a href="#三、启动成功" class="headerlink" title="三、启动成功"></a>三、启动成功</h6><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210221190645.png"></p><p>启动完客户端后，你访问<a href="http://abcde.vaiwan.com/xxxxx%E9%83%BD%E4%BC%9A%E6%98%A0%E5%B0%84%E5%88%B0">http://abcde.vaiwan.com/xxxxx都会映射到</a> <a href="http://127.0.0.1:8080/xxxxx%E3%80%82">http://127.0.0.1:8080/xxxxx。</a></p><h6 id="四、注意事项"><a href="#四、注意事项" class="headerlink" title="四、注意事项"></a>四、注意事项</h6><ul><li>需要访问的域名是<a href="http://abcde.vaiwan.com/xxxxx">http://abcde.vaiwan.com/xxxxx</a> 而不是<a href="http://abcde.vaiwan.com:8080/xxxxx">http://abcde.vaiwan.com:8080/xxxxx</a></li><li>启动命令的subdomain参数有可能被别人占用，尽量不要用常用字符，可以用自己公司名的拼音，例如：alibaba、dingding等</li><li>可以在本地起个http-server服务，放置一个index.html文件，然后访问<a href="http://abcde.vaiwan.com/index.html%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B">http://abcde.vaiwan.com/index.html测试一下</a></li></ul><p>官方文档：<a href="https://developers.dingtalk.com/document/resourcedownload/http-intranet-penetration?pnamespace=app">点击进入</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;什么是内网穿透？&quot;&gt;&lt;a href=&quot;#什么是内网穿透？&quot; class=&quot;headerlink&quot; title=&quot;什么是内网穿透？&quot;&gt;&lt;/a&gt;什么是内网穿透？&lt;/h4&gt;&lt;p&gt;就是让你个人电脑内建立的网站，在外网可以访问，例如你的手机，其他电脑等。&lt;/p&gt;
+&lt;p&gt;例如</summary>
+      
+    
+    
+    
+    <category term="工具" scheme="https://blog.quickso.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="内网穿透" scheme="https://blog.quickso.cn/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    
+    <category term="免费" scheme="https://blog.quickso.cn/tags/%E5%85%8D%E8%B4%B9/"/>
+    
+  </entry>
   
   <entry>
     <title>使用服务器24小时不间断直播电影电视剧</title>
