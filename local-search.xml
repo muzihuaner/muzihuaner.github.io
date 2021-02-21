@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>使用服务器24小时不间断直播电影电视剧</title>
+    <link href="/2021/02/21/%E4%BD%BF%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A824%E5%B0%8F%E6%97%B6%E4%B8%8D%E9%97%B4%E6%96%AD%E7%9B%B4%E6%92%AD%E7%94%B5%E5%BD%B1%E7%94%B5%E8%A7%86%E5%89%A7/"/>
+    <url>/2021/02/21/%E4%BD%BF%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A824%E5%B0%8F%E6%97%B6%E4%B8%8D%E9%97%B4%E6%96%AD%E7%9B%B4%E6%92%AD%E7%94%B5%E5%BD%B1%E7%94%B5%E8%A7%86%E5%89%A7/</url>
+    
+    <content type="html"><![CDATA[<p>在现在主流的平台上面有很多直播电影，电视剧的房间。很多直播平台也有这方面影视的版权。大部分新人还是使用obs+potplayer来直播。这显然不符合技术宅的解决方法，需要开机个windows主机？技术宅：NO。<br>利用我闲置的vps，云服务器。在b站，虎牙，斗鱼上面24小时不间断直播比obs方便太多<br>下面是我的直播方案，我选用的是白嫖的华为云centos系统的云服务器，cpu内存都不高，网络选用的是1M小水管。</p><p>准备工作：<br>下载直播推流工具: wget <a href="http://download.bytelang.cn/kplayer-latest-linux_amd64.tar.gz">http://download.bytelang.cn/kplayer-latest-linux_amd64.tar.gz</a></p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 解压压缩包</span><br><span class="hljs-attribute">tar</span> zxvf kplayer-latest-linux_amd<span class="hljs-number">64</span>.tar.gz<br></code></pre></td></tr></table></figure><p>得到可执行文件</p><p>媒体资源准备:<br>自行下载想要直播的视频资源，我直播的是蜡笔小新。用迅雷下载完成蜡笔小新的全集后，上传到服务器中任意目录</p><p>开始直播：<br>编辑kplayer.yaml的配置文件(可查看官方文档)，在playlist里面添加进下载的媒体资源</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">version:</span> <span class="hljs-string">&quot;1.0&quot;</span><br><span class="hljs-symbol">player:</span><br><span class="hljs-symbol">  media:</span><br><span class="hljs-symbol">    list:</span><br>      - <span class="hljs-string">&quot;/root/lbxx/蜡笔小新1.mp4&quot;</span><br>      - <span class="hljs-string">&quot;/root/lbxx/蜡笔小新2.mp4&quot;</span><br><br><span class="hljs-symbol">  output:</span><br><span class="hljs-symbol">    type:</span> rtmp<br><span class="hljs-symbol">   path:</span> <span class="hljs-string">&quot;rtmp://*****&quot;</span><br></code></pre></td></tr></table></figure><p>下面的output path一般是直播平台提供的推流地址，工具将我们的媒体资源推送到直播服务器上面就开始正式直播了。</p><p>但是kplayer没有提供后台运行的功能，我借助的是tmux工具来进行后台运行的。如果有嫌麻烦的小伙伴可以 nohup 命令来进行后台推流.</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">nohup <span class="hljs-string">./kplayer</span><br></code></pre></td></tr></table></figure><p>打开直播间，就能完整看到蜡笔小新正在播放了</p><p>配置文件：<br>官方网站上面有很详细的配置文件说明，提供了插件。缓存，多个直播平台推流的功能。还是挺全面的，赞一个。这是网站地址 <a href="https://kplayer.bytelang.cn/">https://kplayer.bytelang.cn/</a></p><p>有空可以去看看我的直播间<a href="https://live.bilibili.com/21577989?visit_id=riw92t7hwzk">https://live.bilibili.com/21577989</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>教程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>VPS</tag>
+      
+      <tag>服务器</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>PHP空间虚拟主机不支持子目录的情况下借助.htaccess实现多个域名重定向到子目录实现单空间多站点</title>
     <link href="/2021/02/20/PHP%E7%A9%BA%E9%97%B4%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E4%B8%8D%E6%94%AF%E6%8C%81%E5%AD%90%E7%9B%AE%E5%BD%95%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%80%9F%E5%8A%A9-htaccess%E5%AE%9E%E7%8E%B0%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%B0%E5%AD%90%E7%9B%AE%E5%BD%95%E5%AE%9E%E7%8E%B0%E5%8D%95%E7%A9%BA%E9%97%B4%E5%A4%9A%E7%AB%99%E7%82%B9/"/>
     <url>/2021/02/20/PHP%E7%A9%BA%E9%97%B4%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E4%B8%8D%E6%94%AF%E6%8C%81%E5%AD%90%E7%9B%AE%E5%BD%95%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%80%9F%E5%8A%A9-htaccess%E5%AE%9E%E7%8E%B0%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%B0%E5%AD%90%E7%9B%AE%E5%BD%95%E5%AE%9E%E7%8E%B0%E5%8D%95%E7%A9%BA%E9%97%B4%E5%A4%9A%E7%AB%99%E7%82%B9/</url>
