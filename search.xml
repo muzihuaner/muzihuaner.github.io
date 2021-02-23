@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Armbian-N1手动安装omv</title>
+      <link href="2021/02/23/Armbian-N1%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85omv/"/>
+      <url>2021/02/23/Armbian-N1%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85omv/</url>
+      
+        <content type="html"><![CDATA[<p>本来是想用 <code>armbian-config</code> 来自动安装 <code>OpenMediaVault</code> 的，但是安装的时候总是自动退出，无奈，只能手动安装了。</p><h3 id="1-添加-OMV-软件源"><a href="#1-添加-OMV-软件源" class="headerlink" title="1. 添加 OMV 软件源"></a>1. 添加 OMV 软件源</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;deb http://packages.openmediavault.org/public arrakis main&quot;</span> &gt; /etc/apt/sources.<span class="hljs-keyword">list</span>.d/openmediavault.<span class="hljs-keyword">list</span>  <br>apt-key adv --recv-keys --keyserver keyserver.ubuntu.com <span class="hljs-number">7E7</span>A6C592EF35D13 <span class="hljs-number">24863</span>F0C716B980B<br>apt update<br></code></pre></td></tr></table></figure><h3 id="2-设置环境变量"><a href="#2-设置环境变量" class="headerlink" title="2. 设置环境变量"></a>2. 设置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LANG=C <br><span class="hljs-built_in">export</span> DEBIAN_FRONTEND=noninteractive <br><span class="hljs-built_in">export</span> APT_LISTCHANGES_FRONTEND=none<br></code></pre></td></tr></table></figure><h3 id="3-安装-OMV"><a href="#3-安装-OMV" class="headerlink" title="3. 安装 OMV"></a>3. 安装 OMV</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs swift">apt install openmediavault<span class="hljs-operator">-</span>keyring <span class="hljs-keyword">postfix</span> <br>apt install openmediavault<br></code></pre></td></tr></table></figure><h3 id="4-初始化：快完成时有确认提示，如下："><a href="#4-初始化：快完成时有确认提示，如下：" class="headerlink" title="4. 初始化：快完成时有确认提示，如下："></a>4. 初始化：快完成时有确认提示，如下：</h3><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210223125241.png"></p><p>确认后，<code>omv-initsystem</code> 进行初始化</p><h3 id="5-安装完成后，输入http-ip打开登陆页面，默认账号密码如下，"><a href="#5-安装完成后，输入http-ip打开登陆页面，默认账号密码如下，" class="headerlink" title="5. 安装完成后，输入http://ip打开登陆页面，默认账号密码如下，"></a>5. 安装完成后，输入<code>http://ip</code>打开登陆页面，默认账号密码如下，</h3><ul><li>账号：<code>admin</code></li><li>密码：<code>openmediavault</code></li></ul><h3 id="6-安装扩展插件"><a href="#6-安装扩展插件" class="headerlink" title="6. 安装扩展插件"></a>6. 安装扩展插件</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs csharp">wget http:<span class="hljs-comment">//omv-extras.org/openmediavault-omvextrasorg_latest_all4.deb</span><br>dpkg -i openmediavault-omvextrasorg_latest_all4.deb<br>apt-<span class="hljs-keyword">get</span> update<br></code></pre></td></tr></table></figure><p>这样就安装完成了！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> N1 </tag>
+            
+            <tag> Armbian </tag>
+            
+            <tag> OpenMediaVault </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>钉钉内网穿透，免费高速的内网穿透工具</title>
       <link href="2021/02/21/%E9%92%89%E9%92%89%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%85%8D%E8%B4%B9%E9%AB%98%E9%80%9F%E7%9A%84%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B7%A5%E5%85%B7/"/>
       <url>2021/02/21/%E9%92%89%E9%92%89%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%85%8D%E8%B4%B9%E9%AB%98%E9%80%9F%E7%9A%84%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B7%A5%E5%85%B7/</url>
