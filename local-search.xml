@@ -4,6 +4,62 @@
   
   
   <entry>
+    <title>一键配置VScode的C语言开发环境</title>
+    <link href="/2021/02/24/%E4%B8%80%E9%94%AE%E9%85%8D%E7%BD%AEVScode%E7%9A%84C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <url>/2021/02/24/%E4%B8%80%E9%94%AE%E9%85%8D%E7%BD%AEVScode%E7%9A%84C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    
+    <content type="html"><![CDATA[<p>最近因为学习需要，得整一个C语言的开发平台。打开百度一顿搜。嗯，推荐使用宇宙第一IDE——VS Code！随便敲一段代码，按下F5本来以为会跳出“Hello World”，结果。。。乖乖，我这程序运行出来个json文件！666<img src="https://cdn.jsdelivr.net/gh/zwying0814/Cuteen@4.2/static//emoji/paopao/E985B8E788BD_2x.png" alt="img"><br>再定睛仔细以看，原来如此，还是要配置C语言开发环境的嘛。 <img src="https://cdn.jsdelivr.net/gh/zwying0814/Cuteen@4.2/static//emoji/paopao/E6BB91E7A8BD_2x.png" alt="img"></p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210224110119.png"></p><p>这不看不知道，一看得吓尿。<br>啥是编译器？？？啥是环境变量？？？我写C语言还要用编译器？？？<br>这个MinGW和GCC有什么关系啊？这个tasks和launch是干啥事的呀？这给我还推荐插件装了咋也没用呢？<br>好嘛，我就想写个C语言，本以为装个编辑器就完事了，咋还整出这么多乱七八糟的玩意。告辞！<br>就这样，VS code劝退了诸多萌新，让他们与全宇宙数一数二好用的工具擦肩而过。</p><p>那有没有办法一键配置开发环境呢？<br>答案肯定是：<strong>有！</strong></p><p>B站UP主<a href="https://space.bilibili.com/12263994">SDchao</a>，就开发了一款一键配置C语言开发环境的工具。</p><p>下载链接：<a href="https://github.com/SDchao/AutoVsCEnv_WPF">点我直达</a></p><p>压缩包下载好了，<strong>先解压！右键，以管理员权限</strong>运行那个<strong>又粗又大的exe文件</strong>，你将获得至高无上的快乐。</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210224110250.png"></p><p>咳咳，你还是得选择一下<strong>项目文件夹</strong>。说人话就是你以后写的c或者cpp文件都要放在这个文件夹和它的子文件夹里面。</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210224110312.png"></p><p>点击确认，配置文件、编译器、环境变量、编辑器插件……全部给你一一整好！完事了还帮你开了VS code。<br>新建文件，写下代码，F5，完美运行。（如果不行的话关掉重启下VS code）</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210224110334.png"></p><p>那一刻，泪流了下来 <img src="https://cdn.jsdelivr.net/gh/zwying0814/Cuteen@4.2/static//emoji/aru/E69C9FE5BE85_2x.png" alt="img"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>教程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>VsCode</tag>
+      
+      <tag>C</tag>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>VSCode配置Python开发环境</title>
+    <link href="/2021/02/24/VSCode%E9%85%8D%E7%BD%AEPython%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <url>/2021/02/24/VSCode%E9%85%8D%E7%BD%AEPython%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    
+    <content type="html"><![CDATA[<p>VSCode 是一个相当优秀的编辑器，具备开源、跨平台、模块化、插件丰富、启动时间快、颜值高、可高度定制等等优秀的特质，不愧是微软爸爸的私生子。不管是用来写 css,php,c/c++ 都是不错的选择，用 VSCode 来编写 Python，也是相当的好用的。<br>所以，今天我们就来讲讲，怎么在 VScode 上配置 Python 开发环境。</p><h2 id="程序准备"><a href="#程序准备" class="headerlink" title="程序准备"></a>程序准备</h2><p>首先，我们必须先下载好 Python 的安装包和 VSCode 的安装包。<br>我之前 VS2019 已经自动安装好了 Python3，这里就不再进行安装了。<br>下载地址如下：</p><p><a href="https://www.python.org/downloads/">Python下载</a></p><p><a href="https://code.visualstudio.com/">VsCode下载</a></p><p>大家选择适合自己的版本下载即可。<br>我是 Windows10 64 位的操作系统，所以我 Python 下的是 64 位的最新版，VSCode 下载的是 64 位的最新版。</p><h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><h3 id="安装-Python"><a href="#安装-Python" class="headerlink" title="安装 Python"></a>安装 Python</h3><p>首先，我们安装 Python 到自己的电脑里。切记，一定要记得勾选<strong>添加环境变量</strong>。<br>安装过程如下：</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210224105522.gif"></p><p>然后，我们需要检查下 python 是否安装成功。<br>检查方法如下：</p><ol><li>打开 cmd，输入 <code>python</code>，点击回车。</li><li>输入 <code>import this</code>，欣赏下 python 之禅。</li><li>退出，输入 <code>pip list</code>，检查第三方的包正确不。</li></ol><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210224105602.gif"></p><h3 id="安装第三方包"><a href="#安装第三方包" class="headerlink" title="安装第三方包"></a>安装第三方包</h3><p>通过 python 自带的 pip 工具，安装两个一会儿配置 VScode 需要的包。<br>flake8 和 yapf<br>flake8 会检查编写代码时的不规范的地方和语法错误。<br>yapf 是一个代码格式化工具，可以一键美化代码。<br>安装过程如下：</p><ol><li>在 cmd 输入 <code>pip list</code> 检查是否已存在需要的包。</li><li>输入 <code>pip install flake8</code> 下载安装 flake8。</li><li>输入 <code>pip install yapf</code> 下载安装 yapf（检测代码规范性）。</li></ol><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210224105637.gif"></p><h2 id="配置-VSCode"><a href="#配置-VSCode" class="headerlink" title="配置 VSCode"></a>配置 VSCode</h2><h3 id="安装-Python-插件"><a href="#安装-Python-插件" class="headerlink" title="安装 Python 插件"></a>安装 Python 插件</h3><ol><li>打开 VScode，按下快捷键 Ctrl+Shift+X，进入插件管理页面。</li><li>在搜索栏输入 python。</li><li>选择插件，点击安装。</li></ol><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210224105713.gif"></p><h3 id="创建项目，配置工作区域"><a href="#创建项目，配置工作区域" class="headerlink" title="创建项目，配置工作区域"></a>创建项目，配置工作区域</h3><ol><li>创建一个本地文件夹，作为项目文件。</li><li>在项目文件中，新建文件夹<code>vscode</code>，新建文件 <code>settings.json</code>。</li></ol><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>    <span class="hljs-attr">&quot;files.defaultLanguage&quot;</span>: <span class="hljs-string">&quot;python&quot;</span>,<br>    <span class="hljs-attr">&quot;python.linting.flake8Enabled&quot;</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">&quot;python.formatting.provider&quot;</span>: <span class="hljs-string">&quot;yapf&quot;</span>,<br>    <span class="hljs-attr">&quot;python.linting.flake8Args&quot;</span>: [<br>        <span class="hljs-string">&quot;--max-line-length=248&quot;</span><br>    ],<br>    <span class="hljs-attr">&quot;python.linting.pylintEnabled&quot;</span>: <span class="hljs-literal">false</span><br>&#125;<br></code></pre></td></tr></table></figure><p>点击 VSCode 侧边栏中的<code>Run</code>，选择添加<code>launch.json</code>，选择<code>Python File</code>。</p><ol><li>写个 Hello World 测试，按 F5 进行调试。</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">print(<span class="hljs-string">&quot;Hello VScode&quot;</span>)<br></code></pre></td></tr></table></figure><h2 id="配置完成"><a href="#配置完成" class="headerlink" title="配置完成"></a>配置完成</h2><p>到这里，整个 VSCode 编写 Python 的开发环境就已经全部配置完成了。</p><p>代码格式化工具 yapf：<br>在 VSCode 中按下快捷键<code>Alt+Shift+F</code>即可自动格式化代码。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>教程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>VsCode</tag>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>为博客添加访问提醒</title>
     <link href="/2021/02/24/%E4%B8%BA%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E8%AE%BF%E9%97%AE%E6%8F%90%E9%86%92/"/>
     <url>/2021/02/24/%E4%B8%BA%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E8%AE%BF%E9%97%AE%E6%8F%90%E9%86%92/</url>
