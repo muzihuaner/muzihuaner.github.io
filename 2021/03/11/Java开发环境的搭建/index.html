@@ -20,7 +20,7 @@
   <meta name="author" content="木子欢儿">
   <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
   
-  <title>使用Cloudflare设置网站301重定向 - 点滴记忆</title>
+  <title>Java开发环境的搭建 - 点滴记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="使用Cloudflare设置网站301重定向">
+            <span class="h2" id="subtitle" title="Java开发环境的搭建">
               
             </span>
 
@@ -239,8 +239,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-01 12:39" pubdate>
-        2021年3月1日 下午
+      <time datetime="2021-03-11 19:22" pubdate>
+        2021年3月11日 晚上
       </time>
     </span>
   
@@ -251,7 +251,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      595 字
+      691 字
     </span>
   
 
@@ -261,7 +261,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      8
        分钟
     </span>
   
@@ -291,50 +291,79 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">使用Cloudflare设置网站301重定向</h1>
+            <h1 style="display: none">Java开发环境的搭建</h1>
             
             <div class="markdown-body">
-              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>301 是 HTTP 协议中的一个状态码，表示该网页已经永久迁移到新位置。</p>
-<p>我们经常在更换域名时，使用 301 重定向来把旧域名永久转移到新域名上去，它可以同时把我们旧域名的流量和权重同时转移到新域名上去，对搜索引擎比较友好，避免了更换域名所带来的流量丢失。</p>
-<h2 id="适用情况"><a href="#适用情况" class="headerlink" title="适用情况"></a>适用情况</h2><ul>
-<li>更换域名，将旧域名指向新域名；</li>
-<li>网址规范化，将a.com、<a target="_blank" rel="noopener" href="http://www.a.com、blog.a.com等访问地址全部指向a.com一个地址,集中流量和权重;/">www.a.com、blog.a.com等访问地址全部指向a.com一个地址，集中流量和权重；</a></li>
-<li>将指向过期、无效网页的链接重定向至正确地址；</li>
-<li>http重定向到https；</li>
-<li>中文域名指向英文域名。</li>
-</ul>
-<h2 id="使用-Cloudflare-进行重定向-下面介绍下如何使用-Cloudflare-的页面规则对网站进行-301-重定向。"><a href="#使用-Cloudflare-进行重定向-下面介绍下如何使用-Cloudflare-的页面规则对网站进行-301-重定向。" class="headerlink" title="使用 Cloudflare 进行重定向 下面介绍下如何使用 Cloudflare 的页面规则对网站进行 301 重定向。"></a><strong>使用 Cloudflare 进行重定向 下面介绍下如何使用 Cloudflare 的页面规则对网站进行 301 重定向。</strong></h2><h2 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h2><p>登录 <a target="_blank" rel="noopener" href="https://www.cloudflare.com/">Cloudflare</a> 的控制面板，进入 “Page Rules” 页面，创建一条页面规则。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210301124114.png" srcset="/img/loading.gif"></p>
-<h2 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h2><p>添加规则 “Forwarding URL”，类型 “301 – Permanent Redirect”</p>
-<p>1.统一跳转，将<code>abc.com</code>的所有页面都无差别的重定向至<code>newsite.com</code>首页。</p>
-<p><strong>写法：</strong><code>abc.com/*</code> 301 <code>newsite.com</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210301124147.png" srcset="/img/loading.gif"></p>
-<p>2.对应跳转，即 <code>abc.com/b.html</code> 重定向至 <code>newsite.com/b.html</code>，<code>abc.com/about.html </code>重定向至 <code>newsite.com/about.html</code>，保持原网址结构。</p>
-<p><strong>写法：</strong><code>abc.com/*</code> 301 <code>newsite.com/$1</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210301124224.png" srcset="/img/loading.gif"></p>
-<p>3.HTTP 重定向至 HTTPS</p>
-<p>Cloudflare 提供了 HTTPS 重定向选项，直接选择 “Always Use HTTPS” 即可。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210301124248.png" srcset="/img/loading.gif"></p>
-<p>官方文档：<a target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/en-us/articles/218411427#redirects">Forwarding (URL Redirection)</a></p>
-<h2 id="301重定向检测"><a href="#301重定向检测" class="headerlink" title="301重定向检测"></a>301重定向检测</h2><p><strong>设置好我们可以通过检测工具查看重定向结果。</strong></p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://httpstatus.io/">Bulk URL HTTP Status Code, Header &amp; Redirect Checker</a></li>
-<li><a target="_blank" rel="noopener" href="http://tool.chinaz.com/pagestatus/">HTTP状态查询 – 站长工具</a></li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210301124321.png" srcset="/img/loading.gif"></p>
-<h2 id="301-和-302-的区别"><a href="#301-和-302-的区别" class="headerlink" title="301 和 302 的区别"></a>301 和 302 的区别</h2><p><strong>重定向选项中除了 301 还有一个 302 重定向，但是不建议使用。</strong></p>
-<p><strong>301：永久重定向（推荐）</strong></p>
-<ul>
-<li>永久转移地址，不会恢复原地址；</li>
-<li>对搜素引擎友好，可以转移流量和权重。</li>
-</ul>
-<p><strong>302：临时重定向（不推荐）</strong></p>
-<ul>
-<li>临时性转移，会恢复原地址；</li>
-<li>影响搜索引擎优化。</li>
-</ul>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>当然，进行301重定向还可以通过更改 .htaccess 文件等方法，也很方便。如果正好在使用 Cloudflare 的话，可以通过本文的方法进行重定向，使用 Cloudflare 提供好的选项直接设置，不涉及任何代码。</p>
-<p>via.<a target="_blank" rel="noopener" href="https://go2think.com/301-redirect-by-cloudflare/">https://go2think.com/301-redirect-by-cloudflare/</a></p>
+              <p>开发Java应用需要部署Java的开发环境，就像做饭需要厨房这个环境，Java的jdk就相当于做饭的工具。</p>
+<h2 id="1-平台"><a href="#1-平台" class="headerlink" title="1.平台"></a>1.平台</h2><p>Java SE  ：Java标准版</p>
+<p>Java EE ：Java企业版</p>
+<p>Java ME：为机顶盒、移动电话和PDA之类嵌入式消费电子设备提供的Java语言平台</p>
+<h2 id="2-安装Java-SE平台"><a href="#2-安装Java-SE平台" class="headerlink" title="2.安装Java SE平台"></a>2.安装Java SE平台</h2><p>下载地址：</p>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase-downloads.html">https://www.oracle.com/java/technologies/javase-downloads.html</a></p>
+<p>选择适合你的JDK，我这里下载的是Windows x64版本（如果你是Linux或者Mac系统下载对应版本即可）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311194940.png" srcset="/img/loading.gif" alt="image-20210311194940249"></p>
+<p>下载完毕，开始安装….</p>
+<p>点击“安装包”，选择“<strong>下一步</strong>”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311194738.png" srcset="/img/loading.gif" alt="image-20210311194738316"></p>
+<p>这里我们更改一下安装位置（方便后面配置系统变量）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195118.png" srcset="/img/loading.gif" alt="image-20210311195118348"></p>
+<p>比如我这里修改成D盘的位置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195222.png" srcset="/img/loading.gif" alt="image-20210311195222259"></p>
+<p>然后点击“<strong>下一步</strong>”，就开始安装了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195330.png" srcset="/img/loading.gif" alt="image-20210311195330732"></p>
+<p>这样软件就安装好了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195406.png" srcset="/img/loading.gif" alt="image-20210311195405994"></p>
+<h4 id="配置系统变量"><a href="#配置系统变量" class="headerlink" title="配置系统变量"></a>配置系统变量</h4><p>在<strong>此电脑</strong>那里右键选择“<strong>属性</strong>”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195948.png" srcset="/img/loading.gif" alt="image-20210311195948038"></p>
+<p>在右边那里选择“<strong>高级系统设置</strong>”，然后选择“<strong>环境变量</strong>”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195848.png" srcset="/img/loading.gif" alt="image-20210311195848228"></p>
+<h3 id="1-设置系统变量JAVA-HOME"><a href="#1-设置系统变量JAVA-HOME" class="headerlink" title="1.设置系统变量JAVA_HOME"></a>1.设置系统变量JAVA_HOME</h3><p>在“<strong>系统变量</strong>”那里点击“<strong>新建</strong>”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311200148.png" srcset="/img/loading.gif" alt="image-20210311200148258"></p>
+<p>变量名填</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">JAV<span class="hljs-built_in">A_HOME</span><br></code></pre></td></tr></table></figure>
+<p>变量值填写你的JDK安装位置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311200450.png" srcset="/img/loading.gif" alt="image-20210311200450935"></p>
+<h3 id="2-设置系统环境Path的设置"><a href="#2-设置系统环境Path的设置" class="headerlink" title="2.设置系统环境Path的设置"></a>2.设置系统环境Path的设置</h3><p>选中变量“<strong>Path</strong>”，点击“<strong>编辑</strong>”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311200845.png" srcset="/img/loading.gif" alt="image-20210311200845227"></p>
+<p>在弹出来的对话框中选择“<strong>新建</strong>”，填入</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><span class="hljs-meta">%</span>JAVA_HOME<span class="hljs-meta">%</span>/bi<span class="hljs-symbol">n</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311201103.png" srcset="/img/loading.gif" alt="image-20210311201103059"></p>
+<h3 id="3-设置系统环境classpath变量"><a href="#3-设置系统环境classpath变量" class="headerlink" title="3.设置系统环境classpath变量"></a>3.设置系统环境classpath变量</h3><p>新建系统变量</p>
+<p>变量名填</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">CLASSPATH</span><br></code></pre></td></tr></table></figure>
+<p>变量值填</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">.;%JAVA_HOME%<span class="hljs-regexp">/lib/</span>dt.jar;%JAVA_HOME%<span class="hljs-regexp">/lib/</span>tools.jar<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311201923.png" srcset="/img/loading.gif" alt="image-20210311201923848"></p>
+<h2 id="3-测试是否安装成功"><a href="#3-测试是否安装成功" class="headerlink" title="3.测试是否安装成功"></a>3.测试是否安装成功</h2><p>1.点击“<strong>Win+R</strong>”，输入“<strong>CMD</strong>”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311202724.png" srcset="/img/loading.gif" alt="image-20210311202724748"></p>
+<p>然后输入“<strong>javac</strong>”,会出现下面的一大堆东西，即是安装成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311202827.png" srcset="/img/loading.gif" alt="image-20210311202826947"></p>
+<p>如果出现“<strong>javac不是内部或外部命令，也不是可运行的程序</strong><br><strong>或批处理文件。</strong>”你就需要重新安装或者重新设置环境变量</p>
+<p>2.写一个<strong>HelloWord</strong>程序</p>
+<p>我这里是使用<strong>VsCode</strong>，你可以使用notepad++或其他编辑器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mian</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello，World！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后保存为“<strong>Hello.java</strong>”</p>
+<p>然后使用CMD 进入“<strong>Hello.java</strong>”所在路径（你可以在.Java文件那里右键选择属性查看）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311203705.png" srcset="/img/loading.gif" alt="image-20210311203705352"></p>
+<p>使用“cd 文件路径”命令进入</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311203804.png" srcset="/img/loading.gif" alt="image-20210311203804581"></p>
+<p><strong>编译.java文件</strong></p>
+<p>在CMD输入</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">javac <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Hello</span>.</span></span>java<br></code></pre></td></tr></table></figure>
+<p>如果提示“<strong>错误: 编码 GBK 的不可映射字符</strong>”，则输入</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">javac -encoding UTF-<span class="hljs-number">8</span> <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Hello</span>.</span></span>java<br></code></pre></td></tr></table></figure>
+<p>编译成功就会多一个名为“<strong>Hello.class</strong>”的文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311204822.png" srcset="/img/loading.gif" alt="image-20210311204822848"></p>
+<p><strong>运行</strong></p>
+<p>在CMD输入</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">java Hello</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311205345.png" srcset="/img/loading.gif" alt="image-20210311205345018"></p>
+<p>如果提示</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">错误: 在类 Hello 中找不到 <span class="hljs-selector-tag">main</span> 方法, 请将 <span class="hljs-selector-tag">main</span> 方法定义为:<br>   public static void <span class="hljs-selector-tag">main</span>(String<span class="hljs-selector-attr">[]</span> args)<br>否则 JavaFX 应用程序类必须扩展javafx<span class="hljs-selector-class">.application</span>.Application<br></code></pre></td></tr></table></figure>
+<p>则修改.java文件为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello，World！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>重新编译并运行即可</p>
+<p>是不是很简单呢？嘿嘿~</p>
 
             </div>
             <hr>
@@ -352,9 +381,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/301/">301</a>
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
                     
-                      <a class="hover-with-bg" href="/tags/Cloudflare/">Cloudflare</a>
+                      <a class="hover-with-bg" href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">开发环境</a>
                     
                   </div>
                 
@@ -371,18 +400,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/11/Java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java开发环境的搭建</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/26/%E5%88%A9%E7%94%A8DockerHub%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA%E6%97%A0%E9%99%90%E5%AE%B9%E9%87%8F%E4%B8%8D%E9%99%90%E9%80%9F%E7%9A%84%E7%BD%91%E7%9B%98/">
-                        <span class="hidden-mobile">利用DockerHub仓库搭建无限容量不限速的网盘</span>
+                      <a href="/2021/03/01/%E4%BD%BF%E7%94%A8Cloudflare%E8%AE%BE%E7%BD%AE%E7%BD%91%E7%AB%99301%E9%87%8D%E5%AE%9A%E5%90%91/">
+                        <span class="hidden-mobile">使用Cloudflare设置网站301重定向</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

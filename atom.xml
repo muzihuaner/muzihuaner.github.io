@@ -6,7 +6,7 @@
   <link href="https://blog.quickso.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.quickso.cn/"/>
-  <updated>2021-03-01T04:44:01.313Z</updated>
+  <updated>2021-03-11T12:55:34.927Z</updated>
   <id>https://blog.quickso.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java开发环境的搭建</title>
+    <link href="https://blog.quickso.cn/2021/03/11/Java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
+    <id>https://blog.quickso.cn/2021/03/11/Java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/</id>
+    <published>2021-03-11T11:22:49.000Z</published>
+    <updated>2021-03-11T12:55:34.927Z</updated>
+    
+    <content type="html"><![CDATA[<p>开发Java应用需要部署Java的开发环境，就像做饭需要厨房这个环境，Java的jdk就相当于做饭的工具。</p><h2 id="1-平台"><a href="#1-平台" class="headerlink" title="1.平台"></a>1.平台</h2><p>Java SE  ：Java标准版</p><p>Java EE ：Java企业版</p><p>Java ME：为机顶盒、移动电话和PDA之类嵌入式消费电子设备提供的Java语言平台</p><h2 id="2-安装Java-SE平台"><a href="#2-安装Java-SE平台" class="headerlink" title="2.安装Java SE平台"></a>2.安装Java SE平台</h2><p>下载地址：</p><p><a href="https://www.oracle.com/java/technologies/javase-downloads.html">https://www.oracle.com/java/technologies/javase-downloads.html</a></p><p>选择适合你的JDK，我这里下载的是Windows x64版本（如果你是Linux或者Mac系统下载对应版本即可）</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311194940.png" alt="image-20210311194940249"></p><p>下载完毕，开始安装….</p><p>点击“安装包”，选择“<strong>下一步</strong>”</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311194738.png" alt="image-20210311194738316"></p><p>这里我们更改一下安装位置（方便后面配置系统变量）</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195118.png" alt="image-20210311195118348"></p><p>比如我这里修改成D盘的位置</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195222.png" alt="image-20210311195222259"></p><p>然后点击“<strong>下一步</strong>”，就开始安装了</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195330.png" alt="image-20210311195330732"></p><p>这样软件就安装好了</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195406.png" alt="image-20210311195405994"></p><h4 id="配置系统变量"><a href="#配置系统变量" class="headerlink" title="配置系统变量"></a>配置系统变量</h4><p>在<strong>此电脑</strong>那里右键选择“<strong>属性</strong>”</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195948.png" alt="image-20210311195948038"></p><p>在右边那里选择“<strong>高级系统设置</strong>”，然后选择“<strong>环境变量</strong>”</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311195848.png" alt="image-20210311195848228"></p><h3 id="1-设置系统变量JAVA-HOME"><a href="#1-设置系统变量JAVA-HOME" class="headerlink" title="1.设置系统变量JAVA_HOME"></a>1.设置系统变量JAVA_HOME</h3><p>在“<strong>系统变量</strong>”那里点击“<strong>新建</strong>”</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311200148.png" alt="image-20210311200148258"></p><p>变量名填</p><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">JAV<span class="hljs-built_in">A_HOME</span><br></code></pre></td></tr></table></figure><p>变量值填写你的JDK安装位置</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311200450.png" alt="image-20210311200450935"></p><h3 id="2-设置系统环境Path的设置"><a href="#2-设置系统环境Path的设置" class="headerlink" title="2.设置系统环境Path的设置"></a>2.设置系统环境Path的设置</h3><p>选中变量“<strong>Path</strong>”，点击“<strong>编辑</strong>”</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311200845.png" alt="image-20210311200845227"></p><p>在弹出来的对话框中选择“<strong>新建</strong>”，填入</p><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><span class="hljs-meta">%</span>JAVA_HOME<span class="hljs-meta">%</span>/bi<span class="hljs-symbol">n</span><br></code></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311201103.png" alt="image-20210311201103059"></p><h3 id="3-设置系统环境classpath变量"><a href="#3-设置系统环境classpath变量" class="headerlink" title="3.设置系统环境classpath变量"></a>3.设置系统环境classpath变量</h3><p>新建系统变量</p><p>变量名填</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">CLASSPATH</span><br></code></pre></td></tr></table></figure><p>变量值填</p><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">.;%JAVA_HOME%<span class="hljs-regexp">/lib/</span>dt.jar;%JAVA_HOME%<span class="hljs-regexp">/lib/</span>tools.jar<br></code></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311201923.png" alt="image-20210311201923848"></p><h2 id="3-测试是否安装成功"><a href="#3-测试是否安装成功" class="headerlink" title="3.测试是否安装成功"></a>3.测试是否安装成功</h2><p>1.点击“<strong>Win+R</strong>”，输入“<strong>CMD</strong>”</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311202724.png" alt="image-20210311202724748"></p><p>然后输入“<strong>javac</strong>”,会出现下面的一大堆东西，即是安装成功</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311202827.png" alt="image-20210311202826947"></p><p>如果出现“<strong>javac不是内部或外部命令，也不是可运行的程序</strong><br><strong>或批处理文件。</strong>”你就需要重新安装或者重新设置环境变量</p><p>2.写一个<strong>HelloWord</strong>程序</p><p>我这里是使用<strong>VsCode</strong>，你可以使用notepad++或其他编辑器</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mian</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello，World！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>然后保存为“<strong>Hello.java</strong>”</p><p>然后使用CMD 进入“<strong>Hello.java</strong>”所在路径（你可以在.Java文件那里右键选择属性查看）</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311203705.png" alt="image-20210311203705352"></p><p>使用“cd 文件路径”命令进入</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311203804.png" alt="image-20210311203804581"></p><p><strong>编译.java文件</strong></p><p>在CMD输入</p><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">javac <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Hello</span>.</span></span>java<br></code></pre></td></tr></table></figure><p>如果提示“<strong>错误: 编码 GBK 的不可映射字符</strong>”，则输入</p><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">javac -encoding UTF-<span class="hljs-number">8</span> <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Hello</span>.</span></span>java<br></code></pre></td></tr></table></figure><p>编译成功就会多一个名为“<strong>Hello.class</strong>”的文件</p><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311204822.png" alt="image-20210311204822848"></p><p><strong>运行</strong></p><p>在CMD输入</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">java Hello</span><br></code></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210311205345.png" alt="image-20210311205345018"></p><p>如果提示</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">错误: 在类 Hello 中找不到 <span class="hljs-selector-tag">main</span> 方法, 请将 <span class="hljs-selector-tag">main</span> 方法定义为:<br>   public static void <span class="hljs-selector-tag">main</span>(String<span class="hljs-selector-attr">[]</span> args)<br>否则 JavaFX 应用程序类必须扩展javafx<span class="hljs-selector-class">.application</span>.Application<br></code></pre></td></tr></table></figure><p>则修改.java文件为</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello，World！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>重新编译并运行即可</p><p>是不是很简单呢？嘿嘿~</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;开发Java应用需要部署Java的开发环境，就像做饭需要厨房这个环境，Java的jdk就相当于做饭的工具。&lt;/p&gt;
+&lt;h2 id=&quot;1-平台&quot;&gt;&lt;a href=&quot;#1-平台&quot; class=&quot;headerlink&quot; title=&quot;1.平台&quot;&gt;&lt;/a&gt;1.平台&lt;/h2&gt;&lt;p&gt;J</summary>
+      
+    
+    
+    
+    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="Java" scheme="https://blog.quickso.cn/tags/Java/"/>
+    
+    <category term="开发环境" scheme="https://blog.quickso.cn/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Cloudflare设置网站301重定向</title>
@@ -518,34 +545,6 @@
     
     
     <category term="MarkDown" scheme="https://blog.quickso.cn/tags/MarkDown/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Github-jsDelivr-PicGo的图床方案</title>
-    <link href="https://blog.quickso.cn/2021/02/18/Github-jsDelivr-PicGo%E7%9A%84%E5%9B%BE%E5%BA%8A%E6%96%B9%E6%A1%88/"/>
-    <id>https://blog.quickso.cn/2021/02/18/Github-jsDelivr-PicGo%E7%9A%84%E5%9B%BE%E5%BA%8A%E6%96%B9%E6%A1%88/</id>
-    <published>2021-02-18T12:21:46.000Z</published>
-    <updated>2021-02-19T15:53:08.654Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="使用Github-jsDelivr-PicGo的图床方案"><a href="#使用Github-jsDelivr-PicGo的图床方案" class="headerlink" title="使用Github+jsDelivr+PicGo的图床方案"></a>使用Github+jsDelivr+PicGo的图床方案</h1><p>最近一直在寻找好用的图床，SM.MS的速度越来越堪忧，其他的就怕跑路，所以就看上了Github，但由于G站在国内一直处于半墙的状态，所以就用CDN加速，再通过PicGO一键上传，且GitHub的空间完全够个人博客的使用。<br>CDN:<em>内容分发网络（英语：Content Delivery Network或Content Distribution Network，缩写：CDN）是指一种透过互联网互相连接的电脑网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、视频、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。</em></p><h2 id="新建一个仓库"><a href="#新建一个仓库" class="headerlink" title="新建一个仓库"></a>新建一个仓库</h2><p>注意要勾选Public，进行公开</p><p><a href="https://cdn.jsdelivr.net/gh/Braqr/photo_bed/%E6%96%B0%E5%BB%BA%E4%BB%93%E5%BA%93.png"><img src="https://cdn.jsdelivr.net/gh/Braqr/photo_bed/%E6%96%B0%E5%BB%BA%E4%BB%93%E5%BA%93.png" alt="新建一个仓库"></a></p><h2 id="获取Token"><a href="#获取Token" class="headerlink" title="获取Token"></a>获取Token</h2><p><a href="https://github.com/settings/tokens/new">生成Token</a></p><p><a href="https://cdn.jsdelivr.net/gh/Braqr/photo_bed/tk.png"><img src="https://cdn.jsdelivr.net/gh/Braqr/photo_bed/tk.png" alt="TK"></a><br><a href="https://cdn.jsdelivr.net/gh/Braqr/photo_bed/tk1.png"><img src="https://cdn.jsdelivr.net/gh/Braqr/photo_bed/tk1.png" alt="2"></a></p><p>在主页选择Settings-Developer settings-Personal access tokens-Generate new token，填写好描述，勾选repo，然后点击Generate token生成Token，复制好，待会需要填入PicGo。</p><h2 id="下载PicGo"><a href="#下载PicGo" class="headerlink" title="下载PicGo"></a>下载PicGo</h2><p><a href="https://github.com/Molunerfinn/PicGo">PicGo项目地址</a></p><h2 id="配置PicGo"><a href="#配置PicGo" class="headerlink" title="配置PicGo"></a>配置PicGo</h2><p><img src="https://gitee.com/muzihuaner/huangeimages/raw/master/img/20210218202337.png"></p><ul><li>第一项：填写好自己的仓库名</li><li>第二项：填写默认master</li><li>第三项：填写刚刚生成过的token</li><li>第四项：填写你想储存的路径，不填则是根目录</li><li>第五项：<a href="https://cdn.jsdelivr.net/gh/%E7%94%A8%E6%88%B7%E5%90%8D/%E5%9B%BE%E5%BA%8A%E4%BB%93%E5%BA%93%E5%90%8D/%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84">https://cdn.jsdelivr.net/gh/用户名/图床仓库名/图片路径</a> 来加速图片</li></ul><h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>可以直接通过拖拽图片进行上传啦</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;使用Github-jsDelivr-PicGo的图床方案&quot;&gt;&lt;a href=&quot;#使用Github-jsDelivr-PicGo的图床方案&quot; class=&quot;headerlink&quot; title=&quot;使用Github+jsDelivr+PicGo的图床方案&quot;&gt;&lt;/a&gt;使用</summary>
-      
-    
-    
-    
-    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="Github" scheme="https://blog.quickso.cn/tags/Github/"/>
-    
-    <category term="jsDelivr" scheme="https://blog.quickso.cn/tags/jsDelivr/"/>
-    
-    <category term="PicGo" scheme="https://blog.quickso.cn/tags/PicGo/"/>
     
   </entry>
   
