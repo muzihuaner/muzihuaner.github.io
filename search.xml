@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>ShadowsocksR一键安装脚本</title>
+      <link href="2021/03/13/ShadowsocksR%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/"/>
+      <url>2021/03/13/ShadowsocksR%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</url>
+      
+        <content type="html"><![CDATA[<p>目前逗比网站逗比根据地（doub.io）已经关站无法打开，其它类似名称网站均为山寨版本。但是 doubi 的一键安装脚本仍然可以正常使用。<br>目前网上的各个 ShadowsocksR 脚本基本都是只有 安装/启动/重启 等基础功能，对于小白来说还是不够简单方便，既然是一键脚本，那么就要尽可能地简单</p><h3 id="逗比的SSR脚本特点"><a href="#逗比的SSR脚本特点" class="headerlink" title="逗比的SSR脚本特点"></a>逗比的SSR脚本特点</h3><ul><li>支持 限制 用户速度</li><li>支持 限制 端口设备数</li><li>支持 显示 当前连接IP</li><li>支持 显示 SS/SSR连接 二维码</li><li>支持 切换管理 单/多端口</li><li>支持 一键安装 锐速</li><li>支持 一键安装 BBR</li><li>支持 一键封禁 垃圾邮件(SMAP)/BT/PT</li></ul><h3 id="安装环境要求"><a href="#安装环境要求" class="headerlink" title="安装环境要求"></a>安装环境要求</h3><p>支持架构：Openvz、KVM、Xen<br>系统支持: CentOS6+ / Debian6+ / Ubuntu14+</p><h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><p>我一般使用 <code>aes-256-ctr + auth_aes128_md5 + tls1.2_ticket_fastauth</code></p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget -N --no-check-certificate https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/ToyoDAdoubi/</span>doubi<span class="hljs-regexp">/master/</span>ssr.sh &amp;&amp; chmod x ssr.sh &amp;&amp; bash ssr.sh<br></code></pre></td></tr></table></figure><h3 id="安装锐速及BBR"><a href="#安装锐速及BBR" class="headerlink" title="安装锐速及BBR"></a>安装锐速及BBR</h3><p>如果你的VPS服务器 <code>不是OpenVZ虚拟</code>，而是 KVM/Xen，那么可以在 SSR 安装完毕后，接着安装 锐速/BBR 对网络进行加速。<br>重新运行一键安装脚本 <code>bash ssr.sh</code>，根据提示选项即可</p><h3 id="各平台客户端下载"><a href="#各平台客户端下载" class="headerlink" title="各平台客户端下载"></a>各平台客户端下载</h3><ol><li>Windows客户端下载地址：<br><a href="https://github.com/shadowsocksrr/shadowsocksr-csharp/releases">https://github.com/shadowsocksrr/shadowsocksr-csharp/releases</a></li><li>Mac客户端下载地址：<br><a href="https://github.com/qinyuhang/ShadowsocksX-NG-R/releases">https://github.com/qinyuhang/ShadowsocksX-NG-R/releases</a></li><li>Linux客户端下载地址：<br><a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/Installation">https://github.com/shadowsocks/shadowsocks-qt5/wiki/Installation</a></li><li>Android/安卓客户端下载地址：<br><a href="https://github.com/shadowsocksrr/shadowsocksr-android/releases">https://github.com/shadowsocksrr/shadowsocksr-android/releases</a></li><li>iOS/iPad/苹果客户端可使用 Wingy &amp; Shadowrocket 或者 Potatso Lite</li></ol><h3 id="免费SSR订阅地址"><a href="#免费SSR订阅地址" class="headerlink" title="免费SSR订阅地址"></a>免费SSR订阅地址</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/ssrsub/</span>ssr<span class="hljs-regexp">/master/</span>ssrsub<br></code></pre></td></tr></table></figure><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>ssr.hgnet.workers.dev/<br></code></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ShadowsocksR </tag>
+            
+            <tag> 科学上网 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java开发环境的搭建</title>
       <link href="2021/03/11/Java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
       <url>2021/03/11/Java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
