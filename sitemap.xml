@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.quickso.cn/2021/03/13/ShadowsocksR%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</loc>
+    <loc>https://blog.quickso.cn/ShadowsocksR%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC.html</loc>
     
     <lastmod>2021-03-13</lastmod>
     
@@ -404,13 +404,6 @@
   
   <url>
     <loc>https://blog.quickso.cn/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2021-03-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.quickso.cn/tags/ShadowsocksR/</loc>
     <lastmod>2021-03-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

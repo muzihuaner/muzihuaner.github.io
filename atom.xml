@@ -6,7 +6,7 @@
   <link href="https://blog.quickso.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.quickso.cn/"/>
-  <updated>2021-03-13T01:49:00.142Z</updated>
+  <updated>2021-03-11T12:55:34.927Z</updated>
   <id>https://blog.quickso.cn/</id>
   
   <author>
@@ -15,32 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>ShadowsocksR一键安装脚本</title>
-    <link href="https://blog.quickso.cn/2021/03/13/ShadowsocksR%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/"/>
-    <id>https://blog.quickso.cn/2021/03/13/ShadowsocksR%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</id>
-    <published>2021-03-13T01:42:03.000Z</published>
-    <updated>2021-03-13T01:49:00.142Z</updated>
-    
-    <content type="html"><![CDATA[<p>目前逗比网站逗比根据地（doub.io）已经关站无法打开，其它类似名称网站均为山寨版本。但是 doubi 的一键安装脚本仍然可以正常使用。<br>目前网上的各个 ShadowsocksR 脚本基本都是只有 安装/启动/重启 等基础功能，对于小白来说还是不够简单方便，既然是一键脚本，那么就要尽可能地简单</p><h3 id="逗比的SSR脚本特点"><a href="#逗比的SSR脚本特点" class="headerlink" title="逗比的SSR脚本特点"></a>逗比的SSR脚本特点</h3><ul><li>支持 限制 用户速度</li><li>支持 限制 端口设备数</li><li>支持 显示 当前连接IP</li><li>支持 显示 SS/SSR连接 二维码</li><li>支持 切换管理 单/多端口</li><li>支持 一键安装 锐速</li><li>支持 一键安装 BBR</li><li>支持 一键封禁 垃圾邮件(SMAP)/BT/PT</li></ul><h3 id="安装环境要求"><a href="#安装环境要求" class="headerlink" title="安装环境要求"></a>安装环境要求</h3><p>支持架构：Openvz、KVM、Xen<br>系统支持: CentOS6+ / Debian6+ / Ubuntu14+</p><h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><p>我一般使用 <code>aes-256-ctr + auth_aes128_md5 + tls1.2_ticket_fastauth</code></p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget -N --no-check-certificate https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/ToyoDAdoubi/</span>doubi<span class="hljs-regexp">/master/</span>ssr.sh &amp;&amp; chmod x ssr.sh &amp;&amp; bash ssr.sh<br></code></pre></td></tr></table></figure><h3 id="安装锐速及BBR"><a href="#安装锐速及BBR" class="headerlink" title="安装锐速及BBR"></a>安装锐速及BBR</h3><p>如果你的VPS服务器 <code>不是OpenVZ虚拟</code>，而是 KVM/Xen，那么可以在 SSR 安装完毕后，接着安装 锐速/BBR 对网络进行加速。<br>重新运行一键安装脚本 <code>bash ssr.sh</code>，根据提示选项即可</p><h3 id="各平台客户端下载"><a href="#各平台客户端下载" class="headerlink" title="各平台客户端下载"></a>各平台客户端下载</h3><ol><li>Windows客户端下载地址：<br><a href="https://github.com/shadowsocksrr/shadowsocksr-csharp/releases">https://github.com/shadowsocksrr/shadowsocksr-csharp/releases</a></li><li>Mac客户端下载地址：<br><a href="https://github.com/qinyuhang/ShadowsocksX-NG-R/releases">https://github.com/qinyuhang/ShadowsocksX-NG-R/releases</a></li><li>Linux客户端下载地址：<br><a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/Installation">https://github.com/shadowsocks/shadowsocks-qt5/wiki/Installation</a></li><li>Android/安卓客户端下载地址：<br><a href="https://github.com/shadowsocksrr/shadowsocksr-android/releases">https://github.com/shadowsocksrr/shadowsocksr-android/releases</a></li><li>iOS/iPad/苹果客户端可使用 Wingy &amp; Shadowrocket 或者 Potatso Lite</li></ol><h3 id="免费SSR订阅地址"><a href="#免费SSR订阅地址" class="headerlink" title="免费SSR订阅地址"></a>免费SSR订阅地址</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/ssrsub/</span>ssr<span class="hljs-regexp">/master/</span>ssrsub<br></code></pre></td></tr></table></figure><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>ssr.hgnet.workers.dev/<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;目前逗比网站逗比根据地（doub.io）已经关站无法打开，其它类似名称网站均为山寨版本。但是 doubi 的一键安装脚本仍然可以正常使用。&lt;br&gt;目前网上的各个 ShadowsocksR 脚本基本都是只有 安装/启动/重启 等基础功能，对于小白来说还是不够简单方便，既然是一</summary>
-      
-    
-    
-    
-    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="ShadowsocksR" scheme="https://blog.quickso.cn/tags/ShadowsocksR/"/>
-    
-    <category term="科学上网" scheme="https://blog.quickso.cn/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
-    
-  </entry>
   
   <entry>
     <title>Java开发环境的搭建</title>
@@ -548,6 +522,31 @@
     
     
     <category term="内网穿透" scheme="https://blog.quickso.cn/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MarkDown简单用法</title>
+    <link href="https://blog.quickso.cn/2021/02/18/MarkDown%E7%AE%80%E5%8D%95%E7%94%A8%E6%B3%95/"/>
+    <id>https://blog.quickso.cn/2021/02/18/MarkDown%E7%AE%80%E5%8D%95%E7%94%A8%E6%B3%95/</id>
+    <published>2021-02-18T13:01:23.000Z</published>
+    <updated>2021-02-19T15:40:08.529Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://gitee.com/muzihuaner/huangeimages/raw/master/img/wuoPxS.png" alt="封面图"></p><p>Markdown 是一种轻量级标记语言，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p><h2 id="1-常用语法"><a href="#1-常用语法" class="headerlink" title="1.常用语法"></a>1.常用语法</h2><ul><li><p>标题<br>1~4个<code>#</code>加上空格，代表4个字号的标题</p></li><li><p>高亮强调：<br><code>就是两个反引号把内容括起来</code> ``</p></li><li><p>引用符号： <code>&gt;</code></p><blockquote><p>用来突出内容</p></blockquote></li><li><p><strong>字体加粗</strong> ：</p><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-strong">**字体加粗**</span> <br></code></pre></td></tr></table></figure></li><li><p><em>字体斜体</em>：</p><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-strong">*字体斜体*</span>：<br></code></pre></td></tr></table></figure></li><li><p>菜单：<br>菜单用-、+、*加空格都可以</p></li><li><p>链接：</p><ul><li><p>格式：[标签名字]（链接地址）</p></li><li><p>百度</p><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-attr">[百度]</span>(<span class="hljs-attribute">https</span>:<span class="hljs-comment">//www.baidu.com)</span><br></code></pre></td></tr></table></figure></li></ul></li><li><p>网址：</p><ul><li><p>常规样式：<a href="https://www.jianshu.com/u/97ee21e3f77f">https://www.jianshu.com/u/97ee21e3f77f</a></p></li><li><p>超链接样式：</p><p><a href="https://www.jianshu.com/u/97ee21e3f77f">https://www.jianshu.com/u/97ee21e3f77f</a></p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">&lt;https:<span class="hljs-regexp">//</span>www.jianshu.com<span class="hljs-regexp">/u/</span><span class="hljs-number">97</span>ee21e3f77f&gt;<br></code></pre></td></tr></table></figure></li></ul></li><li><p>插入图片</p><ul><li><p>例：<img src="https://i.loli.net/2020/01/09/n9bcw14OXN82lMD.png" alt="test.png"></p></li><li><p>代码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">![描述](图片地址)<br><span class="hljs-meta">#</span><span class="bash">例如： ![blog头像图片](../images/blog.jpg)</span><br></code></pre></td></tr></table></figure></li></ul></li><li><p>分割线：</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> 就是<span class="hljs-number">3</span>个星号<br>***<br></code></pre></td></tr></table></figure><p>或者用html标签<code>&lt;hr&gt;</code></p><hr></li><li><p>视频：</p></li></ul><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;video&quot;</span> <span class="hljs-attr">controls</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">preload</span>=<span class="hljs-string">&quot;none&quot;</span> <span class="hljs-attr">poster</span>=<span class="hljs-string">&quot;https://i.loli.net/2020/01/09/n9bcw14OXN82lMD.png&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;mp4&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://video.pearvideo.com/mp4/third/20200109/cont-1640431-10042874-102056-hd.mp4&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;video/mp4&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">video</span>&gt;</span><br></code></pre></td></tr></table></figure><ul><li>音频：</li></ul><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">audio</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;audio&quot;</span> <span class="hljs-attr">controls</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">preload</span>=<span class="hljs-string">&quot;none&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;mp3&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;http://qiniu.cloud.fandong.me/Music_iP%E8%B5%B5%E9%9C%B2%20-%20%E7%A6%BB%E6%AD%8C%20%28Live%29.mp3&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">audio</span>&gt;</span><br></code></pre></td></tr></table></figure><h2 id="2-代码块"><a href="#2-代码块" class="headerlink" title="2.代码块"></a>2.代码块</h2><p>以Python为例</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 示例 ```python</span><br><span class="hljs-keyword">import</span> os<br>print(<span class="hljs-string">&#x27;python 代码块？&#x27;</span>)<br><span class="hljs-comment"># OC和html同理：ObjectiveC、html</span><br></code></pre></td></tr></table></figure><h2 id="3-表格"><a href="#3-表格" class="headerlink" title="3.表格:"></a>3.表格:</h2><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">|<span class="hljs-string"> 左对齐 </span>|<span class="hljs-string"> 居中  </span>|<span class="hljs-string"> 右对齐 </span>|<br>|<span class="hljs-string"> ------ </span>|<span class="hljs-string"> :---: </span>|<span class="hljs-string"> -----: </span>|<br>|<span class="hljs-string"> 香蕉   </span>|<span class="hljs-string">  $1   </span>|<span class="hljs-string">      5 </span>|<br>|<span class="hljs-string"> 苹果   </span>|<span class="hljs-string">  $1   </span>|<span class="hljs-string">      6 </span>|<br>|<span class="hljs-string"> 草莓   </span>|<span class="hljs-string">  $1   </span>|<span class="hljs-string">      7 </span>|<br></code></pre></td></tr></table></figure><table><thead><tr><th align="left">左对齐</th><th align="center">居中</th><th align="right">右对齐</th></tr></thead><tbody><tr><td align="left">香蕉</td><td align="center">$1</td><td align="right">5</td></tr><tr><td align="left">苹果</td><td align="center">$1</td><td align="right">6</td></tr><tr><td align="left">草莓</td><td align="center">$1</td><td align="right">7</td></tr></tbody></table><h2 id="4-锚点"><a href="#4-锚点" class="headerlink" title="4.锚点"></a>4.锚点</h2><p>可以利用html的a标签，进行锚点跳转，例：A、B互跳</p><p><a href="https://daning.netlify.app/post/markdown-note/#sssss">锚点A</a></p><p><a href="https://daning.netlify.app/post/markdown-note/#text">锚点B</a></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#sssss&quot;</span>&gt;</span>锚点A<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;sssss&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#text&quot;</span>&gt;</span>锚点B<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure><h2 id="4-快捷键"><a href="#4-快捷键" class="headerlink" title="4.快捷键"></a>4.快捷键</h2><ul><li><strong>字体加粗</strong> ：conmmond + b</li><li><em>字体斜体</em>：conmmond + i</li><li>标题VSCode快捷键<br>变大： shift + ctrl + [<br>缩小： shift + ctrl + ]</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://gitee.com/muzihuaner/huangeimages/raw/master/img/wuoPxS.png&quot; alt=&quot;封面图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Markdown 是一种轻量级标记语言，学习成本也不需要太多，且一旦熟悉这种语法</summary>
+      
+    
+    
+    
+    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="MarkDown" scheme="https://blog.quickso.cn/tags/MarkDown/"/>
     
   </entry>
   
