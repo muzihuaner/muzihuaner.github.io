@@ -6,7 +6,7 @@
   <link href="https://blog.quickso.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.quickso.cn/"/>
-  <updated>2021-04-24T12:20:23.849Z</updated>
+  <updated>2021-05-20T11:30:11.962Z</updated>
   <id>https://blog.quickso.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于宝塔面板的Google镜像网站设置教程</title>
+    <link href="https://blog.quickso.cn/2021/05/20/%E5%9F%BA%E4%BA%8E%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%9A%84Google%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B/"/>
+    <id>https://blog.quickso.cn/2021/05/20/%E5%9F%BA%E4%BA%8E%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%9A%84Google%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B/</id>
+    <published>2021-05-20T11:25:43.000Z</published>
+    <updated>2021-05-20T11:30:11.962Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="建立站点"><a href="#建立站点" class="headerlink" title="建立站点"></a>建立站点</h2><p>在宝塔面板后台点击：<strong>网站-添加站点-输入网站域名</strong></p><h2 id="反向代理设置"><a href="#反向代理设置" class="headerlink" title="反向代理设置"></a>反向代理设置</h2><p>安装面板后新建站点，然后设置站点选择反向代理（如下图所示）<br><a href="http://blog.chauncey09.com/usr/uploads/2019/08/3707359233.png"><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210520192934.png" alt="img"></a></p><p>然后设置反向代理</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stylus">目标URL是： https:<span class="hljs-comment">//www.google.com.hk</span><br>发送域名也是： www<span class="hljs-selector-class">.google</span><span class="hljs-selector-class">.com</span>.hk<br><br><br>#注意：目标URL一定是www<span class="hljs-selector-class">.google</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.hk</span> 后缀为二级区域域名.hk或者.sg。<br>否则会出现无法反代，连续多跳的问题。<br></code></pre></td></tr></table></figure><h2 id="SSL设置"><a href="#SSL设置" class="headerlink" title="SSL设置"></a>SSL设置</h2><p>点击SSL-开启https强制运行（这一步一定要有，因为谷歌目前已经强制https，所以镜像站点同样要以https运行）</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;建立站点&quot;&gt;&lt;a href=&quot;#建立站点&quot; class=&quot;headerlink&quot; title=&quot;建立站点&quot;&gt;&lt;/a&gt;建立站点&lt;/h2&gt;&lt;p&gt;在宝塔面板后台点击：&lt;strong&gt;网站-添加站点-输入网站域名&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;反向代理设置&quot;&gt;</summary>
+      
+    
+    
+    
+    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="Google" scheme="https://blog.quickso.cn/tags/Google/"/>
+    
+    <category term="宝塔" scheme="https://blog.quickso.cn/tags/%E5%AE%9D%E5%A1%94/"/>
+    
+  </entry>
   
   <entry>
     <title>小米路由器mini刷openwrt系统</title>
@@ -539,31 +566,6 @@
     <category term="CloudFlare" scheme="https://blog.quickso.cn/tags/CloudFlare/"/>
     
     <category term="JSProxy" scheme="https://blog.quickso.cn/tags/JSProxy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo sever端口占用，localhost:4000无响应</title>
-    <link href="https://blog.quickso.cn/2021/02/19/Hexo%20sever%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%EF%BC%8Clocalhost-4000%E6%97%A0%E5%93%8D%E5%BA%94/"/>
-    <id>https://blog.quickso.cn/2021/02/19/Hexo%20sever%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%EF%BC%8Clocalhost-4000%E6%97%A0%E5%93%8D%E5%BA%94/</id>
-    <published>2021-02-19T15:17:25.000Z</published>
-    <updated>2021-02-20T02:00:35.279Z</updated>
-    
-    <content type="html"><![CDATA[<p>这种情况一般是因为4000端口被占用，使用下面的命令更改端口号为5000<br>然后浏览器输入<a href="http://localhost:5000/">http://localhost:5000/</a></p><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">$ hexo <span class="hljs-keyword">server</span> -p <span class="hljs-number">5000</span><br></code></pre></td></tr></table></figure><p>可是每次这样设置会很麻烦（如果4000端口被占用）</p><p><strong>解决办法：</strong><br>在站点配置文件加入</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">5000</span><br>  <span class="hljs-attr">compress:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">header:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;这种情况一般是因为4000端口被占用，使用下面的命令更改端口号为5000&lt;br&gt;然后浏览器输入&lt;a href=&quot;http://localhost:5000/&quot;&gt;http://localhost:5000/&lt;/a&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight a</summary>
-      
-    
-    
-    
-    <category term="代码" scheme="https://blog.quickso.cn/categories/%E4%BB%A3%E7%A0%81/"/>
-    
-    
-    <category term="Hexo" scheme="https://blog.quickso.cn/tags/Hexo/"/>
     
   </entry>
   
