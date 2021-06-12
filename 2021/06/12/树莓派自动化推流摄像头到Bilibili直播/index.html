@@ -294,8 +294,10 @@
             <h1 style="display: none">树莓派自动化推流摄像头到Bilibili直播</h1>
             
             <div class="markdown-body">
-              <p>养了条小鱼，想随时随地看看怎么办？各个直播平台就是最好的选择了。不用自己搭建RTMP服务器，还能和大家一起分享，何乐而不为呢？</p>
+              <p>树莓派/玩客云闲置怎么办？用来直播推流呀</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/withsalt/BilibiliLiveTools">withsalt/BilibiliLiveTools: Bilibili直播工具</a></p>
+<p>直播间演示：</p>
+<p><a target="_blank" rel="noopener" href="https://live.bilibili.com/21577989">https://live.bilibili.com/21577989</a></p>
 <p><strong>准备工作</strong></p>
 <p>（1）前提条件</p>
 <p>a.首先要有一个树莓派，并连接了摄像头（USB摄像头）。并能够访问网络。<br>b.在Bilibili中通过实名认证，并开通了直播间。<a target="_blank" rel="noopener" href="https://link.bilibili.com/p/center/index">点击连接</a>开通直播间（很简单的，实名认证通过后直接就可以开通了）<br>c.FFmpeg。推流默认使用FFmpeg，树莓派官方系统默认安装了的，我就不再赘述，其它系统请自行安装。</p>
@@ -355,7 +357,7 @@
 <li>-an：不使用音频</li>
 <li>-f：输出格式</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.quarkbook.com/wp-content/uploads/2019/10/ffmpeg%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3.pdf">ffmpeg翻译文档</a><a target="_blank" rel="noopener" href="https://www.quarkbook.com/wp-content/uploads/2019/10/ffmpeg%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3.pdf">下载</a></p>
+<p><a target="_blank" rel="noopener" href="https://huangenet.lanzoui.com/i7RjTq47fwj">ffmpeg翻译文档.pdf - 蓝奏云 (lanzoui.com)</a></p>
 <p>树莓派在使用FFmpeg推流时，帧数大概在10帧左右，这个帧数并不理想，而且还在用树莓派硬件解码的情况下。但是也是目前我能找到的最优解了</p>
 
             </div>
