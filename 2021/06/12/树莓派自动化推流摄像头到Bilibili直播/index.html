@@ -20,7 +20,7 @@
   <meta name="author" content="木子欢儿">
   <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
   
-  <title>在玩客云上部署code-server - 点滴记忆</title>
+  <title>树莓派自动化推流摄像头到Bilibili直播 - 点滴记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="在玩客云上部署code-server">
+            <span class="h2" id="subtitle" title="树莓派自动化推流摄像头到Bilibili直播">
               
             </span>
 
@@ -239,8 +239,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-06-05 14:49" pubdate>
-        2021年6月5日 下午
+      <time datetime="2021-06-12 09:33" pubdate>
+        2021年6月12日 上午
       </time>
     </span>
   
@@ -251,7 +251,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      814 字
+      1.8k 字
     </span>
   
 
@@ -261,7 +261,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      23
        分钟
     </span>
   
@@ -291,120 +291,72 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">在玩客云上部署code-server</h1>
+            <h1 style="display: none">树莓派自动化推流摄像头到Bilibili直播</h1>
             
             <div class="markdown-body">
-              <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><a target="_blank" rel="noopener" href="https://coder.com/">Code-server</a> 是在远程服务器上运行的VS Code，通过浏览器访问。</p>
+              <p>养了条小鱼，想随时随地看看怎么办？各个直播平台就是最好的选择了。不用自己搭建RTMP服务器，还能和大家一起分享，何乐而不为呢？</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/withsalt/BilibiliLiveTools">withsalt/BilibiliLiveTools: Bilibili直播工具</a></p>
+<p><strong>准备工作</strong></p>
+<p>（1）前提条件</p>
+<p>a.首先要有一个树莓派，并连接了摄像头（USB摄像头）。并能够访问网络。<br>b.在Bilibili中通过实名认证，并开通了直播间。<a target="_blank" rel="noopener" href="https://link.bilibili.com/p/center/index">点击连接</a>开通直播间（很简单的，实名认证通过后直接就可以开通了）<br>c.FFmpeg。推流默认使用FFmpeg，树莓派官方系统默认安装了的，我就不再赘述，其它系统请自行安装。</p>
+<p>（2）获取程序</p>
+<p>下载编译好的程序：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">wget https://github.com/withsalt/BilibiliLiveTools/releases/download/2.0.2/BilibiliLiver_Linux_ARM.zip<br></code></pre></td></tr></table></figure>
+<p>（2）解压并授权</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">unzip BilibiliLiver_Linux_ARM.zip &amp;&amp; chmod -R 755 BilibiliLiver_Linux_ARM &amp;&amp; chmod +x BilibiliLiver_Linux_ARM/BilibiliLiver<br></code></pre></td></tr></table></figure>
+<p>（3）编辑配置文件</p>
+<p>编辑用户配置文件User.json</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> BilibiliLiver_Linux_ARM/<br>nano appsettings.json<br></code></pre></td></tr></table></figure>
+<p>编辑直播配置文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;AppSetting&quot;</span>: &#123;<br>    <span class="hljs-comment">//加密密钥，一般不需要修改，要修改的话，至少需要16位</span><br>    <span class="hljs-attr">&quot;Key&quot;</span>: <span class="hljs-string">&quot;ac131de1-ed20-499f-8fdf-dede054dbaad&quot;</span><br>  &#125;,<br>  <span class="hljs-attr">&quot;LiveSetting&quot;</span>: &#123;<br>    <span class="hljs-comment">//直播间分类</span><br>    <span class="hljs-attr">&quot;LiveCategory&quot;</span>: <span class="hljs-string">&quot;369&quot;</span>,<br>    <span class="hljs-comment">//直播间名称</span><br>    <span class="hljs-attr">&quot;LiveRoomName&quot;</span>: <span class="hljs-string">&quot;【24H】小金鱼啦~&quot;</span>,<br>    <span class="hljs-comment">//FFmpeg推流命令，请自行填写对应操作系统和设备的推流命令，默认为树莓派，且摄像头设备为‘/dev/video0’</span><br>    <span class="hljs-comment">//填写到此处时，请注意将命令中‘&quot;’用‘\’进行转义，将推流的rtmp连接替换为[[URL]]，[[URL]]不需要双引号。</span><br>    <span class="hljs-attr">&quot;FFmpegCmd&quot;</span>: <span class="hljs-string">&quot;ffmpeg -f dshow -video_size 1280x720 -i video=\&quot;5M USB CAM\&quot; -vcodec libx264 -pix_fmt yuv420p -r 30 -s 1280*720 -g 60 -b:v 5000k -an -preset:v ultrafast -tune:v zerolatency -f flv [[URL]]&quot;</span>,<br>    <span class="hljs-comment">//ffmpeg异常退出后，是否自动重新启动</span><br>    <span class="hljs-attr">&quot;AutoRestart&quot;</span>: <span class="hljs-literal">true</span><br>  &#125;,<br>  <span class="hljs-attr">&quot;UserSetting&quot;</span>: &#123;<br>    <span class="hljs-comment">//B站账号</span><br>    <span class="hljs-attr">&quot;Account&quot;</span>: <span class="hljs-string">&quot;*********&quot;</span>,<br>    <span class="hljs-comment">//B站密码，放心填写，没有后门</span><br>    <span class="hljs-attr">&quot;Password&quot;</span>: <span class="hljs-string">&quot;*********&quot;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>由于推流方式不同以及FFmpeg配置的多边性，这里采用直接填写推流命令的方式。建议填写之前先测试推流命令能否正确执行。默认的推流命令设配树莓派官方系统，其它系统可能不适用，需要自己修改。</p>
+<p>推流命令（FFmpegCmd）中的“[[URL]]”，是一个配置符号，将在程序中被替换为获取到的Bilibili推流地址，所以一定要在最终命令中，把测试文件或者地址修改为 “[[URL]]”（URL大写） ，否则程序将抛出错误。推流命令中注意半角双引号需要用符号‘\’来进行转义。</p>
+<p>FFmpeg的使用请查看最后一节：FFmpeg的使用</p>
+<p><strong>开始直播</strong></p>
+<p>执行推流程序。推流程序将会自动开启B站直播，并获取推流地址，然后执行预设的FFmpeg推流命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo ./BilibiliLiver<br></code></pre></td></tr></table></figure>
+<p>输出下面的就表示开始直播啦~</p>
+<p><img src="https://www.quarkbook.com/wp-content/uploads/2019/09/image-12-1024x424.png" srcset="/img/loading.gif" alt="树莓派自动化推流摄像头到Bilibili直播">开始直播输出</p>
+<p>如果希望在后台持续直播，可以将上面一条命令替换为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo nohup ./BilibiliLiver /dev/null 2&gt;live.log<br></code></pre></td></tr></table></figure>
+<p>程序将会在后台运行。</p>
+<p>或者编写一个系统服务，设置开机启动，控制开始关闭推流什么的。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo nano /etc/systemd/system/bilibiliLiver.service<br></code></pre></td></tr></table></figure>
+<p>将下方代码中的执行路径替换为BilibiliLiver程序所在的<strong>绝对路径</strong>。比如“/home/pi/BilibiliLiver_Linux_ARM/BilibiliLiver”，注意大小写。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=BilibiliLiver<br><span class="hljs-attr">After</span>=network.target<br><br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">WorkingDirectory</span>=BilibiliLiver所在路径，比如/home/pi/BilibiliLiver_Linux_ARM<br><span class="hljs-attr">ExecStart</span>=BilibiliLiver所在路径包含程序的路径，比如/home/pi/BilibiliLiver_Linux_ARM/BilibiliLiver<br><span class="hljs-attr">Restart</span>=always<br><span class="hljs-attr">SyslogIdentifier</span>=BilibiliLiver Tool<br><span class="hljs-attr">User</span>=root<br><span class="hljs-attr">Environment</span>=ASPNETCORE_ENVIRONMENT=Production<br><br><span class="hljs-section">[Install]</span><br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure>
+<p>执行start，开启推流服务。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo systemctl start bilibiliLiver<br></code></pre></td></tr></table></figure>
+<p>检查命令是否配置正确已经程序是否正常工作。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo systemctl status bilibiliLiver<br></code></pre></td></tr></table></figure>
+<p>其它服务维护命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo systemctl stop bilibiliLiver    <span class="hljs-comment">#停止推流服务</span><br>sudo systemctl <span class="hljs-built_in">enable</span> bilibiliLiver  <span class="hljs-comment">#设置开机启动</span><br>sudo systemctl <span class="hljs-built_in">disable</span> bilibiliLiver <span class="hljs-comment">#禁用开机启动</span><br></code></pre></td></tr></table></figure>
+<p><strong>FFmpeg的使用</strong></p>
+<p>无论是Windows还是Linux，运行环境无论是PC还是树莓派，如果使用FFmpeg推流，都要在上面安装好FFmpeg，并在命令行中执行ffmpeg -version后可以准确的获取ffmpeg的相关信息。</p>
+<p><img src="https://www.quarkbook.com/wp-content/uploads/2019/10/image-5-1024x360.png" srcset="/img/loading.gif" alt="树莓派自动化推流摄像头到Bilibili直播">ffmpeg命令行输出</p>
+<p>至于如何在各种环境中安装ffmpeg我就不在此赘述，网上有很多详细的教程。树莓派官方系统是内置了ffmpeg的，不用自己再编译安装。</p>
+<p>以下是树莓派Raspbian系统中推流命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment">#推流USB摄像头（包含音频，音频源为音频文件）</span><br>ffmpeg -thread_queue_size 512 -f video4linux2 -s 1280*720 -input_format mjpeg -i <span class="hljs-string">&quot;视频源&quot;</span> -stream_loop -1 -i <span class="hljs-string">&quot;音频源&quot;</span> -vcodec h264_omx -pix_fmt yuv420p -r 30 -s 1280*720 -g 60 -b:v 10M -bufsize 10M -acodec aac -ac 2 -ar 44100 -ab 128k -f flv <span class="hljs-string">&quot;推流地址&quot;</span><br><br><span class="hljs-comment">#推流USB摄像头（包含音频，音频源麦克风）</span><br>ffmpeg -thread_queue_size 512 -f video4linux2 -s 1280*720 -input_format mjpeg -i <span class="hljs-string">&quot;视频源&quot;</span> -i <span class="hljs-string">&quot;音频源&quot;</span> -vcodec h264_omx -pix_fmt yuv420p -r 30 -s 1280*720 -g 60 -b:v 10M -bufsize 10M -acodec aac -ac 2 -ar 44100 -ab 128k -f flv <span class="hljs-string">&quot;推流地址&quot;</span><br><br><span class="hljs-comment">#推流USB摄像头（不包含音频）</span><br>ffmpeg -thread_queue_size 512 -f video4linux2 -s 1280*720 -i <span class="hljs-string">&quot;视频源&quot;</span> -vcodec h264_omx -pix_fmt yuv420p -r 30 -s 1280*720 -g 60 -b:v 10M -bufsize 10M -an -f flv <span class="hljs-string">&quot;推流地址&quot;</span><br><br><span class="hljs-comment">#推流视频</span><br>ffmpeg -re -i <span class="hljs-string">&quot;视频源&quot;</span> -vcodec copy -acodec aac -b:a 192k -f flv <span class="hljs-string">&quot;推流地址&quot;</span> <br></code></pre></td></tr></table></figure>
+<p>以下是Windows系统中推流命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment">#推流USB摄像头（包含音频，音频源为音频文件）</span><br>ffmpeg -f dshow -s 1280*720 -r 1024 -i video=<span class="hljs-string">&quot;视频源&quot;</span> -stream_loop -1 -i <span class="hljs-string">&quot;音频源&quot;</span> -vcodec libx264 -pix_fmt yuv420p -r 30 -s 1280*720 -g 60 -b:v 5000k -acodec aac -ac 2 -ar 44100 -ab 128k -preset:v ultrafast -tune:v zerolatency -f flv <span class="hljs-string">&quot;推流地址&quot;</span><br><br><span class="hljs-comment">#推流USB摄像头（包含音频，音频源麦克风）</span><br>ffmpeg -f dshow -s 1280*720 -r 1024 -i video=<span class="hljs-string">&quot;视频源&quot;</span> -i <span class="hljs-string">&quot;音频源&quot;</span> -vcodec libx264 -pix_fmt yuv420p -r 30 -s 1280*720 -g 60 -b:v 5000k -acodec aac -ac 2 -ar 44100 -ab 128k -preset:v ultrafast -tune:v zerolatency -f flv <span class="hljs-string">&quot;推流地址&quot;</span><br><br><span class="hljs-comment">#推流USB摄像头（不包含音频）</span><br>ffmpeg -f dshow -s 1280*720 -r 1024 -i video=<span class="hljs-string">&quot;视频源&quot;</span> -vcodec libx264 -pix_fmt yuv420p -r 30 -s 1280*720 -g 60 -b:v 5000k -an -preset:v ultrafast -tune:v zerolatency -f flv <span class="hljs-string">&quot;推流地址&quot;</span><br><br><span class="hljs-comment">#推流视频</span><br>ffmpeg -re -i <span class="hljs-string">&quot;视频源&quot;</span> -vcodec copy -acodec aac -b:a 192k -f flv <span class="hljs-string">&quot;推流地址&quot;</span> <br></code></pre></td></tr></table></figure>
+<p>以上命令没有经过仔细测试，不同环境需要不同的参数，请自行学习FFmpeg的用法。</p>
+<p>FFmpeg基本用法：</p>
+<p>ffmpeg [全局选项] {[输入文件选项] -i 输入文件} … {[输出文件选项] 输出文件} …</p>
+<p>参数简单介绍：</p>
 <ul>
-<li>在你的Chromebook、平板、笔记本上用一样的环境来进行开发</li>
-<li>如果你有Windows或Mac工作站，也可以轻松地在Linux上开发</li>
-<li>利用云服务器来加快测试、编译、下载等操作</li>
-<li>不论在哪永远在线</li>
-<li>所有的计算都在云端进行</li>
-<li>不需要再运行过多的Chrome实例</li>
+<li>-f：输入格式（video4linux2 ）</li>
+<li>-i：输入源</li>
+<li>-s：视频分辨率</li>
+<li>-r：所需的帧率</li>
+<li>-vcodec：视频编解码器</li>
+<li>-vb：视频比特率</li>
+<li>-bufsize：缓冲区大小（对于流来说很重要）</li>
+<li>-vf：像素格式</li>
+<li>-g：GOP（图片组，对于流式传输很重要）</li>
+<li>-an：不使用音频</li>
+<li>-f：输出格式</li>
 </ul>
-<p>Code-server → <a target="_blank" rel="noopener" href="https://coder.com/">https://coder.com/</a></p>
-<p>GitHub → <a target="_blank" rel="noopener" href="https://github.com/linuxserver/docker-code-server">https://github.com/linuxserver/docker-code-server</a></p>
-<p>Docker Hub → <a target="_blank" rel="noopener" href="https://hub.docker.com/r/linuxserver/code-server">https://hub.docker.com/r/linuxserver/code-server</a></p>
-<h2 id="支持的系统架构"><a href="#支持的系统架构" class="headerlink" title="支持的系统架构"></a>支持的系统架构</h2><p>得益于docker的跨平台属性，我们的镜像也支持多架构（如，x86-64、arm64、armhf）。</p>
-<p>直接拉取 <code>ghcr.io/linuxserver/code-server</code> 应该就可以自动获取适合你系统架构的版本，当然你也可以通过 tag 获取特定的版本。</p>
-<table>
-<thead>
-<tr>
-<th>架构</th>
-<th>Tag</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>x86-64</td>
-<td>amd64-latest</td>
-</tr>
-<tr>
-<td>arm64</td>
-<td>arm64v8-latest</td>
-</tr>
-<tr>
-<td>armhf</td>
-<td>arm32v7-latest</td>
-</tr>
-</tbody></table>
-<hr>
-<p><strong>玩客云是32位的，所以也可以用这个</strong></p>
-<h2 id="部署方法"><a href="#部署方法" class="headerlink" title="部署方法"></a>部署方法</h2><p>你需要先安装好Docker  ，方法自行百度</p>
-<p><strong>部署命令</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-builtin-name">run</span> -d \<br>  <span class="hljs-attribute">--name</span>=code-server \<br>  -e <span class="hljs-attribute">PUID</span>=1000 \<br>  -e <span class="hljs-attribute">PGID</span>=1000 \<br>  -e <span class="hljs-attribute">TZ</span>=Europe/London \<br>  -e <span class="hljs-attribute">PASSWORD</span>=password  \<br>  -e <span class="hljs-attribute">SUDO_PASSWORD</span>=password  \<br>  -e <span class="hljs-attribute">PROXY_DOMAIN</span>=code-server.my.domain  \<br>  -p 8443:8443 \<br>  -v /path/<span class="hljs-keyword">to</span>/appdata/config:<span class="hljs-built_in">/config </span>\<br>  --restart unless-stopped \<br>  linuxserver/code-server<br></code></pre></td></tr></table></figure>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>Docker镜像在使用的时候需要配置一些参数，这些参数使用 <code>:</code> 分隔，分别表示 <code>宿主机:容器内</code>。例如 <code>-p 8080:80</code> 指的是将容器内的<code>80</code>端口映射到宿主机上的<code>8080</code>端口，即通过宿主机网络访问的话，访问<code>8080</code>端口即是访问容器内的<code>80</code>端口。</p>
-<h3 id="端口（-p）"><a href="#端口（-p）" class="headerlink" title="端口（-p）"></a>端口（-p）</h3><table>
-<thead>
-<tr>
-<th>port</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>8443</code></td>
-<td>WEB界面</td>
-</tr>
-</tbody></table>
-<h3 id="环境变量（-e）"><a href="#环境变量（-e）" class="headerlink" title="环境变量（-e）"></a>环境变量（-e）</h3><table>
-<thead>
-<tr>
-<th>env</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>PUID=1000</code></td>
-<td>用户的 UID，详见下面的说明</td>
-</tr>
-<tr>
-<td><code>PGID=1000</code></td>
-<td>用户的 GID，详见下面的说明</td>
-</tr>
-<tr>
-<td><code>TZ=Europe/London</code></td>
-<td>设置时区，在国内的话可以使用 Asia/Shanghai</td>
-</tr>
-<tr>
-<td><code>PASSWORD=password</code></td>
-<td>Web界面的密码，如果不设置则不会启用认证</td>
-</tr>
-<tr>
-<td><code>SUDO_PASSWORD=password</code></td>
-<td>如果设置了该项，则在服务器的终端上用该密码使用sudo</td>
-</tr>
-<tr>
-<td><code>PROXY_DOMAIN=code-server.my.domain</code></td>
-<td>反向代理相关的设置，<a target="_blank" rel="noopener" href="https://github.com/cdr/code-server/blob/master/doc/FAQ.md#sub-domains">具体参阅这里</a></td>
-</tr>
-</tbody></table>
-<h3 id="卷映射（-v）"><a href="#卷映射（-v）" class="headerlink" title="卷映射（-v）"></a>卷映射（-v）</h3><table>
-<thead>
-<tr>
-<th>volume</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>/config</code></td>
-<td>配置文件所在路径</td>
-</tr>
-</tbody></table>
-<h2 id="从文件加载环境变量"><a href="#从文件加载环境变量" class="headerlink" title="从文件加载环境变量"></a>从文件加载环境变量</h2><p>可以使用前缀名为 <code>FILE__</code> 的文件来加载环境变量。</p>
-<p>例：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">-e FILE__PASSWORD=<span class="hljs-regexp">/run/</span>secrets/mysecretpassword<br></code></pre></td></tr></table></figure>
-<p>将把 <code>/run/secrets/mysecretpassword</code> 文件中的内容作为 <code>PASSWORD</code> 变量的值。</p>
-<h2 id="UID和GID"><a href="#UID和GID" class="headerlink" title="UID和GID"></a>UID和GID</h2><p>当使用 <code>-v</code> 映射卷的时候，宿主机和容器内会出现关于权限的问题，我们的镜像可以通过指定 <code>PUID</code> 和 <code>GUID</code> 来避免此类问题。</p>
-<p>可以使用你目前正在使用的用户的UID和GID进行设置，这样就不会存在权限问题。</p>
-<p>可以通过如下的方式查看当前用户的UID和GID：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> id <span class="hljs-variable">$user</span></span><br>  uid=1000(dockeruser) gid=1000(dockergroup) groups=1000(dockergroup)<br></code></pre></td></tr></table></figure>
-<h2 id="安装说明"><a href="#安装说明" class="headerlink" title="安装说明"></a>安装说明</h2><p>访问WEB界面：<code>http://ip:8443</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/muzihuaner/huancdn/img/20210605150345.png" srcset="/img/loading.gif" alt="image-20210605150345025"></p>
-<p>如果要使用GitHub，把ssh密钥放在 /config/.ssh 文件夹</p>
-<p>然后在菜单中打开终端，设置github的用户名和邮箱</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs verilog">git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> user<span class="hljs-variable">.name</span> <span class="hljs-string">&quot;username&quot;</span><br>git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> user<span class="hljs-variable">.email</span> <span class="hljs-string">&quot;email address&quot;</span><br></code></pre></td></tr></table></figure>
-<p>想换成中文，在拓展那里搜索“Chinese”,找到“简体中文”安装，重新加载页面即可。</p>
-<p>哈哈哈，快去压榨玩客云的性能吧！</p>
+<p><a target="_blank" rel="noopener" href="https://www.quarkbook.com/wp-content/uploads/2019/10/ffmpeg%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3.pdf">ffmpeg翻译文档</a><a target="_blank" rel="noopener" href="https://www.quarkbook.com/wp-content/uploads/2019/10/ffmpeg%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3.pdf">下载</a></p>
+<p>树莓派在使用FFmpeg推流时，帧数大概在10帧左右，这个帧数并不理想，而且还在用树莓派硬件解码的情况下。但是也是目前我能找到的最优解了</p>
 
             </div>
             <hr>
@@ -422,9 +374,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/VsCode/">VsCode</a>
-                    
                       <a class="hover-with-bg" href="/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/">玩客云</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
+                    
+                      <a class="hover-with-bg" href="/tags/FFmpeg/">FFmpeg</a>
                     
                   </div>
                 
@@ -441,18 +395,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/06/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%87%AA%E5%8A%A8%E5%8C%96%E6%8E%A8%E6%B5%81%E6%91%84%E5%83%8F%E5%A4%B4%E5%88%B0Bilibili%E7%9B%B4%E6%92%AD/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">树莓派自动化推流摄像头到Bilibili直播</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/05/20/%E5%9F%BA%E4%BA%8E%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%9A%84Google%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B/">
-                        <span class="hidden-mobile">基于宝塔面板的Google镜像网站设置教程</span>
+                      <a href="/2021/06/05/%E5%9C%A8%E7%8E%A9%E5%AE%A2%E4%BA%91%E4%B8%8A%E9%83%A8%E7%BD%B2code-server/">
+                        <span class="hidden-mobile">在玩客云上部署code-server</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
