@@ -6,7 +6,7 @@
   <link href="https://blog.quickso.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.quickso.cn/"/>
-  <updated>2023-12-12T02:31:15.080Z</updated>
+  <updated>2023-12-12T03:21:52.543Z</updated>
   <id>https://blog.quickso.cn/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>群晖系统安全设置禁止所有外国IP访问 添加网络威胁黑名单</title>
+    <link href="https://blog.quickso.cn/2023/12/12/%E7%BE%A4%E6%99%96%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE%E7%A6%81%E6%AD%A2%E6%89%80%E6%9C%89%E5%A4%96%E5%9B%BDIP%E8%AE%BF%E9%97%AE%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E9%BB%91%E5%90%8D%E5%8D%95/"/>
+    <id>https://blog.quickso.cn/2023/12/12/%E7%BE%A4%E6%99%96%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE%E7%A6%81%E6%AD%A2%E6%89%80%E6%9C%89%E5%A4%96%E5%9B%BDIP%E8%AE%BF%E9%97%AE%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E9%BB%91%E5%90%8D%E5%8D%95/</id>
+    <published>2023-12-12T03:19:13.000Z</published>
+    <updated>2023-12-12T03:21:52.543Z</updated>
+    
+    <content type="html"><![CDATA[<p>群晖系统本身的安全设置能隔绝多数网络威胁，通过简单的设置只要不瞎搞基本能安全无忧！</p><p>注：本文内容大部分来自 无尽光芒 的 “群晖系统安全设置”PDF文档，暂未找到具体出处网址。</p><h1 id="一、群晖的基本安全设置修改"><a href="#一、群晖的基本安全设置修改" class="headerlink" title="一、群晖的基本安全设置修改"></a>一、群晖的基本安全设置修改</h1><h2 id="1、禁用admin账户"><a href="#1、禁用admin账户" class="headerlink" title="1、禁用admin账户"></a>1、禁用admin账户</h2><p>DSM7默认就是禁用admin作为管理员账户的，如实DSM6或者升级到7的可以新建管理员后再禁用admin</p><p><img src="https://i.imnks.com/2022/10/2584009654.png!I" alt="2584009654.png" title="2584009654.png"></p><h2 id="2、使用高强度密码"><a href="#2、使用高强度密码" class="headerlink" title="2、使用高强度密码"></a>2、使用高强度密码</h2><p><img src="https://i.imnks.com/2022/10/1104970198.png!I" alt="1104970198.png" title="1104970198.png"></p><h2 id="3、修改等候超时"><a href="#3、修改等候超时" class="headerlink" title="3、修改等候超时"></a>3、修改等候超时</h2><p>默认是网页上15分钟没操作自动退出登录，按需修改，时间太短会影响使用体验</p><p><img src="https://i.imnks.com/2022/10/2587833162.png!I" alt="2587833162.png" title="2587833162.png"></p><h2 id="4、开启双重验证"><a href="#4、开启双重验证" class="headerlink" title="4、开启双重验证"></a>4、开启双重验证</h2><p>DSM7的双重验证支持OPT验证码（Synology Secure SignIn或者Google Authenticator）</p><p>也支持硬件安全秘钥（x86机型才有），比如USB秘钥类（Fido2）的YubiKey、飞天Key</p><p><img src="https://i.imnks.com/2022/10/2296208027.png!I" alt="2296208027.png" title="2296208027.png"></p><p><img src="https://i.imnks.com/2022/10/906380087.png!I" alt="906380087.png" title="906380087.png"></p><h2 id="5、关闭SHH访问"><a href="#5、关闭SHH访问" class="headerlink" title="5、关闭SHH访问"></a>5、关闭SHH访问</h2><p>如确实需要使用，修改默认的22端口为10000以上的端口，并使用后及时关闭！</p><p><img src="https://i.imnks.com/2022/10/570795422.png!I" alt="570795422.png" title="570795422.png"></p><h2 id="6、对外端口映射"><a href="#6、对外端口映射" class="headerlink" title="6、对外端口映射"></a>6、对外端口映射</h2><p>如有公网IP在路由器端口映射时对外不要使用默认的5000、5001、5005、5006、6690等！对外依旧建议10000以上的端口</p><p><img src="https://i.imnks.com/2022/10/2129729179.png!I" alt="2129729179.png" title="2129729179.png"></p><h2 id="7、关闭root账户"><a href="#7、关闭root账户" class="headerlink" title="7、关闭root账户"></a>7、关闭root账户</h2><p>非常不建议开启群晖的root账户，如必需用请修改为高强度的root密码，也可使用完毕后关闭！</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">synouser <span class="hljs-attr">--setpw</span> root qpzm<span class="hljs-keyword">@1639</span>&amp;IMNKS.COM<br></code></pre></td></tr></table></figure><p>或者直接关闭root登录</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sed -i <span class="hljs-string">&#x27;s/PermitRootLogin yes/#PermitRootLogin prohibit-password/g&#x27;</span> <span class="hljs-regexp">/etc/</span>ssh/sshd_config<br></code></pre></td></tr></table></figure><h1 id="二、配置防火墙禁止国外IP"><a href="#二、配置防火墙禁止国外IP" class="headerlink" title="二、配置防火墙禁止国外IP"></a>二、配置防火墙禁止国外IP</h1><h2 id="1、启用防火墙"><a href="#1、启用防火墙" class="headerlink" title="1、启用防火墙"></a>1、启用防火墙</h2><p><img src="https://i.imnks.com/2022/10/208038144.png!I" alt="208038144.png" title="208038144.png"></p><h2 id="2、编译配置文件default"><a href="#2、编译配置文件default" class="headerlink" title="2、编译配置文件default"></a>2、编译配置文件default</h2><p>新增防火墙规则，下面三个按需设置，设置禁止国外IP访问前 必需 先设置好 允许内网IP访问、允许中国IP！！！</p><h3 id="允许内网IP访问"><a href="#允许内网IP访问" class="headerlink" title="允许内网IP访问"></a>允许内网IP访问</h3><p>内网这个按照实际情况添加，如过多个IP段内网可以互访都要相应的加入，包括虚拟组网的IP段！</p><p><img src="https://i.imnks.com/2022/10/47474197.png!I" alt="47474197.png" title="47474197.png"></p><p>如何docker使用了bridge桥接网络，也需要添加到允许访问的名单内</p><p><img src="https://i.imnks.com/2022/10/1852161711.png!I" alt="1852161711.png" title="1852161711.png"></p><h3 id="允许中国IP访问"><a href="#允许中国IP访问" class="headerlink" title="允许中国IP访问"></a>允许中国IP访问</h3><p><img src="https://i.imnks.com/2022/10/799088048.png!I" alt="799088048.png" title="799088048.png"></p><h3 id="禁止国外IP访问（注意：排序永远是最后一个！）"><a href="#禁止国外IP访问（注意：排序永远是最后一个！）" class="headerlink" title="禁止国外IP访问（注意：排序永远是最后一个！）"></a>禁止国外IP访问（注意：排序永远是最后一个！）</h3><p><img src="https://i.imnks.com/2022/10/3105674518.png!I" alt="3105674518.png" title="3105674518.png"></p><p><img src="https://i.imnks.com/2022/10/3483480270.png!I" alt="3483480270.png" title="3483480270.png"></p><h1 id="三、添加网络威胁黑名单"><a href="#三、添加网络威胁黑名单" class="headerlink" title="三、添加网络威胁黑名单"></a>三、添加网络威胁黑名单</h1><p>东北大学网络威胁黑名单系统（已恢复访问） <a href="https://imnks.com/go/aHR0cDovL2FudGl2aXJ1cy5uZXUuZWR1LmNuL3NjYW4v">http://antivirus.neu.edu.cn/scan/</a></p><p>下载文本格式的黑名单导入群晖系统的封锁名单：<a href="https://imnks.com/go/aHR0cDovL2FudGl2aXJ1cy5uZXUuZWR1LmNuL3NzaC9saXN0cy9uZXUudHh0">http://antivirus.neu.edu.cn/ssh/lists/neu.txt</a></p><p><img src="https://i.imnks.com/2022/10/3367593950.png!I" alt="3367593950.png" title="3367593950.png"></p><p><img src="https://i.imnks.com/2022/10/3554383717.png!I" alt="3554383717.png" title="3554383717.png"></p><p><img src="https://i.imnks.com/2022/10/3523239348.png!I" alt="3523239348.png" title="3523239348.png"></p><h1 id="四、安全顾问扫描"><a href="#四、安全顾问扫描" class="headerlink" title="四、安全顾问扫描"></a>四、安全顾问扫描</h1><p><img src="https://i.imnks.com/2022/10/4132601483.png!I" alt="4132601483.png" title="4132601483.png"></p><p><img src="https://i.imnks.com/2022/10/182347195.png!I" alt="182347195.png" title="182347195.png"></p><p>本文来自<a href="https://imnks.com/6807.html">https://imnks.com/6807.html</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;群晖系统本身的安全设置能隔绝多数网络威胁，通过简单的设置只要不瞎搞基本能安全无忧！&lt;/p&gt;
+&lt;p&gt;注：本文内容大部分来自 无尽光芒 的 “群晖系统安全设置”PDF文档，暂未找到具体出处网址。&lt;/p&gt;
+&lt;h1 id=&quot;一、群晖的基本安全设置修改&quot;&gt;&lt;a href=&quot;#一、群晖</summary>
+      
+    
+    
+    
+    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="群晖" scheme="https://blog.quickso.cn/tags/%E7%BE%A4%E6%99%96/"/>
+    
+    <category term="安全" scheme="https://blog.quickso.cn/tags/%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="软路由" scheme="https://blog.quickso.cn/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/"/>
+    
+  </entry>
   
   <entry>
     <title>CloudflareR2快速开始使用(白嫖)指南</title>
@@ -533,35 +563,6 @@
     <category term="MySQL" scheme="https://blog.quickso.cn/tags/MySQL/"/>
     
     <category term="PhpMyAdmin" scheme="https://blog.quickso.cn/tags/PhpMyAdmin/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在玩客云或树莓派上通过ffmpeg将视频推流到直播平台</title>
-    <link href="https://blog.quickso.cn/2021/04/09/%E5%9C%A8%E7%8E%A9%E5%AE%A2%E4%BA%91%E6%88%96%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%80%9A%E8%BF%87ffmpeg%E5%B0%86%E8%A7%86%E9%A2%91%E6%8E%A8%E6%B5%81%E5%88%B0%E7%9B%B4%E6%92%AD%E5%B9%B3%E5%8F%B0/"/>
-    <id>https://blog.quickso.cn/2021/04/09/%E5%9C%A8%E7%8E%A9%E5%AE%A2%E4%BA%91%E6%88%96%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%80%9A%E8%BF%87ffmpeg%E5%B0%86%E8%A7%86%E9%A2%91%E6%8E%A8%E6%B5%81%E5%88%B0%E7%9B%B4%E6%92%AD%E5%B9%B3%E5%8F%B0/</id>
-    <published>2021-04-09T14:32:37.000Z</published>
-    <updated>2023-12-12T02:31:15.091Z</updated>
-    
-    <content type="html"><![CDATA[<p>为了压榨玩客云的性能，搞了直播推流，下面教大家怎么推流</p><p>我把玩客云刷了Powersee的玩客云第二版固件，具体看<a href="https://powersee.gitee.io/2021/02/wankeyun-2/">这里</a>，当然使用树莓派也可以</p><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h4 id="1、安装ffmpeg"><a href="#1、安装ffmpeg" class="headerlink" title="1、安装ffmpeg"></a>1、安装ffmpeg</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install ffmpeg<br></code></pre></td></tr></table></figure><h4 id="2、启动推流"><a href="#2、启动推流" class="headerlink" title="2、启动推流"></a>2、启动推流</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ffmpeg -re -<span class="hljs-selector-tag">i</span> /root/<span class="hljs-selector-tag">video</span><span class="hljs-selector-class">.mp4</span> -vcodec libx264 -acodec aac -strict -<span class="hljs-number">2</span> -f flv <span class="hljs-string">&quot;你的推流地址&quot;</span><br></code></pre></td></tr></table></figure><p>举个栗子（B站）：</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ffmpeg -re -i <span class="hljs-regexp">/mnt/</span>aria2-downloads<span class="hljs-regexp">/xianghuo.mkv -vcodec libx264 -acodec aac -strict -2 -f flv &quot;rtmp:/</span><span class="hljs-regexp">/live-push.bilivideo.com/</span>live-bvc/直播码<span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210409224001.png" alt="image-20210409224001344"></p><p>更多详细说明可参考ffmpeg官方文档：<a href="http://ffmpeg.org/ffmpeg.html">http://ffmpeg.org/ffmpeg.html</a></p><h4 id="3、后台执行"><a href="#3、后台执行" class="headerlink" title="3、后台执行"></a>3、后台执行</h4><p>（1）安装screen</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install screen<br></code></pre></td></tr></table></figure><p>（2）新建终端</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">screen -S live</span><br></code></pre></td></tr></table></figure><p>（3）在新的终端执行命令后</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">Ctrl+<span class="hljs-selector-tag">A</span>+D<br></code></pre></td></tr></table></figure><p>（4）重新进入终端</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">screen -r live</span><br></code></pre></td></tr></table></figure><p>（5）删除某一个终端</p><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos">screen -<span class="hljs-keyword">S</span> 进程号 -<span class="hljs-keyword">X</span> <span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure><h4 id="4-推流成功"><a href="#4-推流成功" class="headerlink" title="4.推流成功"></a>4.推流成功</h4><p><a href="https://live.bilibili.com/21577989">https://live.bilibili.com/21577989</a></p><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210409224250.png" alt="image-20210409224250405"></p><p>玩客云直播时的参数</p><p>CPU基本跑满</p><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210409224355.png" alt="image-20210409224355158"></p><p>好了，赶快去实践吧！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;为了压榨玩客云的性能，搞了直播推流，下面教大家怎么推流&lt;/p&gt;
-&lt;p&gt;我把玩客云刷了Powersee的玩客云第二版固件，具体看&lt;a href=&quot;https://powersee.gitee.io/2021/02/wankeyun-2/&quot;&gt;这里&lt;/a&gt;，当然使用树莓派也可以&lt;</summary>
-      
-    
-    
-    
-    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="树莓派" scheme="https://blog.quickso.cn/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/"/>
-    
-    <category term="玩客云" scheme="https://blog.quickso.cn/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/"/>
-    
-    <category term="ffmpeg" scheme="https://blog.quickso.cn/tags/ffmpeg/"/>
     
   </entry>
   
