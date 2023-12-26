@@ -6,7 +6,7 @@
   <link href="https://blog.quickso.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.quickso.cn/"/>
-  <updated>2023-12-16T10:01:37.720Z</updated>
+  <updated>2023-12-26T13:28:11.719Z</updated>
   <id>https://blog.quickso.cn/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JetBrains IntelliJ系列全家桶激活服务器</title>
+    <link href="https://blog.quickso.cn/2023/12/26/JetBrainsIntelliJ%E7%B3%BB%E5%88%97%E5%85%A8%E5%AE%B6%E6%A1%B6%E6%BF%80%E6%B4%BB%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>https://blog.quickso.cn/2023/12/26/JetBrainsIntelliJ%E7%B3%BB%E5%88%97%E5%85%A8%E5%AE%B6%E6%A1%B6%E6%BF%80%E6%B4%BB%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
+    <published>2023-12-26T13:23:10.000Z</published>
+    <updated>2023-12-26T13:28:11.719Z</updated>
+    
+    <content type="html"><![CDATA[<p>简要步骤<br>入口Ⅰ：欢迎界面 - 齿轮(设置) - Manage Licenses…</p><p>入口Ⅱ：菜单 - 帮助(Help) - 注册(Register)…</p><p>选择 License Server，输入Server address地址</p><p>点击【Activate】激活成功！！</p><p>同样支持其他编辑器噢，比如 IDEA~</p><p>如您有需要，可自行通过网络空间搜索引擎自行寻找</p><h1 id="Fofa"><a href="#Fofa" class="headerlink" title="Fofa"></a>Fofa</h1><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">header</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;https://account.jetbrains.com/fls-auth&quot;</span><br></code></pre></td></tr></table></figure><h1 id="Shodan"><a href="#Shodan" class="headerlink" title="Shodan"></a>Shodan</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">Location: https:<span class="hljs-regexp">//</span>account.jetbrains.com/fls-auth<br></code></pre></td></tr></table></figure><h1 id="Censys"><a href="#Censys" class="headerlink" title="Censys"></a>Censys</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">Location: https:<span class="hljs-regexp">//</span>account.jetbrains.com/fls-auth<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;简要步骤&lt;br&gt;入口Ⅰ：欢迎界面 - 齿轮(设置) - Manage Licenses…&lt;/p&gt;
+&lt;p&gt;入口Ⅱ：菜单 - 帮助(Help) - 注册(Register)…&lt;/p&gt;
+&lt;p&gt;选择 License Server，输入Server address地址&lt;/p&gt;
+&lt;p&gt;</summary>
+      
+    
+    
+    
+    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="JetBrains" scheme="https://blog.quickso.cn/tags/JetBrains/"/>
+    
+    <category term="IntelliJ" scheme="https://blog.quickso.cn/tags/IntelliJ/"/>
+    
+  </entry>
   
   <entry>
     <title>yt-dlp使用教程</title>
@@ -531,33 +560,6 @@
     <category term="VsCode" scheme="https://blog.quickso.cn/tags/VsCode/"/>
     
     <category term="玩客云" scheme="https://blog.quickso.cn/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基于宝塔面板的Google镜像网站设置教程</title>
-    <link href="https://blog.quickso.cn/2021/05/20/%E5%9F%BA%E4%BA%8E%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%9A%84Google%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B/"/>
-    <id>https://blog.quickso.cn/2021/05/20/%E5%9F%BA%E4%BA%8E%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%9A%84Google%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B/</id>
-    <published>2021-05-20T11:25:43.000Z</published>
-    <updated>2023-12-12T02:31:15.092Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="建立站点"><a href="#建立站点" class="headerlink" title="建立站点"></a>建立站点</h2><p>在宝塔面板后台点击：<strong>网站-添加站点-输入网站域名</strong></p><h2 id="反向代理设置"><a href="#反向代理设置" class="headerlink" title="反向代理设置"></a>反向代理设置</h2><p>安装面板后新建站点，然后设置站点选择反向代理（如下图所示）<br><a href="http://blog.chauncey09.com/usr/uploads/2019/08/3707359233.png"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210520192934.png" alt="img"></a></p><p>然后设置反向代理</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stylus">目标URL是： https:<span class="hljs-comment">//www.google.com.hk</span><br>发送域名也是： www<span class="hljs-selector-class">.google</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.hk</span><br><br><br>#注意：目标URL一定是www<span class="hljs-selector-class">.google</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.hk</span> 后缀为二级区域域名.hk或者.sg。<br>否则会出现无法反代，连续多跳的问题。<br></code></pre></td></tr></table></figure><h2 id="SSL设置"><a href="#SSL设置" class="headerlink" title="SSL设置"></a>SSL设置</h2><p>点击SSL-开启https强制运行（这一步一定要有，因为谷歌目前已经强制https，所以镜像站点同样要以https运行）</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;建立站点&quot;&gt;&lt;a href=&quot;#建立站点&quot; class=&quot;headerlink&quot; title=&quot;建立站点&quot;&gt;&lt;/a&gt;建立站点&lt;/h2&gt;&lt;p&gt;在宝塔面板后台点击：&lt;strong&gt;网站-添加站点-输入网站域名&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;反向代理设置&quot;&gt;</summary>
-      
-    
-    
-    
-    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="Google" scheme="https://blog.quickso.cn/tags/Google/"/>
-    
-    <category term="宝塔" scheme="https://blog.quickso.cn/tags/%E5%AE%9D%E5%A1%94/"/>
     
   </entry>
   

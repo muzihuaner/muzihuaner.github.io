@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>JetBrains IntelliJ系列全家桶激活服务器</title>
+    <link href="/2023/12/26/JetBrainsIntelliJ%E7%B3%BB%E5%88%97%E5%85%A8%E5%AE%B6%E6%A1%B6%E6%BF%80%E6%B4%BB%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <url>/2023/12/26/JetBrainsIntelliJ%E7%B3%BB%E5%88%97%E5%85%A8%E5%AE%B6%E6%A1%B6%E6%BF%80%E6%B4%BB%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<p>简要步骤<br>入口Ⅰ：欢迎界面 - 齿轮(设置) - Manage Licenses…</p><p>入口Ⅱ：菜单 - 帮助(Help) - 注册(Register)…</p><p>选择 License Server，输入Server address地址</p><p>点击【Activate】激活成功！！</p><p>同样支持其他编辑器噢，比如 IDEA~</p><p>如您有需要，可自行通过网络空间搜索引擎自行寻找</p><h1 id="Fofa"><a href="#Fofa" class="headerlink" title="Fofa"></a>Fofa</h1><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">header</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;https://account.jetbrains.com/fls-auth&quot;</span><br></code></pre></td></tr></table></figure><h1 id="Shodan"><a href="#Shodan" class="headerlink" title="Shodan"></a>Shodan</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">Location: https:<span class="hljs-regexp">//</span>account.jetbrains.com/fls-auth<br></code></pre></td></tr></table></figure><h1 id="Censys"><a href="#Censys" class="headerlink" title="Censys"></a>Censys</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">Location: https:<span class="hljs-regexp">//</span>account.jetbrains.com/fls-auth<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>教程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>JetBrains</tag>
+      
+      <tag>IntelliJ</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>yt-dlp使用教程</title>
     <link href="/2023/12/16/yt-dlp%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
     <url>/2023/12/16/yt-dlp%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
@@ -1023,33 +1050,6 @@
     <tags>
       
       <tag>Hexo</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>快链-友链接力</title>
-    <link href="/2021/02/20/%E5%BF%AB%E9%93%BE-%E5%8F%8B%E9%93%BE%E6%8E%A5%E5%8A%9B/"/>
-    <url>/2021/02/20/%E5%BF%AB%E9%93%BE-%E5%8F%8B%E9%93%BE%E6%8E%A5%E5%8A%9B/</url>
-    
-    <content type="html"><![CDATA[<p>开箱即用的网站友链交换解决方案。</p><p><a href="https://camo.githubusercontent.com/ca6324f77de99b5c4d7c1f739fd67c1023babcee6a9cac2564672b4eac52f260/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f6d757a696875616e65722f517569636b4c696e6b73406d61696e2f6173736574732f517569636b4c696e6b732e676966"><img src="https://camo.githubusercontent.com/ca6324f77de99b5c4d7c1f739fd67c1023babcee6a9cac2564672b4eac52f260/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f6d757a696875616e65722f517569636b4c696e6b73406d61696e2f6173736574732f517569636b4c696e6b732e676966" alt="example"></a></p><ul><li>预览：<a href="https://quickso.cn/">https://quickso.cn</a></li><li>首页：<a href="https://myquicklinks.vercel.app/">https://myquicklinks.vercel.app</a></li></ul><h2 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h2><p>快链是一个开箱即用的友链接力项目，您只需要将“快链”的徽标或者链接放入您的网页，提交审核，审核通过，就可以使用。</p><p>可以用来增加网页流量和交个朋友（李姐万岁~）</p><h6 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h6><p>每当有用户访问加入快链的网页时，点击快链后会<strong><strong>随机跳转</strong></strong>到另一个加入快链的网页。加入快链的网页越多，友链接力的规模越大，分享流量的规模也越大。</p><p>“ 网页A → 快链 → 网页B → 快链 → 网页C → 快链 → 网页D → 快链 → 网页E → 快链 → 网页F … ”</p><p>示例：</p><h2 id=""><a href="#" class="headerlink" title=""></a><a href="https://camo.githubusercontent.com/ae9d20fc7e04d77916d04c0b704f384ccaac6459c315f1c8edd193c8c8c5bc08/68747470733a2f2f67697465652e636f6d2f6d757a696875616e65722f6875616e6765696d616765732f7261772f6d61737465722f696d672f32303231303231373231323731332e706e67"><img src="https://camo.githubusercontent.com/ae9d20fc7e04d77916d04c0b704f384ccaac6459c315f1c8edd193c8c8c5bc08/68747470733a2f2f67697465652e636f6d2f6d757a696875616e65722f6875616e6765696d616765732f7261772f6d61737465722f696d672f32303231303231373231323731332e706e67" alt="img"></a></h2><hr><h2 id="项目仓库"><a href="#项目仓库" class="headerlink" title="项目仓库"></a>项目仓库</h2><p>国际：Github</p><p><a href="https://github.com/muzihuaner/QuickLinks">https://github.com/muzihuaner/QuickLinks</a></p><p>国内：Gitee</p><p><a href="https://gitee.com/muzihuaner/QuickLinks">https://gitee.com/muzihuaner/QuickLinks</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>工具</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>QuickLinks</tag>
-      
-      <tag>快链</tag>
       
     </tags>
     
