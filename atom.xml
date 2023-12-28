@@ -6,7 +6,7 @@
   <link href="https://blog.quickso.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.quickso.cn/"/>
-  <updated>2023-12-26T13:28:11.719Z</updated>
+  <updated>2023-12-28T02:43:02.267Z</updated>
   <id>https://blog.quickso.cn/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>code-server Dokcer部署方法及踩坑</title>
+    <link href="https://blog.quickso.cn/2023/12/28/code-serverDokcer%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%8F%8A%E8%B8%A9%E5%9D%91/"/>
+    <id>https://blog.quickso.cn/2023/12/28/code-serverDokcer%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%8F%8A%E8%B8%A9%E5%9D%91/</id>
+    <published>2023-12-28T02:38:33.000Z</published>
+    <updated>2023-12-28T02:43:02.267Z</updated>
+    
+    <content type="html"><![CDATA[<p>简介<br>code-server是一款服务端的vscode，可以在浏览器中使用vscode</p><p>官网：code-server</p><p>安装<br>官方提供的安装方法：<a href="https://coder.com/docs/code-server/latest/install">https://coder.com/docs/code-server/latest/install</a></p><p>官方提供了许多的安装方式，这里为了方便快捷，我们使用Docker部署，Docker Hub。官方镜像支持 amd64 和 arm64，如果需要arm32，可以使用社区版镜像<a href="https://hub.docker.com/r/linuxserver/code-server%E3%80%82%E8%BF%99%E9%87%8C%E6%88%91%E4%BB%AC%E4%BD%BF%E7%94%A8%E5%AE%98%E6%96%B9%E9%95%9C%E5%83%8F%E3%80%82">https://hub.docker.com/r/linuxserver/code-server。这里我们使用官方镜像。</a></p><p>在官网中Docker安装的方法中，映射了以下两个目录：</p><p>&#x2F;home&#x2F;coder&#x2F;.config：code-server的配置文件，里面包含了登录密码。容器第一次启动时如果.config文件夹为空，会自动创建配置文件，docker的启动日志中可以查看。具体配置文件为&#x2F;home&#x2F;coder&#x2F;.config&#x2F;code-server&#x2F;config.yaml<br>&#x2F;home&#x2F;coder&#x2F;project：code-server默认提供的工程目录，映射在物理机方便用户修改查看，当然你也可以映射自己的目录。<br>自动创建的config.yaml文件会包含密码。密码是自动生成的，可以自己修改。</p><h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">docker</span> pull codercom/<span class="hljs-meta">code</span>-server:latest<br></code></pre></td></tr></table></figure><h1 id="创建物理机所需要的映射目录"><a href="#创建物理机所需要的映射目录" class="headerlink" title="创建物理机所需要的映射目录"></a>创建物理机所需要的映射目录</h1><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle">mkdir -p <span class="hljs-regexp">/www/</span>wwwroot<span class="hljs-regexp">/coder-server/</span>.config<br>mkdir -p <span class="hljs-regexp">/www/</span>wwwroot<span class="hljs-regexp">/coder-server/</span><span class="hljs-keyword">project</span><br></code></pre></td></tr></table></figure><h1 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h1><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d -<span class="hljs-literal">it</span> --name code-server -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> <span class="hljs-string">\</span>   <br>  -v <span class="hljs-string">&quot;/www/wwwroot/coder-server/.config:$HOME/.config&quot;</span> <span class="hljs-string">\</span>  <br>  -v <span class="hljs-string">&quot;/www/wwwroot/coder-server/project:/home/coder/project&quot;</span> <span class="hljs-string">\</span> <br>  -u <span class="hljs-string">&quot;$(id -u):$(id -g)&quot;</span> <span class="hljs-string">\</span><br>  -e <span class="hljs-string">&quot;DOCKER_USER=$USER&quot;</span> <span class="hljs-string">\</span> <br>  codercom/code-server:latest<br></code></pre></td></tr></table></figure><p>查看config.yaml中的密码，并访问8080端口就可以使用了！！！！</p><p>踩坑<br>访问提示401错误<br>这是由于配置文件（config.yaml）不存在，或者配置文件有误。我在第一次创建容器时，Docker日志提示创建了默认的配置文件，但是.config文件夹为空。</p><p>新建一个没有映射的容器，进入容器后执行cat ~&#x2F;.config&#x2F;code-server&#x2F;config.yaml并复制文件内容，之后在物理机映射目录创建文件.config&#x2F;cod-server&#x2F;config.yaml粘贴内容。之后删除新建的容器，重启之前的容器。</p><p>也可以直接使用以下内容创建新文件（之后版本有可能配置文件有变，如果无效使用上面的方式）</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">bind-addr:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:8080</span><br><span class="hljs-attr">auth:</span> <span class="hljs-string">password</span><br><span class="hljs-attr">password:</span> <span class="hljs-string">*****</span><br><span class="hljs-attr">cert:</span> <span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure><p>到这里重启容器后理论上是可以正常使用了，但我在尝试后还是有问题，可以在新建容器时填入密码参数，这样无论配置文件是否存在都可以使用。</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-built_in">run</span> -d -it --name code-server -p 8080:8080<br>  -v <span class="hljs-string">&quot;/www/wwwroot/coder-server/.config:<span class="hljs-variable">$HOME</span>/.config&quot;</span><br>  -v <span class="hljs-string">&quot;/www/wwwroot/coder-server/project:/home/coder/project&quot;</span><br>  -u <span class="hljs-string">&quot;(id -u):(id−u):(id -g)&quot;</span><br>  -e <span class="hljs-string">&quot;DOCKER_USER=<span class="hljs-variable">$USER</span>&quot;</span><br>  -e <span class="hljs-string">&quot;PASSWORD&quot;</span>=*****<br>  codercom/code-server:latest<br></code></pre></td></tr></table></figure><p>还可以不映射配置文件到物理机，之后修改配置可以进入容器再修改。</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs applescript">docker <span class="hljs-built_in">run</span> -d -<span class="hljs-keyword">it</span> <span class="hljs-comment">--name code-server -p 8080:8080</span><br>  -v <span class="hljs-string">&quot;/www/wwwroot/coder-server/project:/home/coder/project&quot;</span><br>  -u <span class="hljs-string">&quot;(id -u):(id−u):(id -g)&quot;</span><br>  -e <span class="hljs-string">&quot;DOCKER_USER=$USER&quot;</span><br>  codercom/code-server:latest<br></code></pre></td></tr></table></figure><p>部分功能无法使用，部分插件失效<br>右下角应该有如下的提示：</p><p>code-server is being accessed in an insecure context. Web views, the clipboard, and other functionality may not work as expected.</p><p>因为部分组件依赖于第三方的数据，这些数据请求时协议为https，如果部署时未使用https协议，浏览器因为安全问题无法获取数据。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;简介&lt;br&gt;code-server是一款服务端的vscode，可以在浏览器中使用vscode&lt;/p&gt;
+&lt;p&gt;官网：code-server&lt;/p&gt;
+&lt;p&gt;安装&lt;br&gt;官方提供的安装方法：&lt;a href=&quot;https://coder.com/docs/code-server/l</summary>
+      
+    
+    
+    
+    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="Docker" scheme="https://blog.quickso.cn/tags/Docker/"/>
+    
+    <category term="code-server" scheme="https://blog.quickso.cn/tags/code-server/"/>
+    
+  </entry>
   
   <entry>
     <title>JetBrains IntelliJ系列全家桶激活服务器</title>
@@ -534,32 +562,6 @@
     <category term="玩客云" scheme="https://blog.quickso.cn/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/"/>
     
     <category term="FFmpeg" scheme="https://blog.quickso.cn/tags/FFmpeg/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在玩客云上部署code-server</title>
-    <link href="https://blog.quickso.cn/2021/06/05/%E5%9C%A8%E7%8E%A9%E5%AE%A2%E4%BA%91%E4%B8%8A%E9%83%A8%E7%BD%B2code-server/"/>
-    <id>https://blog.quickso.cn/2021/06/05/%E5%9C%A8%E7%8E%A9%E5%AE%A2%E4%BA%91%E4%B8%8A%E9%83%A8%E7%BD%B2code-server/</id>
-    <published>2021-06-05T06:49:06.000Z</published>
-    <updated>2023-12-12T02:31:15.091Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><a href="https://coder.com/">Code-server</a> 是在远程服务器上运行的VS Code，通过浏览器访问。</p><ul><li>在你的Chromebook、平板、笔记本上用一样的环境来进行开发</li><li>如果你有Windows或Mac工作站，也可以轻松地在Linux上开发</li><li>利用云服务器来加快测试、编译、下载等操作</li><li>不论在哪永远在线</li><li>所有的计算都在云端进行</li><li>不需要再运行过多的Chrome实例</li></ul><p>Code-server → <a href="https://coder.com/">https://coder.com/</a></p><p>GitHub → <a href="https://github.com/linuxserver/docker-code-server">https://github.com/linuxserver/docker-code-server</a></p><p>Docker Hub → <a href="https://hub.docker.com/r/linuxserver/code-server">https://hub.docker.com/r/linuxserver/code-server</a></p><h2 id="支持的系统架构"><a href="#支持的系统架构" class="headerlink" title="支持的系统架构"></a>支持的系统架构</h2><p>得益于docker的跨平台属性，我们的镜像也支持多架构（如，x86-64、arm64、armhf）。</p><p>直接拉取 <code>ghcr.io/linuxserver/code-server</code> 应该就可以自动获取适合你系统架构的版本，当然你也可以通过 tag 获取特定的版本。</p><table><thead><tr><th>架构</th><th>Tag</th></tr></thead><tbody><tr><td>x86-64</td><td>amd64-latest</td></tr><tr><td>arm64</td><td>arm64v8-latest</td></tr><tr><td>armhf</td><td>arm32v7-latest</td></tr></tbody></table><hr><p><strong>玩客云是32位的，所以也可以用这个</strong></p><h2 id="部署方法"><a href="#部署方法" class="headerlink" title="部署方法"></a>部署方法</h2><p>你需要先安装好Docker  ，方法自行百度</p><p><strong>部署命令</strong></p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-built_in">run</span> -d \<br>  <span class="hljs-attribute">--name</span>=code-server \<br>  -e <span class="hljs-attribute">PUID</span>=1000 \<br>  -e <span class="hljs-attribute">PGID</span>=1000 \<br>  -e <span class="hljs-attribute">TZ</span>=Europe/London \<br>  -e <span class="hljs-attribute">PASSWORD</span>=password  \<br>  -e <span class="hljs-attribute">SUDO_PASSWORD</span>=password  \<br>  -e <span class="hljs-attribute">PROXY_DOMAIN</span>=code-server.my.domain  \<br>  -p 8443:8443 \<br>  -v /path/<span class="hljs-keyword">to</span>/appdata/config:<span class="hljs-built_in">/config </span>\<br>  --restart unless-stopped \<br>  linuxserver/code-server<br></code></pre></td></tr></table></figure><h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>Docker镜像在使用的时候需要配置一些参数，这些参数使用 <code>:</code> 分隔，分别表示 <code>宿主机:容器内</code>。例如 <code>-p 8080:80</code> 指的是将容器内的<code>80</code>端口映射到宿主机上的<code>8080</code>端口，即通过宿主机网络访问的话，访问<code>8080</code>端口即是访问容器内的<code>80</code>端口。</p><h3 id="端口（-p）"><a href="#端口（-p）" class="headerlink" title="端口（-p）"></a>端口（-p）</h3><table><thead><tr><th>port</th><th>说明</th></tr></thead><tbody><tr><td><code>8443</code></td><td>WEB界面</td></tr></tbody></table><h3 id="环境变量（-e）"><a href="#环境变量（-e）" class="headerlink" title="环境变量（-e）"></a>环境变量（-e）</h3><table><thead><tr><th>env</th><th>说明</th></tr></thead><tbody><tr><td><code>PUID=1000</code></td><td>用户的 UID，详见下面的说明</td></tr><tr><td><code>PGID=1000</code></td><td>用户的 GID，详见下面的说明</td></tr><tr><td><code>TZ=Europe/London</code></td><td>设置时区，在国内的话可以使用 Asia&#x2F;Shanghai</td></tr><tr><td><code>PASSWORD=password</code></td><td>Web界面的密码，如果不设置则不会启用认证</td></tr><tr><td><code>SUDO_PASSWORD=password</code></td><td>如果设置了该项，则在服务器的终端上用该密码使用sudo</td></tr><tr><td><code>PROXY_DOMAIN=code-server.my.domain</code></td><td>反向代理相关的设置，<a href="https://github.com/cdr/code-server/blob/master/doc/FAQ.md#sub-domains">具体参阅这里</a></td></tr></tbody></table><h3 id="卷映射（-v）"><a href="#卷映射（-v）" class="headerlink" title="卷映射（-v）"></a>卷映射（-v）</h3><table><thead><tr><th>volume</th><th>说明</th></tr></thead><tbody><tr><td><code>/config</code></td><td>配置文件所在路径</td></tr></tbody></table><h2 id="从文件加载环境变量"><a href="#从文件加载环境变量" class="headerlink" title="从文件加载环境变量"></a>从文件加载环境变量</h2><p>可以使用前缀名为 <code>FILE__</code> 的文件来加载环境变量。</p><p>例：</p><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">-e FILE__PASSWORD=<span class="hljs-regexp">/run/</span>secrets/mysecretpassword<br></code></pre></td></tr></table></figure><p>将把 <code>/run/secrets/mysecretpassword</code> 文件中的内容作为 <code>PASSWORD</code> 变量的值。</p><h2 id="UID和GID"><a href="#UID和GID" class="headerlink" title="UID和GID"></a>UID和GID</h2><p>当使用 <code>-v</code> 映射卷的时候，宿主机和容器内会出现关于权限的问题，我们的镜像可以通过指定 <code>PUID</code> 和 <code>GUID</code> 来避免此类问题。</p><p>可以使用你目前正在使用的用户的UID和GID进行设置，这样就不会存在权限问题。</p><p>可以通过如下的方式查看当前用户的UID和GID：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$ </span><span class="language-bash"><span class="hljs-built_in">id</span> <span class="hljs-variable">$user</span></span><br>  uid=1000(dockeruser) gid=1000(dockergroup) groups=1000(dockergroup)<br></code></pre></td></tr></table></figure><h2 id="安装说明"><a href="#安装说明" class="headerlink" title="安装说明"></a>安装说明</h2><p>访问WEB界面：<code>http://ip:8443</code></p><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210605150345.png" alt="image-20210605150345025"></p><p>如果要使用GitHub，把ssh密钥放在 &#x2F;config&#x2F;.ssh 文件夹</p><p>然后在菜单中打开终端，设置github的用户名和邮箱</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">git config <span class="hljs-attr">--global</span> user<span class="hljs-selector-class">.name</span> <span class="hljs-string">&quot;username&quot;</span><br>git config <span class="hljs-attr">--global</span> user<span class="hljs-selector-class">.email</span> <span class="hljs-string">&quot;email address&quot;</span><br></code></pre></td></tr></table></figure><p>想换成中文，在拓展那里搜索“Chinese”,找到“简体中文”安装，重新加载页面即可。</p><p>哈哈哈，快去压榨玩客云的性能吧！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://coder.com/&quot;&gt;Code-server&lt;/a&gt; 是在远程服务器上运行的VS Code，通过浏览器访</summary>
-      
-    
-    
-    
-    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="VsCode" scheme="https://blog.quickso.cn/tags/VsCode/"/>
-    
-    <category term="玩客云" scheme="https://blog.quickso.cn/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/"/>
     
   </entry>
   
