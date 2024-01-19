@@ -6,7 +6,7 @@
   <link href="https://blog.quickso.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.quickso.cn/"/>
-  <updated>2024-01-14T07:57:23.101Z</updated>
+  <updated>2024-01-19T04:59:43.072Z</updated>
   <id>https://blog.quickso.cn/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>短波气象传真接收指南（JMH）</title>
+    <link href="https://blog.quickso.cn/2024/01/19/%E7%9F%AD%E6%B3%A2%E6%B0%94%E8%B1%A1%E4%BC%A0%E7%9C%9F%E6%8E%A5%E6%94%B6%E6%8C%87%E5%8D%97/"/>
+    <id>https://blog.quickso.cn/2024/01/19/%E7%9F%AD%E6%B3%A2%E6%B0%94%E8%B1%A1%E4%BC%A0%E7%9C%9F%E6%8E%A5%E6%94%B6%E6%8C%87%E5%8D%97/</id>
+    <published>2024-01-19T04:57:06.000Z</published>
+    <updated>2024-01-19T04:59:43.072Z</updated>
+    
+    <content type="html"><![CDATA[<p>短波气象传真是一种通过短波无线电频段传输天气信息的技术。它通过发送特定编码的图像信号，包括气象图、天气预报、海洋气象等，使接收者能够获取到实时的气象数据。短波气象传真广泛应用于航海、航空、军事、科学研究等领域，特别是在远离陆地的地区或通信网络不稳定的地方。</p><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401191246162.png" alt="接收日本ＪＭＨ气象传真"></p><p>在网络通信不发达的年代，一些远洋航船会配备气象传真接收机（当然现在也有），靠接收海岸台的气象传真图来分析预测海上天气情况。虽然现在信息技术发达，获取海上天气信息不困难，但是在某些特殊的情况下，短波气象传真仍然能发挥很关键的作用。</p><p>设备：支持USB模式的短波电台、收音机、SDR设备…</p><p>软件：<a href="http://www2.plala.or.jp/hikokibiyori/soft/kgfax/index.html">KG-FAX</a>（电脑），<a href="https://www.jvcomm.de/dlframee.html">JVComm32</a>（电脑），HF Weather FAX（手机，PC）</p><p>如果你没有设备也可以用在线SDR（可以直接解码）</p><p><a href="http://rx.linkfanel.net/">http://rx.linkfanel.net/</a></p><p><a href="https://www.receiverbook.de/map">https://www.receiverbook.de/map</a></p><p>这里以日本JMH气象传真为例：</p><p><strong>日本东京气象厅气象无线电传真广播台（JMH）</strong></p><p>以海上船舶为主要服务对象，它不仅提供地面、高空、海洋的各种气象、水文的实况分析资料，而且还提供各种气压形势、气象要素、海面状况及其它物理量的短、中期预报图。由于JMH台广播的气象传真资料种类比较齐全，因此对提高北太平洋区域的天气预报时效和预报服务质量起了很大作用。</p><p><strong>接收模式：USB</strong></p><p><strong>接收频率，接收时间，接收内容：</strong></p><table><thead><tr><th align="center">JMH</th><th align="center">JMH2</th><th align="center">JMH4</th></tr></thead><tbody><tr><td align="center">3622.5kHz</td><td align="center">7795kHz</td><td align="center">13988.5kHz</td></tr></tbody></table><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401191240868.png" alt="78d8d789d889b81713c7bdf540f635a0"></p><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401191241142.png" alt="b61609c85fea1f045be2367e656bf283"></p><p><strong>气象传真图的种类</strong></p><p>种类：气象传真图的内容丰富、种类繁多。航海最常用的气象传真图主要有：</p><p>（1）地面图：地面分析图（AS），地面预报图（FS）</p><p>（2）高空图：高空分析图（AU），高空预报图（FU）</p><p>（常用的高空图—500hPa、700hPa、850hpa）</p><p>（3）波浪图：波浪分析图（AW），波浪预报（FW）</p><p>（4）辅助图：卫星云图（VS-可见光云图；IR-红外云图），海冰图（ST-冰况图，FI-冰况预报图），海流图（SO-海流实况图，FO-海流预报图），海温图（CO-海温分布图，FO-海温预报图），风暴警报图WT等。</p><p><strong>图题内容</strong></p><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401191246487.png" alt="接收日本ＪＭＨ气象传真"></p><p>表1—气象传真图图名标题</p><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401191247411.png" alt="接收日本ＪＭＨ气象传真"></p><p>表2—常用传真图类别代号</p><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401191247675.png" alt="接收日本ＪＭＨ气象传真"></p><p>表3—常用传真图区域代号</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;短波气象传真是一种通过短波无线电频段传输天气信息的技术。它通过发送特定编码的图像信号，包括气象图、天气预报、海洋气象等，使接收者能够获取到实时的气象数据。短波气象传真广泛应用于航海、航空、军事、科学研究等领域，特别是在远离陆地的地区或通信网络不稳定的地方。&lt;/p&gt;
+&lt;p&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="业余无线电" scheme="https://blog.quickso.cn/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+    <category term="短波" scheme="https://blog.quickso.cn/tags/%E7%9F%AD%E6%B3%A2/"/>
+    
+    <category term="气象" scheme="https://blog.quickso.cn/tags/%E6%B0%94%E8%B1%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>用树莓派搭建自己的FM电台并进行直播</title>
@@ -535,35 +564,6 @@
     <category term="CloudFlare" scheme="https://blog.quickso.cn/tags/CloudFlare/"/>
     
     <category term="短网址" scheme="https://blog.quickso.cn/tags/%E7%9F%AD%E7%BD%91%E5%9D%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Github个人首页美化指北</title>
-    <link href="https://blog.quickso.cn/2021/08/02/Github%E4%B8%AA%E4%BA%BA%E9%A6%96%E9%A1%B5%E7%BE%8E%E5%8C%96%E6%8C%87%E5%8C%97/"/>
-    <id>https://blog.quickso.cn/2021/08/02/Github%E4%B8%AA%E4%BA%BA%E9%A6%96%E9%A1%B5%E7%BE%8E%E5%8C%96%E6%8C%87%E5%8C%97/</id>
-    <published>2021-08-02T06:31:37.000Z</published>
-    <updated>2023-12-12T02:31:15.081Z</updated>
-    
-    <content type="html"><![CDATA[<p>闲逛Github的时候，会发现有的Profile页面出现了一个README的头部，里面可以使用markdown自定义一些信息进行展示。查询了一下发现是Github新出现的一个秘密功能模块。不由分说，赶紧弄起来</p><h3 id="1-新建个人仓库"><a href="#1-新建个人仓库" class="headerlink" title="1.新建个人仓库"></a>1.新建个人仓库</h3><p>要展示这个特殊的模块，就需要新建一个”特殊“的仓库。这个仓库名称与你的Github用户名相同。如果你以Github用户名新建仓库，就会提示一段话：</p><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210802143541.png" alt="image-20210802143540972"></p><blockquote><p>You found a secret! <strong>muzihuaner&#x2F;muzihuaner</strong> is a ✨<em>special</em> ✨ repository that you can use to add a <code>README.md</code> to your GitHub profile. Make sure it’s public and initialize it with a <strong>README</strong> to get started.</p></blockquote><p>记得创建仓库的时候初始化一个README.md文件。</p><h3 id="2-编辑README-md文件"><a href="#2-编辑README-md文件" class="headerlink" title="2.编辑README.md文件"></a>2.编辑README.md文件</h3><p>打开README.md文件，就会发现Github已经创建好了一段信息，给你补充的灵感。当然，也可以按照自己的想法进行修改。</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs applescript">- 🔭 I’m currently working <span class="hljs-keyword">on</span> …<br>- 🌱 I’m currently learning …<br>- 👯 I’m looking <span class="hljs-keyword">to</span> collaborate <span class="hljs-keyword">on</span> …<br>- 🤔 I’m looking <span class="hljs-keyword">for</span> help <span class="hljs-keyword">with</span> …<br>- 💬 Ask <span class="hljs-keyword">me</span> <span class="hljs-keyword">about</span> …<br>- 📫 How <span class="hljs-keyword">to</span> reach <span class="hljs-keyword">me</span>: …<br>- 😄 Pronouns: …<br>- ⚡ Fun fact: …<br></code></pre></td></tr></table></figure><p>编辑好文件打开个人首页就可以看到效果了。</p><h3 id="3-展示控件"><a href="#3-展示控件" class="headerlink" title="3.展示控件"></a>3.展示控件</h3><p>下面介绍几个不错的展示组件和灵感来源。</p><h4 id="3-1动态GitHub-Readme-Stats"><a href="#3-1动态GitHub-Readme-Stats" class="headerlink" title="3.1动态GitHub Readme Stats"></a>3.1动态GitHub Readme Stats</h4><p><a href="https://github.com/anuraghazra/github-readme-stats">anuraghazra&#x2F;github-readme-stats</a>提供了一个展示Github动态的方式，支持展示Github基本信息、编码语言分布、仓库信息。最常用的还是Github基本信息和仓库信息。</p><p><img src="https://sumygg.com/2021/04/25/beautify-your-github-profile-readme/github-stats.png" alt="github-stats"></p><p>引用也是非常简单，按照仓库的[说明文档](<a href="https://github.com/anuraghazra/github-readme-stats/blob/master/docs/readme_cn.md">github-readme-stats&#x2F;readme_cn.md at master · anuraghazra&#x2F;github-readme-stats</a>)，将其中的用户名替换成自己的用户名即可。</p><h4 id="3-2Awesome-READMEs"><a href="#3-2Awesome-READMEs" class="headerlink" title="3.2Awesome READMEs"></a>3.2Awesome READMEs</h4><p>如果没有灵感，可以参考一下其他人的Github个人信息页。这里有个仓库收集了一些人的Github信息页，可以翻翻参考一下。</p><p><a href="https://github.com/kautukkundan/Awesome-Profile-README-templates">https://github.com/kautukkundan/Awesome-Profile-README-templates</a></p><h4 id="3-3访问计数"><a href="#3-3访问计数" class="headerlink" title="3.3访问计数"></a>3.3访问计数</h4><p>可以添加访问计数的徽章，这类服务不少，也可以自己搭建一个。这里列举一些只需要将其中的用户名替换成自己的用户名。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">![muzihuaner](https:<span class="hljs-regexp">//</span>komarev.com<span class="hljs-regexp">/ghpvc/</span>?username=muzihuaner)<br>![muzihuaner](https:<span class="hljs-regexp">//</span>visitor-badge.glitch.me/badge?page_id=muzihuaner.profile)<br>&lt;img src=<span class="hljs-string">&quot;https://count.getloli.com/get/@:muzihuaner&quot;</span> alt=<span class="hljs-string">&quot;:muzihauner&quot;</span> /&gt;<br></code></pre></td></tr></table></figure><h4 id="3-4图标徽章"><a href="#3-4图标徽章" class="headerlink" title="3.4图标徽章"></a>3.4图标徽章</h4><p>很多仓库都有这类图标徽章<a href="https://img.shields.io/badge/github-%2324292e.svg?&style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/github-%2324292e.svg?&style=for-the-badge&logo=github&logoColor=white" alt="github"></a>github，<a href="https://shields.io/">https://shields.io/</a>    提供了好多预制的徽章信息可供选择。</p><p>除了预制的徽章，shields也能自定义徽章样式。先从 <a href="https://simpleicons.org/">https://simpleicons.org/</a>   选择一个图标，shields支持直接使用simpleicons的图标。然后按照对应部分修改或替换到地址中，具体参数还是继续查看官网说明吧。</p><h4 id="3-5模板"><a href="#3-5模板" class="headerlink" title="3.5模板"></a>3.5模板</h4><p>各种布局、配件、模板真是挑花了了眼，尤其是其中技能图标，一个一个找好麻烦。幸好这里有一个Github <a href="https://profilinator.rishav.dev/">profilinator</a>模板生成器，一部分一部分的选择，可以快速生成需要的首页信息。</p><p>生成的README.md文件不只是局限于使用他的模板，更重要的是将其中的元素提取出来，复用其中的元素。比如技能图标Vue.js等<a href="https://profilinator.rishav.dev/skills-assets/vuejs-original-wordmark.svg"><img src="https://profilinator.rishav.dev/skills-assets/vuejs-original-wordmark.svg" alt="Vue.js"></a></p><h3 id="我的成果"><a href="#我的成果" class="headerlink" title="我的成果"></a>我的成果</h3><p>最后我的首页就是这样子了，欢迎前来参观。</p><p><a href="https://github.com/muzihuaner">muzihuaner (木子欢儿～) (github.com)</a></p><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210802144514.png" alt="image-20210802144514608"></p><h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul><li><a href="https://zhuanlan.zhihu.com/p/265462490">Github个人首页美化指北</a></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;闲逛Github的时候，会发现有的Profile页面出现了一个README的头部，里面可以使用markdown自定义一些信息进行展示。查询了一下发现是Github新出现的一个秘密功能模块。不由分说，赶紧弄起来&lt;/p&gt;
-&lt;h3 id=&quot;1-新建个人仓库&quot;&gt;&lt;a href=&quot;#</summary>
-      
-    
-    
-    
-    <category term="教程" scheme="https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="Github" scheme="https://blog.quickso.cn/tags/Github/"/>
-    
-    <category term="markdown" scheme="https://blog.quickso.cn/tags/markdown/"/>
-    
-    <category term="Readme" scheme="https://blog.quickso.cn/tags/Readme/"/>
     
   </entry>
   
