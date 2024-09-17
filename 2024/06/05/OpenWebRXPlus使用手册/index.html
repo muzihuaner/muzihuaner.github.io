@@ -25,17 +25,16 @@
 <meta property="og:site_name" content="点滴记忆">
 <meta property="og:description" content="OpenWebRX是一款基于网络的软件定义无线电(SDR)接收器应用程序。它允许用户通过网页浏览器访问和控制连接的SDR硬件设备,用于无线电收听和监控。  本文档是关于 OpenWebRX+  的，它是基于 OpenWebRX 的改进和扩展版本 。由于原始项目缺少诸如降噪、调整步骤和对许多数字模式的支持等必要功能，**Marat Fayzullin**决定分支OpenWebRX项目并添加他认为有">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=MzFmZTExN2Y5ZTEzOGNhMTVhZTg2NjQ4NGQ3MzBiNmZfUDhQejBLamhqR21UVnlMUFNhT3NpQnBmOGNvdnNZUUFfVG9rZW46SG9JamJiR2w5b3Z5Rk54Um4xR2NyUmVwbjZlXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA">
 <meta property="og:image" content="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=NDQzNDE5MTY4ZjBlNzE0YThmNmUyYjJkYzA4NDNkNmJfM3Z3SW84Rzh1U3FUcG9wYUduRkdVM3k0amVhN0FieFhfVG9rZW46V2hVT2JpQ0dIb0lRWVl4Zm9YRmNKQnhBbkNiXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA">
 <meta property="og:image" content="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=Mjg3NWFkMWVhMjk2YjY1Zjc0MDczNWNkMzk4YjhhYjNfbXU3VkR5S1hXZWQ1akhCcDhjdTZaZ2xPbXBueTF1RzFfVG9rZW46TThwZ2JaaHdPb0o2ZFJ4UWFDYWNIbzlIbmtiXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA">
 <meta property="og:image" content="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=MjA2MWQ0NDFmN2IwNjcxNjMzNTAxZTg2MzdhYTJkMzZfM2NmbUpzdVYyd2ZzVUNsRTNFU0FQWmdGMDlKYnpLenVfVG9rZW46S1pzdmJaS0Vub3d1a0Z4WmNxdGNIaUxrbmpoXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA">
 <meta property="article:published_time" content="2024-06-05T06:16:07.000Z">
-<meta property="article:modified_time" content="2024-06-05T06:28:32.102Z">
+<meta property="article:modified_time" content="2024-09-17T12:17:33.217Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="业余无线电">
 <meta property="article:tag" content="OpenWebRXPlus">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=MzFmZTExN2Y5ZTEzOGNhMTVhZTg2NjQ4NGQ3MzBiNmZfUDhQejBLamhqR21UVnlMUFNhT3NpQnBmOGNvdnNZUUFfVG9rZW46SG9JamJiR2w5b3Z5Rk54Um4xR2NyUmVwbjZlXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA">
+<meta name="twitter:image" content="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=NDQzNDE5MTY4ZjBlNzE0YThmNmUyYjJkYzA4NDNkNmJfM3Z3SW84Rzh1U3FUcG9wYUduRkdVM3k0amVhN0FieFhfVG9rZW46V2hVT2JpQ0dIb0lRWVl4Zm9YRmNKQnhBbkNiXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA">
   
   
   
@@ -437,11 +436,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash">docker run -d --name openwebrx \--device /dev/bus/usb \-p 8073:8073 \-v /root/openwebrx/set:/var/lib/openwebrx \-v /root/openwebrx/etc:/etc/openwebrx \--restart unless-stopped \<br>slechev/openwebrxplus-softmbe<br></code></pre></td></tr></table></figure>
 
 <p>进入容器并创建admin管理账号：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Bash">docker <span class="hljs-built_in">exec</span> -it openwebrx python3 openwebrx.py admin adduser admin<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Bash">docker <span class="hljs-built_in">exec</span> -it openwebrx admin adduser admin<br></code></pre></td></tr></table></figure>
 
 <p>账号创建完成后就可以浏览器访问“IP:8073”打开页面了（如需外网访问请自行申请公网IP或者搭建内网穿透，并使用强壮密码，请勿随意分享自己的站点，更不要触及敏感波段，切记！！！），浏览守听无需登录，需要对站点进行自定义时点击右上角的“Settings”使用刚才创建的账号登录修改。</p>
-<h4 id="避坑指南"><a href="#避坑指南" class="headerlink" title="避坑指南"></a>避坑指南</h4><p>OpenWebRX+可能会出现FT8无法解码的情况，报错日志如下：</p>
-<p><img src="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=MzFmZTExN2Y5ZTEzOGNhMTVhZTg2NjQ4NGQ3MzBiNmZfUDhQejBLamhqR21UVnlMUFNhT3NpQnBmOGNvdnNZUUFfVG9rZW46SG9JamJiR2w5b3Z5Rk54Um4xR2NyUmVwbjZlXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h4 id="避坑指南"><a href="#避坑指南" class="headerlink" title="避坑指南"></a>避坑指南</h4><p>OpenWebRX+可能会出现FT8无法解码的情况</p>
 <p>解决办法(x86平台)：</p>
 <p>进入容器：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Bash">docker <span class="hljs-built_in">exec</span> -it openwebrx /bin/sh<br></code></pre></td></tr></table></figure>
@@ -681,7 +679,7 @@
 <h3 id="后台解码"><a href="#后台解码" class="headerlink" title="后台解码"></a><strong>后台解码</strong></h3><p>作为<strong>服务器管理员</strong>，您可以让 OpenWebRX 服务器 在有人通过这些传输收听配置文件时<strong>自动解码无线电传输。</strong>此功能可用于接收 SSTV 图像、传真、监控数字 HAM 流量、跟踪飞机等。</p>
 <p>要开始后台解码，请转到<em>“设置|后台解码”</em>，选中<em>“启用后台解码服务”</em> 选项，然后选择您想要自动接收和解码的传输模式。确保只选择您真正需要的解码器，因为运行太多后台解码器会大大降低服务器速度。</p>
 <p>现在，转到要用于后台解码的 SDR 设备，让我们说<em>“设置 | SDR 设备和配置文件 | &lt;设备&gt;”</em>，然后添加<em>“在此设备上运行后台服务”</em>选项。添加此选项后，请确保已启用它。</p>
-<p>此时，每次有人连接并收听 <em><Device><em>配置文件时，OpenWebRX 都会<strong>自动解码标有绿色书签的频率上的所有启用的信号类型</strong>，即频段计划一部分的所有信号。如果解码的数据是图像或消息日志，这些数据将保存到</em>&#x2F;tmp</em>文件夹中，并在单击<strong>“文件”</strong>按钮后显示。<strong>当您单击“地图”</strong>按钮时，位置报告（例如 FT8、WSPR、APRS 等）将显示在地图上。</p>
+<p>此时，每次有人连接并收听 <em><code>&lt;Device&gt;</code><em>配置文件时，OpenWebRX 都会<strong>自动解码标有绿色书签的频率上的所有启用的信号类型</strong>，即频段计划一部分的所有信号。如果解码的数据是图像或消息日志，这些数据将保存到</em>&#x2F;tmp</em>文件夹中，并在单击<strong>“文件”</strong>按钮后显示。<strong>当您单击“地图”</strong>按钮时，位置报告（例如 FT8、WSPR、APRS 等）将显示在地图上。</p>
 <p>为了以不属于<strong>频段</strong> 计划的频率启用后台解码（<strong>无</strong>绿色书签），您必须通过编辑以下文件将该频率添加到频段计划中：</p>
 <p>&#x2F;etc&#x2F;openwebrx&#x2F;bands.json</p>
 <p>在编辑此文件之前，请确保<strong>创建备份副本</strong>，以防出现问题。不幸的是，目前无法通过基于网络的设置来编辑频段计划。编辑并保存文件后，按如下方式重新启动 OpenWebRX，并确保在您添加的频率处有一个绿色书签：</p>
@@ -726,7 +724,7 @@
 <li><strong>允许用户录制收到的音频</strong> 如果您不希望用户录制他们正在收听的任何音频，请禁用此选项。禁用后，<strong>REC</strong> 按钮将从用户界面中消失。请记住，这<strong>不会</strong>阻止您的用户通过其他方式录制音频。</li>
 <li><strong>允许用户更改中心频率</strong> 如果您想让 OpenWebRX+ 用户通过右键单击圆形箭头按钮“回避”其当前配置文件，请启用此选项。由于侦听同一配置文件的所有用户都会发生此更改，因此在许多人侦听相同配置文件的服务器上禁用它是有意义的。</li>
 <li><strong>魔法密钥</strong> 当魔法密钥字符串被填写（即不为空）时，OpenWebRX+ 将只允许对知道魔法密钥并提供它的人进行侧步配置文件，如下所示：</li>
-<li><a target="_blank" rel="noopener" href="http://openwebrx.receiver.org:8073/#">http://openwebrx.receiver.org:8073/#</a> <strong>key&#x3D;<magic-key></strong></li>
+<li><a target="_blank" rel="noopener" href="http://openwebrx.receiver.org:8073/#">http://openwebrx.receiver.org:8073/#</a> <strong>key&#x3D;<code>&lt;magic-key&gt;</code></strong></li>
 </ul>
 <h3 id="监控接收器的使用"><a href="#监控接收器的使用" class="headerlink" title="监控接收器的使用"></a><strong>监控接收器的使用</strong></h3><p>OpenWebRX+<strong>允许其管理员监控</strong>服务器连接并<strong>禁止滥用用户</strong>。请注意，由于 OpenWebRX 项目的主要目标是提供免费、开放的在线广播，因此应极其小心地使用该设施。如果您想拥有真正私有的 OpenWebRX 服务器，请考虑将其关闭以供公共访问。</p>
 <p><img src="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=MjA2MWQ0NDFmN2IwNjcxNjMzNTAxZTg2MzdhYTJkMzZfM2NmbUpzdVYyd2ZzVUNsRTNFU0FQWmdGMDlKYnpLenVfVG9rZW46S1pzdmJaS0Vub3d1a0Z4WmNxdGNIaUxrbmpoXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
@@ -755,7 +753,7 @@
 <li>确保选中<em>“需要魔术键才能在此设备上切换配置文件”</em>复选框，然后单击<strong>“应用”和“保存”</strong>。</li>
 </ol>
 <p>从现在开始，用户只能通过在 URL 中提供预配置的魔术键值来更改设备上的配置文件，如下所示：</p>
-<p><a target="_blank" rel="noopener" href="http://openwebrx.receiver.org:8073/#">http://openwebrx.receiver.org:8073/#</a> <strong>key&#x3D;<magic-key></strong></p>
+<p><a target="_blank" rel="noopener" href="http://openwebrx.receiver.org:8073/#">http://openwebrx.receiver.org:8073/#</a> <strong>key&#x3D;<code>&lt;magic-key&gt;</code></strong></p>
 <h3 id="如何跳转到任意频率？"><a href="#如何跳转到任意频率？" class="headerlink" title="如何跳转到任意频率？"></a><strong>如何跳转到任意频率？</strong></h3><p>由于 OpenWebRX 根据“配置文件”（即预配置的频率范围）工作，因此您<strong>无法</strong>跳转到任意频率，因为新频率可能需要不同的配置文件设置。此外，收听相同配置文件的其他用户可能不喜欢您跳到全新的频率。</p>
 <p>尽管如此，OpenWebRX+ 确实提供了一种“回避”当前配置文件、转到相邻频率的方法。要启用侧步，请执行以下操作：</p>
 <ol>
@@ -765,7 +763,7 @@
 </ol>
 <p>从现在开始，您可以通过右键单击接收器网页顶部的大圆形箭头来超出预先配置的频率范围。没有鼠标的移动用户只需用手指按住这些大圆形箭头大约一秒钟即可。</p>
 <p>如果配置了魔术键，则只有在 URL 中提供该键时才能回避配置文件，如下所示：</p>
-<p><a target="_blank" rel="noopener" href="http://openwebrx.receiver.org:8073/#">http://openwebrx.receiver.org:8073/#</a> <strong>key&#x3D;<magic-key></strong></p>
+<p><a target="_blank" rel="noopener" href="http://openwebrx.receiver.org:8073/#">http://openwebrx.receiver.org:8073/#</a> <strong>key&#x3D;<code>&lt;magic-key&gt;</code></strong></p>
 <h3 id="OpenWebRX-配置文件在哪里？"><a href="#OpenWebRX-配置文件在哪里？" class="headerlink" title="OpenWebRX 配置文件在哪里？"></a><strong>OpenWebRX 配置文件在哪里？</strong></h3><p>如果您想备份 OpenWebRX 配置文件，它们的位置如下：</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/openwebrx/</span>settings.json<br><span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/openwebrx/</span>bookmarks.json<br><span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/openwebrx/u</span>sers.json<br><span class="hljs-regexp">/etc/</span>openwebrx/openwebrx.conf<br><span class="hljs-regexp">/etc/</span>openwebrx/bands.json<br></code></pre></td></tr></table></figure>
 
