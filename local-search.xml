@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Proxmox VE 8配置国内软件源并删除订阅弹窗</title>
+    <link href="/2024/09/17/ProxmoxVE8%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E8%BD%AF%E4%BB%B6%E6%BA%90%E5%B9%B6%E5%88%A0%E9%99%A4%E8%AE%A2%E9%98%85%E5%BC%B9%E7%AA%97/"/>
+    <url>/2024/09/17/ProxmoxVE8%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E8%BD%AF%E4%BB%B6%E6%BA%90%E5%B9%B6%E5%88%A0%E9%99%A4%E8%AE%A2%E9%98%85%E5%BC%B9%E7%AA%97/</url>
+    
+    <content type="html"><![CDATA[<h1 id="删除订阅弹窗"><a href="#删除订阅弹窗" class="headerlink" title="删除订阅弹窗"></a>删除订阅弹窗</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sed -Ezi.bak <span class="hljs-string">&quot;s/(Ext.Msg.show\(\&#123;\s+title: gettext\(&#x27;No valid sub)/void\(\&#123; \/\/\1/g&quot;</span> <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/javascript/</span>proxmox-widget-toolkit/proxmoxlib.js &amp;&amp; systemctl restart pveproxy.service<br></code></pre></td></tr></table></figure><p>执行后清理浏览器缓存，重新登录验证。</p><h1 id="修改软件源"><a href="#修改软件源" class="headerlink" title="修改软件源"></a>修改软件源</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs awk">mv <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>pve-enterprise.list <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>pve-enterprise.list.bak<br><span class="hljs-comment"># 屏蔽订阅企业源</span><br>wget https:<span class="hljs-regexp">//mi</span>rrors.ustc.edu.cn<span class="hljs-regexp">/proxmox/</span>debian<span class="hljs-regexp">/proxmox-release-bookworm.gpg -O /</span>etc<span class="hljs-regexp">/apt/</span>trusted.gpg.d/proxmox-release-bookworm.gpg<br>echo <span class="hljs-string">&quot;deb https://mirrors.ustc.edu.cn/proxmox/debian bookworm pve-no-subscription&quot;</span> &gt; <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>pve-no-subscription.list<br><span class="hljs-comment"># 使用Proxmox非企业版中科大源</span><br>sed -i <span class="hljs-string">&#x27;s|^deb http://ftp.debian.org|deb https://mirrors.ustc.edu.cn|g&#x27;</span> <span class="hljs-regexp">/etc/</span>apt/sources.list<br>sed -i <span class="hljs-string">&#x27;s|^deb http://security.debian.org|deb https://mirrors.ustc.edu.cn/debian-security|g&#x27;</span> <span class="hljs-regexp">/etc/</span>apt/sources.list<br><span class="hljs-comment"># 将Debian官方源替换为中科大源</span><br>echo <span class="hljs-string">&quot;deb https://mirrors.ustc.edu.cn/proxmox/debian/ceph-quincy bookworm no-subscription&quot;</span> &gt; <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>ceph.list<br><span class="hljs-comment"># 替换Ceph源</span><br>sed -i <span class="hljs-string">&#x27;s|http://download.proxmox.com|https://mirrors.ustc.edu.cn/proxmox|g&#x27;</span> <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/perl5/</span>PVE/APLInfo.pm<br><span class="hljs-comment"># 替换CT镜像下载源（重启PVE才能生效）</span><br>apt update <br><span class="hljs-comment">#更新源列表</span><br>apt upgrade <br><span class="hljs-comment">#升级软件包</span><br>apt dist-upgrade <br><span class="hljs-comment">#升级系统</span><br>apt install openvswitch-switch<br><span class="hljs-comment">#安装OVS</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>教程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Proxmox</tag>
+      
+      <tag>Pve</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>青龙面板搭建教程</title>
     <link href="/2024/09/17/%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/"/>
     <url>/2024/09/17/%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/</url>
