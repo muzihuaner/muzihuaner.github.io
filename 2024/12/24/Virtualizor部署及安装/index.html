@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAbdmFWSJ-xZewX64_yEQq1iuy2V6cAAChA8AAmSdsVQwmJHfBBf1GzQE.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAbZmFWRN-tja8dKbGcNkV1Ufh0481gACgw8AAmSdsVQueL5a5DbjeDQE.png">
 <meta property="article:published_time" content="2024-12-24T11:36:32.000Z">
-<meta property="article:modified_time" content="2024-12-24T12:12:31.809Z">
+<meta property="article:modified_time" content="2024-12-24T12:17:41.898Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Virtualizor">
@@ -329,7 +329,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.6k 字
+          1.7k 字
         
       </span>
     
@@ -341,7 +341,7 @@
         
         
           <!-- compatible with older versions-->
-          14 分钟
+          15 分钟
         
       </span>
     
@@ -426,7 +426,7 @@
 <p>然后打开您的IP:4085&#x2F;4084访问管理页面，使用您的root密码登录</p>
 <p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAchmFWWG1-YxSFgX44Dfm8oto7QmCAAClQ8AAmSdsVRyc9RxCZRc3TQE.png" srcset="/img/loading.gif" lazyload alt="Alt Text"></p>
 <p>Virtualizor使用的端口为4081 - 4085，如果登不上可以考虑防火墙的问题：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">firewall-cmd <span class="hljs-attribute">--zone</span>=public --permanent <span class="hljs-attribute">--add-port</span>=4081-4085/tcp<br></code></pre></td></tr></table></figure>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs nsis">首先确保防火墙是开启状态：<br><br><span class="hljs-params">system</span>ctl status firewalld<br><br>开启防火墙：<br><br><span class="hljs-params">system</span>ctl start firewalld<br><br>关闭防火墙：<br><br><span class="hljs-params">system</span>ctl stop firewalld<br><br>开机启动防火墙：<br><br><span class="hljs-params">system</span>ctl enable firewalld<br><br>取消开机启动防火墙：<br><br><span class="hljs-params">system</span>ctl disable firewalld<br></code></pre></td></tr></table></figure>
 
 <p>添加存储：打开Virtualizor Admin Panel -&gt; Storage -&gt; Add Storage，按下面介绍填写并提交。</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-type">Name</span>：随意<br><span class="hljs-keyword">Server</span>：localhost<br><span class="hljs-keyword">Storage</span> <span class="hljs-keyword">Type</span> ：LVM<br><span class="hljs-keyword">Storage</span> <span class="hljs-type">Path</span>： 储存路径(LVM卷组路径，如果用我上面的那种的话就填/dev/VolGroup01)<br>Overcommit：虚拟盘有多大写多大<br>Alert Threshold: 告警(就是如果硬盘占用超过这个值就会提示你，一般不变就行了)<br><span class="hljs-keyword">Primary</span> <span class="hljs-keyword">Storage</span>: 如果你只有这一个硬盘请勾选，否则WHMCS开机器会报错<br></code></pre></td></tr></table></figure>
