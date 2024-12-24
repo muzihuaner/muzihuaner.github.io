@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAbdmFWSJ-xZewX64_yEQq1iuy2V6cAAChA8AAmSdsVQwmJHfBBf1GzQE.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAbZmFWRN-tja8dKbGcNkV1Ufh0481gACgw8AAmSdsVQueL5a5DbjeDQE.png">
 <meta property="article:published_time" content="2024-12-24T11:36:32.000Z">
-<meta property="article:modified_time" content="2024-12-24T12:06:30.435Z">
+<meta property="article:modified_time" content="2024-12-24T12:12:31.809Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Virtualizor">
@@ -414,7 +414,7 @@
 <p>之后，运行partprobe刷新磁盘。完成后，运行下面命令创建必要卷组，需要确认请输入y</p>
 <figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs smali">yum install lvm2 -y<br>pvcreate /dev/loop0<br>vgcreate -s 32M VolGroup01 /dev/loop0<br></code></pre></td></tr></table></figure>
 
-<h3 id="3-安装Virtualizor"><a href="#3-安装Virtualizor" class="headerlink" title="3.安装Virtualizor"></a>3.安装Virtualizor</h3><p>执行如下命令，将email后换成您自己的，安装后输入y确认重启。重启后虚拟磁盘挂载会掉，请输入</p>
+<h3 id="3-安装Virtualizor"><a href="#3-安装Virtualizor" class="headerlink" title="3.安装Virtualizor"></a>3.安装Virtualizor</h3><p>执行如下命令，将email后换成您自己的，安装后输入y确认重启。重启后虚拟磁盘可能挂载会掉，请输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">losetup /dev/loop0 /lxcdisk.img<br></code></pre></td></tr></table></figure>
 
 <p>重新挂载。</p>
