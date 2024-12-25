@@ -32,7 +32,11 @@
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/84c2f0972238eb24379e5fba3595f621.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAchmFWWG1-YxSFgX44Dfm8oto7QmCAAClQ8AAmSdsVRyc9RxCZRc3TQE.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAcdmFWV03KoHa7krVDfsy1oysU__EgAClA8AAmSdsVSsZKL2RRyCejQE.png">
-<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAcNmFWU_6W0q6kzxWccyjAmppO3voAACkA8AAmSdsVTnTezYlGko_DQE.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224531513.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224401783.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224751841.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224918781.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224954037.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAb1mFWTkhWq05LnO_yjfE-KnhVjPfwACig8AAmSdsVTLYWWqxS_y2jQE.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAbxmFWTUvl1OSkCo06tUZeDH0FRZiAACiQ8AAmSdsVQIKutqBIRkmzQE.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAbtmFWTGCH7rIderhmxvMlLoGaW_IgACiA8AAmSdsVSBiplKYDeDJjQE.png">
@@ -40,7 +44,7 @@
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAbdmFWSJ-xZewX64_yEQq1iuy2V6cAAChA8AAmSdsVQwmJHfBBf1GzQE.png">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAbZmFWRN-tja8dKbGcNkV1Ufh0481gACgw8AAmSdsVQueL5a5DbjeDQE.png">
 <meta property="article:published_time" content="2024-12-24T11:36:32.000Z">
-<meta property="article:modified_time" content="2024-12-25T14:40:22.137Z">
+<meta property="article:modified_time" content="2024-12-25T14:50:48.153Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Virtualizor">
@@ -325,7 +329,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.8k 字
+          1.9k 字
         
       </span>
     
@@ -429,7 +433,7 @@
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nsis">首先确保防火墙是开启状态：<br><span class="hljs-params">system</span>ctl status firewalld<br>开启防火墙：<br><span class="hljs-params">system</span>ctl start firewalld<br>关闭防火墙：<br><span class="hljs-params">system</span>ctl stop firewalld<br>开机启动防火墙：<br><span class="hljs-params">system</span>ctl enable firewalld<br>取消开机启动防火墙：<br><span class="hljs-params">system</span>ctl disable firewalld<br></code></pre></td></tr></table></figure>
 
 <p>添加存储：打开Virtualizor Admin Panel -&gt; Storage -&gt; Add Storage，按下面介绍填写并提交。</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-type">Name</span>：随意<br><span class="hljs-keyword">Server</span>：localhost<br><span class="hljs-keyword">Storage</span> <span class="hljs-keyword">Type</span> ：LVM<br><span class="hljs-keyword">Storage</span> <span class="hljs-type">Path</span>： 储存路径(LVM卷组路径，如果用我上面的那种的话就填/dev/VolGroup01)<br>Overcommit：虚拟盘有多大写多大<br>Alert Threshold: 告警(就是如果硬盘占用超过这个值就会提示你，一般不变就行了)<br><span class="hljs-keyword">Primary</span> <span class="hljs-keyword">Storage</span>: 如果你只有这一个硬盘请勾选，否则WHMCS开机器会报错<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-type">Name</span>：随意<br><span class="hljs-keyword">Server</span>：localhost<br><span class="hljs-keyword">Storage</span> <span class="hljs-keyword">Type</span> ：LVM<br><span class="hljs-keyword">Storage</span> <span class="hljs-type">Path</span>： 储存路径(LVM卷组路径，如果用我上面的那种的话就填/dev/VolGroup01)<br>Overcommit：虚拟盘有多大写多大,这里是<span class="hljs-number">80</span><br>Alert Threshold: 告警(就是如果硬盘占用超过这个值就会提示你，一般不变就行了)<br><span class="hljs-keyword">Primary</span> <span class="hljs-keyword">Storage</span>: 如果你只有这一个硬盘请勾选，否则WHMCS开机器会报错<br></code></pre></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAcdmFWV03KoHa7krVDfsy1oysU__EgAClA8AAmSdsVSsZKL2RRyCejQE.png" srcset="/img/loading.gif" lazyload alt="Alt Text"></p>
 <h3 id="4-构建虚拟网卡"><a href="#4-构建虚拟网卡" class="headerlink" title="4.构建虚拟网卡"></a>4.构建虚拟网卡</h3><p>官方文档</p>
@@ -442,28 +446,36 @@
 <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">systemctl <span class="hljs-built_in">restart</span> NetworkManager.service<br></code></pre></td></tr></table></figure>
 
 <p>打开Admin Panel &gt; IP Pool &gt; Create IP Pool，按照下面填写并提交</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">name</span> 随意<br>Gateway <span class="hljs-number">10.0.1.1</span><br>netmask <span class="hljs-number">255.255.255.0</span><br>nameserver1/<span class="hljs-number">2</span> 选择Google就好<br>First IP <span class="hljs-number">10.0.1.2</span><br>Last IP <span class="hljs-number">10.0.1.254</span><br>启用 VLAN 填入 **br0**<br>其他不变，点保存<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">name</span> 随意<br>Gateway <span class="hljs-number">10.0.1.1</span><br>netmask <span class="hljs-number">255.255.255.0</span><br>nameserver1/<span class="hljs-number">2</span> 选择Google就好<br>First IP <span class="hljs-number">10.0.1.2</span><br>Last IP <span class="hljs-number">10.0.1.254</span><br>启用 VLAN 填入 br0<br>其他不变，点保存<br></code></pre></td></tr></table></figure>
 
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224531513.png" srcset="/img/loading.gif" lazyload alt="image-20241225224531513"></p>
 <h3 id="5-下载系统镜像"><a href="#5-下载系统镜像" class="headerlink" title="5.下载系统镜像"></a>5.下载系统镜像</h3><p>打开Virtualizor Admin Panel -&gt; Media -&gt; OS Templates Browser，Type选LXC，勾上你想要的，提交。</p>
-<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAcNmFWU_6W0q6kzxWccyjAmppO3voAACkA8AAmSdsVTnTezYlGko_DQE.png" srcset="/img/loading.gif" lazyload alt="Alt Text"></p>
-<p>等镜像下完，就可以开VPS了。</p>
-<h3 id="6-设置NAT端口转发"><a href="#6-设置NAT端口转发" class="headerlink" title="6.设置NAT端口转发"></a>6.设置NAT端口转发</h3><p>执行</p>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224401783.png" srcset="/img/loading.gif" lazyload alt="image-20241225224401783"></p>
+<h3 id="6-创建小鸡"><a href="#6-创建小鸡" class="headerlink" title="6.创建小鸡"></a>6.创建小鸡</h3><p>如果你自己玩的，就可以去开小鸡了，如果还想着对接whmcs就设置一下小鸡套餐。</p>
+<ul>
+<li>设置Plan</li>
+</ul>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224751841.png" srcset="/img/loading.gif" lazyload alt="image-20241225224751841"></p>
+<ul>
+<li>创建虚拟机</li>
+</ul>
+<p>选择刚设置好的plan,基本不用设置。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224918781.png" srcset="/img/loading.gif" lazyload alt="image-20241225224918781"></p>
+<h3 id="7-设置NAT端口转发"><a href="#7-设置NAT端口转发" class="headerlink" title="7.设置NAT端口转发"></a>7.设置NAT端口转发</h3><p>执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget -N --no-check-certificate <span class="hljs-string">&quot;https://github.com/ldayday/virtualizor-iptables/releases/download/1.1.1/iptables-pf.sh&quot;</span>&amp;&amp;<span class="hljs-built_in">chmod</span> +x ./iptables-pf.sh<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash ./iptables-pf.sh<br></code></pre></td></tr></table></figure>
 
-<p>初次使用前请请务必执行 </p>
-<ol>
-<li>安装 iptables</li>
-</ol>
+<p>初次使用脚本<strong>请务必执行</strong> 1.安装 iptables</p>
 <p>然后选择 4. 添加 iptables 端口转发<br>比如：</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">iptables</span>欲转发至的远程端口：<span class="hljs-number">22</span>，远程<span class="hljs-built_in">ip</span>：就是LXC小鸡的<span class="hljs-built_in">IP</span><br>本地监听端口，你挑一个喜欢的，比如 <span class="hljs-number">50000</span><br>本服务器公网 <span class="hljs-built_in">ip</span>，一般这个直接回车<br>转发类型：<span class="hljs-number">1</span>.TCP 或者默认回车就好<br>然后按提示操作，成功后，就可以在外面像正常的vps那样，用母鸡的公网<span class="hljs-built_in">ip</span>，端口用刚刚设置的那个<span class="hljs-number">50000</span> ssh到nat鸡了。<br>假如你要一次性设置<span class="hljs-number">20</span>个转发端口那么下面举例子：<br><span class="hljs-symbol">iptables</span>欲转发至的远程端口：<span class="hljs-number">50001</span>-<span class="hljs-number">50019</span>，远程<span class="hljs-built_in">IP</span>:就是你创建的vps的<span class="hljs-built_in">IP</span><br>本地监听端口：<span class="hljs-number">50001</span>-<span class="hljs-number">50019</span><br>本服务器公网 <span class="hljs-built_in">ip</span>，回车<br>转发类型：<span class="hljs-number">3</span>.TCP+UDP<br></code></pre></td></tr></table></figure>
 
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224954037.png" srcset="/img/loading.gif" lazyload alt="image-20241225224954037"></p>
 <p>到这里，这个nat机器可以正常访问了</p>
 <p>这个时候，还需要执行一条ipt指令，才能让VPS正常联网</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">iptables</span> -t nat -A POSTROUTING -s <span class="hljs-number">10.0.0.0</span>/<span class="hljs-number">24</span> -j MASQUERADE<br></code></pre></td></tr></table></figure>
 
-<h3 id="7-对接WHMCS"><a href="#7-对接WHMCS" class="headerlink" title="7.对接WHMCS"></a>7.对接WHMCS</h3><p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAb1mFWTkhWq05LnO_yjfE-KnhVjPfwACig8AAmSdsVTLYWWqxS_y2jQE.png" srcset="/img/loading.gif" lazyload alt="Alt Text"></p>
+<h3 id="8-对接WHMCS"><a href="#8-对接WHMCS" class="headerlink" title="8..对接WHMCS"></a>8..对接WHMCS</h3><p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAb1mFWTkhWq05LnO_yjfE-KnhVjPfwACig8AAmSdsVTLYWWqxS_y2jQE.png" srcset="/img/loading.gif" lazyload alt="Alt Text"></p>
 <p>这里要提一下的是CPU Units，这是类似优先值的概念，比如你开了两台小鸡，一台CPU Units设置为1000，另一台设置为2000，那么当CPU跑满的时候 第一台会占有1000 &#x2F; (1000+2000)的CPU资源，第二台会占有2000 &#x2F; (1000+2000)的CPU资源 CPU%是指占所有核心的百分数，比如你有四个核心，想要VPS最多用一半的性能，你可以设置CPU%为50，那么他最多使用 2 ÷ 4 x 100 &#x3D; 50 (CPU%)<br>下载<a target="_blank" rel="noopener" href="https://www.virtualizor.com/docs/billing/whmcs-module/">Virtualizor_For_WHMCS</a>插件，上传到&#x2F;path&#x2F;to&#x2F;whmcs&#x2F;modules&#x2F;servers&#x2F;目录<br>WHMCS管理面板-&gt;设置-&gt;产品&#x2F;服务-&gt;服务器设置</p>
 <p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAbxmFWTUvl1OSkCo06tUZeDH0FRZiAACiQ8AAmSdsVQIKutqBIRkmzQE.png" srcset="/img/loading.gif" lazyload alt="Alt Text"></p>
 <p>添加服务器<br>主机名&#x2F;IP地址：母鸡ip</p>
