@@ -29,7 +29,7 @@
 <meta property="og:description" content="在开源软件的使用中，镜像仓库（Mirror Repository）扮演着至关重要的角色。它们为全球用户提供快速、可靠的软件下载服务。特别是在国内，由于网络限制，访问官方仓库往往较为缓慢，因此搭建一个自己的镜像仓库就显得尤为重要。而 **TunaSync**，作为一个开源的同步工具，提供了简便的方式来搭建和管理自己的镜像仓库。 tunasync 是清华大学 TUNA 镜像源目前使用的镜像方案。 1.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-03T15:43:01.000Z">
-<meta property="article:modified_time" content="2025-01-04T02:07:50.482Z">
+<meta property="article:modified_time" content="2025-01-04T05:15:04.091Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="开源">
 <meta property="article:tag" content="tunasync">
@@ -313,7 +313,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.6k 字
+          1.7k 字
         
       </span>
     
@@ -414,15 +414,16 @@
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mkdir -p /home/www/mirrors/scripts<br></code></pre></td></tr></table></figure>
 
 <p>在worker.conf文件添加</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[[mirrors]]</span><br><span class="hljs-attr">name</span> = <span class="hljs-string">&quot;github-release&quot;</span><br><span class="hljs-attr">provider</span> = <span class="hljs-string">&quot;command&quot;</span><br><span class="hljs-attr">upstream</span> = <span class="hljs-string">&quot;https://api.github.com/repos/&quot;</span><br><span class="hljs-comment"># https://github.com/tuna/tunasync-scripts/blob/master/github-release.py</span><br><span class="hljs-attr">command</span> = <span class="hljs-string">&quot;/home/www/mirrors/scripts/github-release.py&quot;</span><br><span class="hljs-attr">interval</span> = <span class="hljs-number">1440</span><br><span class="hljs-attr">docker_image</span> = <span class="hljs-string">&quot;tunathu/tunasync-scripts:latest&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[[mirrors]]</span><br><span class="hljs-attr">name</span> = <span class="hljs-string">&quot;github-release&quot;</span><br><span class="hljs-attr">provider</span> = <span class="hljs-string">&quot;command&quot;</span><br><span class="hljs-attr">upstream</span> = <span class="hljs-string">&quot;https://api.github.com/repos/&quot;</span><br><span class="hljs-attr">command</span> = <span class="hljs-string">&quot;/home/www/mirrors/scripts/github-release.py&quot;</span><br><span class="hljs-attr">interval</span> = <span class="hljs-number">1440</span><br><span class="hljs-attr">docker_image</span> = <span class="hljs-string">&quot;tunathu/tunasync-scripts:latest&quot;</span><br></code></pre></td></tr></table></figure>
 
 <p>下载同步脚本</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget -P scripts<span class="hljs-regexp">/ https:/</span><span class="hljs-regexp">/gh-proxy.com/</span>https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/tuna/</span>tunasync-scripts<span class="hljs-regexp">/master/gi</span>thub-release.py<br>wget -P scripts<span class="hljs-regexp">/ https:/</span><span class="hljs-regexp">/gh-proxy.com/</span>https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/tuna/</span>tunasync-scripts<span class="hljs-regexp">/master/gi</span>thub-release.json<br>chmod +x scripts/github-release.py<br>vim scripts/github-release.py<br></code></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget -P scripts<span class="hljs-regexp">/ https:/</span><span class="hljs-regexp">/gh-proxy.com/</span>https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/muzihuaner/mi</span>rrors<span class="hljs-regexp">/refs/</span>heads<span class="hljs-regexp">/new/mi</span>rrors<span class="hljs-regexp">/scripts/gi</span>thub-release.py<br>wget -P scripts<span class="hljs-regexp">/ https:/</span><span class="hljs-regexp">/gh-proxy.com/</span>https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/muzihuaner/mi</span>rrors<span class="hljs-regexp">/refs/</span>heads<span class="hljs-regexp">/new/mi</span>rrors<span class="hljs-regexp">/scripts/gi</span>thub-release.json<br>chmod +x scripts/github-release.py<br>vim scripts/github-release.py<br>vim scripts/github-release.json <span class="hljs-comment">#修改你要同步的仓库</span><br></code></pre></td></tr></table></figure>
 
 <p>可以先检验一下此脚本能否正常运行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 scripts/github-release.py<br></code></pre></td></tr></table></figure>
 
-<p>如果只是提示 <code>Exception: Working Directory is None</code> 而不是其他类型的错误则说明一切正常。</p>
+
+
 <p>更多配置：<a target="_blank" rel="noopener" href="https://github.com/tuna/tunasync/blob/master/docs/zh_CN/workers.conf">https://github.com/tuna/tunasync/blob/master/docs/zh_CN/workers.conf</a></p>
 <p>更多脚本：<a target="_blank" rel="noopener" href="https://github.com/tuna/tunasync-scripts">https://github.com/tuna/tunasync-scripts</a></p>
 <h4 id="下载tunasync启动停止脚本"><a href="#下载tunasync启动停止脚本" class="headerlink" title="下载tunasync启动停止脚本"></a>下载tunasync启动停止脚本</h4><p><a target="_blank" rel="noopener" href="https://github.com/whsir/tunasync-bin">https://github.com/whsir/tunasync-bin</a></p>
@@ -472,6 +473,9 @@
 
 <p>并根据需要补充 <code>index.html</code> 和配置的 web 文件到 <code>/mirrors</code> 目录。</p>
 <p>网页文件可以在 <a target="_blank" rel="noopener" href="https://github.com/muzihuaner/mirrors/tree/new/mirrors%E4%B8%8A%E4%B8%8B%E8%BD%BD%E4%BD%BF%E7%94%A8%EF%BC%88%E6%89%80%E6%9C%89">https://github.com/muzihuaner/mirrors/tree/new/mirrors上下载使用（所有</a> web 文件放到 <code>/mirrors</code> 目录即可）。</p>
+<p>文件夹层级</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs axapta">.<br>└── www<br>    └── mirrors 网站根目录<br>        ├── <span class="hljs-keyword">index</span>.html 首页<br>        ├── jobs.json 状态信息<br>        ├── logs 日志<br>        ├── scripts 脚本<br>        ├── <span class="hljs-keyword">static</span> 网页静态资源<br>        ├── status 服务器状态网页目录<br></code></pre></td></tr></table></figure>
+
 <p>至此，同步服务以及 web 访问服务全部搭建完成，内网的小伙伴们可以通过浏览器访问镜像站了 <a target="_blank" rel="noopener" href="http://服务器ip/">http:&#x2F;&#x2F;服务器IP&#x2F;</a>。</p>
 <h4 id="文章参考"><a href="#文章参考" class="headerlink" title="文章参考"></a>文章参考</h4><p><a target="_blank" rel="noopener" href="http://weyo.me/pages/techs/how-to-make-a-mirror-site/">http://weyo.me/pages/techs/how-to-make-a-mirror-site/</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.lussac.net/archives/342/">https://blog.lussac.net/archives/342/</a></p>
