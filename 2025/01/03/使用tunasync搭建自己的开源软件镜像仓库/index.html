@@ -29,7 +29,7 @@
 <meta property="og:description" content="在开源软件的使用中，镜像仓库（Mirror Repository）扮演着至关重要的角色。它们为全球用户提供快速、可靠的软件下载服务。特别是在国内，由于网络限制，访问官方仓库往往较为缓慢，因此搭建一个自己的镜像仓库就显得尤为重要。而 **TunaSync**，作为一个开源的同步工具，提供了简便的方式来搭建和管理自己的镜像仓库。 tunasync 是清华大学 TUNA 镜像源目前使用的镜像方案。 1.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-03T15:43:01.000Z">
-<meta property="article:modified_time" content="2025-01-04T01:24:23.850Z">
+<meta property="article:modified_time" content="2025-01-04T02:01:28.759Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="开源">
 <meta property="article:tag" content="tunasync">
@@ -450,23 +450,27 @@
 <p>验证</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">crontab -l</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="安装-apache-服务器"><a href="#安装-apache-服务器" class="headerlink" title="安装 apache 服务器"></a>安装 apache 服务器</h4><p>运行 <code>yum install httpd</code> 安装 apache。</p>
-<h4 id="7-3-配置apache服务器"><a href="#7-3-配置apache服务器" class="headerlink" title="7.3 配置apache服务器"></a>7.3 配置apache服务器</h4><p>编辑 <code>/etc/httpd/conf/httpd.conf</code> 文件，将web目录指向提供的镜像目录（这里以“&#x2F;mirrors”目录为例。在 <code>httpd.conf</code> 中修改以下配置内容：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">DocumentRoot</span> <span class="hljs-string">&quot;/home/www/mirrors&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>添加目录访问权限：</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-operator">&lt;</span><span class="hljs-built_in">Directory</span> <span class="hljs-string">&quot;/home/www/mirrors&quot;</span><span class="hljs-operator">&gt;</span><br>    <span class="hljs-built_in">Options</span> <span class="hljs-variable">Indexes</span> <span class="hljs-variable">FollowSymLinks</span><br>    <span class="hljs-variable">AllowOverride</span> <span class="hljs-built_in">None</span><br>    <span class="hljs-variable">Require</span> <span class="hljs-variable">all</span> <span class="hljs-variable">granted</span><br><span class="hljs-operator">&lt;/</span><span class="hljs-built_in">Directory</span><span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
-
-<p>并根据需要补充 <code>index.html</code> 和配置的 web 文件到 <code>/mirrors</code> 目录。</p>
-<h4 id="配置访问权限"><a href="#配置访问权限" class="headerlink" title="配置访问权限"></a>配置访问权限</h4><p>镜像目录权限设置（DocumentRoot 参数对应的所有层级目录均设置为 755 权限）</p>
+<h4 id="安装-Caddy-Web服务器"><a href="#安装-Caddy-Web服务器" class="headerlink" title="安装 Caddy Web服务器"></a>安装 Caddy Web服务器</h4><h4 id="配置访问权限"><a href="#配置访问权限" class="headerlink" title="配置访问权限"></a>配置访问权限</h4><p>镜像目录权限设置</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> 755 /home/www/mirrors<br></code></pre></td></tr></table></figure>
 
-<p>SELINUX权限设置</p>
+<p>SELINUX权限设置(可选)</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">chcon -R -t <span class="hljs-type">httpd_sys_content_t</span> /home/www/mirrors<br></code></pre></td></tr></table></figure>
 
-<h4 id="设置启动项"><a href="#设置启动项" class="headerlink" title="设置启动项"></a>设置启动项</h4><p>开启 apache 服务器并设置开机启动项</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-params">system</span>ctl start httpd.service<br><span class="hljs-params">system</span>ctl enable httpd.service<br></code></pre></td></tr></table></figure>
+<h4 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h4><p>如果你还没有安装 Docker，可以通脚本安装 Docker：</p>
+<p><a target="_blank" rel="noopener" href="https://getdocker.quickso.cn/">https://getdocker.quickso.cn/</a></p>
+<p>创建Caddy文件夹</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mkdir -p /home/www/Caddy<br></code></pre></td></tr></table></figure>
 
+<p>创建Caddyfile</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arcade">:<span class="hljs-number">80</span> &#123;<br>    root * <span class="hljs-regexp">/usr/</span>share/caddy<br>    file_server browse<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>为了简化部署，可以使用 <code>Docker Compose</code> 来管理 Caddy 服务和配置。</p>
+<h4 id="创建-docker-compose-yml"><a href="#创建-docker-compose-yml" class="headerlink" title="创建 docker-compose.yml"></a>创建 <code>docker-compose.yml</code></h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span><br><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">caddy:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">caddy:latest</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">caddy</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;80:80&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;443:443&quot;</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/home/www/Caddy/Caddyfile:/etc/caddy/Caddyfile</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/home/www/mirrors:/usr/share/caddy</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">caddy_data:/data</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">caddy_config:/config</span><br><br><span class="hljs-attr">volumes:</span><br>  <span class="hljs-attr">caddy_data:</span><br>  <span class="hljs-attr">caddy_config:</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="启动-Caddy-服务"><a href="#启动-Caddy-服务" class="headerlink" title="启动 Caddy 服务"></a>启动 Caddy 服务</h4><p>运行以下命令启动 Caddy 服务：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose up -d</span><br></code></pre></td></tr></table></figure>
+
+<p>并根据需要补充 <code>index.html</code> 和配置的 web 文件到 <code>/mirrors</code> 目录。</p>
 <p>网页文件可以在 <a target="_blank" rel="noopener" href="https://github.com/muzihuaner/mirrors/tree/new/mirrors%E4%B8%8A%E4%B8%8B%E8%BD%BD%E4%BD%BF%E7%94%A8%EF%BC%88%E6%89%80%E6%9C%89">https://github.com/muzihuaner/mirrors/tree/new/mirrors上下载使用（所有</a> web 文件放到 <code>/mirrors</code> 目录即可）。</p>
 <p>至此，同步服务以及 web 访问服务全部搭建完成，内网的小伙伴们可以通过浏览器访问镜像站了 <a target="_blank" rel="noopener" href="http://服务器ip/">http:&#x2F;&#x2F;服务器IP&#x2F;</a>。</p>
 <h4 id="文章参考"><a href="#文章参考" class="headerlink" title="文章参考"></a>文章参考</h4><p><a target="_blank" rel="noopener" href="http://weyo.me/pages/techs/how-to-make-a-mirror-site/">http://weyo.me/pages/techs/how-to-make-a-mirror-site/</a></p>
