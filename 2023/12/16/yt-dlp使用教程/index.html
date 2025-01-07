@@ -29,8 +29,9 @@
 <meta property="og:description" content="很久没用youtube-dl这个工具了，然后在油管上看到想下载的视频，发现下载速度超慢，只有几十KB最多。 于是，搜一下，发现可能是被限速了吧。 找到了这个 yt-dlp 的代替工具。项目地址：https:&#x2F;&#x2F;github.com&#x2F;yt-dlp&#x2F;yt-dlp 这个下载，就看个人网速了，因为我晚上下载有时候1M&#x2F;s、几百K&#x2F;s都有，白天下载有时候10几M&#x2F;s、20~30">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i007it.com/img/yt-dlp.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20250107214027574.png">
 <meta property="article:published_time" content="2023-12-16T09:50:04.000Z">
-<meta property="article:modified_time" content="2024-11-23T13:12:18.427Z">
+<meta property="article:modified_time" content="2025-01-07T13:43:56.177Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Youtube">
 <meta property="article:tag" content="yt-dlp">
@@ -315,7 +316,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          906 字
+          1.2k 字
         
       </span>
     
@@ -327,7 +328,7 @@
         
         
           <!-- compatible with older versions-->
-          8 分钟
+          11 分钟
         
       </span>
     
@@ -400,6 +401,41 @@
 <p>最方便直接用，可以直接用最后一种通用的下载最佳视频的方式。</p>
 <h3 id="5-下载播放列表所有视频"><a href="#5-下载播放列表所有视频" class="headerlink" title="5.下载播放列表所有视频"></a>5.下载播放列表所有视频</h3><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">yt-dlp https://www.youtube.com/playlist?list=<span class="hljs-strong">*****</span><span class="hljs-strong">*****</span><br></code></pre></td></tr></table></figure>
 
+<h3 id="6-yt-dlp无法使用–cookies-from-browser解决方法"><a href="#6-yt-dlp无法使用–cookies-from-browser解决方法" class="headerlink" title="6.yt-dlp无法使用–cookies-from-browser解决方法"></a>6.yt-dlp无法使用–cookies-from-browser解决方法</h3><p><strong>安装扩展插件Get cookies.txt LOCALLY：</strong></p>
+<p>打开Chrome，输入网址</p>
+<p><a target="_blank" rel="noopener" href="https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc?pli=1">https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc?pli=1</a></p>
+<p>之后点击安装扩展。</p>
+<p>安装后可以将插件固定在浏览器显示中</p>
+<p><strong>使用插件手动获取youtube的相关cookies：</strong></p>
+<p>打开youtube，点击Export，就可以成功导出并下载与youtube相关的cookies文件。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20250107214027574.png" srcset="/img/loading.gif" lazyload alt="image-20250107214027574"></p>
+<p><strong>使用cookies文件下载相关视频：</strong></p>
+<p>下载好cookies文件后，将原代码中的–cookies-from-browser chrome替换成–cookies [下载的cookies所在的文件路径]</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">yt-dlp <span class="hljs-attr">--cookies</span> /root/www<span class="hljs-selector-class">.youtube</span><span class="hljs-selector-class">.com_cookies</span><span class="hljs-selector-class">.txt</span> https:<span class="hljs-comment">//www.youtube.com/watch?v=XXX</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-常用命令总结"><a href="#7-常用命令总结" class="headerlink" title="7.常用命令总结"></a>7.常用命令总结</h3><ol>
+<li><p><strong>下载视频：</strong></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">yt<span class="hljs-punctuation">-</span>dlp https<span class="hljs-punctuation">:</span><span class="hljs-comment">//www.youtube.com/watch?v=example</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>下载音频：</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">yt-dlp -<span class="hljs-attribute">x</span> <span class="hljs-attr">--audio-format</span> mp3 https://www.youtube.com/watch?v=example<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>下载播放列表：</strong></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">yt<span class="hljs-punctuation">-</span>dlp https<span class="hljs-punctuation">:</span><span class="hljs-comment">//www.youtube.com/playlist?list=example</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>选择视频格式：</strong></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">yt<span class="hljs-punctuation">-</span>dlp <span class="hljs-punctuation">-</span>f best https<span class="hljs-punctuation">:</span><span class="hljs-comment">//www.youtube.com/watch?v=example</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>保存到特定文件夹：</strong></p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">yt-dlp -o &#x27;/path/to/<span class="hljs-built_in">directory</span>/<span class="hljs-symbol">%</span>(<span class="hljs-built_in">title</span>)s.<span class="hljs-symbol">%</span>(ext)s&#x27; https://www.youtube.com/watch?v=<span class="hljs-built_in">example</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>限制下载速度：</strong></p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs hsp">yt-dlp --rate-<span class="hljs-keyword">limit</span> <span class="hljs-number">500</span>K https:<span class="hljs-comment">//www.youtube.com/watch?v=example</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>下载字幕：</strong></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">yt-dlp <span class="hljs-params">--write-sub</span> <span class="hljs-params">--sub-lang</span> en https:<span class="hljs-string">//www.youtube.com/watch</span>?v=example<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><code>yt-dlp</code> 还有更多高级选项，你可以通过运行 <code>yt-dlp --help</code> 来查看详细的帮助文档</p>
 
                 
               </div>
