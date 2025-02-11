@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191743260.png">
 <meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250209113446838.png">
 <meta property="article:published_time" content="2025-02-11T11:01:27.000Z">
-<meta property="article:modified_time" content="2025-02-11T11:42:01.321Z">
+<meta property="article:modified_time" content="2025-02-11T14:30:16.288Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="VPN">
@@ -407,7 +407,9 @@
 <p>参考以下命令正式启动容器,注意本文示例<code>conf</code>目录存放于<code>/root</code>下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d \<br>    --name anylink \<br>    --restart always \<br>    --privileged=<span class="hljs-literal">true</span> \<br>    -p 55555:443 \<br>    -p 8800:8800 \<br>    -v /root/conf:/app/conf \<br>bjdgyc/anylink -c=/app/conf/server.toml<br></code></pre></td></tr></table></figure>
 
-<h4 id="6-管理后台"><a href="#6-管理后台" class="headerlink" title="6.管理后台"></a>6.管理后台</h4><p>访问<code>内网IP:端口</code>,本例<code>http://IP:8800</code>输入<code>admin</code>密码登陆后台管理系统.<br>后台管理非常简单明了,只需要配置<code>用户组</code>,<code>用户</code>即可开始使用,如需邮件分发密码功能可以在<code>邮件设置</code>中配置.</p>
+<h4 id="6-管理后台"><a href="#6-管理后台" class="headerlink" title="6.管理后台"></a>6.管理后台</h4><p>访问<code>内网IP:端口</code>,例如<code>https://IP:8800</code>输入<code>admin</code>密码登陆后台管理系统.</p>
+<p><a target="_blank" rel="noopener" href="https://ip:55555/">https://IP:55555</a> 即为VPN首页，可以自定义</p>
+<p>后台管理非常简单明了,只需要配置<code>用户组</code>,<code>用户</code>即可开始使用,如需邮件分发密码功能可以在<code>邮件设置</code>中配置.</p>
 <p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191205518.png" srcset="/img/loading.gif" lazyload alt="image-20250211191205518"></p>
 <p><code>其他设置</code>中可以配置Banner信息、自定义首页（支持HTML代码）、邮件分发模版等，可以根据自己的需求修改</p>
 <p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191032651.png" srcset="/img/loading.gif" lazyload alt="image-20250211191032651"></p>
