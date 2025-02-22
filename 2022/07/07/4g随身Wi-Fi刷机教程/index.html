@@ -1,0 +1,919 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="4g 随身 Wi-Fi 刷机教程这是一个二十多块就能买到的， 4G USB 随身 Wi-Fi，你可能不会想到它居然跑的是安卓系统。并且还能刷 debian 系统，甚至你还能刷 openwrt 成为软路由，更棒的是 4G 和 Wi-Fi 、USB 等功能都正常工作。  默认基本的配置都是： 高通410 四核 1.2GHz CPU、512M 内存、4G emmc 闪存、默认 android 4.4 系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4g随身Wi-Fi刷机教程">
+<meta property="og:url" content="https://blog.quickso.cn/2022/07/07/4g%E9%9A%8F%E8%BA%ABWi-Fi%E5%88%B7%E6%9C%BA%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="4g 随身 Wi-Fi 刷机教程这是一个二十多块就能买到的， 4G USB 随身 Wi-Fi，你可能不会想到它居然跑的是安卓系统。并且还能刷 debian 系统，甚至你还能刷 openwrt 成为软路由，更棒的是 4G 和 Wi-Fi 、USB 等功能都正常工作。  默认基本的配置都是： 高通410 四核 1.2GHz CPU、512M 内存、4G emmc 闪存、默认 android 4.4 系">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/24955_origin_IMG_20220707_153431.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/1657182806244.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071627483.jpeg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/23919_origin_1736dc4f641e2636.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071545851.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071546430.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071548184.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071550581.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071551712.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071553757.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071555274.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071611878.jpeg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/1657204950159.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071614901.jpeg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071615023.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071616906.jpeg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071617773.jpeg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071618479.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071626725.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071620062.jpeg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071637011.jpeg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071622644.jpeg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071623970.jpeg">
+<meta property="article:published_time" content="2022-07-07T08:34:43.000Z">
+<meta property="article:modified_time" content="2025-02-21T16:10:08.488Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="ADB">
+<meta property="article:tag" content="安卓">
+<meta property="article:tag" content="刷机">
+<meta property="article:tag" content="WIFI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/24955_origin_IMG_20220707_153431.jpg">
+  
+  
+  
+  <title>4g随身Wi-Fi刷机教程 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="4g随身Wi-Fi刷机教程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-07 16:34" pubdate>
+          2022年7月7日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">4g随身Wi-Fi刷机教程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="4g-随身-Wi-Fi-刷机教程"><a href="#4g-随身-Wi-Fi-刷机教程" class="headerlink" title="4g 随身 Wi-Fi 刷机教程"></a>4g 随身 Wi-Fi 刷机教程</h2><p>这是一个二十多块就能买到的， 4G USB 随身 Wi-Fi，你可能不会想到它居然跑的是安卓系统。并且还能刷 debian 系统，甚至你还能刷 openwrt 成为软路由，更棒的是 4G 和 Wi-Fi 、USB 等功能都正常工作。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/24955_origin_IMG_20220707_153431.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><strong>默认基本的配置都是：</strong> 高通410 四核 1.2GHz CPU、512M 内存、4G emmc 闪存、默认 android 4.4 系统。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/1657182806244.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li><strong>高通410（msm8916）方案的随身 Wi-Fi</strong>：板子上的丝印是 UFI001B、UFI001C、UFI003、UFI-W-001 最好，或者 SP970（不推荐，细分版本目前13个太多，基本要短接才能进 9008 模式，然后现在的 openwrt Wi-Fi 也有问题）、UZ801 也 OK；<strong>需要带卡槽、能切卡</strong>。我的版本是<strong>先机w001</strong>  （根据你的情况选择是否抠esim手机卡，可以使用热风枪或者美工刀，要小心）</li>
+</ol>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071627483.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li><strong>一台 Windows 电脑</strong>（建议关闭所有杀毒软件）</li>
+<li><strong>小卡转大卡 SIM 卡套</strong></li>
+<li><strong>螺丝刀</strong>（拧随身 Wi-Fi 十字小螺丝）</li>
+<li><strong>下载刷机需要的工具文件</strong></li>
+</ol>
+<p>工具包：</p>
+<p><a target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/XZ38e2Yfjdq">https://www.aliyundrive.com/s/XZ38e2Yfjdq</a></p>
+<p>搞基工具箱：（用来进入fastboot）：</p>
+<p><a target="_blank" rel="noopener" href="https://huangenet.lanzoub.com/izUcj07i4k6b">https://huangenet.lanzoub.com/izUcj07i4k6b</a></p>
+<p>openwrt：</p>
+<p><a target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/bzGSJKYSrY7">https://www.aliyundrive.com/s/bzGSJKYSrY7</a></p>
+<p>另一个人编译的</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/OpenStick/OpenStick">https://github.com/OpenStick/OpenStick</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.coolapk.com/feed/36677219?shareKey=ZWY3NjQ4MzQ2NDM2NjJjNmYyMjQ~&shareUid=524513&shareFrom=com.coolapk.market_12.2">https://www.coolapk.com/feed/36677219?shareKey=ZWY3NjQ4MzQ2NDM2NjJjNmYyMjQ~&amp;shareUid=524513&amp;shareFrom=com.coolapk.market_12.2</a></p>
+<p>debian系统</p>
+<p><a target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/VenG1jiBuNF">https://www.aliyundrive.com/s/VenG1jiBuNF</a></p>
+<h2 id="检查和备份"><a href="#检查和备份" class="headerlink" title="检查和备份"></a>检查和备份</h2><h3 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h3><p>到手后第一件事，先插上电，连上随身 Wi-Fi 提供的 Wi-Fi，进入后台，检查下是否能正常工作，防止到手就是坏的；然后用螺丝刀拆开检查板子，是否有卡槽，以及上面的版本丝印。（可以看到我的这款有卡槽，没有丝印，但是写了一个12jj，在酷安找了半天，才知道是w001 ）</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/23919_origin_1736dc4f641e2636.jpg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="全量备份"><a href="#全量备份" class="headerlink" title="全量备份"></a>全量备份</h3><p>做好全量备份就不会变砖，随时刷成到手的状态</p>
+<p>首先安装下载好的 <strong>9008</strong> 驱动</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071545851.png" srcset="/img/loading.gif" lazyload></p>
+<p>按住拇指位置的按钮插上电脑（一般不会有亮灯），在电脑设备管理器-端口设备里能看到 9008 的 COM 设备就说明连接上了。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071546430.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071548184.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后安装下载好的 miko，并将 Loader 移动到安装的路径下面（默认在 C:\Program Files (x86)\miko_service_tool_pro\miko_service_tool_pro），打开 Loader。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071550581.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后在 miko 里依次选择 Read - Partition Backup&#x2F;Earese - 点击左下角 Load Partition Structure 看到右边有系统信息的输出就说明连上了。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071551712.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后点击 Read Full Image 选个路径，取个名字就开始全量备份救砖能用的 .bin 文件。过程会比较慢，可能要十几分钟。等到跑完进度条 100% 右边的输出显示 success 就备份好了，我们就能开始随意折腾。</p>
+<p><strong>如何恢复原厂固件？</strong></p>
+<p>打开miko（Loader.exe，网盘文件有说明），刷入文件名为xx.bin的全量包等待开机即可。按照顺序操作</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071553757.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果你只需要切卡功能，可以使用酷安大佬的一键工具</p>
+<p>最新版本看作者</p>
+<p><a target="_blank" rel="noopener" href="https://www.coolapk.com/feed/37357377?shareKey=MmI1ZTFmZTU5ODQ0NjJjNmYyMWI~&shareUid=524513&shareFrom=com.coolapk.market_12.2">https://www.coolapk.com/feed/37357377?shareKey=MmI1ZTFmZTU5ODQ0NjJjNmYyMWI~&amp;shareUid=524513&amp;shareFrom=com.coolapk.market_12.2</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.123pan.com/s/FrsrVv-Mf97A">https://www.123pan.com/s/FrsrVv-Mf97A</a></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071555274.png" srcset="/img/loading.gif" lazyload></p>
+<p>把随身wifi插入，根据步骤刷机即可</p>
+<h2 id="切换网络（电信基本可跳过此步）"><a href="#切换网络（电信基本可跳过此步）" class="headerlink" title="切换网络（电信基本可跳过此步）"></a>切换网络（电信基本可跳过此步）</h2><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071611878.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>你可以在默认的安卓系统下直接从默认的 esim 切到你自己的卡来验证是否有网，一般联通电信都是可以正常工作的，因为刷写 openwrt 会直接使用安卓系统里的基带分区，<strong>如果使用自己的卡网络正常，可以直接跳到下一步刷 openwrt，也就是说只有切卡不能正常使用你才需要刷基带，另外刷 openwrt 目前有个 BUG ：你只能使用在刷前安卓上正常工作的运营商的卡。</strong></p>
+<p>比如看图中我插入使用的是联通卡正常工作，我刷 openwrt 就只能使用联通的卡</p>
+<p><strong>如果你要使用移动的卡，或者你联通卡不能正常工作，那你可能需要刷下基带（看后面）。</strong></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/1657204950159.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="刷Openwrt"><a href="#刷Openwrt" class="headerlink" title="刷Openwrt"></a>刷Openwrt</h2><p>刷入 openwrt 十分简单，因为「苏苏小亮亮」已经做好了一键刷入的包。刷入前请确认你安卓里你插入使用的 SIM 卡正常工作。</p>
+<h3 id="进入-fastboot-模式"><a href="#进入-fastboot-模式" class="headerlink" title="进入 fastboot 模式"></a>进入 fastboot 模式</h3><p>备份完后重新插拔，然后打开搞机工具箱，选择线刷，重启到 Fastboot，一般重启 fastboot 后随身 Wi-Fi 会亮红灯。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071614901.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>打开解压好对应版本的 openwrt 文件夹（例如我这里刷UFI001c）</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071615023.png" srcset="/img/loading.gif" lazyload alt="image-20220707161535000"></p>
+<p>然后双击 flash.bat 就能开始刷机</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071616906.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>能搜索到 HandsomeMod Wi-Fi 就是 openwrt 刷好了。默认的后台地址是 192.168.1.1 用户名是 root 没有密码。（如果有就是root）</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071617773.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>在后台网络接口里，检查 MODEM 是否能正常获取 IP 地址，如果能那说明 SIM 卡能正常联网使用，你现在的 Wi-Fi 应该也是有网络的。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071618479.png" srcset="/img/loading.gif" lazyload alt="image-20220707161805455"></p>
+<h2 id="刷Debian"><a href="#刷Debian" class="headerlink" title="刷Debian"></a>刷Debian</h2><p>包大多来自这里</p>
+<p><a target="_blank" rel="noopener" href="https://www.kancloud.cn/handsomehacker/openstick/2636505">https://www.kancloud.cn/handsomehacker/openstick/2636505</a></p>
+<p>进入 fastboot 模式</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071626725.png" srcset="/img/loading.gif" lazyload alt="image-20220707162628695"></p>
+<p>选择你的包</p>
+<p>然后双击 flash.bat 就能开始刷机</p>
+<p>debian账号root 密码1  可以使用ssh工具连接</p>
+<h2 id="刷写基带"><a href="#刷写基带" class="headerlink" title="刷写基带"></a>刷写基带</h2><p>大部分的随身 Wi-Fi 都是支持电信卡的，很多其实也支持联通，移动大概率默认是不支持的。当然因为产品众多，甚至丝印型号相同用的 modem 型号都有差别，当然最麻烦的其实也是这一步，不能保证你刷了基带后移动联通就能正常使用，还是更推荐电信或联通用户使用。</p>
+<p>首先务必备份QCN基带文件（需要root权限）。<br>打开投屏软件ARDC，连接到随身wifi，找不到设备在投屏软件菜单栏设备里选择。CMD栏里输入 adb shell su 回车，等待随身wifi shell 获取root权限（可以用上面的一键包）。或者手动进magisk赋予root权限。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071620062.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>打开星海SVIP，按照流程操作，高通强开端口点一键执行，设备管理器会多出一个901D端口。备份QCN基带文件的路径大概等个三五分钟即可，QCN文件大小在500多kb才是有效的，不行就多重复几次操作。每一个步骤要等随身WIFI有所反应才能执行下一步。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071637011.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>使用搞基工具箱进入fastboot模式，也可以打开投屏软件，CMD栏输入 adb reboot bootloader 回车进入fastboot。进入fastboot后红灯常亮。</p>
+<p>首先擦除基带，打开星海SVIP，按流程操作，完成后设备会重启</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071622644.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>设备重启后，执行高通强开1（进入901D模式，会响一下，这里一定要在设备管理器看是否是901D）</p>
+<p>选择写入QCN，选择备份的QCN基带执行即可。不行就多重复几遍。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202207071623970.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>好了，到这里就结束了</p>
+<p>如果你还有问题，可以到酷安「随身 Wi-Fi」 社区，里面有很多资料可以参看</p>
+<p>本文参考：</p>
+<p><a target="_blank" rel="noopener" href="https://qust.me/post/msm8916/">4g 随身 Wi-Fi 刷 openwrt 变成软路由 | 酱紫表 (qust.me)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.coolapk.com/feed/37147505?shareKey=ZjQ3YzhkNzg5OWE5NjJjNjhlMjk~&shareUid=524513&shareFrom=com.coolapk.market_12.2">【小白入门】随身wifi先机W001和先机003mb备份与刷机恢复基带流程 来自 UTF16 - 酷安 (coolapk.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.wudilad.com/?p=1502">《万物皆可刷1》小巧的4G随身WiFi刷OPENWRT畅游网络-人至践则无敌 (wudilad.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.coolapk.com/u/2013314">用户分享 - 酷安 (coolapk.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.coolapk.com/feed/37207111?shareKey=NWZhNzU1MjgzNDVmNjJjNjk5M2M~&shareUid=524513&shareFrom=com.coolapk.market_12.2">来自 噗吐血 - 酷安 (coolapk.com)</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ADB/" class="print-no-link">#ADB</a>
+      
+        <a href="/tags/%E5%AE%89%E5%8D%93/" class="print-no-link">#安卓</a>
+      
+        <a href="/tags/%E5%88%B7%E6%9C%BA/" class="print-no-link">#刷机</a>
+      
+        <a href="/tags/WIFI/" class="print-no-link">#WIFI</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>4g随身Wi-Fi刷机教程</div>
+      <div>https://blog.quickso.cn/2022/07/07/4g随身Wi-Fi刷机教程/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/07/28/CloudflareR2%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97%E6%95%99%E7%A8%8B/" title="CloudflareR2快速开始使用(白嫖)指南">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CloudflareR2快速开始使用(白嫖)指南</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/20/%E5%9F%BA%E4%BA%8ERTL2832U-R820T2%E7%9A%84RTL-SDR%E6%96%B9%E6%A1%88/" title="基于RTL2832U+R820T2的RTL-SDR方案">
+                        <span class="hidden-mobile">基于RTL2832U+R820T2的RTL-SDR方案</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
