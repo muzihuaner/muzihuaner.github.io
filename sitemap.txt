@@ -1,3 +1,4 @@
+https://blog.quickso.cn/2025/02/28/VMwareESXI%E5%AF%86%E9%92%A5-ISO%E9%95%9C%E5%83%8F/
 https://blog.quickso.cn/2025/02/22/Minecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E8%B5%84%E6%BA%90%E5%A4%A7%E6%9D%82%E7%83%A9/
 https://blog.quickso.cn/about/index.html
 https://blog.quickso.cn/2024/09/17/%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/
@@ -175,6 +176,8 @@ https://blog.quickso.cn/tags/%E9%9D%92%E9%BE%99/
 https://blog.quickso.cn/tags/Minecraft/
 https://blog.quickso.cn/tags/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C/
 https://blog.quickso.cn/tags/Paper/
+https://blog.quickso.cn/tags/VMware/
+https://blog.quickso.cn/tags/ESXI/
 https://blog.quickso.cn/categories/%E6%95%99%E7%A8%8B/
 https://blog.quickso.cn/categories/%E4%BB%A3%E7%A0%81/
 https://blog.quickso.cn/categories/%E8%B5%84%E6%BA%90/

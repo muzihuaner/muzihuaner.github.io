@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>VMwareESXI密钥/ISO镜像</title>
+    <link href="/2025/02/28/VMwareESXI%E5%AF%86%E9%92%A5-ISO%E9%95%9C%E5%83%8F/"/>
+    <url>/2025/02/28/VMwareESXI%E5%AF%86%E9%92%A5-ISO%E9%95%9C%E5%83%8F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="VMwareESXI密钥-ISO镜像"><a href="#VMwareESXI密钥-ISO镜像" class="headerlink" title="VMwareESXI密钥&#x2F;ISO镜像"></a>VMwareESXI密钥&#x2F;ISO镜像</h1><p>它们应该可以工作。适用于主机系统的所有核心。也可以从此处下载 ESXi。</p><h2 id="下载链接"><a href="#下载链接" class="headerlink" title="下载链接:"></a>下载链接:</h2><h4 id="vCenter"><a href="#vCenter" class="headerlink" title="vCenter"></a>vCenter</h4><ul><li><a href="#vcenter-server-8-standard">vCenter Server 8 Standard</a></li><li><a href="#vcenter-server-7">vCenter Server 7</a></li></ul><h4 id="ESXi"><a href="#ESXi" class="headerlink" title="ESXi"></a>ESXi</h4><ul><li><a href="#esxi-8">ESXi 8</a></li><li><a href="#esxi-7-enterprise-plus">ESXi 7 Enterprise Plus</a></li><li><a href="#esxi-6-enterprise-plus">ESXi 6 Enterprise Plus</a></li></ul><h4 id="Workstation"><a href="#Workstation" class="headerlink" title="Workstation"></a>Workstation</h4><ul><li><a href="#workstation-17">Workstation 17</a></li><li><a href="#workstation-16">Workstation 16</a></li></ul><h4 id="Fusion"><a href="#Fusion" class="headerlink" title="Fusion"></a>Fusion</h4><ul><li><a href="#fusion-13-pro">Fusion 13 Pro</a></li></ul><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><h3 id="ESXi-1"><a href="#ESXi-1" class="headerlink" title="ESXi"></a>ESXi</h3><div>    <img src="https://gist.github.com/user-attachments/assets/facf84ef-ba73-47c8-9e37-e531dc8602a7" width="24" height="24" alt="VMWare ESXi 8 Current logo icon"/>    <br>    <a href="https://dl.hausmer.com/pub/VMware-VMvisor-Installer-8.0U3b-24280767.iso">ESXi 8.0U3b</a> (build 24280767)  <p>   <a href="https://dl.hausmer.com/pub/ESXI-8.0U2b.iso">ESXi 8.0U2b</a> (build 23305546)</p></div><div>    <img src="https://gist.github.com/user-attachments/assets/e916f8b4-9c7f-49f9-a777-ba4be2226cef" width="24" height="24" alt="VMWare ESXi 7 Old logo icon"/>    <br>    <a href="https://dl.hausmer.com/pub/VMware-VMvisor-Installer-7.0U3n-21930508.iso">ESXi 7.0U3n</a> (build 21930508)</div><h3 id="工作站"><a href="#工作站" class="headerlink" title="工作站"></a>工作站</h3><div>   <img src="https://gist.github.com/user-attachments/assets/4440ff01-70a2-4698-8984-f2eb1cb9d80f" width="24" height="24" alt="VMWare Workstation logo icon"/>    <br>    <a href="https://dl.hausmer.com/pub/VMware-workstation-full-17.5.1-23298084.exe">Workstation 17.5.1 Windows</a> (build 23298084)     <br>    <a href="https://dl.hausmer.com/pub/VMware-Workstation-Full-17.5.1-23298084.x86_64.bundle">Workstation 17.5.1 Linux</a> (build 23298084)</div><h2 id="vCenter-Server"><a href="#vCenter-Server" class="headerlink" title="vCenter Server"></a>vCenter Server</h2><h3 id="vCenter-Server-8-Standard"><a href="#vCenter-Server-8-Standard" class="headerlink" title="vCenter Server 8 Standard"></a>vCenter Server 8 Standard</h3><table><thead><tr><th>Key</th><th>Tested</th></tr></thead><tbody><tr><td>4F282-0MLD2-M8869-T89G0-CF240</td><td>✅</td></tr><tr><td>0F41K-0MJ4H-M88U1-0C3N0-0A214</td><td>✅</td></tr></tbody></table><h3 id="vCenter-Server-7"><a href="#vCenter-Server-7" class="headerlink" title="vCenter Server 7"></a>vCenter Server 7</h3><table><thead><tr><th>Key</th><th>Tested</th></tr></thead><tbody><tr><td>4F282-0MLD2-M8869-T89G0-CF240</td><td>✅</td></tr><tr><td>0F41K-0MJ4H-M88U1-0C3N0-0A214</td><td>✅</td></tr></tbody></table><h2 id="ESXi-2"><a href="#ESXi-2" class="headerlink" title="ESXi"></a>ESXi</h2><h3 id="ESXi-8"><a href="#ESXi-8" class="headerlink" title="ESXi 8"></a>ESXi 8</h3><table><thead><tr><th>Key</th><th>Tested</th></tr></thead><tbody><tr><td>4V492-44210-48830-931GK-2PRJ4</td><td>✅</td></tr><tr><td>HG00K-03H8K-48929-8K1NP-3LUJ4</td><td>✅</td></tr></tbody></table><h3 id="ESXi-7-Enterprise-Plus"><a href="#ESXi-7-Enterprise-Plus" class="headerlink" title="ESXi 7 Enterprise Plus"></a>ESXi 7 Enterprise Plus</h3><table><thead><tr><th>Key</th><th>Tested</th></tr></thead><tbody><tr><td>JJ2WR-25L9P-H71A8-6J20P-C0K3F</td><td>✅</td></tr><tr><td>HN2X0-0DH5M-M78Q1-780HH-CN214</td><td>✅</td></tr><tr><td>JH09A-2YL84-M7EC8-FL0K2-3N2J2</td><td>✅</td></tr></tbody></table><h3 id="ESXi-6-Enterprise-Plus"><a href="#ESXi-6-Enterprise-Plus" class="headerlink" title="ESXi 6 Enterprise Plus"></a>ESXi 6 Enterprise Plus</h3><table><thead><tr><th>Key</th><th>Tested</th></tr></thead><tbody><tr><td>1G4WK-4YH54-080P9-C9AZP-9GHQF</td><td>✅</td></tr></tbody></table><h2 id="Workstation-1"><a href="#Workstation-1" class="headerlink" title="Workstation"></a>Workstation</h2><h3 id="Workstation-17"><a href="#Workstation-17" class="headerlink" title="Workstation 17"></a>Workstation 17</h3><table><thead><tr><th>Key</th><th>Tested</th></tr></thead><tbody><tr><td>ZV3JH-4LXE1-M88MZ-HQXXX-XG0FD</td><td>✅</td></tr><tr><td>AG5RU-6AXDL-H81FZ-KQYN9-M32E0</td><td>✅</td></tr></tbody></table><h3 id="Workstation-16"><a href="#Workstation-16" class="headerlink" title="Workstation 16"></a>Workstation 16</h3><table><thead><tr><th>Key</th><th>Tested</th></tr></thead><tbody><tr><td>4F40H-4ML1K-M89U0-0C2N4-1AKL4</td><td>❓</td></tr></tbody></table><h2 id="Fusion-1"><a href="#Fusion-1" class="headerlink" title="Fusion"></a>Fusion</h2><h3 id="Fusion-13-Pro"><a href="#Fusion-13-Pro" class="headerlink" title="Fusion 13 Pro"></a>Fusion 13 Pro</h3><table><thead><tr><th>Key</th><th>Tested</th></tr></thead><tbody><tr><td>4A4RR-813DK-M81A9-4U35H-06KND</td><td>✅</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>资源</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>VMware</tag>
+      
+      <tag>ESXI</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Minecraft服务器搭建资源大杂烩</title>
     <link href="/2025/02/22/Minecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E8%B5%84%E6%BA%90%E5%A4%A7%E6%9D%82%E7%83%A9/"/>
     <url>/2025/02/22/Minecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E8%B5%84%E6%BA%90%E5%A4%A7%E6%9D%82%E7%83%A9/</url>
