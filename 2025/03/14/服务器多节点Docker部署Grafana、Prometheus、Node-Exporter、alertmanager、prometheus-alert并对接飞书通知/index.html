@@ -29,7 +29,7 @@
 <meta property="og:description" content="要在多台服务器上部署 Grafana、Prometheus 和 Node-Exporter，并且其中一台服务器专门用于 Grafana 和 Prometheus 的部署 1. 准备工作 服务器信息： Server 1：用于部署 Grafana 和 Prometheus、alertmanager、prometheus-alert Server 2-n：用于部署 Node-Exporter。   Do">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-14T12:58:56.000Z">
-<meta property="article:modified_time" content="2025-05-26T15:06:48.613Z">
+<meta property="article:modified_time" content="2025-07-26T13:08:23.975Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Prometheus">
 <meta property="article:tag" content="Grafana">
@@ -314,7 +314,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          858 字
+          867 字
         
       </span>
     
@@ -391,7 +391,8 @@
 <h4 id="2-3-启动服务"><a href="#2-3-启动服务" class="headerlink" title="2.3 启动服务"></a>2.3 启动服务</h4><p>在 Server 1 上运行以下命令启动：</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">docker</span>-compose up -d<br></code></pre></td></tr></table></figure>
 
-<h3 id="3-在-Server-2-n-上部署-Node-Exporter，并开放端口"><a href="#3-在-Server-2-n-上部署-Node-Exporter，并开放端口" class="headerlink" title="3.在 Server 2-n 上部署 Node-Exporter，并开放端口"></a>3.在 Server 2-n 上部署 Node-Exporter，并开放端口</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">docker</span> run -d \<br>  --name node-exporter \<br>  -p <span class="hljs-number">9100</span>:<span class="hljs-number">9100</span> \<br>  --restart always \<br>  prom/node-exporter<br></code></pre></td></tr></table></figure>
+<h3 id="3-在-Server-2-n-上部署-Node-Exporter，并开放端口"><a href="#3-在-Server-2-n-上部署-Node-Exporter，并开放端口" class="headerlink" title="3.在 Server 2-n 上部署 Node-Exporter，并开放端口"></a>3.在 Server 2-n 上部署 Node-Exporter，并开放端口</h3><h4 id="Docker方式"><a href="#Docker方式" class="headerlink" title="Docker方式"></a>Docker方式</h4><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">docker</span> run -d \<br>  --name node-exporter \<br>  -p <span class="hljs-number">9100</span>:<span class="hljs-number">9100</span> \<br>  --restart always \<br>  prom/node-exporter<br></code></pre></td></tr></table></figure>
+<h4 id="二进制（Debian）"><a href="#二进制（Debian）" class="headerlink" title="二进制（Debian）"></a>二进制（Debian）</h4> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install prometheus-node-exporter<br></code></pre></td></tr></table></figure>
 
 <h3 id="4-配置-Grafana"><a href="#4-配置-Grafana" class="headerlink" title="4. 配置 Grafana"></a>4. 配置 Grafana</h3><h4 id="4-1-访问-Grafana"><a href="#4-1-访问-Grafana" class="headerlink" title="4.1 访问 Grafana"></a>4.1 访问 Grafana</h4><p>在浏览器中访问 <code>http://&lt;Server1-IP&gt;:3000</code>，使用默认用户名 <code>admin</code> 和密码 <code>admin</code> 登录。</p>
 <h4 id="4-2-添加-Prometheus-数据源"><a href="#4-2-添加-Prometheus-数据源" class="headerlink" title="4.2 添加 Prometheus 数据源"></a>4.2 添加 Prometheus 数据源</h4><h4 id="在-Grafana-中，点击左侧菜单的-Configuration-Data-Sources。"><a href="#在-Grafana-中，点击左侧菜单的-Configuration-Data-Sources。" class="headerlink" title="在 Grafana 中，点击左侧菜单的 Configuration -&gt; Data Sources。"></a>在 Grafana 中，点击左侧菜单的 <strong>Configuration</strong> -&gt; <strong>Data Sources</strong>。</h4><ol>
