@@ -29,7 +29,7 @@
 <meta property="og:description" content="Java下载https:&#x2F;&#x2F;docs.papermc.io&#x2F;misc&#x2F;java-install http:&#x2F;&#x2F;mirror.nju.edu.cn&#x2F;openjdk&#x2F; Minecraft Paper服务端https:&#x2F;&#x2F;papermc.io&#x2F;software&#x2F;paper    Paper 版本 推荐Java版本    1.8 to 1.11 Java 8   1.12 to 1.16.4 Java 1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-22T13:45:53.000Z">
-<meta property="article:modified_time" content="2025-05-26T15:06:48.579Z">
+<meta property="article:modified_time" content="2025-07-26T13:29:54.025Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Minecraft">
 <meta property="article:tag" content="我的世界">
@@ -314,7 +314,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          857 字
+          1.8k 字
         
       </span>
     
@@ -326,7 +326,7 @@
         
         
           <!-- compatible with older versions-->
-          8 分钟
+          16 分钟
         
       </span>
     
@@ -407,115 +407,142 @@
 <h3 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h3><table>
 <thead>
 <tr>
-<th align="left"><strong>插件名称</strong></th>
-<th align="left"><strong>版本</strong></th>
-<th align="left"><strong>主要功能</strong></th>
+<th align="left">插件名称</th>
+<th align="left">主要功能概述</th>
+<th align="left">备注&#x2F;常见用途</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left"><strong>AuthMe</strong></td>
-<td align="left">5.6.0</td>
-<td align="left">玩家注册&#x2F;登录系统，防止未授权访问，支持密码保护。</td>
+<td align="left"><strong>AuthMe (5.7.0-FORK-b53)</strong></td>
+<td align="left">玩家登录与注册系统。要求玩家设置密码并在每次进入服务器时登录。</td>
+<td align="left">防止盗号，基础服务器安全必备。Fork 版本可能包含特定优化或功能。</td>
 </tr>
 <tr>
-<td align="left"><strong>CMILib</strong></td>
-<td align="left">1.5.2.7</td>
-<td align="left">其他插件（如CustomMobItems）的公共依赖库，提供通用功能支持。</td>
+<td align="left"><strong>BlueMap (5.7)</strong></td>
+<td align="left">为你的 Minecraft 世界生成实时、交互式的网页地图。</td>
+<td align="left">玩家可以在浏览器中查看服务器地图、定位地标等。</td>
 </tr>
 <tr>
-<td align="left"><strong>CoreProtect</strong></td>
-<td align="left">22.4</td>
-<td align="left">记录方块操作、物品交易、玩家行为，支持回滚和审计（反破坏&#x2F;查熊孩子）。</td>
+<td align="left"><strong>CMI (9.7.15.5)</strong></td>
+<td align="left"><strong>综合管理插件 (Comprehensive Management Interface)</strong>。提供大量功能，如传送、经济、飞行、邮件、公告板、传送点等。</td>
+<td align="left">旨在替代多个单一功能插件。功能非常庞大。</td>
 </tr>
 <tr>
-<td align="left"><strong>EssentialsX</strong></td>
-<td align="left">2.20.1</td>
-<td align="left">基础功能集成：传送、家园、邮件、经济、指令简化等，服务器管理必备。</td>
+<td align="left"><strong>CMIEInjector (1.0.2.3)</strong></td>
+<td align="left">CMI 的扩展&#x2F;依赖组件。处理 CMI 与其他插件的集成和事件注入。</td>
+<td align="left">通常与 CMI 主插件一起安装，是其运行所必需的。</td>
 </tr>
 <tr>
-<td align="left"><strong>FastAsyncWorldEdit (FAWE)</strong></td>
-<td align="left">Paper-2.12.3</td>
-<td align="left">高性能世界编辑工具，快速生成&#x2F;修改地形（需搭配WorldEdit使用）。</td>
+<td align="left"><strong>CMILib (1.5.5.5)</strong></td>
+<td align="left">CMI 的核心库。提供 CMI 及其扩展插件运行所需的基础代码和 API。</td>
+<td align="left">是 CMI 主插件和其相关插件（如 CMIEInjector）运行的基础依赖。</td>
 </tr>
 <tr>
-<td align="left"><strong>LiveKit</strong></td>
-<td align="left">1.4.8</td>
-<td align="left">聊天系统，支持玩家手机文字聊天，查看地图等</td>
+<td align="left"><strong>Citizens (2.0.37-SNAPSHOT)</strong></td>
+<td align="left"><strong>NPC 系统</strong>。允许创建和管理非玩家角色（NPC）。</td>
+<td align="left">用于创建商人、向导、守卫、任务NPC等。是许多 RPG 或功能服务器的核心。需要配合其他插件赋予 NPC 更多功能。</td>
 </tr>
 <tr>
-<td align="left"><strong>LuckPerms</strong></td>
-<td align="left">Bukkit-5.4.40</td>
-<td align="left">权限管理插件，灵活配置玩家&#x2F;用户组的权限和继承关系。</td>
+<td align="left"><strong>CoreProtect (22.4)</strong></td>
+<td align="left"><strong>方块&#x2F;容器&#x2F;命令记录与回滚</strong>。记录玩家和自然事件的方块破坏、放置、容器交互、命令执行等。</td>
+<td align="left">用于查熊、恢复破坏、回滚地形、查看物品去向等。服务器管理和安全的重要工具。</td>
 </tr>
 <tr>
-<td align="left"><strong>MOTD</strong></td>
-<td align="left">-</td>
-<td align="left">自定义服务器列表的MOTD（描述信息），支持图标和动态内容。</td>
+<td align="left"><strong>Dominion (4.3.5-beta)</strong></td>
+<td align="left"><strong>领地&#x2F;区域保护插件</strong>。允许玩家创建私人领地，控制领地内的权限（PVP、建造、方块交互等）。</td>
+<td align="left">保护玩家建筑和资源不被他人破坏或盗窃。</td>
 </tr>
 <tr>
-<td align="left"><strong>PlaceholderAPI</strong></td>
-<td align="left">2.11.6</td>
-<td align="left">变量占位符库，允许其他插件通过变量在聊天&#x2F;标题中显示动态信息（如经济、等级）。</td>
+<td align="left"><strong>Jobs (5.2.6.1)</strong></td>
+<td align="left"><strong>职业与经济系统</strong>。玩家可以选择职业（如矿工、农夫、伐木工），通过完成相应活动（挖矿、种植、砍树）赚钱。</td>
+<td align="left">增加游戏目标和玩法，驱动服务器经济。通常需要配合经济插件（如 CMI 内置经济或 Vault 兼容的经济插件）。</td>
 </tr>
 <tr>
-<td align="left"><strong>QuickShop-Hikari</strong></td>
-<td align="left">6.2.0.8</td>
-<td align="left">快速创建箱子商店，支持物品买卖和经济系统交互。</td>
+<td align="left"><strong>LiveKit (1.4.8)</strong></td>
+<td align="left">将 <strong>Livekitapp</strong> 与 Minecraft 游戏内语音聊天连接起来。</td>
+<td align="left">允许玩家在游戏内通过指定的 APP文字交流。增强社交体验。</td>
 </tr>
 <tr>
-<td align="left"><strong>Residence</strong></td>
-<td align="left">5.1.6.4</td>
-<td align="left">领地保护系统，划分区域并设置权限（防破坏&#x2F;防偷窃）。</td>
+<td align="left"><strong>LuckPerms (5.4.40)</strong></td>
+<td align="left"><strong>现代权限管理插件</strong>。用于管理玩家和用户组的权限节点。</td>
+<td align="left">服务器权限系统的核心，控制玩家能执行什么命令、拥有什么功能。强大、高效、可扩展。</td>
 </tr>
 <tr>
-<td align="left"><strong>SkinsRestorer</strong></td>
-<td align="left">-</td>
-<td align="left">修复正版&#x2F;Mojang皮肤显示问题，支持离线服务器玩家使用自定义皮肤。</td>
+<td align="left"><strong>MOTD (2.3.11)</strong></td>
+<td align="left"><strong>自定义服务器列表信息</strong>。修改玩家在服务器列表中看到的服务器名称、描述、图标、玩家数量显示等。</td>
+<td align="left">使服务器在列表里更吸引人，提供更多信息或个性化展示。</td>
 </tr>
 <tr>
-<td align="left"><strong>TAB</strong></td>
-<td align="left">v4.1.8</td>
-<td align="left">自定义玩家列表（Tab列表）、玩家头顶标签、计分板等界面元素。</td>
+<td align="left"><strong>Multiverse-Core (5.0.1)</strong></td>
+<td align="left"><strong>多世界管理</strong>。创建和管理多个不同的世界（主世界、资源世界、地狱、末地、小游戏世界等）。</td>
+<td align="left">实现服务器多世界架构的基础。控制世界的生成、传送规则、环境设置等。</td>
 </tr>
 <tr>
-<td align="left"><strong>TimelsMoney</strong></td>
-<td align="left">1.9.10</td>
-<td align="left">经济插件，可能基于在线时间奖励游戏货币（需配合Vault使用）。</td>
+<td align="left"><strong>PlaceholderAPI (2.11.6)</strong></td>
+<td align="left"><strong>占位符 API</strong>。提供一套标准化的 <code>%placeholder%</code> 变量，供其他插件使用和扩展。</td>
+<td align="left">是众多插件之间信息沟通的桥梁。允许在聊天、计分板、Tab列表、插件消息中显示来自其他插件的数据（如金钱、等级）。</td>
 </tr>
 <tr>
-<td align="left"><strong>Vault</strong></td>
-<td align="left">-</td>
-<td align="left">经济&#x2F;权限&#x2F;聊天API，为其他插件提供兼容性支持（如EssentialsX与LuckPerms的桥梁）。</td>
+<td align="left"><strong>ProtocolLib (5.3.0)</strong></td>
+<td align="left"><strong>底层数据包操作库</strong>。允许其他插件修改客户端和服务器之间传输的网络数据包。</td>
+<td align="left">许多高级插件（如 ViaVersion, ViaBackwards, TAB, LiveKit, SkinsRestorer）的基础依赖，用于实现复杂功能。</td>
 </tr>
 <tr>
-<td align="left"><strong>ViaVersion</strong></td>
-<td align="left">5.2.1</td>
-<td align="left">允许高版本客户端（如1.20）连接低版本服务器（如1.18.2），跨版本兼容。</td>
+<td align="left"><strong>QuickShop-Hikari (6.2.0.9)</strong></td>
+<td align="left"><strong>箱子商店系统</strong>。玩家可以创建基于箱子&#x2F;容器的商店进行物品买卖（收购&#x2F;出售）。</td>
+<td align="left">建立玩家驱动的市场经济。Hikari 版本优化了数据库性能。</td>
 </tr>
 <tr>
-<td align="left"><strong>ViaBackwards</strong></td>
-<td align="left">5.1.1</td>
-<td align="left">支持更低版本客户端（如1.12）连接高版本服务器（需配合ViaVersion使用）。</td>
+<td align="left"><strong>SkinsRestorer (15.7.7)</strong></td>
+<td align="left"><strong>皮肤修复与自定义</strong>。恢复正版皮肤显示，允许离线模式玩家设置自定义皮肤。</td>
+<td align="left">解决非正版服务器皮肤显示问题，提升玩家个性化。</td>
 </tr>
 <tr>
-<td align="left"><strong>BlueMap</strong></td>
-<td align="left">5.5-paper</td>
-<td align="left">生成3D动态地图网页，实时展示服务器地形和玩家位置，支持浏览器查看。</td>
+<td align="left"><strong>TAB (5.2.0)</strong></td>
+<td align="left"><strong>自定义玩家列表 (Tablist)</strong>。修改玩家按 Tab 键看到的玩家列表格式、内容、动画等。</td>
+<td align="left">美化玩家列表，显示更多信息（如Ping、金钱、等级、服务器时间等），通常依赖 PlaceholderAPI。</td>
 </tr>
 <tr>
-<td align="left"><strong>EBackup</strong></td>
-<td align="left">1.3.1</td>
-<td align="left">自动化服务器备份工具，支持定时备份和恢复世界数据。</td>
+<td align="left"><strong>UnifiedMetrics (0.3.8)</strong></td>
+<td align="left"><strong>服务器性能监控</strong>。收集并展示服务器性能指标（TPS, MSPT, 内存使用、实体数量等）。</td>
+<td align="left">帮助管理员监控服务器运行状况，诊断性能瓶颈。</td>
+</tr>
+<tr>
+<td align="left"><strong>Vault (1.7.3-CMI)</strong></td>
+<td align="left"><strong>经济&#x2F;权限&#x2F;聊天 API</strong>。提供一个标准接口，让其他插件可以兼容不同的经济、权限、聊天插件。</td>
+<td align="left"><strong>本身不提供经济&#x2F;权限&#x2F;聊天功能</strong>，是插件兼容性的桥梁。例如，让商店插件兼容各种经济插件。CMI 版表明 CMI 可能内置了兼容的 Vault API。</td>
+</tr>
+<tr>
+<td align="left"><strong>ViaBackwards (5.4.1)</strong></td>
+<td align="left"><strong>旧版本客户端兼容</strong>。允许 <strong>旧版本</strong> Minecraft 客户端（如 1.9-1.18.x）连接到使用 <strong>更新版本</strong> 的服务器。</td>
+<td align="left">需要配合 ViaVersion 使用。扩大服务器支持的客户端范围。</td>
+</tr>
+<tr>
+<td align="left"><strong>ViaVersion (5.4.2)</strong></td>
+<td align="left"><strong>新版本客户端兼容</strong>。允许 <strong>新版本</strong> Minecraft 客户端（如 1.19+）连接到使用 <strong>旧版本</strong> 的服务器。也支持旧版客户端连新版服务器。</td>
+<td align="left">实现跨版本游玩的核心插件。ViaBackwards 是其功能的扩展（专门处理旧客户端连新服务器）。</td>
+</tr>
+<tr>
+<td align="left"><strong>Welcomer_Plus (2.6.6)</strong></td>
+<td align="left"><strong>进服&#x2F;离服消息管理</strong>。自定义玩家加入和退出服务器时显示的欢迎&#x2F;告别消息、标题、动作栏等。</td>
+<td align="left">提升玩家初次体验和仪式感。</td>
+</tr>
+<tr>
+<td align="left"><strong>WorldEdit (7.3.14+…)</strong></td>
+<td align="left"><strong>强大的世界编辑工具</strong>。提供大量命令用于快速选择、复制、粘贴、填充、替换地形和建筑方块。</td>
+<td align="left">服务器建筑、地形改造、地图制作的必备神器。功能极其强大。</td>
+</tr>
+<tr>
+<td align="left"><strong>eBackup (1.3.1)</strong></td>
+<td align="left"><strong>服务器世界备份</strong>。定时自动备份服务器地图&#x2F;世界文件夹。</td>
+<td align="left">防止数据丢失，在服务器崩溃或重大错误后可以回档。</td>
+</tr>
+<tr>
+<td align="left"><strong>packetevents (2.8.0)</strong></td>
+<td align="left"><strong>低级网络数据包处理库</strong>。提供比 ProtocolLib 更底层、更高效的 API 来处理网络数据包。</td>
+<td align="left">通常被需要极致性能或特定数据包操作的插件（如 ViaVersion 系列、某些反作弊）使用。是 ProtocolLib 的现代替代或补充。</td>
 </tr>
 </tbody></table>
-<hr>
-<p><strong>补充说明</strong>：</p>
-<ul>
-<li><strong>ViaBackwards</strong> 需与 <strong>ViaVersion</strong> 配合使用，实现更广泛的跨版本兼容（如旧版客户端连接新版服务器）。</li>
-<li><strong>Vault</strong> 是许多经济&#x2F;权限插件的依赖，自身不直接提供功能，但为其他插件（如EssentialsX、LuckPerms）提供API支持。</li>
-<li><strong>TimelsMoney</strong> 可能是基于玩家在线时间发放货币的经济插件（如TimeIsMoney），需配合Vault使用。</li>
-<li><strong>LiveKit</strong> 可能需额外配置语音服务器或与其他语音插件集成（如Plasmo Voice）。</li>
-</ul>
 <h3 id="SCHEMATICS投影下载"><a href="#SCHEMATICS投影下载" class="headerlink" title="SCHEMATICS投影下载"></a>SCHEMATICS投影下载</h3><p><a target="_blank" rel="noopener" href="https://www.minecraft-schematics.com/">https://www.minecraft-schematics.com/</a></p>
 <p><a target="_blank" rel="noopener" href="https://mcbuild.org/schematics/">https://mcbuild.org/schematics/</a></p>
 <h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p><strong>HMCL</strong></p>
