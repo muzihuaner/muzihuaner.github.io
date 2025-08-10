@@ -30,10 +30,12 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://docs.k3s.io/zh/assets/images/how-it-works-k3s-revised-9c025ef482404bca2e53a89a0ba7a3c5.svg">
 <meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/xwm7fssuac6j9q4g.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250810101419509.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250810101553749.png">
 <meta property="og:image" content="https://mmdjiji.com/images/2022/09/1.png">
 <meta property="og:image" content="https://mmdjiji.com/images/2022/09/2.png">
 <meta property="article:published_time" content="2024-12-20T17:14:33.000Z">
-<meta property="article:modified_time" content="2025-08-09T12:15:24.835Z">
+<meta property="article:modified_time" content="2025-08-10T02:27:08.637Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="K3s">
@@ -318,7 +320,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.7k 字
+          3.2k 字
         
       </span>
     
@@ -330,7 +332,7 @@
         
         
           <!-- compatible with older versions-->
-          23 分钟
+          27 分钟
         
       </span>
     
@@ -397,7 +399,7 @@
 <p><strong>2.安装Docker</strong></p>
 <p>由于 K3s 默认运行环境为 containerd，所以为了使用 Docker 作为运行时，需要先在各节点正常安装 Docker</p>
 <p><a target="_blank" rel="noopener" href="https://getdocker.quickso.cn/">https://getdocker.quickso.cn/</a></p>
-<h3 id="步骤-2：安装-K3s"><a href="#步骤-2：安装-K3s" class="headerlink" title="步骤 2：安装 K3s"></a>步骤 2：安装 K3s</h3><h4 id="1-使用官方安装脚本安装-K3s"><a href="#1-使用官方安装脚本安装-K3s" class="headerlink" title="1.使用官方安装脚本安装 K3s"></a><strong>1.使用官方安装脚本安装 K3s</strong></h4><p>默认：</p>
+<h3 id="步骤-2：安装-K3s"><a href="#步骤-2：安装-K3s" class="headerlink" title="步骤 2：安装 K3s"></a>步骤 2：安装 K3s</h3><p>默认：</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">curl -sfL <span class="hljs-keyword">https</span>://<span class="hljs-built_in">get</span>.k3s.io | sh -<br></code></pre></td></tr></table></figure>
 
 <p>国内：</p>
@@ -410,16 +412,156 @@
 <p>国内：</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">curl -sfL https://rancher-mirror.rancher.<span class="hljs-keyword">cn</span>/k3s/k3s-install.<span class="hljs-keyword">sh</span> | INSTALL_K3S_MIRROR=<span class="hljs-keyword">cn</span> <span class="hljs-keyword">sh</span> -s - --docker<br></code></pre></td></tr></table></figure>
 
-<p>使用如下命令查看节点运行状态：</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">root@k3s-<span class="hljs-literal">master</span>:~<span class="hljs-comment"># kubectl get node</span><br>NAME         STATUS   ROLES                  AGE   <span class="hljs-keyword">VERSION</span><br>k3s-server   Ready    control-plane,<span class="hljs-keyword">master</span>   <span class="hljs-title">20s</span>   v1.<span class="hljs-number">24.4</span>+k3s1<br></code></pre></td></tr></table></figure>
-
-<p>列出 所有命名空间 下的所有 服务（services）</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">kubectl</span> get pods --<span class="hljs-literal">all</span>-namespaces<br><span class="hljs-attribute">NAMESPACE</span>     NAME                                     READY   STATUS      RESTARTS   AGE<br><span class="hljs-attribute">kube</span>-system   local-path-provisioner-<span class="hljs-number">6</span>d59f47c7-lncxn   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">51</span>s<br><span class="hljs-attribute">kube</span>-system   metrics-server-<span class="hljs-number">7566</span>d596c8-<span class="hljs-number">9</span>tnck          <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">51</span>s<br><span class="hljs-attribute">kube</span>-system   helm-install-traefik-mbkn9               <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     Completed   <span class="hljs-number">1</span>          <span class="hljs-number">51</span>s<br><span class="hljs-attribute">kube</span>-system   coredns-<span class="hljs-number">8655855</span>d6-rtbnb                  <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">51</span>s<br><span class="hljs-attribute">kube</span>-system   svclb-traefik-jbmvl                      <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">43</span>s<br><span class="hljs-attribute">kube</span>-system   traefik-<span class="hljs-number">758</span>cd5fc85-<span class="hljs-number">2</span>wz97                 <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">43</span>s<br></code></pre></td></tr></table></figure>
-<p>列出 所有命名空间 下的所有 Pod</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">kubectl <span class="hljs-keyword">get</span> pods <span class="hljs-comment">--all-namespaces</span><br></code></pre></td></tr></table></figure>
-<p>查看名为 kuboard-etcd-gvx6q 的 Pod 在 kuboard 命名空间中的详细信息</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs excel">kubectl describe pod kuboard-etcd-gvx6q -<span class="hljs-built_in">n</span> kuboard<br></code></pre></td></tr></table></figure>
-
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><table>
+<thead>
+<tr>
+<th align="left"><strong>类型</strong></th>
+<th align="left"><strong>命令</strong></th>
+<th align="left"><strong>使用方法及示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>集群信息</strong></td>
+<td align="left"><code>kubectl cluster-info</code></td>
+<td align="left">显示集群基本信息 <code>kubectl cluster-info</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl version</code></td>
+<td align="left">查看客户端和服务器版本 <code>kubectl version --short</code></td>
+</tr>
+<tr>
+<td align="left"><strong>节点管理</strong></td>
+<td align="left"><code>kubectl get nodes</code></td>
+<td align="left">查看所有节点状态 <code>kubectl get nodes -o wide</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl describe node &lt;节点名&gt;</code></td>
+<td align="left">查看节点详细信息 <code>kubectl describe node node01</code></td>
+</tr>
+<tr>
+<td align="left"><strong>命名空间</strong></td>
+<td align="left"><code>kubectl get ns</code></td>
+<td align="left">查看所有命名空间 <code>kubectl get ns</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl create ns &lt;命名空间&gt;</code></td>
+<td align="left">创建命名空间 <code>kubectl create ns test</code></td>
+</tr>
+<tr>
+<td align="left"><strong>Pod 管理</strong></td>
+<td align="left"><code>kubectl get pods</code></td>
+<td align="left">查看默认命名空间的 Pod <code>kubectl get pods -n &lt;命名空间&gt;</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl describe pod &lt;Pod名&gt;</code></td>
+<td align="left">查看 Pod 详细信息 <code>kubectl describe pod nginx-pod</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl logs &lt;Pod名&gt;</code></td>
+<td align="left">查看 Pod 日志 <code>kubectl logs nginx-pod -c &lt;容器名&gt;</code> （多容器场景）</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl exec -it &lt;Pod名&gt; -- &lt;命令&gt;</code></td>
+<td align="left">进入 Pod 容器 <code>kubectl exec -it nginx-pod -- /bin/sh</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl delete pod &lt;Pod名&gt;</code></td>
+<td align="left">删除 Pod <code>kubectl delete pod nginx-pod --force</code> （强制删除）</td>
+</tr>
+<tr>
+<td align="left"><strong>部署管理</strong></td>
+<td align="left"><code>kubectl get deployments</code></td>
+<td align="left">查看 Deployment <code>kubectl get deploy -A</code> （全命名空间）</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl scale deploy &lt;Deployment名&gt; --replicas=&lt;数量&gt;</code></td>
+<td align="left">扩缩容 <code>kubectl scale deploy nginx-deploy --replicas=3</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl rollout status deploy/&lt;Deployment名&gt;</code></td>
+<td align="left">查看滚动更新状态 <code>kubectl rollout status deploy/nginx-deploy</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl rollout undo deploy/&lt;Deployment名&gt;</code></td>
+<td align="left">回滚到上一版本 <code>kubectl rollout undo deploy/nginx-deploy</code></td>
+</tr>
+<tr>
+<td align="left"><strong>服务管理</strong></td>
+<td align="left"><code>kubectl get services</code></td>
+<td align="left">查看 Service <code>kubectl get svc</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl expose deploy &lt;Deployment名&gt; --port=&lt;端口&gt;</code></td>
+<td align="left">创建 Service <code>kubectl expose deploy nginx-deploy --port=80 --type=NodePort</code></td>
+</tr>
+<tr>
+<td align="left"><strong>配置管理</strong></td>
+<td align="left"><code>kubectl get configmaps</code></td>
+<td align="left">查看 ConfigMap <code>kubectl get cm</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl create configmap &lt;名称&gt; --from-file=&lt;文件路径&gt;</code></td>
+<td align="left">从文件创建 ConfigMap <code>kubectl create configmap app-config --from-file=config.properties</code></td>
+</tr>
+<tr>
+<td align="left"><strong>存储管理</strong></td>
+<td align="left"><code>kubectl get pv</code></td>
+<td align="left">查看持久卷（PV） <code>kubectl get pv</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl get pvc</code></td>
+<td align="left">查看持久卷声明（PVC） <code>kubectl get pvc -n default</code></td>
+</tr>
+<tr>
+<td align="left"><strong>调试诊断</strong></td>
+<td align="left"><code>kubectl top pod</code></td>
+<td align="left">查看 Pod 资源使用 <code>kubectl top pod --sort-by=cpu</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl get events --sort-by=.metadata.creationTimestamp</code></td>
+<td align="left">查看事件（按时间排序） <code>kubectl get events -n kube-system</code></td>
+</tr>
+<tr>
+<td align="left"><strong>应用部署</strong></td>
+<td align="left"><code>kubectl apply -f &lt;YAML文件&gt;</code></td>
+<td align="left">通过 YAML 文件部署资源 <code>kubectl apply -f nginx.yaml</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>kubectl delete -f &lt;YAML文件&gt;</code></td>
+<td align="left">删除 YAML 定义的资源 <code>kubectl delete -f nginx.yaml</code></td>
+</tr>
+<tr>
+<td align="left"><strong>标签筛选</strong></td>
+<td align="left"><code>kubectl get pods -l &lt;键&gt;=&lt;值&gt;</code></td>
+<td align="left">按标签筛选资源 <code>kubectl get pods -l app=nginx</code></td>
+</tr>
+<tr>
+<td align="left"><strong>端口转发</strong></td>
+<td align="left"><code>kubectl port-forward &lt;Pod名&gt; &lt;本地端口&gt;:&lt;Pod端口&gt;</code></td>
+<td align="left">端口转发到本地 <code>kubectl port-forward nginx-pod 8080:80</code></td>
+</tr>
+<tr>
+<td align="left"><strong>补丁更新</strong></td>
+<td align="left"><code>kubectl patch deploy &lt;名称&gt; -p &#39;&#123;&quot;spec&quot;: &#123;&quot;template&quot;: &#123;&quot;metadata&quot;: &#123;&quot;annotations&quot;: &#123;&quot;update&quot;: &quot;v2&quot;&#125;&#125;&#125;&#125;&#125;&#39;</code></td>
+<td align="left">热更新 Deployment <code>kubectl patch deploy nginx-deploy -p &#39;&#123;&quot;spec&quot;:&#123;&quot;replicas&quot;:5&#125;&#125;&#39;</code></td>
+</tr>
+</tbody></table>
+<hr>
 <h4 id="2-配置镜像"><a href="#2-配置镜像" class="headerlink" title="2.配置镜像"></a>2.配置镜像</h4><h5 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;&#123;&quot;registry-mirrors&quot;: [&quot;https://docker.1ms.run&quot;]&#125;&#x27;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/docker/daemon.json &gt; /dev/null<br>systemctl daemon-reload<br>systemctl restart docker<br></code></pre></td></tr></table></figure>
 
 <h5 id="K3s"><a href="#K3s" class="headerlink" title="K3s"></a>K3s</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> &gt;&gt; /etc/rancher/k3s/registries.yaml &lt;&lt;<span class="hljs-string">EOF</span><br><span class="hljs-string">mirrors:</span><br><span class="hljs-string">  &quot;docker.io&quot;:</span><br><span class="hljs-string">    endpoint:</span><br><span class="hljs-string">      - &quot;https://docker.1ms.run&quot;</span><br><span class="hljs-string">EOF</span><br>systemctl restart k3s<br></code></pre></td></tr></table></figure>
@@ -427,22 +569,16 @@
 <p>安装完成后，K3s 会自动启动， 检查K3s服务的状态：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl status k3s<br></code></pre></td></tr></table></figure>
 
-<p>安装完成后通过以下指令获取k3s节点的工作状态</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">k3s kubectl get node<br></code></pre></td></tr></table></figure>
-
-<p>将会输出存在的节点的工作状态</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">NAME</span>       STATUS   ROLES                  AGE    VERSION<br><span class="hljs-symbol">ubuntu</span>   Ready    control-plane,master   <span class="hljs-number">134</span>m   <span class="hljs-built_in">v1</span>.<span class="hljs-number">29</span>.<span class="hljs-number">5</span>+k3s1<br></code></pre></td></tr></table></figure>
-
-<p>查看 K3S_TOKEN</p>
+<h3 id="工作节点的安装（可选）"><a href="#工作节点的安装（可选）" class="headerlink" title="工作节点的安装（可选）"></a>工作节点的安装（可选）</h3><p>查看 K3S_TOKEN</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cat</span> /var/lib/rancher/k3s/server/node-token<br></code></pre></td></tr></table></figure>
 
-<h3 id="工作节点的安装（可选）"><a href="#工作节点的安装（可选）" class="headerlink" title="工作节点的安装（可选）"></a>工作节点的安装（可选）</h3><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss">root<span class="hljs-keyword">@k</span>3s-agent-<span class="hljs-number">1</span>:~# curl -sfL <span class="hljs-attribute">https</span>://get.k3s.io | K3S_URL=<span class="hljs-attribute">https</span>://MASTER_<span class="hljs-attribute">URL</span>:<span class="hljs-number">6443</span> K3S_TOKEN=NODE_TOKEN sh -<br></code></pre></td></tr></table></figure>
+<h5 id="Agent安装"><a href="#Agent安装" class="headerlink" title="Agent安装"></a>Agent安装</h5><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss">root<span class="hljs-keyword">@k</span>3s-agent-<span class="hljs-number">1</span>:~# curl -sfL <span class="hljs-attribute">https</span>://get.k3s.io | K3S_URL=<span class="hljs-attribute">https</span>://MASTER_<span class="hljs-attribute">URL</span>:<span class="hljs-number">6443</span> K3S_TOKEN=NODE_TOKEN sh -<br></code></pre></td></tr></table></figure>
 
 <p><strong>要使用 Docker 而不是 containerd</strong></p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -sfL https:<span class="hljs-regexp">//g</span>et.k3s.io | K3S_URL=https:<span class="hljs-regexp">//</span>MASTER_URL:<span class="hljs-number">6443</span> K3S_TOKEN=NODE_TOKEN INSTALL_K3S_EXEC=<span class="hljs-string">&quot;--docker&quot;</span> sh -<br><span class="hljs-comment"># 或使用国内镜像</span><br>curl -sfL http:<span class="hljs-regexp">//</span>rancher-mirror.cnrancher.com<span class="hljs-regexp">/k3s/</span>k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_URL=https:<span class="hljs-regexp">//</span>MASTER_URL:<span class="hljs-number">6443</span> K3S_TOKEN=NODE_TOKEN INSTALL_K3S_EXEC=<span class="hljs-string">&quot;--docker&quot;</span> sh -<br></code></pre></td></tr></table></figure>
 
 <p>根据需求把上面的 <code>https://MASTER_URL:6443</code>和 <code>NODE_TOKEN</code>更换成你的即可</p>
-<p>K3s worker 节点的角色默认为<code>none</code>，如何修改？</p>
+<p><strong>K3s worker 节点的角色默认为<code>none</code>，如何修改？</strong></p>
 <p>可以通过<code>kubectl label node 节点名称 node-role.kubernetes.io/worker=worker</code>为节点增加 worker 角色。</p>
 <h2 id="配套工具"><a href="#配套工具" class="headerlink" title="配套工具"></a>配套工具</h2><h2 id="helm"><a href="#helm" class="headerlink" title="helm"></a>helm</h2><blockquote>
 <p>Helm 是一个 Kubernetes 包管理工具，类似于 Linux 下的 <code>apt</code> 或 <code>yum</code>，它帮助用户管理 Kubernetes 应用的安装、升级和配置。</p>
@@ -458,22 +594,41 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> /etc/rancher/k3s/k3s.yaml ~/.kube/<br></code></pre></td></tr></table></figure>
 
 <p>测试helm命令：<br><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/xwm7fssuac6j9q4g.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h2 id="kuboard"><a href="#kuboard" class="headerlink" title="kuboard"></a>kuboard</h2><p>接着去安装<a target="_blank" rel="noopener" href="https://kuboard.cn/">kuboard</a>这个面板来可视化管理集群。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml<br></code></pre></td></tr></table></figure>
+<h2 id="kubepi"><a href="#kubepi" class="headerlink" title="kubepi"></a>kubepi</h2><ul>
+<li>KubePi 是一个现代化的 K8s 面板。</li>
+<li>KubePi 允许管理员导入多个 Kubernetes 集群，并且通过权限控制，将不同 cluster、namespace 的权限分配给指定用户。它允许开发人员管理 Kubernetes 集群中运行的应用程序并对其进行故障排查，供开发人员更好地处理 Kubernetes 集群中的复杂性。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/1Panel-dev/KubePi">https://github.com/1Panel-dev/KubePi</a></p>
+<p>文档：<a target="_blank" rel="noopener" href="https://github.com/1Panel-dev/KubePi/wiki/">https://github.com/1Panel-dev/KubePi/wiki/</a></p>
+<p><strong>安装（持久化部署）</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/1Panel-dev/</span>KubePi<span class="hljs-regexp">/master/</span>docs<span class="hljs-regexp">/deploy/</span>kubectl/kubepi-pvc.yaml<br></code></pre></td></tr></table></figure>
 
-<p>使用 <code>watch kubectl get pods -n kuboard</code>命令监控所有的Pod就绪</p>
-<p><strong>访问Kuboard</strong></p>
-<ul>
-<li>在浏览器中打开链接<code>http://your-node-ip-address:30080</code><ul>
-<li>用户名：admin</li>
-<li>密码：Kuboard123</li>
-</ul>
-</li>
-</ul>
-<h2 id="kube-explorer"><a href="#kube-explorer" class="headerlink" title="kube-explorer"></a>kube-explorer</h2><p><strong>Kube-Explorer</strong> 是一个用来探索和管理 Kubernetes 集群资源的工具。它的目的是简化与 Kubernetes 集群的交互，帮助用户更容易地查看、分析和管理 Kubernetes 中的各种资源，如 Pod、服务、部署、命名空间等。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/cnrancher/kube-explorer">https://github.com/cnrancher/kube-explorer</a></p>
-<h2 id="cert-manager"><a href="#cert-manager" class="headerlink" title="cert-manager"></a>cert-manager</h2><p>启用HTTPS访问你的服务</p>
-<p><a target="_blank" rel="noopener" href="https://cert-manager.io/docs/installation/kubectl/">https://cert-manager.io/docs/installation/kubectl/</a></p>
+<p>获取StorageClass</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">kubectl <span class="hljs-built_in">get</span> sc<br></code></pre></td></tr></table></figure>
+
+<p>修改</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">vim</span> kubepi-pvc.yaml<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">storageClassName: <span class="hljs-keyword">local</span>-<span class="hljs-built_in">path</span> 修改这个配置为你的StorageClass<br></code></pre></td></tr></table></figure>
+
+<p>应用</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq">kubectl <span class="hljs-built_in">apply</span> -f kubepi-pvc.yaml<br></code></pre></td></tr></table></figure>
+<p>获取访问地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-comment"># 获取 NodeIp</span><br><span class="hljs-built_in">export</span> NODE_IP=$(kubectl get nodes -o jsonpath=<span class="hljs-string">&quot;&#123;.items[0].status.addresses[0].address&#125;&quot;</span>)<br><span class="hljs-comment"># 获取 NodePort</span><br><span class="hljs-built_in">export</span> NODE_PORT=$(kubectl -n kube-system get services kubepi -o jsonpath=<span class="hljs-string">&quot;&#123;.spec.ports[0].nodePort&#125;&quot;</span>)<br><span class="hljs-comment"># 获取 Address</span><br><span class="hljs-built_in">echo</span> http://<span class="hljs-variable">$NODE_IP</span>:<span class="hljs-variable">$NODE_PORT</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>登录系统</strong><br>地址: http:&#x2F;&#x2F;$NODE_IP:$NODE_PORT<br>用户名: admin<br>密码: kubepi</p>
+<p><strong>集群导入</strong></p>
+<p>选择集群列表-导入-认证模式选择kubeconfig 文件</p>
+<p>在终端执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /etc/rancher/k3s/k3s.yaml<br></code></pre></td></tr></table></figure>
+
+<p>将输出的内容复制粘贴到输入框</p>
+<blockquote>
+<p>如果 server IP 为 127.0.0.1，需要将 IP 替换为集群 master 节点 IP</p>
+</blockquote>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250810101419509.png" srcset="/img/loading.gif" lazyload alt="cluster-import-kubeconfig"></p>
+<p>然后修改默认密码，就可以开始使用了，更多内容请看官方文档</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250810101553749.png" srcset="/img/loading.gif" lazyload alt="image-20250810101553554"></p>
 <h2 id="卸载-K3s"><a href="#卸载-K3s" class="headerlink" title="卸载 K3s"></a>卸载 K3s</h2><p>如果您使用安装脚本安装了 K3s，那么在安装过程中会生成一个卸载 K3s 的脚本。</p>
 <blockquote>
 <p>卸载 K3s 会删除集群数据和所有脚本。要使用不同的安装选项重新启动集群，请使用不同的标志重新运行安装脚本。</p>
