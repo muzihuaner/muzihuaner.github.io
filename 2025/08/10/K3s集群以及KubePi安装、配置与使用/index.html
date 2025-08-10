@@ -23,8 +23,8 @@
   
     <meta name="description" content="Debian-K3s集群的安装、配置与使用K3s 是一个轻量级的 Kubernetes 发行版，旨在简化和优化 Kubernetes 的安装和运行。K3s 使用了简化的架构，使其更适合在资源受限的环境中运行，如边缘设备、物联网（IoT）设备和低功耗硬件。K3s 的架构基于标准的 Kubernetes 组件，但对其进行了精简和优化。 官方文档：https:&#x2F;&#x2F;docs.k3s.io&#x2F;zh&#x2F; http">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Debian-K3s集群的安装、配置与使用">
-<meta property="og:url" content="https://blog.quickso.cn/2024/12/21/Debian-K3s%E9%9B%86%E7%BE%A4%E7%9A%84%E5%AE%89%E8%A3%85%E3%80%81%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="K3s集群以及KubePi安装、配置与使用">
+<meta property="og:url" content="https://blog.quickso.cn/2025/08/10/K3s%E9%9B%86%E7%BE%A4%E4%BB%A5%E5%8F%8AKubePi%E5%AE%89%E8%A3%85%E3%80%81%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="点滴记忆">
 <meta property="og:description" content="Debian-K3s集群的安装、配置与使用K3s 是一个轻量级的 Kubernetes 发行版，旨在简化和优化 Kubernetes 的安装和运行。K3s 使用了简化的架构，使其更适合在资源受限的环境中运行，如边缘设备、物联网（IoT）设备和低功耗硬件。K3s 的架构基于标准的 Kubernetes 组件，但对其进行了精简和优化。 官方文档：https:&#x2F;&#x2F;docs.k3s.io&#x2F;zh&#x2F; http">
 <meta property="og:locale" content="zh_CN">
@@ -34,8 +34,8 @@
 <meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250810101553749.png">
 <meta property="og:image" content="https://mmdjiji.com/images/2022/09/1.png">
 <meta property="og:image" content="https://mmdjiji.com/images/2022/09/2.png">
-<meta property="article:published_time" content="2024-12-20T17:14:33.000Z">
-<meta property="article:modified_time" content="2025-08-10T02:27:08.637Z">
+<meta property="article:published_time" content="2025-08-10T02:33:05.000Z">
+<meta property="article:modified_time" content="2025-08-10T02:35:15.369Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="K3s">
@@ -44,7 +44,7 @@
   
   
   
-  <title>Debian-K3s集群的安装、配置与使用 - 点滴记忆</title>
+  <title>K3s集群以及KubePi安装、配置与使用 - 点滴记忆</title>
 
   <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -296,7 +296,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Debian-K3s集群的安装、配置与使用"></span>
+            <span id="subtitle" data-typed-text="K3s集群以及KubePi安装、配置与使用"></span>
           
         </div>
 
@@ -307,8 +307,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-12-21 01:14" pubdate>
-          2024年12月21日 凌晨
+        <time datetime="2025-08-10 10:33" pubdate>
+          2025年8月10日 上午
         </time>
       </span>
     
@@ -369,7 +369,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Debian-K3s集群的安装、配置与使用</h1>
+            <h1 id="seo-header">K3s集群以及KubePi安装、配置与使用</h1>
             
             
               <div class="markdown-body">
@@ -562,7 +562,7 @@
 </tr>
 </tbody></table>
 <hr>
-<h4 id="2-配置镜像"><a href="#2-配置镜像" class="headerlink" title="2.配置镜像"></a>2.配置镜像</h4><h5 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;&#123;&quot;registry-mirrors&quot;: [&quot;https://docker.1ms.run&quot;]&#125;&#x27;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/docker/daemon.json &gt; /dev/null<br>systemctl daemon-reload<br>systemctl restart docker<br></code></pre></td></tr></table></figure>
+<h4 id="配置镜像"><a href="#配置镜像" class="headerlink" title="配置镜像"></a>配置镜像</h4><h5 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;&#123;&quot;registry-mirrors&quot;: [&quot;https://docker.1ms.run&quot;]&#125;&#x27;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/docker/daemon.json &gt; /dev/null<br>systemctl daemon-reload<br>systemctl restart docker<br></code></pre></td></tr></table></figure>
 
 <h5 id="K3s"><a href="#K3s" class="headerlink" title="K3s"></a>K3s</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> &gt;&gt; /etc/rancher/k3s/registries.yaml &lt;&lt;<span class="hljs-string">EOF</span><br><span class="hljs-string">mirrors:</span><br><span class="hljs-string">  &quot;docker.io&quot;:</span><br><span class="hljs-string">    endpoint:</span><br><span class="hljs-string">      - &quot;https://docker.1ms.run&quot;</span><br><span class="hljs-string">EOF</span><br>systemctl restart k3s<br></code></pre></td></tr></table></figure>
 
@@ -613,8 +613,9 @@
 
 <p>应用</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq">kubectl <span class="hljs-built_in">apply</span> -f kubepi-pvc.yaml<br></code></pre></td></tr></table></figure>
+
 <p>获取访问地址</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-comment"># 获取 NodeIp</span><br><span class="hljs-built_in">export</span> NODE_IP=$(kubectl get nodes -o jsonpath=<span class="hljs-string">&quot;&#123;.items[0].status.addresses[0].address&#125;&quot;</span>)<br><span class="hljs-comment"># 获取 NodePort</span><br><span class="hljs-built_in">export</span> NODE_PORT=$(kubectl -n kube-system get services kubepi -o jsonpath=<span class="hljs-string">&quot;&#123;.spec.ports[0].nodePort&#125;&quot;</span>)<br><span class="hljs-comment"># 获取 Address</span><br><span class="hljs-built_in">echo</span> http://<span class="hljs-variable">$NODE_IP</span>:<span class="hljs-variable">$NODE_PORT</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 获取 NodeIp</span><br><span class="hljs-built_in">export</span> NODE_IP=$(kubectl get nodes -o jsonpath=<span class="hljs-string">&quot;&#123;.items[0].status.addresses[0].address&#125;&quot;</span>)<br><span class="hljs-comment"># 获取 NodePort</span><br><span class="hljs-built_in">export</span> NODE_PORT=$(kubectl -n kube-system get services kubepi -o jsonpath=<span class="hljs-string">&quot;&#123;.spec.ports[0].nodePort&#125;&quot;</span>)<br><span class="hljs-comment"># 获取 Address</span><br><span class="hljs-built_in">echo</span> http://<span class="hljs-variable">$NODE_IP</span>:<span class="hljs-variable">$NODE_PORT</span><br><br></code></pre></td></tr></table></figure>
 
 <p><strong>登录系统</strong><br>地址: http:&#x2F;&#x2F;$NODE_IP:$NODE_PORT<br>用户名: admin<br>密码: kubepi</p>
 <p><strong>集群导入</strong></p>
@@ -639,7 +640,8 @@
 <p>要从 agent 节点卸载 K3s，请运行：</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>k3s-agent-uninstall.sh<br></code></pre></td></tr></table></figure>
 
-<h2 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h2><h2 id="创建-Pod"><a href="#创建-Pod" class="headerlink" title="创建 Pod"></a>创建 Pod</h2><p>将以下代码写入 <code>nginx-pod.yaml</code>：</p>
+<h2 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h2><p>以NGINX为例</p>
+<h4 id="创建-Pod"><a href="#创建-Pod" class="headerlink" title="创建 Pod"></a>创建 Pod</h4><p>将以下代码写入 <code>nginx-pod.yaml</code>：</p>
 <figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">apiVersion</span><span class="hljs-punctuation">:</span> <span class="hljs-string">v1</span><br><span class="hljs-attribute">kind</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Pod</span><br><span class="hljs-attribute">metadata</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx</span><br><span class="hljs-attribute">spec</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">containers</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">name: nginx</span><br>    <span class="hljs-attribute">image</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx:latest</span><br>    <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">containerPort: 80</span><br></code></pre></td></tr></table></figure>
 
 <p>使用如下命令应用：</p>
@@ -655,7 +657,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs xml">root@k3s-server:~/k3s# kubectl exec -it nginx -- /bin/bash<br>root@nginx:/# curl localhost<br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Welcome to nginx!<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css"><span class="hljs-selector-tag">html</span> &#123; <span class="hljs-attribute">color-scheme</span>: light dark; &#125;</span><br><span class="language-css"><span class="hljs-selector-tag">body</span> &#123; <span class="hljs-attribute">width</span>: <span class="hljs-number">35em</span>; <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;</span><br><span class="language-css"><span class="hljs-attribute">font-family</span>: Tahoma, Verdana, Arial, sans-serif; &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to nginx!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>If you see this page, the nginx web server is successfully installed and<br>working. Further configuration is required.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>For online documentation and support please refer to<br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;http://nginx.org/&quot;</span>&gt;</span>nginx.org<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>.<span class="hljs-tag">&lt;<span class="hljs-name">br</span>/&gt;</span><br>Commercial support is available at<br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;http://nginx.com/&quot;</span>&gt;</span>nginx.com<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>Thank you for using nginx.<span class="hljs-tag">&lt;/<span class="hljs-name">em</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>到此为止，我们创建了一个功能正常的 Pod。</p>
-<h2 id="创建-Deployment"><a href="#创建-Deployment" class="headerlink" title="创建 Deployment"></a>创建 Deployment</h2><p>将以下代码写入 <code>nginx-deployment.yaml</code>：</p>
+<h4 id="创建-Deployment"><a href="#创建-Deployment" class="headerlink" title="创建 Deployment"></a>创建 Deployment</h4><p>将以下代码写入 <code>nginx-deployment.yaml</code>：</p>
 <figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">apiVersion</span><span class="hljs-punctuation">:</span> <span class="hljs-string">apps/v1</span><br><span class="hljs-attribute">kind</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Deployment</span><br><span class="hljs-attribute">metadata</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx</span><br><span class="hljs-attribute">spec</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">selector</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">matchLabels</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-attribute">app</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx</span><br>  <span class="hljs-attribute">replicas</span><span class="hljs-punctuation">:</span> <span class="hljs-string">2</span><br>  <span class="hljs-attribute">template</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">metadata</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-attribute">labels</span><span class="hljs-punctuation">:</span><br>        <span class="hljs-attribute">app</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx</span><br>    <span class="hljs-attribute">spec</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-attribute">containers</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">name: nginx</span><br>        <span class="hljs-attribute">image</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx:latest</span><br>        <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">containerPort: 80</span><br></code></pre></td></tr></table></figure>
 
 <p>使用如下命令应用：</p>
@@ -674,11 +676,11 @@
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">root</span>@k3s-server:~/k3s# kubectl get pod -o wide<br><span class="hljs-attribute">NAME</span>                     READY   STATUS    RESTARTS   AGE     IP          NODE          NOMINATED NODE   READINESS GATES<br><span class="hljs-attribute">nginx</span>-<span class="hljs-number">544</span>dc8b7c4-lzvz9   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">9</span>m30s   <span class="hljs-number">10.42.1.4</span>   k3s-agent-<span class="hljs-number">1</span>   &lt;none&gt;           &lt;none&gt;<br><span class="hljs-attribute">nginx</span>-<span class="hljs-number">544</span>dc8b7c4-<span class="hljs-number">5</span>nbcw   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">9</span>m30s   <span class="hljs-number">10.42.3.3</span>   k3s-agent-<span class="hljs-number">2</span>   &lt;none&gt;           &lt;none&gt;<br></code></pre></td></tr></table></figure>
 
 <p>可以看到，该 nginx 被创建了两个 Pod 副本，分别部署在了 <code>k3s-agent-1</code> 和 <code>k3s-agent-2</code> 上面。</p>
-<h2 id="创建-Service"><a href="#创建-Service" class="headerlink" title="创建 Service"></a>创建 Service</h2><p>Service，将运行在一组 Pods 上的应用程序公开为网络服务的抽象方法。</p>
+<h4 id="创建-Service"><a href="#创建-Service" class="headerlink" title="创建 Service"></a>创建 Service</h4><p>Service，将运行在一组 Pods 上的应用程序公开为网络服务的抽象方法。</p>
 <p>举个例子，考虑一个图片处理后端，它运行了 3 个副本。这些副本是可互换的 —— 前端不需要关心它们调用了哪个后端副本。 然而组成这一组后端程序的 Pod 实际上可能会发生变化， 前端客户端不应该也没必要知道，而且也不需要跟踪这一组后端的状态。</p>
 <p>Service 定义的抽象能够解耦这种关联。</p>
 <p>Service 有两种类型，一种是 <code>NodePort</code>，选择该种类型的可直接通过 <code>$&#123;serverIP&#125;:$&#123;nodePort&#125;</code> 访问内部的服务；另一种是 <code>ClusterIP</code> 类型，它只会在集群内部可以访问到该 Pod，不会把 Pod 的内容映射在某一个外网可以访问的端口上，但这并不意味着不能对外提供服务，而是需要 Ingress 的帮助，来将外网的流量转发到 Service 上来。</p>
-<h3 id="NodePort"><a href="#NodePort" class="headerlink" title="NodePort"></a>NodePort</h3><p>将以下代码写入 <code>nginx-service-nodeport.yaml</code>：</p>
+<h4 id="NodePort"><a href="#NodePort" class="headerlink" title="NodePort"></a>NodePort</h4><p>将以下代码写入 <code>nginx-service-nodeport.yaml</code>：</p>
 <figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">apiVersion</span><span class="hljs-punctuation">:</span> <span class="hljs-string">v1</span><br><span class="hljs-attribute">kind</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Service</span><br><span class="hljs-attribute">metadata</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx-service</span><br><span class="hljs-attribute">spec</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">selector</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">app</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx</span><br>  <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">protocol: TCP</span><br>    <span class="hljs-attribute">port</span><span class="hljs-punctuation">:</span> <span class="hljs-string">80</span><br>    <span class="hljs-attribute">targetPort</span><span class="hljs-punctuation">:</span> <span class="hljs-string">80</span><br>    <span class="hljs-attribute">nodePort</span><span class="hljs-punctuation">:</span> <span class="hljs-string">30080</span><br>  <span class="hljs-attribute">type</span><span class="hljs-punctuation">:</span> <span class="hljs-string">NodePort</span><br></code></pre></td></tr></table></figure>
 
 <p>这里 <code>nodePort</code> 的范围是 <code>30000-32767</code>。</p>
@@ -690,14 +692,14 @@
 <p>查看 Service：</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">root@k3s-<span class="hljs-keyword">server</span>:~/k3s# kubectl <span class="hljs-keyword">get</span> service<br><span class="hljs-type">NAME</span>            <span class="hljs-keyword">TYPE</span>        <span class="hljs-keyword">CLUSTER</span>-IP     <span class="hljs-keyword">EXTERNAL</span>-IP   PORT(S)        AGE<br>kubernetes      ClusterIP   <span class="hljs-number">10.43</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>      &lt;<span class="hljs-keyword">none</span>&gt;        <span class="hljs-number">443</span>/TCP        <span class="hljs-number">12</span>h<br>nginx-service   NodePort    <span class="hljs-number">10.43</span><span class="hljs-number">.74</span><span class="hljs-number">.219</span>   &lt;<span class="hljs-keyword">none</span>&gt;        <span class="hljs-number">80</span>:<span class="hljs-number">30080</span>/TCP   <span class="hljs-number">7</span>m21s<br></code></pre></td></tr></table></figure>
 
-<h3 id="ClusterIP"><a href="#ClusterIP" class="headerlink" title="ClusterIP"></a>ClusterIP</h3><h4 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h4><p>将以下代码写入 <code>nginx-service-clusterip.yaml</code>：</p>
+<h4 id="ClusterIP"><a href="#ClusterIP" class="headerlink" title="ClusterIP"></a>ClusterIP</h4><h5 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h5><p>将以下代码写入 <code>nginx-service-clusterip.yaml</code>：</p>
 <figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">apiVersion</span><span class="hljs-punctuation">:</span> <span class="hljs-string">v1</span><br><span class="hljs-attribute">kind</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Service</span><br><span class="hljs-attribute">metadata</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx-service</span><br><span class="hljs-attribute">spec</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">selector</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">app</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx</span><br>  <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">protocol: TCP</span><br>    <span class="hljs-attribute">port</span><span class="hljs-punctuation">:</span> <span class="hljs-string">80</span><br>    <span class="hljs-attribute">targetPort</span><span class="hljs-punctuation">:</span> <span class="hljs-string">80</span><br></code></pre></td></tr></table></figure>
 
 <p>使用如下命令应用：</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs autoit">root<span class="hljs-symbol">@k3s</span>-server:~/k3s<span class="hljs-meta"># kubectl apply -f nginx-service-clusterip.yaml </span><br>service/nginx-service created<br></code></pre></td></tr></table></figure>
 
 <p>这样就创建了 Service，但外部还不能访问，所以需要 Ingress。</p>
-<h4 id="Ingress"><a href="#Ingress" class="headerlink" title="Ingress"></a>Ingress</h4><p>先做个 DNS 解析：</p>
+<h5 id="Ingress"><a href="#Ingress" class="headerlink" title="Ingress"></a>Ingress</h5><p>先做个 DNS 解析：</p>
 <table>
 <thead>
 <tr>
@@ -740,7 +742,7 @@
 <figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">$ ping nginx.k3s.abc.com</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">正在 Ping nginx.k3s.abc.com[10.0.0.31] 具有 32 字节的数据</span><span class="hljs-punctuation">:</span><br><span class="hljs-attribute">来自 10.0.0.1 的回复</span><span class="hljs-punctuation">:</span> <span class="hljs-string">无法访问目标主机。</span><br><span class="hljs-attribute">来自 10.0.0.1 的回复</span><span class="hljs-punctuation">:</span> <span class="hljs-string">无法访问目标主机。</span><br><span class="hljs-attribute">来自 10.0.0.1 的回复</span><span class="hljs-punctuation">:</span> <span class="hljs-string">无法访问目标主机。</span><br><span class="hljs-attribute">来自 10.0.0.1 的回复</span><span class="hljs-punctuation">:</span> <span class="hljs-string">无法访问目标主机。</span><br><br><span class="hljs-attribute">10.0.0.31 的 Ping 统计信息</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">数据包</span><span class="hljs-punctuation">:</span> <span class="hljs-string">已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，</span><br><br><span class="hljs-attribute">$ ping nginx.k3s.abc.com</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">正在 Ping nginx.k3s.abc.com [10.0.0.39] 具有 32 字节的数据</span><span class="hljs-punctuation">:</span><br><span class="hljs-attribute">来自 10.0.0.39 的回复</span><span class="hljs-punctuation">:</span> <span class="hljs-string">字节=32 时间=3ms TTL=63</span><br><span class="hljs-attribute">来自 10.0.0.39 的回复</span><span class="hljs-punctuation">:</span> <span class="hljs-string">字节=32 时间=5ms TTL=63</span><br><span class="hljs-attribute">来自 10.0.0.39 的回复</span><span class="hljs-punctuation">:</span> <span class="hljs-string">字节=32 时间=5ms TTL=63</span><br><span class="hljs-attribute">来自 10.0.0.39 的回复</span><span class="hljs-punctuation">:</span> <span class="hljs-string">字节=32 时间=12ms TTL=63</span><br><br><span class="hljs-attribute">10.0.0.39 的 Ping 统计信息</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">数据包</span><span class="hljs-punctuation">:</span> <span class="hljs-string">已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，</span><br><span class="hljs-attribute">往返行程的估计时间(以毫秒为单位)</span><span class="hljs-punctuation">:</span><br>    最短 = 3ms，最长 = 12ms，平均 = 6ms<br></code></pre></td></tr></table></figure>
 
 <p>但当我关闭 <code>k3s-server</code> 的时候，服务出现了不可用，且无自动切换。或许对于高可用 K3s 集群来说，需要至少两台 <code>Server</code> 节点。</p>
-<h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">root@k3s-server:~# kubectl <span class="hljs-keyword">create</span> secret tls my-tls-secret \<br>  --cert=<span class="hljs-keyword">path</span>/<span class="hljs-keyword">to</span>/cert/file \<br>  --<span class="hljs-keyword">key</span>=<span class="hljs-keyword">path</span>/<span class="hljs-keyword">to</span>/<span class="hljs-keyword">key</span>/file<br></code></pre></td></tr></table></figure>
+<h5 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h5><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">root@k3s-server:~# kubectl <span class="hljs-keyword">create</span> secret tls my-tls-secret \<br>  --cert=<span class="hljs-keyword">path</span>/<span class="hljs-keyword">to</span>/cert/file \<br>  --<span class="hljs-keyword">key</span>=<span class="hljs-keyword">path</span>/<span class="hljs-keyword">to</span>/<span class="hljs-keyword">key</span>/file<br></code></pre></td></tr></table></figure>
 
 <p>在 <code>nginx-ingress.yaml</code> 中追加：</p>
 <figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">spec</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">tls</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">hosts:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">nginx.k3s.abc.com</span><br>    <span class="hljs-attribute">secretName</span><span class="hljs-punctuation">:</span> <span class="hljs-string">my-tls-secret</span><br></code></pre></td></tr></table></figure>
@@ -791,8 +793,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Debian-K3s集群的安装、配置与使用</div>
-      <div>https://blog.quickso.cn/2024/12/21/Debian-K3s集群的安装、配置与使用/</div>
+      <div>K3s集群以及KubePi安装、配置与使用</div>
+      <div>https://blog.quickso.cn/2025/08/10/K3s集群以及KubePi安装、配置与使用/</div>
     </div>
     <div class="license-meta">
       
@@ -804,7 +806,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年12月21日</div>
+          <div>2025年8月10日</div>
         </div>
       
       
@@ -836,18 +838,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/12/24/Virtualizor%E9%83%A8%E7%BD%B2%E5%8F%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E5%AF%B9%E6%8E%A5whmcs/" title="Virtualizor部署及安装并对接whmcs">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Virtualizor部署及安装并对接whmcs</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/12/01/%E5%93%AA%E5%90%92%E9%9D%A2%E6%9D%BF%E6%96%B0%E7%89%88%E6%9C%ACv1%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" title="哪吒面板新版本v1安装教程">
-                        <span class="hidden-mobile">哪吒面板新版本v1安装教程</span>
+                      <a href="/2025/08/02/Tailscale%E8%87%AA%E5%BB%BADerp%E4%B8%AD%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Tailscale自建Derp中转服务器">
+                        <span class="hidden-mobile">Tailscale自建Derp中转服务器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
