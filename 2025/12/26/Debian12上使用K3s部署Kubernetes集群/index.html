@@ -29,7 +29,7 @@
 <meta property="og:description" content="这里使用两个主机 2h2g 40GB存储 Master （192.168.10.101），Node0 （192.168.10.103） 1. 准备工作（两台主机均需执行）在开始之前，确保两台机器可以互相通信，并且防火墙允许必要的流量。  更新系统： 1sudo apt update &amp;&amp; sudo apt upgrade -y  停止并禁用防火墙（可选，但建议初学者操作以避免连接问">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-26T14:15:36.000Z">
-<meta property="article:modified_time" content="2025-12-26T16:36:38.227Z">
+<meta property="article:modified_time" content="2025-12-26T17:05:59.194Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="K3s">
 <meta property="article:tag" content="Kubernetes">
@@ -314,7 +314,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.7k 字
+          2.2k 字
         
       </span>
     
@@ -326,7 +326,7 @@
         
         
           <!-- compatible with older versions-->
-          14 分钟
+          19 分钟
         
       </span>
     
@@ -458,7 +458,6 @@
 <p><strong>验证与访问</strong></p>
 <ol>
 <li><p><strong>检查 Pod 运行状态：</strong></p>
-<p>Bash</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">kubectl <span class="hljs-built_in">get</span> pods -n portainer<br></code></pre></td></tr></table></figure>
 
 <p>等待状态变为 <code>Running</code>。</p>
@@ -593,7 +592,7 @@
 <li>如果是 Pending&#x2F;Error，执行 <code>kubectl describe pod &lt;name&gt;</code> (查看 Events 报错)</li>
 <li>如果是 CrashLoopBackOff，执行 <code>kubectl logs &lt;name&gt;</code> (查看程序崩溃原因)</li>
 </ol>
-<h2 id="Helm"><a href="#Helm" class="headerlink" title="Helm"></a>Helm</h2><h3 id="1-Helm-是什么？"><a href="#1-Helm-是什么？" class="headerlink" title="1. Helm 是什么？"></a>1. Helm 是什么？</h3><p>在没有 Helm 之前，部署一个复杂的应用（如 WordPress）需要手动编写和维护大量的 YAML 文件（Deployment, Service, Ingress, ConfigMap 等）。</p>
+<h2 id="7-Helm"><a href="#7-Helm" class="headerlink" title="7.Helm"></a>7.Helm</h2><h3 id="1-Helm-是什么？"><a href="#1-Helm-是什么？" class="headerlink" title="1. Helm 是什么？"></a>1. Helm 是什么？</h3><p>在没有 Helm 之前，部署一个复杂的应用（如 WordPress）需要手动编写和维护大量的 YAML 文件（Deployment, Service, Ingress, ConfigMap 等）。</p>
 <p><strong>Helm 的核心价值：</strong></p>
 <ul>
 <li><strong>打包管理：</strong> 将多个 YAML 文件封装成一个名为 <strong>Chart</strong> 的包。</li>
@@ -620,6 +619,51 @@
 <h4 id="第三步：管理已安装的应用"><a href="#第三步：管理已安装的应用" class="headerlink" title="第三步：管理已安装的应用"></a><strong>第三步：管理已安装的应用</strong></h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-comment"># 查看已安装的应用列表</span><br>helm <span class="hljs-built_in">list</span><br><br><span class="hljs-comment"># 查看应用的配置参数</span><br>helm <span class="hljs-keyword">get</span> values <span class="hljs-keyword">my</span>-redis<br><br><span class="hljs-comment"># 升级应用 (比如修改了配置文件后)</span><br>helm upgrade <span class="hljs-keyword">my</span>-redis bitnami/redis -f values.yaml<br><br><span class="hljs-comment"># 一键回滚到上一个版本</span><br>helm rollback <span class="hljs-keyword">my</span>-redis <span class="hljs-number">1</span><br><br><span class="hljs-comment"># 卸载应用</span><br>helm uninstall <span class="hljs-keyword">my</span>-redis<br></code></pre></td></tr></table></figure>
 
 <hr>
+<p><strong>Q&amp;A</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">出现了下面问题<br>root@master:~# helm install kps prometheus-community/kube-prometheus-stack \<br>  -n monitoring <br>Error: INSTALLATION FAILED: Kubernetes cluster unreachable: <span class="hljs-built_in">stat</span> /root/.kube/config: no such file or directory<br>解决办法<br><span class="hljs-built_in">mkdir</span> -p ~/.kube<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /etc/rancher/k3s/k3s.yaml ~/.kube/config<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> <span class="hljs-variable">$USER</span>:<span class="hljs-variable">$USER</span> ~/.kube/config<br><span class="hljs-built_in">chmod</span> 600 ~/.kube/config<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="8-安装-kube-prometheus-stack-监控栈"><a href="#8-安装-kube-prometheus-stack-监控栈" class="headerlink" title="8.安装 kube-prometheus-stack 监控栈"></a>8.安装 kube-prometheus-stack 监控栈</h2><h3 id="第一步：添加-Helm-仓库"><a href="#第一步：添加-Helm-仓库" class="headerlink" title="第一步：添加 Helm 仓库"></a>第一步：添加 Helm 仓库</h3><p>首先，需要将 Prometheus 社区的 Helm 仓库添加到你的本地 Helm 客户端中。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">helm</span> repo <span class="hljs-keyword">add</span> prometheus-community https:<span class="hljs-comment">//prometheus-community.github.io/helm-charts</span><br><span class="hljs-symbol">helm</span> repo update<br></code></pre></td></tr></table></figure>
+
+<h3 id="第二步：创建命名空间"><a href="#第二步：创建命名空间" class="headerlink" title="第二步：创建命名空间"></a>第二步：创建命名空间</h3><p>为了保持集群整洁，建议为监控组件创建一个独立的 <code>monitoring</code> 命名空间。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">kubectl create <span class="hljs-keyword">namespace</span> <span class="hljs-symbol">monitoring</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="第三步：安装-Helm-Chart"><a href="#第三步：安装-Helm-Chart" class="headerlink" title="第三步：安装 Helm Chart"></a>第三步：安装 Helm Chart</h3><p>使用 Helm 安装监控栈。这里我们将该发布（Release）命名为 <code>kps</code>。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">helm install kps prometheus-community/kube-prometheus-stack -n monitoring<br></code></pre></td></tr></table></figure>
+
+<h3 id="第四步：验证-Pod-运行状态"><a href="#第四步：验证-Pod-运行状态" class="headerlink" title="第四步：验证 Pod 运行状态"></a>第四步：验证 Pod 运行状态</h3><p>确认所有组件（Prometheus, Grafana, Alertmanager 等）是否已成功启动。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">kubectl <span class="hljs-built_in">get</span> pods -n monitoring<br></code></pre></td></tr></table></figure>
+
+<p><strong>预期输出：</strong> 你会看到类似下方的列表，确保所有 Pod 的状态均为 <code>Running</code> 且 <code>READY</code> 列显示正常（如 2&#x2F;2 或 3&#x2F;3）。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">NAME</span>                                                    READY   STATUS    RESTARTS   AGE<br><span class="hljs-attribute">alertmanager</span>-kps-kube-prometheus-stack-alertmanager-<span class="hljs-number">0</span>   <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">92</span>s<br><span class="hljs-attribute">kps</span>-grafana-b456ddcf7-<span class="hljs-number">2</span>nx8g                             <span class="hljs-number">3</span>/<span class="hljs-number">3</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">98</span>s<br><span class="hljs-attribute">kps</span>-kube-prometheus-stack-operator-<span class="hljs-number">56</span>d87dbbdf-s2q7c     <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">98</span>s<br><span class="hljs-attribute">kps</span>-kube-state-metrics-<span class="hljs-number">6</span>ff8469dcf-t5qq6                 <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">98</span>s<br><span class="hljs-attribute">kps</span>-prometheus-node-exporter-chszk                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">98</span>s<br><span class="hljs-attribute">prometheus</span>-kps-kube-prometheus-stack-prometheus-<span class="hljs-number">0</span>       <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">92</span>s<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="第五步：访问-Grafana-面板"><a href="#第五步：访问-Grafana-面板" class="headerlink" title="第五步：访问 Grafana 面板"></a>第五步：访问 Grafana 面板</h3><p><strong>1. 获取 Grafana 管理员密码</strong> 默认用户名是 <code>admin</code>。运行以下命令获取自动生成的解码密码（提示：默认通常是 <code>prom-operator</code>）：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">kubectl <span class="hljs-built_in">get</span><span class="hljs-built_in"> secret </span>--namespace monitoring kps-grafana -o <span class="hljs-attribute">jsonpath</span>=<span class="hljs-string">&quot;&#123;.data.admin-password&#125;&quot;</span> | base64 --decode ; echo<br></code></pre></td></tr></table></figure>
+
+<p><strong>2. 端口转发（Port-forward）</strong> 为了从外部访问集群内部的服务，我们需要映射端口。</p>
+<blockquote>
+<p><strong>注意：</strong> <code>--address 0.0.0.0</code> 允许你通过服务器的 IP 访问，而不仅仅是 localhost。</p>
+</blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">kubectl</span> port-forward --address <span class="hljs-number">0.0.0.0</span> -n monitoring svc/kps-grafana <span class="hljs-number">3000</span>:<span class="hljs-number">80</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>3. 浏览器登录</strong> 访问你的服务器 IP 和端口（例如：<code>http://192.168.122.42:3000</code>）：</p>
+<ul>
+<li><strong>用户名 (Username):</strong> <code>admin</code></li>
+<li><strong>密码 (Password):</strong> 使用上方命令获取到的字符串。</li>
+</ul>
+<p>持久化运行</p>
+<p>将 Grafana 服务的类型从 <code>ClusterIP</code> 改为 <code>NodePort</code>，这样你可以通过<strong>集群中任何节点的 IP + 指定端口</strong>直接访问，无需运行任何命令。</p>
+<ol>
+<li><p><strong>修改服务：</strong></p>
+<figure class="highlight scilab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scilab">kubectl patch svc kps-grafana -n monitoring -p <span class="hljs-string">&#x27;&#123;&quot;</span>spec<span class="hljs-string">&quot;: &#123;&quot;</span><span class="hljs-built_in">type</span><span class="hljs-string">&quot;: &quot;</span>NodePort<span class="hljs-string">&quot;&#125;&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>获取暴露的端口：</strong></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">kubectl</span> <span class="hljs-meta">get</span> <span class="hljs-keyword">svc</span> -n monitoring kps-grafana<br></code></pre></td></tr></table></figure>
+
+<p>在输出的 <code>PORT(S)</code> 列中，你会看到类似 <code>80:31234/TCP</code> 的内容。此时，你可以通过 <code>http://&lt;服务器IP&gt;:31234</code> 永久访问。</p>
+</li>
+</ol>
 
                 
               </div>
