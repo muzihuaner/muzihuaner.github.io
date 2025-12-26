@@ -29,7 +29,7 @@
 <meta property="og:description" content="这里使用两个主机 2h2g 40GB存储 Master （192.168.10.101），Node0 （192.168.10.103） 1. 准备工作（两台主机均需执行）在开始之前，确保两台机器可以互相通信，并且防火墙允许必要的流量。  更新系统： 1sudo apt update &amp;&amp; sudo apt upgrade -y  停止并禁用防火墙（可选，但建议初学者操作以避免连接问">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-26T14:15:36.000Z">
-<meta property="article:modified_time" content="2025-12-26T17:05:59.194Z">
+<meta property="article:modified_time" content="2025-12-26T17:15:41.783Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="K3s">
 <meta property="article:tag" content="Kubernetes">
@@ -415,7 +415,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> nano /etc/rancher/k3s/registries.yaml<br></code></pre></td></tr></table></figure>
 
 <p>填入</p>
-<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">mirrors</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">docker.io</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">endpoint</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;https://docker.1ms.run&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">mirrors</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">docker.io</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">endpoint</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;https://docker.1ms.run&quot;</span><br>  <span class="hljs-attribute">registry.k8s.io</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">endpoint</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;https://k8s.m.daocloud.io&quot;</span><br></code></pre></td></tr></table></figure>
 
 <p>重启K3s</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl restart k3s<br></code></pre></td></tr></table></figure>
