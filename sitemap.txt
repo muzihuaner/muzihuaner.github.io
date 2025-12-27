@@ -1,3 +1,4 @@
+https://blog.quickso.cn/2025/12/27/RustFS%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8Docker%E9%83%A8%E7%BD%B2/
 https://blog.quickso.cn/2025/12/26/Debian12%E4%B8%8A%E4%BD%BF%E7%94%A8K3s%E9%83%A8%E7%BD%B2Kubernetes%E9%9B%86%E7%BE%A4/
 https://blog.quickso.cn/about/index.html
 https://blog.quickso.cn/2024/09/17/%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/
