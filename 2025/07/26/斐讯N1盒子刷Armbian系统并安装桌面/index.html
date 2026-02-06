@@ -1,0 +1,972 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="PHICOMM N1 盒子已经上市很多年了，虽然是一个矿渣产品，但是其优异的硬件配置，丰富的固件适配，目前还被广泛使用。在此首先对 webpad 等几位大佬致敬，由于他们的分享，使得很多人可以很方便的在 N1 盒子上实现自己所需的功能。 一、斐讯 N1 的硬件参数 产品类型：家庭网络存储，云存储 处理器：Amlogic S905D Cortex-A53，Mali-450 GPU 内存：RAM 2G">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斐讯N1盒子刷Armbian系统并安装桌面">
+<meta property="og:url" content="https://blog.quickso.cn/2025/07/26/%E6%96%90%E8%AE%AFN1%E7%9B%92%E5%AD%90%E5%88%B7Armbian%E7%B3%BB%E7%BB%9F%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A1%8C%E9%9D%A2/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="PHICOMM N1 盒子已经上市很多年了，虽然是一个矿渣产品，但是其优异的硬件配置，丰富的固件适配，目前还被广泛使用。在此首先对 webpad 等几位大佬致敬，由于他们的分享，使得很多人可以很方便的在 N1 盒子上实现自己所需的功能。 一、斐讯 N1 的硬件参数 产品类型：家庭网络存储，云存储 处理器：Amlogic S905D Cortex-A53，Mali-450 GPU 内存：RAM 2G">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714739962370407.webp">
+<meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714739978448687.webp">
+<meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714739993276301.webp">
+<meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740007378510.webp">
+<meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740022198752.webp">
+<meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740042717577.webp">
+<meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740057197921.webp">
+<meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740074835356.webp">
+<meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740113513927.webp">
+<meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740129381098.webp">
+<meta property="article:published_time" content="2025-07-26T13:11:18.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.781Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="N1">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Armbian">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714739962370407.webp">
+  
+  
+  
+  <title>斐讯N1盒子刷Armbian系统并安装桌面 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="斐讯N1盒子刷Armbian系统并安装桌面"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-26 21:11" pubdate>
+          2025年7月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          26 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">斐讯N1盒子刷Armbian系统并安装桌面</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>PHICOMM N1 盒子已经上市很多年了，虽然是一个矿渣产品，但是其优异的硬件配置，丰富的固件适配，目前还被广泛使用。在此首先对 webpad 等几位大佬致敬，由于他们的分享，使得很多人可以很方便的在 N1 盒子上实现自己所需的功能。</p>
+<p><strong>一、斐讯 N1 的硬件参数</strong></p>
+<p>产品类型：家庭网络存储，云存储</p>
+<p>处理器：Amlogic S905D Cortex-A53，Mali-450 GPU</p>
+<p>内存：RAM 2GB, ROM 8GB</p>
+<p>接口：USB 2.0 * 2、HDMI * 1、RJ45 * 1（千兆网口）</p>
+<p>无线连接：支持2.4G&#x2F;5G WiFi，蓝牙BT 4.1 BLE低功耗</p>
+<p>视频输出分辨率：最高支持到 4K 60 帧硬件解码</p>
+<p>电源接口：12V&#x2F;2A</p>
+<p>尺寸与重量：产品尺寸为110mm x 110mm x 40mm，产品重量约为0.248kg</p>
+<p><strong>二、刷机准备</strong></p>
+<p>1、所需硬件</p>
+<p>　　N1 盒子一个、8G 以上 U 盘一个、USB 接口键盘一个、USB 鼠标一块、HDMI 晶晨短接神器（作用为线刷时短接，很便宜，海鲜市场有卖，如果没有可以拆机手动短接）、HDMI 接口显示器 &#x2F; HDMI 接口电视一台、网线一根、HDMI 线一根、路由器、电脑。</p>
+<p>2、所需软件</p>
+<p>　　为方便使用，我已经将所需要的软件整理好，放到了谷歌云盘，大家可以下载后使用。</p>
+<p><a target="_blank" rel="noopener" href="https://drive.google.com/drive/u/1/folders/1QUhpnzm1CvFHkUh1904EN7QFaJBag8Vb">https://drive.google.com/drive/u/1/folders/1QUhpnzm1CvFHkUh1904EN7QFaJBag8Vb</a></p>
+<p>Bash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">1. 解压使用-斐讯T1、N1官方系统降级工具.zip                              <span class="hljs-comment">#斐讯 T1、N1 官方系统降级工具</span><br>2. 解压使用-N1U盘启动.zip                                              <span class="hljs-comment">#N1 U 盘启动</span><br>3. USB_Burning_Tools_v2.0.7.2_build2.exe                              <span class="hljs-comment">#晶晨线刷工具含驱动</span><br>4. win32diskimager-1.0.0-install.exe                                  <span class="hljs-comment">#写盘工具</span><br>5. N1_mod_by_webpad_v2.2_20180920.img.7z                              <span class="hljs-comment">#Android 7.0.1 版本固件, root, 可引导进入 Armbian</span><br>6. Reboot to LibreELEC_1.1_Apkpure.apk                                <span class="hljs-comment">#重启进入 Armbian 软件</span><br>7.Armbian_24.5.0_amlogic_s905d_jammy_6.6.28_server_2024.04.25.img.gz  <span class="hljs-comment">#Armbian_24.5.0 版本固件,kernel BPF 模块已打开,可使用 dae</span><br></code></pre></td></tr></table></figure>
+
+<p>　　谷歌云盘里提供的 Armbian 固件 kernel BPF 模块默认已打开, 经我测试可使用 dae ，来自于 ophub 的 GitHub 项目，如果你更习惯于使用 Debian 固件，请使用如下链接自行下载。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/releases/">https://github.com/ophub/amlogic-s9xxx-armbian/releases/</a></p>
+<p>　　Armbian 是基于 Debian 和 Ubuntu 的 Linux 发行版，专门为 ARM 开发板设计。Armbian 的版本命名通常遵循其基于的 Debian 或 Ubuntu 发行版。Armbian 的这四个版本（Noble、Jammy、Bullseye 和 Bookworm）分别基于不同的 Debian 或 Ubuntu 版本：</p>
+<ul>
+<li>Armbian Noble - 这是基于 Ubuntu 22.04 LTS (代号 “Jammy Jellyfish”) 的版本。Ubuntu 22.04 是一个长期支持版本，提供了五年的安全更新和支持。Armbian 对这个版本进行了针对 ARM 设备的优化和定制。</li>
+<li>Armbian Jammy - 也是基于 Ubuntu 22.04 LTS 的版本。这个版本名可能与 Noble 重复或是对同一基础版本的另一种命名方式。</li>
+<li>Armbian Bullseye - 这是基于 Debian 11 (代号 “Bullseye”) 的版本。Debian 11 提供了多种软件的最新稳定版，并享有 Debian 社区的广泛支持和安全维护。Debian 版本的 Armbian 通常更倾向于稳定性和兼容性。</li>
+<li>Armbian Bookworm - 基于 Debian 12 (代号 “Bookworm”)。这是 Debian 的测试版本，在正式成为稳定版前，它会包含最新的软件更新。使用这个版本的 Armbian 可能提供一些最前沿的特性，但也可能不如稳定版那么稳定。</li>
+</ul>
+<p><strong>三、降级关键分区</strong></p>
+<p>　　玩 N1 的朋友都知道第一步要对 N1 进行降级，但是却很少有人说明为什么要进行降级，降级针对盒子做了什么事情，这里我参考“if年少有为”在自己博文中的描述，希望大家能明白其中原理。</p>
+<p>　　连接 HDMI、网线、电源后会进入斐讯自带的安卓系统，安卓系统的标准启动过程如下：</p>
+<ul>
+<li>bootloader：斐讯针对该盒子硬件实现的类似 BIOS 的东西，它负责硬件的初始化，最终引导操作系统。</li>
+<li>boot 分区：放着安卓操作系统的内核文件，由 bootloader 唤起，也就实现了进入操作系统的效果。</li>
+<li>recovery 分区：类似于 WinPE 的东西，如果 boot 分区挂了，则可以通过 Recovery 方式进入一个临时的操作系统，然后恢复 boot 分区（类似于 ghost 做系统）。</li>
+</ul>
+<p>　　问题就在于，bootloader 是斐讯针对盒子定制的，它设置了一些限制，比如：</p>
+<ul>
+<li>只能使用他家的安卓系统</li>
+<li>不支持U盘引导操作系统</li>
+</ul>
+<p>　　所以呢，恩山论坛的 webpad 大佬，修改了斐讯的 bootloader，我们要做的就是把 webpad 大佬修改后的 bootloader 覆盖到盒子里面去，这个过程被称之为 N1 降级，一台 N1 这辈子只需要做一次降级操作，后续不需要再研究这个问题了。当然如果你的盒子到手时就已经被刷成了 TV 等其他系统，这一步骤就可以跳过了。</p>
+<p>1、将 N1 接上网线，HDMI 线接显示器，离 HDMI 口远的那个 USB 口接一个鼠标。连上网以后，等个五分钟左右，待其自动升级到最新版，中间可能会多次重启升级，直到不再升级为准。否则如果正在刷的过程中 N1 重启可能会有点麻烦。记录一下屏幕上显示的 IP ，下一步会用到。接下来用鼠标点击屏幕上版本号的地方 4 次，屏幕中间会显示一下“开启adb”。</p>
+<p><img src="https://www.hicairo.com/zb_users/upload/2024/05/202405031714739962370407.webp" srcset="/img/loading.gif" lazyload alt="1.N1 在 nas 主界面点击四次固件版本打开 adb.webp"></p>
+<p>2、下载“1.解压使用-斐讯T1、N1官方系统降级工具.zip”文件并解压，运行 onekey 目录中的 run.bat 批处理文件，按照提示输入 2 选择 N1 降级。</p>
+<p><img src="https://www.hicairo.com/zb_users/upload/2024/05/202405031714739978448687.webp" srcset="/img/loading.gif" lazyload alt="2.N1 降级_1.webp"></p>
+<p>按照提示输入 N1 的 IP 地址。</p>
+<p><img src="https://www.hicairo.com/zb_users/upload/2024/05/202405031714739993276301.webp" srcset="/img/loading.gif" lazyload alt="2.N1 降级_2.webp"></p>
+<p>按照提示按任意键开始降级。</p>
+<p><img src="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740007378510.webp" srcset="/img/loading.gif" lazyload alt="2.N1 降级_3.webp"></p>
+<p><strong>四、制作 Armbian U 盘</strong></p>
+<p>1、在电脑上下载并安装“4.win32diskimager-1.0.0-install.exe”写盘工具软件，同时下载并解压镜像文件“7.Armbian_24.5.0_amlogic_s905d_jammy_6.6.28_server_2024.04.25.img.gz”备用。</p>
+<p>2、运行 win32diskimager 软件，如下图所示，选择上一步解压好的镜像文件，插入 U 盘后将镜像文件写入 U 盘。</p>
+<p><img src="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740022198752.webp" srcset="/img/loading.gif" lazyload alt="3.给U盘写入armbian镜像.webp"></p>
+<p>　　有关网上流传的 armbian 5.77 版本的最稳定，meson-gxl-s905d-phicomm-n1-xiangsm.dtb 可以解决系统过高等问题，经过我的实际测试，目前 ophub 编译的镜像已经解决了上述问题，大家可以放心使用。</p>
+<p><strong>五、在 Android 系统里引导从 U 盘启动</strong></p>
+<p>1、下载“2.解压使用-N1U盘启动.zip”并解压，将显示器和键盘接入 N1 盒子，执行“N1-ADBU盘启动（傻瓜包）”文件夹下的“U盘启动.bat”，输入 N1 盒子的 IP 地址，地址可以从路由器管理界面看到。</p>
+<p><img src="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740042717577.webp" srcset="/img/loading.gif" lazyload alt="4.N1盒子U盘启动.webp"></p>
+<p>2、N1 的两个 USB 口，离 HDMI口 远的接 USB 键盘，另一个接 U 盘。HDMI 线接显示器，加电冷启动。屏幕会先出现启动画面，之后会进入 U 盘的 armbian 系统。这里如果多次重复，还是只能进入 Android 的 recovery 模式，那么请换个 U 盘试试，基本这里不成功都是因为 U 盘兼容性问题导致的，建议最好使用 USB 2.0 的 U 盘。</p>
+<p><img src="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740057197921.webp" srcset="/img/loading.gif" lazyload alt="5.armbian启动界面.webp"></p>
+<p>3、进入 armbian 以后用 root:1234 登录，会被要求修改密码和创建普通用户，不想创建用户可以 Ctrl+C 跳过，完成以后会留在一个 shell 里面。</p>
+<p><img src="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740074835356.webp" srcset="/img/loading.gif" lazyload alt="6.armbian初始化设置.webp"></p>
+<p><strong>六、将 U 盘中的 Armbian 系统写入 N1 盒子的 EMMC</strong></p>
+<p>　　接上一步，使用 root 用户及密码登录 armbian 后，在 bash 下执行 <strong>armbian-install</strong> 命令。按照提示输入“101”，选择文件系统输入“1”（选择ext4），这时开始将 U 盘中的 armbian 系统 copy 到 emmc ，整个过程大概需要 2~3 分钟，等待文件 copy 完后，按照提示输入 <strong>poweroff</strong> 命令关机，然后移除盒子上的 U 盘，给盒子重新加电后会使用 emmc 进入 armbian 系统，到此刷机工作就完成了。</p>
+<p>　　注意：在将 armbian 写入 emmc 成功后，引导的先后顺序为先从 U 盘引导进入系统，没有插 U 盘时才使用 emmc 引导进入系统，所有如果你要使用 emmc 中的系统，请务必拔掉 U 盘。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><code class="hljs bash">root@armbian:~# armbian-install<br>[ STEPS ] Installing Armbian to internal eMMC...<br>[ STEPS ] Checking dependencies...<br>[ INFO ] Dependency check completed. Proceeding installation...<br>[ STEPS ] Initializing the environment...<br>[ INFO ] Use mainline u-boot: [ no ]<br>[ INFO ] Use ampart tool: [ <span class="hljs-built_in">yes</span> ]<br>[ INFO ] Show all devices: [ no ]<br>[ INFO ] Internal eMMC : [ /dev/mmcblk2 ]<br>[ STEPS ] Start selecting device...<br>--------------------------------------------------------------------------------------<br>ID    SOC        MODEL                               DTB<br>--------------------------------------------------------------------------------------<br>101   s905d      Phicomm-N1                          meson-gxl-s905d-phicomm-n1.dtb<br>102   s905d      Phicomm-N1(DMA-thresh)              meson-gxl-s905d-phicomm-n1-thresh.dtb<br>103   s905d      MECOOL-KI-Pro                       meson-gxl-s905d-mecool-ki-pro.dtb<br>104   s905d      SML-5442TW                          meson-gxl-s905d-sml5442tw.dtb<br>105   s905x      HG680P                              meson-gxl-s905x-p212.dtb<br>106   s905x      B860H                               meson-gxl-s905x-b860h.dtb<br>107   s905x      Nexbox-a95x                         meson-gxl-s905x-nexbox-a95x.dtb<br>108   s905x      TX9                                 meson-gxl-s905x-tx9.dtb<br>109   s905x      T95,XiaoMI-3S,X96                   meson-gxl-s905x-p212.dtb<br>110   s905x      TBee                                meson-gxl-s905x-tbee.dtb<br>--------------------------------------------------------------------------------------<br>111   s905w      TX3-Mini                            meson-gxl-s905w-tx3-mini.dtb<br>112   s905w      W95                                 meson-gxl-s905w-p281.dtb<br>113   s905w      X96-Mini                            meson-gxl-s905w-x96-mini.dtb<br>114   s905w      X96W,FunTV,MXQ-Pro-4K               meson-gxl-s905w-x96w.dtb<br>115   s905l      UNT402A,M201-S,MiBox-4C             meson-gxl-s905l3b-m302a.dtb<br>116   s905l      MG101,Mibox-4                       meson-gxl-s905l-venz-v10.dtb<br>117   s905l2     MGV2000,MGV3000,M301A,CM201-1       meson-gxl-s905l2-x7-5g.dtb<br>118   s905l2     E900v21E,MGV2000-K,e900v21d         meson-gxl-s905l2-x7-5g.dtb<br>119   s905l2     Wojia-TV-IPBS9505                   meson-gxl-s905l2-ipbs9505.dtb<br>120   s905l3     CM311-1,HG680-LC,M401A,UNT402A      meson-gxl-s905l2-x7-5g.dtb<br>--------------------------------------------------------------------------------------<br>121   s905l3     CM211-1,M411A,B860AV3.2-M           meson-gxl-s905l3b-m302a.dtb<br>122   s905l3     UNT400G1,E900V22D-2                 meson-gxl-s905l2-x7-5g.dtb<br>123   s905l3b    E900V22D,TY1608                     meson-gxl-s905l2-x7-5g.dtb<br>124   s905l3b    E900V21E,E900V22E,MGV2000           meson-gxl-s905l3b-e900v22e.dtb<br>125   s905l3b    M302A,M304A,CM201-1,CM211-1,CM311-1 meson-gxl-s905l3b-m302a.dtb<br>126   s905l3b    UNT403A                             meson-gxl-s905l3b-m302a.dtb<br>127   s905l3b    RG020ET-CA                          meson-gxl-s905l3b-e900v22e.dtb<br>128   s905l3b    IP103H,TY1608,BV310,B860AV-2.1M     meson-gxl-s905l3b-m302a.dtb<br>129   s905lb     BesTV-R3300L,SumaVision-Q7,MG101    meson-gxl-s905x-p212.dtb<br>130   s905lb     Q96-mini                            meson-gxl-s905x-p212.dtb<br>--------------------------------------------------------------------------------------<br>131   s905mb     S65                                 meson-gxl-s905x-p212.dtb<br>0     Other      Customize                           Enter-custom-dtb-name<br>--------------------------------------------------------------------------------------<br>[ OPTIONS ] Please Input ID: 101<br>[ INFO ] Input Box ID: [ 101 ]<br>[ INFO ] Model Name: [ Phicomm-N1 ]<br>[ INFO ] FDTFILE: [ meson-gxl-s905d-phicomm-n1.dtb ]<br>[ INFO ] MAINLINE_UBOOT: [  ]<br>[ INFO ] BOOTLOADER_IMG:  [ u-boot-2015-phicomm-n1.bin ]<br>[ INFO ] UBOOT_OVERLOAD: [ u-boot-n1.bin ]<br>[ INFO ] NEED_OVERLOAD: [ no ]<br>[ STEPS ] Which <span class="hljs-built_in">type</span> of filesystem <span class="hljs-keyword">do</span> you want <span class="hljs-keyword">for</span> your root?<br>-----------------------------------------------<br>  ID   TYPE<br>-----------------------------------------------<br>  1    ext4<br>  2    btrfs<br>-----------------------------------------------<br>[ OPTIONS ] Please Input ID (1/2): 1<br>[ INFO ] Input Type ID: [ 1 ]<br>[ INFO ] Type of filesystem: [ ext4 ]<br>[ STEPS ] Partitioning eMMC...<br>[ INFO ] Start backing up the default bootloader.<br>4+0 records <span class="hljs-keyword">in</span><br>4+0 records out<br>4194304 bytes (4.2 MB, 4.0 MiB) copied, 2.19803 s, 1.9 MB/s<br>[ INFO ] Delete the existing [ 2 ] partitions.<br>[ INFO ] Start create MBR and partittion.<br>[ INFO ] 02. Write Android bootloader: [ u-boot-2015-phicomm-n1.bin ]<br>444+0 records <span class="hljs-keyword">in</span><br>444+0 records out<br>444 bytes copied, 0.00781175 s, 56.8 kB/s<br>8191+0 records <span class="hljs-keyword">in</span><br>8191+0 records out<br>4193792 bytes (4.2 MB, 4.0 MiB) copied, 0.450597 s, 9.3 MB/s<br>[ STEPS ] Processing BOOTFS partition...<br>[ INFO ] Formatting BOOTFS partition...<br>mkfs.fat 4.2 (2021-01-31)<br>[ INFO ] Copying BOOTFS ...<br>[ INFO ] Update the [ uEnv.txt ] file.<br>[ STEPS ] Start processing the rootfs partition...<br>[ INFO ] Formatting ROOTFS ...<br>/dev/mmcblk2p2 contains a btrfs file system labelled <span class="hljs-string">&#x27;ROOTFS_EMMC&#x27;</span><br>[ INFO ] Copying ROOTFS ...<br>[ INFO ] Copying [ etc ] ...<br>[ INFO ] Copying [ home ] ...<br>[ INFO ] Copying [ opt ] ...<br>[ INFO ] Copying [ root ] ...<br>[ INFO ] Copying [ selinux ] ...<br>[ INFO ] Copying [ srv ] ...<br>[ INFO ] Copying [ usr ] ...<br>[ INFO ] Copying [ var ] ...<br>[ INFO ] Generate the new fstab file.<br>[ INFO ] Update the relevant parameters.<br>[ SUCCESS ] Installation successful. Run [ poweroff ], remove the installation media <span class="hljs-keyword">then</span> re-insert the power supply to boot new system.<br></code></pre></td></tr></table></figure>
+
+<p><strong>七、Armbian 的简单设置</strong></p>
+<p>1、将 armbian 的更新源修改为清华源</p>
+<p>　　Armbian 操作系统默认使用的官方更新源（ports.ubuntu.com）服务器在海外，连接速度和国内镜像源比起来较慢，建议修改为清华大学提供的镜像源。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">armbian-apt<br></code></pre></td></tr></table></figure>
+
+<p>更新本机已安装的软件包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt update<br>apt upgrade -y<br></code></pre></td></tr></table></figure>
+
+<p>2、修改时区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 系统时间和时区</span><br><span class="hljs-built_in">date</span> -R<br><br><span class="hljs-comment"># 修改时区，使用 tzselect 命令，然后选择 asia china beijing yes。</span><br>tzselect<br><span class="hljs-built_in">cp</span> /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br><br><span class="hljs-comment"># 再次查询系统时间和时区</span><br><span class="hljs-built_in">date</span> -R<br></code></pre></td></tr></table></figure>
+
+<p>安装显示服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install xorg<br></code></pre></td></tr></table></figure>
+
+
+<p>安装xfce</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">apt install <span class="hljs-keyword">task</span>-xfce-desktop<br></code></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> xfce4 xfce4-goodies -y<br></code></pre></td></tr></table></figure>
+
+<p>安装显示管理器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings<br></code></pre></td></tr></table></figure>
+
+
+<p>启动显示管理器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> lightdm<br><span class="hljs-built_in">sudo</span> systemctl start lightdm<br></code></pre></td></tr></table></figure>
+
+
+<p>安装音量管理器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install pulseaudio<br></code></pre></td></tr></table></figure>
+
+<p>安装浏览器</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> firefox-esr<br></code></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> chromium -y<br></code></pre></td></tr></table></figure>
+
+<p>远程软件</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">apt install remmina remmina-<span class="hljs-keyword">plugin</span>-vnc remmina-<span class="hljs-keyword">plugin</span>-rdp<br></code></pre></td></tr></table></figure>
+
+<p>蓝牙管理器</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> blueman<br></code></pre></td></tr></table></figure>
+
+<p>网络管理器</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> nm-connection-editor<br></code></pre></td></tr></table></figure>
+
+<p>也可以使用nmtui配置网络</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">nmtui</span><br></code></pre></td></tr></table></figure>
+
+<p>中文字体</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">apt-<span class="hljs-built_in">get</span> install fonts-wqy-zenhei<br></code></pre></td></tr></table></figure>
+
+<p> 设置系统语言为中文桌面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dpkg-reconfigure locales<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo update-locale <span class="hljs-attribute">LANG</span>=zh_CN.UTF-8 <span class="hljs-attribute">LC_ALL</span>=zh_CN.UTF-8<br></code></pre></td></tr></table></figure>
+
+<p>编辑 <code>/etc/default/locale</code>，确保内容如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">LANG=zh_CN.UTF-8<br>LC_ALL=zh_CN.UTF-8<br></code></pre></td></tr></table></figure>
+
+<p><strong>远程桌面</strong></p>
+<p>安装vnc server</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">apt-<span class="hljs-built_in">get</span> install tightvncserver<br></code></pre></td></tr></table></figure>
+
+<p>在root或者普通用户下执行</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">/usr/bin/vncserver -depth <span class="hljs-number">24</span> -<span class="hljs-built_in">geometry</span> <span class="hljs-number">1920</span>x1080 :<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p> 设置密码</p>
+<p>然后修改启动脚本</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">vim /etc/rc.<span class="hljs-keyword">local</span><br></code></pre></td></tr></table></figure>
+
+<p>添加以下内容</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">su - yourusername -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;/usr/bin/vncserver -depth 24 -geometry 1920x1080 :1 &amp;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/802#top">Phicomm-n1刷入后lightdm无法正常启动</a></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">cat</span> &lt;&lt; <span class="hljs-string">&#x27;_EOF_&#x27;</span> &gt; /etc/<span class="hljs-built_in">X11</span>/xorg.conf.d/<span class="hljs-number">02</span>-dietpi-aml-s905.conf<br><span class="hljs-symbol">Section</span> <span class="hljs-string">&quot;OutputClass&quot;</span><br>    Identifier <span class="hljs-string">&quot;Amlogic&quot;</span><br>    MatchDriver <span class="hljs-string">&quot;meson&quot;</span><br>    Driver <span class="hljs-string">&quot;modesetting&quot;</span><br>    Option <span class="hljs-string">&quot;PrimaryGPU&quot;</span> <span class="hljs-string">&quot;true&quot;</span><br><span class="hljs-symbol">EndSection</span><br><span class="hljs-symbol">Section</span> <span class="hljs-string">&quot;Screen&quot;</span><br>    Identifier <span class="hljs-string">&quot;Default Screen&quot;</span><br>    Device <span class="hljs-string">&quot;Meson&quot;</span><br>    Monitor <span class="hljs-string">&quot;foo&quot;</span><br>    DefaultDepth <span class="hljs-number">24</span><br>    SubSection <span class="hljs-string">&quot;Display&quot;</span><br>        Depth <span class="hljs-number">24</span><br>        Modes <span class="hljs-string">&quot;1920x1080&quot;</span> <span class="hljs-string">&quot;1440x900&quot;</span> <span class="hljs-string">&quot;1280x720&quot;</span> <span class="hljs-string">&quot;1280x1024&quot;</span> <span class="hljs-string">&quot;1280x960&quot;</span> <span class="hljs-string">&quot;1024x768&quot;</span> <span class="hljs-string">&quot;800x600&quot;</span> <span class="hljs-string">&quot;640x480&quot;</span> <span class="hljs-string">&quot;720x400&quot;</span><br>    EndSubSection<br><span class="hljs-symbol">EndSection</span><br><span class="hljs-symbol">_EOF_</span><br></code></pre></td></tr></table></figure>
+
+<p>如果还不行的话：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs none">apt install accountsservice<br>mkdir /var/lib/lightdm/data<br>chmod 775 /var/lib/lightdm/data<br></code></pre></td></tr></table></figure>
+
+<p><strong>八、从 Armbian 刷到 Android 固件</strong></p>
+<p>1、在电脑上下载并安装“3.USB_Burning_Tools_v2.0.7.2_build2.exe”烧录软件，同时下载并解压 android 固件“5.N1_mod_by_webpad_v2.2_20180920.img.7z”备用。</p>
+<p>2、运行 USB_Burning_tools 软件，如下图所示，选择 android 固件后，去掉“擦除flash”和“擦除bootloader”前的对勾，然后点击“开始”按钮，将晶晨短接神器插在 HDMI 接口上，USB双公头线插到靠近 HDMI 接口的 USB 口上，然后给 N1 盒子接上电源，这时软件就识别到了 N1 盒子，开始写入固件。</p>
+<p><img src="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740113513927.webp" srcset="/img/loading.gif" lazyload alt="8.N1线刷 Android 系统_1.webp"></p>
+<p>3、大约等待 3~4 分钟，会提示“100%：烧录成功”，这时先点击“停止”按钮，关闭烧录软件，然后拔掉 USB 线，拔掉电源后再次开机就进入了 android 系统。</p>
+<p><img src="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740129381098.webp" srcset="/img/loading.gif" lazyload alt="8.N1线刷 Android 系统_2.webp"></p>
+<hr>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://www.hicairo.com/post/75.html">https://www.hicairo.com/post/75.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.erballoon.vip/2023/03/14/armbianazxfcezmjqtdyxsz/">Armbian安装xfce桌面及其他的一些设置</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/releases/">https://github.com/ophub/amlogic-s9xxx-armbian/releases/</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/N1/" class="print-no-link">#N1</a>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+        <a href="/tags/Armbian/" class="print-no-link">#Armbian</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>斐讯N1盒子刷Armbian系统并安装桌面</div>
+      <div>https://blog.quickso.cn/2025/07/26/斐讯N1盒子刷Armbian系统并安装桌面/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年7月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/08/02/Tailscale%E8%87%AA%E5%BB%BADerp%E4%B8%AD%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Tailscale自建Derp中转服务器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Tailscale自建Derp中转服务器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/06/28/%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BAMinecraft%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="用树莓派搭建Minecraft服务器">
+                        <span class="hidden-mobile">用树莓派搭建Minecraft服务器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

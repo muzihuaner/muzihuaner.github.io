@@ -1,0 +1,1098 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="这里使用两个主机 2h2g 40GB存储 Master （192.168.10.101），Node0 （192.168.10.103） 1. 准备工作（两台主机均需执行）在开始之前，确保两台机器可以互相通信，并且防火墙允许必要的流量。  更新系统： 1sudo apt update &amp;&amp; sudo apt upgrade -y  停止并禁用防火墙（可选，但建议初学者操作以避免连接问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Debian12上使用K3s部署Kubernetes集群">
+<meta property="og:url" content="https://blog.quickso.cn/2025/12/26/Debian12%E4%B8%8A%E4%BD%BF%E7%94%A8K3s%E9%83%A8%E7%BD%B2Kubernetes%E9%9B%86%E7%BE%A4/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="这里使用两个主机 2h2g 40GB存储 Master （192.168.10.101），Node0 （192.168.10.103） 1. 准备工作（两台主机均需执行）在开始之前，确保两台机器可以互相通信，并且防火墙允许必要的流量。  更新系统： 1sudo apt update &amp;&amp; sudo apt upgrade -y  停止并禁用防火墙（可选，但建议初学者操作以避免连接问">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-26T14:15:36.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.760Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="K3s">
+<meta property="article:tag" content="Debian">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Debian12上使用K3s部署Kubernetes集群 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Debian12上使用K3s部署Kubernetes集群"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-26 22:15" pubdate>
+          2025年12月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Debian12上使用K3s部署Kubernetes集群</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>这里使用两个主机 2h2g 40GB存储</p>
+<p>Master （192.168.10.101），Node0 （192.168.10.103）</p>
+<h2 id="1-准备工作（两台主机均需执行）"><a href="#1-准备工作（两台主机均需执行）" class="headerlink" title="1. 准备工作（两台主机均需执行）"></a>1. 准备工作（两台主机均需执行）</h2><p>在开始之前，确保两台机器可以互相通信，并且防火墙允许必要的流量。</p>
+<ul>
+<li><p><strong>更新系统：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt update &amp;&amp; <span class="hljs-built_in">sudo</span> apt upgrade -y<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>停止并禁用防火墙（可选，但建议初学者操作以避免连接问题）：</strong> Debian 默认可能没有启用 <code>ufw</code>，但如果有，请确保开放端口 <code>6443</code>（API Server）和 <code>10250</code>（Kubelet Metrics）。</p>
+</li>
+<li><p><strong>确认主机名：</strong> 建议分别设置主机名为 <code>master</code> 和 <code>node0</code> 方便识别。</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">master</span>  <span class="hljs-comment"># 在101上执行</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">node0</span>   <span class="hljs-comment"># 在103上执行</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="2-部署-Master-节点-192-168-10-101"><a href="#2-部署-Master-节点-192-168-10-101" class="headerlink" title="2. 部署 Master 节点 (192.168.10.101)"></a>2. 部署 Master 节点 (192.168.10.101)</h2><p>在 Master 节点上，我们将运行安装脚本并将其配置为集群的主控节点。</p>
+<ol>
+<li><p><strong>执行安装命令：</strong></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vim">curl -sfL https://<span class="hljs-built_in">get</span>.k3s.io | <span class="hljs-keyword">sh</span> -<br><br># 中国用户，可以使用以下方法加速安装：<br><br>curl -sfL https://rancher-mirror.rancher.<span class="hljs-keyword">cn</span>/k3s/k3s-install.<span class="hljs-keyword">sh</span> | INSTALL_K3S_MIRROR=<span class="hljs-keyword">cn</span> <span class="hljs-keyword">sh</span> -<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>获取 Node Token：</strong> 安装完成后，你需要获取一个“令牌”，用于将 Node0 加入集群。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cat</span> /var/lib/rancher/k3s/server/node-token<br></code></pre></td></tr></table></figure>
+
+<p><strong>复制保存这个字符串</strong>，稍后在 Node0 上会用到。</p>
+</li>
+<li><p><strong>检查状态：</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo kubectl <span class="hljs-built_in">get</span> nodes<br></code></pre></td></tr></table></figure>
+
+<p>此时你应该能看到 <code>master</code> 节点处于 <code>Ready</code> 状态。</p>
+</li>
+</ol>
+<hr>
+<h2 id="3-部署-Node-节点-192-168-10-103"><a href="#3-部署-Node-节点-192-168-10-103" class="headerlink" title="3. 部署 Node 节点 (192.168.10.103)"></a>3. 部署 Node 节点 (192.168.10.103)</h2><p>现在切换到 Node0 主机，将其作为工作节点连接到 Master。</p>
+<ol>
+<li><p><strong>执行安装命令：</strong> 请将下方命令中的 <code>&lt;MASTER_TOKEN&gt;</code> 替换为你刚才在 Master 上获取的字符串。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">curl -sfL <span class="hljs-keyword">https</span>://<span class="hljs-built_in">get</span>.k3s.io | K3S_URL=<span class="hljs-keyword">https</span>://<span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.101</span>:<span class="hljs-number">6443</span> \<br>K3S_TOKEN=&lt;MASTER_TOKEN&gt; sh -<br></code></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="4-验证集群状态"><a href="#4-验证集群状态" class="headerlink" title="4. 验证集群状态"></a>4. 验证集群状态</h2><p>回到 <strong>Master 节点</strong>，运行以下命令验证 Node0 是否已成功加入：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo kubectl <span class="hljs-built_in">get</span> nodes<br></code></pre></td></tr></table></figure>
+
+<p><strong>预期输出：</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">sudo kubectl get nodes<br>NAME     STATUS   ROLES                  AGE   <span class="hljs-keyword">VERSION</span><br><span class="hljs-keyword">master</span>   <span class="hljs-title">Ready</span>    control-plane,<span class="hljs-keyword">master</span>   <span class="hljs-title">32m</span>   v1.<span class="hljs-number">33.6</span>+k3s1<br>node0    Ready    <span class="hljs-tag">&lt;none&gt;</span>                 <span class="hljs-number">30m</span>   v1.<span class="hljs-number">33.6</span>+k3s1<br></code></pre></td></tr></table></figure>
+
+<h3 id="配置国内镜像"><a href="#配置国内镜像" class="headerlink" title="配置国内镜像"></a>配置国内镜像</h3><p><strong>Master节点</strong></p>
+<p>创建或编辑配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> nano /etc/rancher/k3s/registries.yaml<br></code></pre></td></tr></table></figure>
+
+<p>填入</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">mirrors</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">docker.io</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">endpoint</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;https://docker.1ms.run&quot;</span><br>  <span class="hljs-attribute">registry.k8s.io</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">endpoint</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;https://k8s.m.daocloud.io&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>重启K3s</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl restart k3s<br></code></pre></td></tr></table></figure>
+
+<p><strong>Node节点</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /etc/rancher/k3s<br><span class="hljs-built_in">sudo</span> nano /etc/rancher/k3s/registries.yaml<br></code></pre></td></tr></table></figure>
+
+<p>配置完成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl restart k3s-agent<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="如何卸载K3s"><a href="#如何卸载K3s" class="headerlink" title="如何卸载K3s"></a>如何卸载K3s</h3><p>如果需要重新开始：</p>
+<ul>
+<li><strong>Master:</strong> <code>sudo /usr/local/bin/k3s-uninstall.sh</code></li>
+<li><strong>Node:</strong> <code>sudo /usr/local/bin/k3s-agent-uninstall.sh</code></li>
+</ul>
+<h3 id="部署-Nginx-验证集群"><a href="#部署-Nginx-验证集群" class="headerlink" title="部署 Nginx 验证集群"></a>部署 Nginx 验证集群</h3><p>我们创建一个简单的 Nginx 服务，并使用 K3s 自带的 <code>ServiceLB</code> 让它在 80 端口跑起来。</p>
+<ol>
+<li><p><strong>在 Master 节点上创建配置文件：</strong></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">nano nginx-<span class="hljs-keyword">test</span>.yaml<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>粘贴以下内容：</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">Deployment</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">nginx-deployment</span><br><span class="hljs-attr">spec:</span><br>  <span class="hljs-attr">selector:</span><br>    <span class="hljs-attr">matchLabels:</span><br>      <span class="hljs-attr">app:</span> <span class="hljs-string">nginx</span><br>  <span class="hljs-attr">replicas:</span> <span class="hljs-number">2</span> <span class="hljs-comment"># 会在两个节点上各跑一个</span><br>  <span class="hljs-attr">template:</span><br>    <span class="hljs-attr">metadata:</span><br>      <span class="hljs-attr">labels:</span><br>        <span class="hljs-attr">app:</span> <span class="hljs-string">nginx</span><br>    <span class="hljs-attr">spec:</span><br>      <span class="hljs-attr">containers:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">nginx</span><br>        <span class="hljs-attr">image:</span> <span class="hljs-string">nginx:latest</span><br>        <span class="hljs-attr">ports:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-attr">containerPort:</span> <span class="hljs-number">80</span><br><span class="hljs-meta">---</span><br><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">Service</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">nginx-service</span><br><span class="hljs-attr">spec:</span><br>  <span class="hljs-attr">selector:</span><br>    <span class="hljs-attr">app:</span> <span class="hljs-string">nginx</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">LoadBalancer</span><br>  <span class="hljs-attr">ports:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">protocol:</span> <span class="hljs-string">TCP</span><br>      <span class="hljs-attr">port:</span> <span class="hljs-number">80</span><br>      <span class="hljs-attr">targetPort:</span> <span class="hljs-number">80</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>应用配置：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> kubectl apply -f nginx-test.yaml<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>验证：</strong> 等待几分钟后，访问 <code>http://192.168.10.101</code> 或 <code>192.168.10.103</code>，你应该能看到 Nginx 的欢迎页面。</p>
+</li>
+</ol>
+<h2 id="5-安装管理面板-Portainer"><a href="#5-安装管理面板-Portainer" class="headerlink" title="5.安装管理面板 (Portainer)"></a>5.安装管理面板 (Portainer)</h2><p>对于 K3s 这种轻量级集群，<strong>Portainer</strong> 是最推荐的面板。它比官方 Dashboard 更美观，比 Rancher 更省资源。</p>
+<ol>
+<li><p><strong>创建 Portainer 命名空间：</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">sudo kubectl create <span class="hljs-keyword">namespace</span> <span class="hljs-symbol">portainer</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用 Helm 或直接使用 Manifest 安装：</strong> 这里我们使用最简单的官方远程脚本安装：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo kubectl apply -n portainer -f https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/portainer/</span>k8s<span class="hljs-regexp">/master/</span>deploy<span class="hljs-regexp">/manifests/</span>portainer/portainer-lb.yaml<br></code></pre></td></tr></table></figure>
+
+<p><strong>验证与访问</strong></p>
+<ol>
+<li><p><strong>检查 Pod 运行状态：</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">kubectl <span class="hljs-built_in">get</span> pods -n portainer<br></code></pre></td></tr></table></figure>
+
+<p>等待状态变为 <code>Running</code>。</p>
+</li>
+<li><p><strong>获取访问端口：</strong> Portainer 默认映射了两个端口：</p>
+<ul>
+<li><strong>HTTP:</strong> <code>30777</code></li>
+<li><strong>HTTPS:</strong> <code>30779</code> (推荐使用)</li>
+</ul>
+</li>
+<li><p><strong>浏览器访问：</strong> 打开浏览器，输入 Master 或 Node 的 IP 地址：</p>
+<ul>
+<li><code>https://192.168.10.101:30779</code></li>
+<li><code>https://192.168.10.103:30779</code></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>注意：</strong> 初次登录需要你在 12 分钟内设置管理员密码，否则出于安全考虑，Portainer 服务会自动停止，届时需要重启 Pod。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="6-拓展"><a href="#6-拓展" class="headerlink" title="6.拓展"></a>6.拓展</h2><h2 id="kubernetes-常用命令"><a href="#kubernetes-常用命令" class="headerlink" title="kubernetes 常用命令"></a>kubernetes 常用命令</h2><h3 id="1-基础信息查询-Get-Describe"><a href="#1-基础信息查询-Get-Describe" class="headerlink" title="1. 基础信息查询 (Get &amp; Describe)"></a>1. 基础信息查询 (Get &amp; Describe)</h3><p>这些命令用于查看集群资源的运行状态。</p>
+<ul>
+<li><strong>查看资源列表：</strong><ul>
+<li><code>kubectl get nodes</code> (查看节点状态)</li>
+<li><code>kubectl get pods -A</code> (查看所有命名空间的 Pod)</li>
+<li><code>kubectl get svc</code> (查看服务)</li>
+<li><code>kubectl get ns</code> (查看命名空间)</li>
+</ul>
+</li>
+<li><strong>查看详细描述：</strong><ul>
+<li><code>kubectl describe pod &lt;pod-name&gt;</code> (当 Pod 状态异常时，常用此命令查看错误事件)</li>
+</ul>
+</li>
+<li><strong>查看日志：</strong><ul>
+<li><code>kubectl logs &lt;pod-name&gt;</code> (查看容器标准输出日志)</li>
+<li><code>kubectl logs -f &lt;pod-name&gt;</code> (持续跟踪日志)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-资源创建与修改-Apply-Edit"><a href="#2-资源创建与修改-Apply-Edit" class="headerlink" title="2. 资源创建与修改 (Apply &amp; Edit)"></a>2. 资源创建与修改 (Apply &amp; Edit)</h3><p>K8s 推荐使用“声明式”管理资源。</p>
+<ul>
+<li><strong>通过文件创建&#x2F;更新：</strong><ul>
+<li><code>kubectl apply -f &lt;filename.yaml&gt;</code> (最常用的部署命令)</li>
+</ul>
+</li>
+<li><strong>直接编辑运行中的资源：</strong><ul>
+<li><code>kubectl edit deployment &lt;deployment-name&gt;</code></li>
+</ul>
+</li>
+<li><strong>临时修改镜像：</strong><ul>
+<li><code>kubectl set image deployment/&lt;name&gt; &lt;container-name&gt;=&lt;new-image&gt;:&lt;tag&gt;</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-故障排除与调试-Debug"><a href="#3-故障排除与调试-Debug" class="headerlink" title="3. 故障排除与调试 (Debug)"></a>3. 故障排除与调试 (Debug)</h3><p>当应用出现问题时，这些工具能帮你进入内部查看。</p>
+<ul>
+<li><strong>进入 Pod 内部：</strong><ul>
+<li><code>kubectl exec -it &lt;pod-name&gt; -- /bin/bash</code></li>
+</ul>
+</li>
+<li><strong>端口转发：</strong> (将本地端口映射到集群内部)<ul>
+<li><code>kubectl port-forward &lt;pod-name&gt; 8080:80</code></li>
+</ul>
+</li>
+<li><strong>查看资源占用 (需安装 Metrics Server)：</strong><ul>
+<li><code>kubectl top node</code></li>
+<li><code>kubectl top pod</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-扩缩容与滚动更新-Scale-Rollout"><a href="#4-扩缩容与滚动更新-Scale-Rollout" class="headerlink" title="4. 扩缩容与滚动更新 (Scale &amp; Rollout)"></a>4. 扩缩容与滚动更新 (Scale &amp; Rollout)</h3><p>管理应用的副本数量和发布版本。</p>
+<ul>
+<li><strong>手动扩缩容：</strong><ul>
+<li><code>kubectl scale deployment &lt;name&gt; --replicas=5</code></li>
+</ul>
+</li>
+<li><strong>查看更新状态：</strong><ul>
+<li><code>kubectl rollout status deployment/&lt;name&gt;</code></li>
+</ul>
+</li>
+<li><strong>版本回滚：</strong><ul>
+<li><code>kubectl rollout undo deployment/&lt;name&gt;</code> (回滚到上一个版本)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-常用技巧与别名"><a href="#5-常用技巧与别名" class="headerlink" title="5. 常用技巧与别名"></a>5. 常用技巧与别名</h3><p>为了提高效率，建议在你的终端配置文件（如 <code>.bashrc</code> 或 <code>.zshrc</code>）中添加别名：</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">alias</span> k=<span class="hljs-string">&#x27;kubectl&#x27;</span><br></code></pre></td></tr></table></figure></blockquote>
+<p><strong>常用缩写对照表：</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>全称</strong></th>
+<th><strong>缩写</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pods</code></td>
+<td><code>po</code></td>
+</tr>
+<tr>
+<td><code>nodes</code></td>
+<td><code>no</code></td>
+</tr>
+<tr>
+<td><code>deployments</code></td>
+<td><code>deploy</code></td>
+</tr>
+<tr>
+<td><code>services</code></td>
+<td><code>svc</code></td>
+</tr>
+<tr>
+<td><code>namespaces</code></td>
+<td><code>ns</code></td>
+</tr>
+<tr>
+<td><code>configmaps</code></td>
+<td><code>cm</code></td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>💡 一个典型的排错流程示例：</strong></p>
+<ol>
+<li><code>kubectl get pods</code> (查看状态是否为 Running)</li>
+<li>如果是 Pending&#x2F;Error，执行 <code>kubectl describe pod &lt;name&gt;</code> (查看 Events 报错)</li>
+<li>如果是 CrashLoopBackOff，执行 <code>kubectl logs &lt;name&gt;</code> (查看程序崩溃原因)</li>
+</ol>
+<h2 id="7-Helm"><a href="#7-Helm" class="headerlink" title="7.Helm"></a>7.Helm</h2><h3 id="1-Helm-是什么？"><a href="#1-Helm-是什么？" class="headerlink" title="1. Helm 是什么？"></a>1. Helm 是什么？</h3><p>在没有 Helm 之前，部署一个复杂的应用（如 WordPress）需要手动编写和维护大量的 YAML 文件（Deployment, Service, Ingress, ConfigMap 等）。</p>
+<p><strong>Helm 的核心价值：</strong></p>
+<ul>
+<li><strong>打包管理：</strong> 将多个 YAML 文件封装成一个名为 <strong>Chart</strong> 的包。</li>
+<li><strong>模板化：</strong> 支持变量（Values），同一个 Chart 可以通过不同的配置部署到开发、测试和生产环境。</li>
+<li><strong>版本控制：</strong> 像 Git 一样，你可以一键升级应用，或者在出问题时一键回滚（Rollback）。</li>
+</ul>
+<hr>
+<h3 id="2-如何安装-Helm"><a href="#2-如何安装-Helm" class="headerlink" title="2. 如何安装 Helm"></a>2. 如何安装 Helm</h3><p>Helm 只是一个二进制客户端工具，安装非常简单。</p>
+<p>通过脚本快速安装：</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-string">curl</span> -<span class="hljs-string">fsSL</span> -<span class="hljs-string">o</span> <span class="hljs-string">get_helm</span>.<span class="hljs-string">sh</span> <span class="hljs-string">https</span>://<span class="hljs-string">raw</span>.<span class="hljs-string">githubusercontent</span>.<span class="hljs-string">com</span>/<span class="hljs-string">helm</span>/<span class="hljs-string">helm</span>/<span class="hljs-string">main</span>/<span class="hljs-string">scripts</span>/<span class="hljs-built_in">get-helm-3</span><br><span class="hljs-string">chmod</span> <span class="hljs-string">700</span> <span class="hljs-string">get_helm</span>.<span class="hljs-string">sh</span><br>./<span class="hljs-string">get_helm</span>.<span class="hljs-string">sh</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意：</strong> 安装完成后，运行 <code>helm version</code> 确认是否安装成功。</p>
+</blockquote>
+<hr>
+<h3 id="3-Helm-怎么用？-常用命令"><a href="#3-Helm-怎么用？-常用命令" class="headerlink" title="3. Helm 怎么用？ (常用命令)"></a>3. Helm 怎么用？ (常用命令)</h3><p>使用 Helm 通常遵循：<strong>添加仓库 -&gt; 搜索 -&gt; 安装 -&gt; 管理</strong> 的流程。</p>
+<h4 id="第一步：添加常用的-Chart-仓库"><a href="#第一步：添加常用的-Chart-仓库" class="headerlink" title="第一步：添加常用的 Chart 仓库"></a><strong>第一步：添加常用的 Chart 仓库</strong></h4><p>就像给手机加源一样，最常用的是 Bitnami 仓库。</p>
+<p>Bash</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim">helm repo <span class="hljs-built_in">add</span> bitnami https://charts.bitnami.<span class="hljs-keyword">com</span>/bitnami<br>helm repo <span class="hljs-keyword">update</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="第二步：查找并安装应用"><a href="#第二步：查找并安装应用" class="headerlink" title="第二步：查找并安装应用"></a><strong>第二步：查找并安装应用</strong></h4><p>假设我们要安装一个 Redis：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-comment"># 搜索 Redis</span><br>helm search repo redis<br><br><span class="hljs-comment"># 安装 Redis (名称定为 my-redis)</span><br>helm install <span class="hljs-keyword">my</span>-redis bitnami/redis<br></code></pre></td></tr></table></figure>
+
+<h4 id="第三步：管理已安装的应用"><a href="#第三步：管理已安装的应用" class="headerlink" title="第三步：管理已安装的应用"></a><strong>第三步：管理已安装的应用</strong></h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-comment"># 查看已安装的应用列表</span><br>helm <span class="hljs-built_in">list</span><br><br><span class="hljs-comment"># 查看应用的配置参数</span><br>helm <span class="hljs-keyword">get</span> values <span class="hljs-keyword">my</span>-redis<br><br><span class="hljs-comment"># 升级应用 (比如修改了配置文件后)</span><br>helm upgrade <span class="hljs-keyword">my</span>-redis bitnami/redis -f values.yaml<br><br><span class="hljs-comment"># 一键回滚到上一个版本</span><br>helm rollback <span class="hljs-keyword">my</span>-redis <span class="hljs-number">1</span><br><br><span class="hljs-comment"># 卸载应用</span><br>helm uninstall <span class="hljs-keyword">my</span>-redis<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>Q&amp;A</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">出现了下面问题<br>root@master:~# helm install kps prometheus-community/kube-prometheus-stack \<br>  -n monitoring <br>Error: INSTALLATION FAILED: Kubernetes cluster unreachable: <span class="hljs-built_in">stat</span> /root/.kube/config: no such file or directory<br>解决办法<br><span class="hljs-built_in">mkdir</span> -p ~/.kube<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /etc/rancher/k3s/k3s.yaml ~/.kube/config<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> <span class="hljs-variable">$USER</span>:<span class="hljs-variable">$USER</span> ~/.kube/config<br><span class="hljs-built_in">chmod</span> 600 ~/.kube/config<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="8-安装-kube-prometheus-stack-监控栈"><a href="#8-安装-kube-prometheus-stack-监控栈" class="headerlink" title="8.安装 kube-prometheus-stack 监控栈"></a>8.安装 kube-prometheus-stack 监控栈</h2><h4 id="1-添加-Helm-仓库"><a href="#1-添加-Helm-仓库" class="headerlink" title="1.添加 Helm 仓库"></a>1.添加 Helm 仓库</h4><p>首先，需要将 Prometheus 社区的 Helm 仓库添加到你的本地 Helm 客户端中。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">helm</span> repo <span class="hljs-keyword">add</span> prometheus-community https:<span class="hljs-comment">//prometheus-community.github.io/helm-charts</span><br><span class="hljs-symbol">helm</span> repo update<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-创建命名空间"><a href="#2-创建命名空间" class="headerlink" title="2.创建命名空间"></a>2.创建命名空间</h4><p>为了保持集群整洁，建议为监控组件创建一个独立的 <code>monitoring</code> 命名空间。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">kubectl create <span class="hljs-keyword">namespace</span> <span class="hljs-symbol">monitoring</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="3-安装-Helm-Chart"><a href="#3-安装-Helm-Chart" class="headerlink" title="3.安装 Helm Chart"></a>3.安装 Helm Chart</h4><p>使用 Helm 安装监控栈。这里我们将该发布（Release）命名为 <code>kps</code>。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">helm install kps prometheus-community/kube-prometheus-stack -n monitoring<br></code></pre></td></tr></table></figure>
+
+<h4 id="4-验证-Pod-运行状态"><a href="#4-验证-Pod-运行状态" class="headerlink" title="4.验证 Pod 运行状态"></a>4.验证 Pod 运行状态</h4><p>确认所有组件（Prometheus, Grafana, Alertmanager 等）是否已成功启动。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">kubectl <span class="hljs-built_in">get</span> pods -n monitoring<br></code></pre></td></tr></table></figure>
+
+<p><strong>预期输出：</strong> 你会看到类似下方的列表，确保所有 Pod 的状态均为 <code>Running</code> 且 <code>READY</code> 列显示正常（如 2&#x2F;2 或 3&#x2F;3）。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">NAME</span>                                                    READY   STATUS    RESTARTS      AGE<br><span class="hljs-attribute">alertmanager</span>-kps-kube-prometheus-stack-alertmanager-<span class="hljs-number">0</span>   <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running   <span class="hljs-number">2</span> (<span class="hljs-number">12</span>m ago)   <span class="hljs-number">30</span>m<br><span class="hljs-attribute">kps</span>-grafana-<span class="hljs-number">7</span>c695669f4-mwsbg                            <span class="hljs-number">3</span>/<span class="hljs-number">3</span>     Running   <span class="hljs-number">0</span>             <span class="hljs-number">30</span>m<br><span class="hljs-attribute">kps</span>-kube-prometheus-stack-operator-<span class="hljs-number">7964756</span>cb-mmfbr      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">1</span> (<span class="hljs-number">12</span>m ago)   <span class="hljs-number">30</span>m<br><span class="hljs-attribute">kps</span>-kube-state-metrics-<span class="hljs-number">96</span>dc6f854-vmwnn                  <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>             <span class="hljs-number">30</span>m<br><span class="hljs-attribute">kps</span>-prometheus-node-exporter-tzqg4                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">1</span> (<span class="hljs-number">12</span>m ago)   <span class="hljs-number">30</span>m<br><span class="hljs-attribute">kps</span>-prometheus-node-exporter-ztvnh                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>             <span class="hljs-number">30</span>m<br><span class="hljs-attribute">prometheus</span>-kps-kube-prometheus-stack-prometheus-<span class="hljs-number">0</span>       <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running   <span class="hljs-number">0</span>             <span class="hljs-number">30</span>m<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="5-访问-Grafana-面板"><a href="#5-访问-Grafana-面板" class="headerlink" title="5.访问 Grafana 面板"></a>5.访问 Grafana 面板</h4><p><strong>1. 获取 Grafana 管理员密码</strong> 默认用户名是 <code>admin</code>。运行以下命令获取自动生成的解码密码（提示：默认通常是 <code>prom-operator</code>）：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">kubectl <span class="hljs-built_in">get</span><span class="hljs-built_in"> secret </span>--namespace monitoring -l app.kubernetes.io/<span class="hljs-attribute">component</span>=admin-secret -o <span class="hljs-attribute">jsonpath</span>=<span class="hljs-string">&quot;&#123;.items[0].data.admin-password&#125;&quot;</span> | base64 --decode ; echo<br></code></pre></td></tr></table></figure>
+
+<p><strong>2. 端口转发（Port-forward）</strong> 为了从外部访问集群内部的服务，我们需要映射端口。<strong>（临时访问）</strong></p>
+<blockquote>
+<p><strong>注意：</strong> <code>--address 0.0.0.0</code> 允许你通过服务器的 IP 访问，而不仅仅是 localhost。</p>
+</blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">kubectl</span> port-forward --address <span class="hljs-number">0.0.0.0</span> -n monitoring svc/kps-grafana <span class="hljs-number">3000</span>:<span class="hljs-number">80</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>3. 浏览器登录</strong> 访问你的服务器 IP 和端口（例如：<code>http://192.168.122.42:3000</code>）：</p>
+<ul>
+<li><strong>用户名 (Username):</strong> <code>admin</code></li>
+<li><strong>密码 (Password):</strong> 使用上方命令获取到的字符串。</li>
+</ul>
+<h4 id="6-持久化运行"><a href="#6-持久化运行" class="headerlink" title="6.持久化运行"></a>6.持久化运行</h4><p>将 Grafana 服务的类型从 <code>ClusterIP</code> 改为 <code>NodePort</code>，这样你可以通过<strong>集群中任何节点的 IP + 指定端口</strong>直接访问，无需运行任何命令。</p>
+<ol>
+<li><p><strong>修改服务：</strong></p>
+<figure class="highlight scilab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scilab">kubectl patch svc kps-grafana -n monitoring -p <span class="hljs-string">&#x27;&#123;&quot;</span>spec<span class="hljs-string">&quot;: &#123;&quot;</span><span class="hljs-built_in">type</span><span class="hljs-string">&quot;: &quot;</span>NodePort<span class="hljs-string">&quot;&#125;&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>获取暴露的端口：</strong></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">kubectl</span> <span class="hljs-meta">get</span> <span class="hljs-keyword">svc</span> -n monitoring kps-grafana<br></code></pre></td></tr></table></figure>
+
+<p>在输出的 <code>PORT(S)</code> 列中，你会看到类似 <code>80:31234/TCP</code> 的内容。此时，你可以通过 <code>http://&lt;服务器IP&gt;:31234</code> 永久访问。</p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Kubernetes/" class="print-no-link">#Kubernetes</a>
+      
+        <a href="/tags/K3s/" class="print-no-link">#K3s</a>
+      
+        <a href="/tags/Debian/" class="print-no-link">#Debian</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Debian12上使用K3s部署Kubernetes集群</div>
+      <div>https://blog.quickso.cn/2025/12/26/Debian12上使用K3s部署Kubernetes集群/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/12/27/RustFS%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8Docker%E9%83%A8%E7%BD%B2/" title="RustFS对象存储Docker部署">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RustFS对象存储Docker部署</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/08/10/K3s%E9%9B%86%E7%BE%A4%E4%BB%A5%E5%8F%8AKubePi%E5%AE%89%E8%A3%85%E3%80%81%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="K3s集群以及KubePi安装、配置与使用">
+                        <span class="hidden-mobile">K3s集群以及KubePi安装、配置与使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

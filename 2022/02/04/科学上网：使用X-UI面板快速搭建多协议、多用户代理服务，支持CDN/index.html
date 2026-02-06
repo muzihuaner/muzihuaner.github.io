@@ -1,0 +1,941 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="使用代理服务进行科学上网，重要的是代理服务端的搭建。在我们搭建过程中，往往需要依照自身情况选择适合自己的搭建方式。如采用官方推荐的脚本进行安装，但官方推荐的脚本一般都对新手不够友好，常常需要自行拓展方可安装成功。也有各路大神实现的多合一一键安装脚本，这些脚本在一定程度上降低了新手搭建服务端的难度。此外还有一类搭建方法，那就是通过面板来搭建。 使用面板来搭建，好处在于：由于拥有UI界面，信息展示相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN">
+<meta property="og:url" content="https://blog.quickso.cn/2022/02/04/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%EF%BC%9A%E4%BD%BF%E7%94%A8X-UI%E9%9D%A2%E6%9D%BF%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%A4%9A%E5%8D%8F%E8%AE%AE%E3%80%81%E5%A4%9A%E7%94%A8%E6%88%B7%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%EF%BC%8C%E6%94%AF%E6%8C%81CDN/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="使用代理服务进行科学上网，重要的是代理服务端的搭建。在我们搭建过程中，往往需要依照自身情况选择适合自己的搭建方式。如采用官方推荐的脚本进行安装，但官方推荐的脚本一般都对新手不够友好，常常需要自行拓展方可安装成功。也有各路大神实现的多合一一键安装脚本，这些脚本在一定程度上降低了新手搭建服务端的难度。此外还有一类搭建方法，那就是通过面板来搭建。 使用面板来搭建，好处在于：由于拥有UI界面，信息展示相">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://coderfan.net/wp-content/uploads/2021/07/XUI%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/%25E5%25AE%2589%25E8%25A3%2585%25E7%25BB%2593%25E6%259E%259C-1024x505.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/A%E8%AE%B0%E5%BD%95-1024x462.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/XUI%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2-1024x441.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2-1024x311.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E5%85%A5%E7%AB%99%E8%8A%82%E7%82%B9-1024x317.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-1-1024x517.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-2.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-3-1024x221.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/AP%E4%BB%A4%E7%89%8C-1024x574.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E6%9F%A5%E7%9C%8BAPI-1024x499.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85-1-1024x239.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E5%BC%80%E5%90%AFtls.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E9%9D%A2%E6%9D%BF%E7%AB%AF%E5%8F%A3-1024x399.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-4.png">
+<meta property="article:published_time" content="2022-02-04T11:45:27.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.785Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="科学上网">
+<meta property="article:tag" content="X-ui">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://coderfan.net/wp-content/uploads/2021/07/XUI%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2.png">
+  
+  
+  
+  <title>科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-02-04 19:45" pubdate>
+          2022年2月4日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img src="https://coderfan.net/wp-content/uploads/2021/07/XUI%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>使用代理服务进行科学上网，重要的是代理服务端的搭建。在我们搭建过程中，往往需要依照自身情况选择适合自己的搭建方式。如采用官方推荐的脚本进行安装，但官方推荐的脚本一般都对新手不够友好，常常需要自行拓展方可安装成功。也有各路大神实现的多合一一键安装脚本，这些脚本在一定程度上降低了新手搭建服务端的难度。此外还有一类搭建方法，那就是通过面板来搭建。</p>
+<p>使用面板来搭建，好处在于：<strong>由于拥有UI界面，信息展示相当直观，更便于我们新手操作（无需命令行）</strong>。那么今天我们就来介绍一下使用X-UI来搭建我们的代理服务。</p>
+<p>使用X-UI搭建代理服务，具有以下优点：</p>
+<ul>
+<li><strong>支持系统状态监控：如CPU、内存、硬盘等状态</strong></li>
+<li><strong>支持多用户多协议，网页可视化操作</strong></li>
+<li><strong>支持流量统计</strong></li>
+<li><strong>支持自定义Xray配置模板</strong></li>
+<li><strong>支持HTTPS访问面板</strong></li>
+<li><strong>支持面板自定义端口，账号与密码</strong></li>
+<li><strong>快速生成分享连接或二维码</strong></li>
+<li><strong>支持CDN套用</strong></li>
+<li><strong>支持Fallback分流设置</strong></li>
+</ul>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><ul>
+<li>VPS</li>
+<li>域名</li>
+<li>Cloudfare账号</li>
+<li>ZeroSSL账号</li>
+<li>Github</li>
+</ul>
+<p>这里需要注意的是，我们注册好的域名必须要先在Cloudfare内增加A记录，方便我们申请SSL证书。</p>
+<p>如果不知道如何添加A记录，请各位自行Google。</p>
+<h3 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h3><ul>
+<li><strong>使用Github进入X-UI官方仓库：<a target="_blank" rel="noopener" href="https://github.com/sprov065/x-ui">https://github.com/sprov065/x-ui</a></strong></li>
+</ul>
+<p>复制官方推荐的脚本：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">bash</span> &lt;(curl -Ls https://raw.githubusercontent.com/sprov065/x-ui/master/install.sh) <span class="hljs-number">0</span>.<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>将上述代码复制到你的VPS内执行，<strong>如果提示未安装curl工具，请先安装curl工具</strong></li>
+</ul>
+<p>执行完成后，我们应该能看到以下输出内容</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/%25E5%25AE%2589%25E8%25A3%2585%25E7%25BB%2593%25E6%259E%259C-1024x505.png" srcset="/img/loading.gif" lazyload>安装完成示意图</p>
+<p>面板安装完成后我们在&#x2F;usr&#x2F;local&#x2F;x-ui内可以找到关于面板的配置内容。</p>
+<ul>
+<li><strong>进入Cloudfare官方网站，新增A记录（子域名），指向VPS的IP地址</strong></li>
+</ul>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/A%E8%AE%B0%E5%BD%95-1024x462.png" srcset="/img/loading.gif" lazyload alt="img">添加A记录</p>
+<p>请注意，添加后先不要开启代理，仅限DNS解析。怎样判断是否开启CDN代理呢？很简单，代理状态下方有一片云朵，橙色云朵代表开启CDN，灰色云朵代表仅限DNS解析。</p>
+<p>添加完成后，我们打开新的网页，在网址输入栏内输入你的<strong>域名:54321</strong>（面板初始端口），回车后即可进入到我们的登录界面。</p>
+<p>登录界面是这个样子的：</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/XUI%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2-1024x441.png" srcset="/img/loading.gif" lazyload alt="img">X-UI登录界面</p>
+<p>我们使用默认的用户名与密码登录，即可进入X-UI的设置界面：</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2-1024x311.png" srcset="/img/loading.gif" lazyload alt="img">设置界面</p>
+<p>建议登录之后在立即在<strong>面板设置</strong>内重置面板端口与用户名、登录密码，然后重启面板。</p>
+<ul>
+<li><strong>新建节点</strong></li>
+</ul>
+<p>点击**“入站列表”**，新增入站节点：</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E5%85%A5%E7%AB%99%E8%8A%82%E7%82%B9-1024x317.png" srcset="/img/loading.gif" lazyload alt="img">增加入站节点</p>
+<p>进行节点设置：</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-1-1024x517.png" srcset="/img/loading.gif" lazyload alt="img">节点设置</p>
+<p>如果没有套CDN或其他需求，可以不做其他设置，点击“<strong>添加</strong>”完成添加节点。</p>
+<ul>
+<li><strong>获取链接或者二维码</strong></li>
+</ul>
+<p>添加节点后，我们点击<strong>查看</strong>，点击右下方复制连接获取连接。在V2rayN客户端内添加即可。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-2.png" srcset="/img/loading.gif" lazyload alt="img">获取链接</p>
+<p>获取二维码，点击二维码图标即可</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-3-1024x221.png" srcset="/img/loading.gif" lazyload alt="img">获取二维码</p>
+<p>至此，使用X-UI搭建的流程就完成了。</p>
+<p>**需要说明的是，以上步骤搭建完成后并不支持CDN套用。**如果想支持CDN套用，则继续参考以下步骤</p>
+<h3 id="CDN套用"><a href="#CDN套用" class="headerlink" title="CDN套用"></a>CDN套用</h3><p>如果需要支持CDN套用，还需要申请一套SSL证书。这一套证书实际上是用于你的子域名的认证的，请不要与主域名的证书混淆！</p>
+<p>在这里我们使用ACME来申请证书。需要说明的是，ACME申请的证书CA方默认为ZeroSSL，需要先去ZeroSSL官网进行注册才能使用。</p>
+<p><strong>2021.11.06更新：</strong></p>
+<p>经实际验证，无需事先在ZeroSSL官网进行注册，使用acme脚本初次申请ZeroSSL证书时会要求个人输入account与password，也可以完成注册。</p>
+<ul>
+<li><strong>安装ACME工具：</strong></li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">curl https://<span class="hljs-built_in">get</span>.acme.<span class="hljs-keyword">sh</span> | <span class="hljs-keyword">sh</span>	<br></code></pre></td></tr></table></figure>
+
+<p>安装后，会在root目录下生成.acme.sh这样的文件夹，使用ls -la命令可以查看。</p>
+<ul>
+<li><strong>设置Cloudfare API：</strong></li>
+</ul>
+<p>登录Cloudfare官网，在左下角的API区域，点击**“获取您的API令牌”**</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/AP%E4%BB%A4%E7%89%8C-1024x574.png" srcset="/img/loading.gif" lazyload alt="img">API令牌</p>
+<p>点击之后进入二级页面，点击API令牌，找到API密钥下方的Global API Key，进行查看</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E6%9F%A5%E7%9C%8BAPI-1024x499.png" srcset="/img/loading.gif" lazyload alt="img">查看API令牌</p>
+<p>请将这份API Key复制到你本地。输入以下命令导入环境变量（复制粘贴时请自行去除掉&#x2F;&#x2F;及之后的内容，在本教程中仅为了注释，实际使用时不需要&#x2F;&#x2F;及之后的内容）：</p>
+<p>export CF_Key&#x3D;”***********************” &#x2F;&#x2F;Global API key</p>
+<p>export CF_Email&#x3D;<a href="mailto:&#53;&#51;&#x30;&#53;&#x34;&#x37;&#x31;&#x38;&#51;&#x40;&#x71;&#113;&#x2e;&#x63;&#111;&#x6d;">***************.com</a> &#x2F;&#x2F;Cloudfare 注册邮箱</p>
+<ul>
+<li><strong>申请、安装证书：</strong></li>
+</ul>
+<p>使用以下命令</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">~/<span class="hljs-selector-class">.acme</span>.sh/acme<span class="hljs-selector-class">.sh</span> <span class="hljs-attr">--issue</span> <span class="hljs-attr">--dns</span> dns_cf -d YourDomain -d *<span class="hljs-selector-class">.YourDomain</span><br>mkdir /root/cert<br>~/<span class="hljs-selector-class">.acme</span>.sh/acme<span class="hljs-selector-class">.sh</span> <span class="hljs-attr">--installcert</span> -d YourDomian <span class="hljs-attr">--key-file</span> /root/cert/private<span class="hljs-selector-class">.key</span> <span class="hljs-attr">--fullchain-file</span> /root/cert/cert<span class="hljs-selector-class">.crt</span><br>~/<span class="hljs-selector-class">.acme</span>.sh/acme<span class="hljs-selector-class">.sh</span> <span class="hljs-attr">--upgrade</span> <span class="hljs-attr">--auto-upgrade</span><br>chmod -R <span class="hljs-number">755</span> /root/cert<br></code></pre></td></tr></table></figure>
+
+<p>安装成功如下图提示：</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85-1-1024x239.png" srcset="/img/loading.gif" lazyload alt="img">证书安装</p>
+<p>安装好证书后，我们就可以设置开启TLS套用CDN了。</p>
+<p><strong>2021.09.01更新：</strong></p>
+<p>由于acme脚本变更了默认CA方为ZeroSSL，而ZeroSSL存在证书数量的限制（除非加钱），建议大家切换为Let‘sEncrypt的证书。切换方式：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">~/.acme.<span class="hljs-keyword">sh</span>/acme.<span class="hljs-keyword">sh</span> --<span class="hljs-keyword">set</span>-default-<span class="hljs-keyword">ca</span>  --server  letsencrypt<br></code></pre></td></tr></table></figure>
+
+<p>切换为Let’s Encrypt后，安装证书的命令相应地做变更：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">~<span class="hljs-string">/.acme.sh/acme.sh</span> <span class="hljs-params">--installcert</span>  -d  YourDomain -d *<span class="hljs-string">.YourDomain</span> <span class="hljs-params">--ca-file</span> <span class="hljs-string">/root/cert/ca.cer</span> <span class="hljs-params">--cert-file</span> <span class="hljs-string">/root/cert/YourDomain.cer</span> <span class="hljs-params">--key-file</span>   <span class="hljs-string">/root/cert/YourDomain.key</span> <span class="hljs-params">--fullchain-file</span> <span class="hljs-string">/root/cert/fullchain.cer</span><br></code></pre></td></tr></table></figure>
+
+<p>注： <strong>YourDomain</strong> 代表你自己的域名。</p>
+<ul>
+<li><strong>设置TLS</strong></li>
+</ul>
+<p>进入面板界面，添加入站节点，设置如下：</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E5%BC%80%E5%90%AFtls.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>设置过程中需要注意的点：</p>
+<p><strong>1.端口需要是Cloudfare支持分发的端口，如443等</strong></p>
+<p><strong>2.套用CDN需要搭配WebSocket，请在传输设置项呢选择ws</strong></p>
+<p>3**.ws路径可随意，但最好不要为根路径**</p>
+<p><strong>4.公钥文件路径与密钥文件路径请根据你证书安装的实际位置进行填写</strong></p>
+<p><strong>5.在使用证书与密钥时，除了设置路径也可以通过填入certificate file content的内容达到使用的目的</strong></p>
+<p>添加节点后，我们回到Cloudflare，将灰色云朵置为橙色。然后我们回到VPS侧，使用ping +域名查看IP是否变更，如果不再为我们VPS的IP，则表明已经成功套用CDN。</p>
+<ul>
+<li><strong>开启证书自动更新</strong></li>
+</ul>
+<p>本身acme脚本提供了自动更新证书的功能，证书在90天到期后会自动更新，我们需要开启该功能，这样可以保证我们的证书一直不过期，自动更新证书需要使用如下命令：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">~/<span class="hljs-selector-class">.acme</span>.sh/acme<span class="hljs-selector-class">.sh</span> <span class="hljs-attr">--upgrade</span> <span class="hljs-attr">--auto-upgrade</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="面板套用CDN"><a href="#面板套用CDN" class="headerlink" title="面板套用CDN"></a>面板套用CDN</h3><p>除了我们搭建的节点可以套用CDN，我们的X-UI面板也支持套用CDN。如果需要X-UI面板也套用CDN，我们需要在面板内修改面板监听的端口为Cloudflare支持的端口，同时设置SSL证书密钥路径。<strong>在这里需要注</strong>意，<strong>面板的监听端口一定不要与你的节点共用同一端口。</strong></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E9%9D%A2%E6%9D%BF%E7%AB%AF%E5%8F%A3-1024x399.png" srcset="/img/loading.gif" lazyload alt="img">更改面板设置</p>
+<p>设置完以后记得重启面板，重新输入：<strong>https:&#x2F;&#x2F;域名+端口</strong>,正常进入面板界面。同时我们会发现我们的网页已经是安装加密的。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-4.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>至此，面板也支持套用CDN了。</p>
+<p>以上就是X-UI使用的整个教程，大家可以依照教程自行进行测试使用，如有问题可以在评论区与我沟通。本人在搭建完成后进行了一天的使用，总体使用下来还是非常方便快捷的，很适合新手使用。在这里也要感谢X-UI的开发者们，是他们无私的付出才给我们带来了如此好用的工具，Respect！</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" class="print-no-link">#科学上网</a>
+      
+        <a href="/tags/X-ui/" class="print-no-link">#X-ui</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN</div>
+      <div>https://blog.quickso.cn/2022/02/04/科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年2月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/12/FileBrowser%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/" title="FileBrowser安装及使用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">FileBrowser安装及使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/30/Searx%EF%BC%9A%E6%90%AD%E5%BB%BA%E7%A7%81%E4%BA%BA%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%B9%B3%E5%8F%B0%EF%BC%8C%E5%8F%AF%E5%B1%95%E7%8E%B0Google-Bing%E7%AD%8970%E5%A4%9A%E7%A7%8D%E6%90%9C%E7%B4%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/" title="Searx：搭建私人的搜索引擎平台，可展现Google/Bing等70多种搜索网站的搜索结果">
+                        <span class="hidden-mobile">Searx：搭建私人的搜索引擎平台，可展现Google/Bing等70多种搜索网站的搜索结果</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,916 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="写在前面刷机有风险，小白需谨慎！！！解锁会丢失所有数据，请做好数据备份！！！ 所谓「类原生」，是指基于 AOSP（Android Open Source Project，Android 开放源代码工程）开发的第三方固件，其界面与操作方式与谷歌官方的 Android 一致。 AOSP ?优点：「轻快」 大多界面简洁，有原生动画， 没有厂商预装系统软件和三方软件（差不多只有电话、短信、时钟、文件、设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小米平板6crDroid类原生安卓14系统刷机">
+<meta property="og:url" content="https://blog.quickso.cn/2024/10/05/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF6crDroid%E7%B1%BB%E5%8E%9F%E7%94%9F%E5%AE%89%E5%8D%9314%E7%B3%BB%E7%BB%9F%E5%88%B7%E6%9C%BA/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="写在前面刷机有风险，小白需谨慎！！！解锁会丢失所有数据，请做好数据备份！！！ 所谓「类原生」，是指基于 AOSP（Android Open Source Project，Android 开放源代码工程）开发的第三方固件，其界面与操作方式与谷歌官方的 Android 一致。 AOSP ?优点：「轻快」 大多界面简洁，有原生动画， 没有厂商预装系统软件和三方软件（差不多只有电话、短信、时钟、文件、设置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050812237.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050811297.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050820031.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050821639.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050821133.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050840173.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050842939.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050844812.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050847367.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050850696.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050856508.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050903510.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050903329.jpg">
+<meta property="article:published_time" content="2024-10-04T23:33:07.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.779Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="ADB">
+<meta property="article:tag" content="安卓">
+<meta property="article:tag" content="刷机">
+<meta property="article:tag" content="小米平板6">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050812237.png">
+  
+  
+  
+  <title>小米平板6crDroid类原生安卓14系统刷机 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="小米平板6crDroid类原生安卓14系统刷机"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-05 07:33" pubdate>
+          2024年10月5日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">小米平板6crDroid类原生安卓14系统刷机</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><strong>刷机有风险，小白需谨慎！！！解锁会丢失所有数据，请做好数据备份！！！</strong></p>
+<p>所谓「类原生」，是指基于 <strong>AOSP</strong>（Android Open Source Project，Android 开放源代码工程）开发的第三方固件，其界面与操作方式与谷歌官方的 Android 一致。</p>
+<p>AOSP</p>
+<p>?优点：「轻快」</p>
+<p>大多界面简洁，有原生动画，</p>
+<p>没有厂商预装系统软件和三方软件（差不多只有电话、短信、时钟、文件、设置、甚至没有浏览器），</p>
+<p>没有太多花里胡哨的功能，系统后台占用率较少。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050812237.png" srcset="/img/loading.gif" lazyload></p>
+<p>对于安卓来说，刷机流程都大致一样</p>
+<p>1.解锁 Bootloader<br>2.刷入 Recovery<br>3.刷入 ROM&#x2F;Gapps&#x2F;Magisk<br>4.开始愉快地玩耍</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="1-解锁BL（Bootloader）"><a href="#1-解锁BL（Bootloader）" class="headerlink" title="1.解锁BL（Bootloader）"></a>1.解锁BL（Bootloader）</h3><p>小米的系统现在解锁越来越难了，<a target="_blank" rel="noopener" href="https://s.xiaomi.cn/c/3hfTCor6"><strong>小米澎湃 OS · Bootloader 解锁权限变更公告</strong></a>，需要实名认证+通过社区答题测试+社区 5 级账号。</p>
+<blockquote>
+<p>大家好！ Bootloader 锁处于上锁状态时，有助于保护设备安全、避免数据泄露，也给用户提供更加安全、稳定的使用体验。自即日起，升级到小米澎湃 OS 后的 Bootloader 解锁权限将仅针对开发者和手机发烧友开放，感谢大家的支持和理解。</p>
+</blockquote>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050811297.png" srcset="/img/loading.gif" lazyload></p>
+<p>不过好在有大佬搞了一个绕开的工具，只需要168小时就可以解锁了</p>
+<p>工具下载地址：  <a target="_blank" rel="noopener" href="https://www.123865.com/s/FrsrVv-wB47A?%E6%8F%90%E5%8F%96%E7%A0%81:8ecC">https://www.123865.com/s/FrsrVv-wB47A?提取码:8ecC</a></p>
+<p><strong>提示：解锁BL会清除所有数据，请及时备份</strong></p>
+<p>具体方法：</p>
+<p>1.usb调式界面的操作</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050820031.png" srcset="/img/loading.gif" lazyload alt="image-20241005082032966"></p>
+<p>2.安装旧版设置（上面链接有）<br>3.下载工具php8.39，电脑解压双击php目录下”bypass.cmd”脚本运行<br>4.出现这样就是成功了</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050821639.png" srcset="/img/loading.gif" lazyload alt="image-20241005082121481"></p>
+<p>5.小米解锁工具解锁，依旧要等168小时。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050821133.png" srcset="/img/loading.gif" lazyload alt="image-20241005082144070"></p>
+<p>6.好了，现在可以关闭本文了，7天后再来。</p>
+<h3 id="2-开始刷机"><a href="#2-开始刷机" class="headerlink" title="2.开始刷机"></a>2.开始刷机</h3><p><strong>注意：确保使用基于 Android 13 固件的 MIUI 14，请勿尝试使用 HyperOS 固件运行此 ROM</strong></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://github.com/DragonEmperor9480/pipa_notes">https://github.com/DragonEmperor9480/pipa_notes</a></p>
+<p>如果使用的是 HyperOS，请按照以下步骤操作</p>
+<blockquote>
+<p>按照下面步骤 1 到 7 进行操作，然后使用命令 adb sideload fw_package_name.zip（将 fw_package_name.zip 替换为您下载的固件名称.zip）刷入区域固件<br>，刷入后，重新启动一次recovery并继续按照上述剩余步骤操作</p>
+</blockquote>
+<p>如果已经在使用 MIUI固件&#x2F;第三方ROM，则可以跳过此步骤并按照以下步骤操作。</p>
+<p>刷机资料文件： </p>
+<p><a target="_blank" rel="noopener" href="https://www.123865.com/s/FrsrVv-gB47A?%E6%8F%90%E5%8F%96%E7%A0%81:GgYS">https://www.123865.com/s/FrsrVv-gB47A?提取码:GgYS</a></p>
+<ol>
+<li>下载 rom 包以及 boot、dtbo 和 vendor_boot 等（链接里的所有文件）</li>
+<li>将下载的文件放在一个文件夹中</li>
+<li>重新启动到fastboot（按住电源 + 音量减）</li>
+</ol>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050840173.png" srcset="/img/loading.gif" lazyload alt="image-20241005083959513"></p>
+<p>4.在电脑上，打开文件所在的文件夹，打开cmd 并依次运行以下命令（文件需要具体的路径）：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">fastboot flash <span class="hljs-keyword">boot</span> <span class="hljs-keyword">boot</span>.img<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">fastboot</span> flash dtbo dtbo.img<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">fastboot</span> flash vendor_boot vendor_boot.img<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">fastboot reboot recovery</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050842939.png" srcset="/img/loading.gif" lazyload alt="image-20241005084228825"></p>
+<p>5.通过recovery格式化数据（如果刷入的是同一个系列的rom，这步可以省略）</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050844812.png" srcset="/img/loading.gif" lazyload alt="image-20241005084442712"></p>
+<p>6.重启一次 recovery(advanced -&gt; reboot to recovery)</p>
+<p>7.然后选择apply update  选择 adb sideload</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050847367.png" srcset="/img/loading.gif" lazyload alt="image-20241005084705249"></p>
+<p>8.还是在刚才的目录里打开cmd 刷入ROM包</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">adb sideload rom.<span class="hljs-built_in">zip</span>（将 rom.<span class="hljs-built_in">zip</span> 替换为下载的 rom 包名.<span class="hljs-built_in">zip</span>，最好是具体路径）<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050850696.png" srcset="/img/loading.gif" lazyload alt="image-20241005085041587"></p>
+<p>9.有可能会卡到47%，弹出重启recovery 这时其实已经刷完机了，点击重启到recovery。</p>
+<p>10.接下来就可以刷入Gapps（谷歌套件，上面链接里有）等第三方包了，刷入方法和上面一样，选择apply update  选择 adb sideload，CMD运行</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">adb</span> sideload gapps.zip<br></code></pre></td></tr></table></figure>
+
+<p>11.刷完就点击 reboot system，重启系统，开始玩了～</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050856508.png" srcset="/img/loading.gif" lazyload alt="image-20241005085650406"></p>
+<h3 id="3-Magisk-安装"><a href="#3-Magisk-安装" class="headerlink" title="3.Magisk 安装"></a>3.Magisk 安装</h3><p>1.下载 Magisk apk 并安装</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/topjohnwu/Magisk/releases">https://github.com/topjohnwu/Magisk/releases</a> </p>
+<p>2.打开Magisk，①：安装 – ②：选择 boot.img – ③：开始修补文件 – ④：修补完成（修补生成 magisk_patched-xxx.img 文件在 Download 目录）</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050903510.jpg" srcset="/img/loading.gif" lazyload alt="Magisk安装教程插图"></p>
+<p>3.将修补完的文件传入刚才的ROM文件夹，进入 Bootloader 模式</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">adb reboot bootloader</span><br></code></pre></td></tr></table></figure>
+
+<p>4.运行</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">fastboot flash <span class="hljs-keyword">boot </span>刚才修补的文件路径<br></code></pre></td></tr></table></figure>
+
+<p>5.显示下面这三行代码，就是成功刷入了。再使用指令 <code>fastboot reboot</code> 重启。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Sending</span> &#x27;boot&#x27; (<span class="hljs-number">131072</span> KB)      OKAY<span class="hljs-meta"> [ 3.105s]</span><br><span class="hljs-attribute">Writing</span> &#x27;boot&#x27;                  OKAY<span class="hljs-meta"> [ 0.404s]</span><br><span class="hljs-attribute">Finished</span>. Total time: <span class="hljs-number">3</span>.<span class="hljs-number">556</span>s<br></code></pre></td></tr></table></figure>
+
+<p>6.显示Magisk的版本，就是刷好了的</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202410050903329.jpg" srcset="/img/loading.gif" lazyload alt="Magisk安装教程插图4"></p>
+<p>温馨提示:</p>
+<p>如果刷入 <strong>magisk.img</strong> 不能开机，可以把前面提取的 <strong>boot.img</strong> 通过 <strong>fastboot</strong> 刷回去，恢复原 boot，一般都能正常开机！<br><strong>boot.img</strong> 保留一份在电脑，避免出问题了可以自救下！还原 boot 指令</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">fastboot flash <span class="hljs-keyword">boot</span> <span class="hljs-keyword">boot</span>.img<br></code></pre></td></tr></table></figure>
+
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>好久没有刷机了，刷机方式也变了好多。通过这次刷机，又熟悉了一遍。</p>
+<p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://xdaforums.com/f/xiaomi-pad-6.12759/">https://xdaforums.com/f/xiaomi-pad-6.12759/</a></p>
+<p><a target="_blank" rel="noopener" href="https://xdaforums.com/t/beta-crdroid-10-x-a14-pipa.4641070/">https://xdaforums.com/t/beta-crdroid-10-x-a14-pipa.4641070/</a></p>
+<p><a target="_blank" rel="noopener" href="https://xdaforums.com/t/rom-14-pipa-lmodroid-unofficial-aosp.4652823/">https://xdaforums.com/t/rom-14-pipa-lmodroid-unofficial-aosp.4652823/</a></p>
+<p><a target="_blank" rel="noopener" href="https://crdroid.net/pipa/10">https://crdroid.net/pipa/10</a></p>
+<p><a target="_blank" rel="noopener" href="https://magiskcn.com/">https://magiskcn.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.byboke.com/2569.html">https://www.byboke.com/2569.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/DragonEmperor9480/pipa_notes?tab=readme-ov-file#installation-guide">https://github.com/DragonEmperor9480/pipa_notes?tab=readme-ov-file#installation-guide</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.coolapk.com/feed/57324806?shareKey=MmVmOGZiYjliMzYwNjcwMDdmMjI~&shareUid=524513&shareFrom=com.coolapk.market_14.5.0">https://www.coolapk.com/feed/57324806?shareKey=MmVmOGZiYjliMzYwNjcwMDdmMjI~&amp;shareUid=524513&amp;shareFrom=com.coolapk.market_14.5.0</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ytW2R3Laujg&t=254s">https://www.youtube.com/watch?v=ytW2R3Laujg&amp;t=254s</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ADB/" class="print-no-link">#ADB</a>
+      
+        <a href="/tags/%E5%AE%89%E5%8D%93/" class="print-no-link">#安卓</a>
+      
+        <a href="/tags/%E5%88%B7%E6%9C%BA/" class="print-no-link">#刷机</a>
+      
+        <a href="/tags/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF6/" class="print-no-link">#小米平板6</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>小米平板6crDroid类原生安卓14系统刷机</div>
+      <div>https://blog.quickso.cn/2024/10/05/小米平板6crDroid类原生安卓14系统刷机/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/12/01/%E5%93%AA%E5%90%92%E9%9D%A2%E6%9D%BF%E6%96%B0%E7%89%88%E6%9C%ACv1%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" title="哪吒面板新版本v1安装教程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">哪吒面板新版本v1安装教程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/17/ProxmoxVE8%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E8%BD%AF%E4%BB%B6%E6%BA%90%E5%B9%B6%E5%88%A0%E9%99%A4%E8%AE%A2%E9%98%85%E5%BC%B9%E7%AA%97/" title="Proxmox VE 8配置国内软件源并删除订阅弹窗">
+                        <span class="hidden-mobile">Proxmox VE 8配置国内软件源并删除订阅弹窗</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

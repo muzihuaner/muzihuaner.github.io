@@ -1,0 +1,879 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="一、前言&amp;环境准备服务器BMC&#x2F;IPMI，可以看到硬件的运行情况，比如CPU温度、内存温度、风扇转速、主板电压等，这些数据默认只能通过登录web后台或者ipmitool等接口工具来实时查看，看不到历史曲线图，也做不到监控告警，当服务器出现问题时，除了日志之外，这些物理传感器指标绘制的趋势图更有利于我们判断服务器在历史异常时间点的硬件状态趋势变化情况，或者实时监测指标到达设定的阈值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Prometheus和Grafana的IPMI&#x2F;BMC监控系统">
+<meta property="og:url" content="https://blog.quickso.cn/2025/03/14/%E5%9F%BA%E4%BA%8EPrometheus%E5%92%8CGrafana%E7%9A%84IPMI-BMC%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="一、前言&amp;环境准备服务器BMC&#x2F;IPMI，可以看到硬件的运行情况，比如CPU温度、内存温度、风扇转速、主板电压等，这些数据默认只能通过登录web后台或者ipmitool等接口工具来实时查看，看不到历史曲线图，也做不到监控告警，当服务器出现问题时，除了日志之外，这些物理传感器指标绘制的趋势图更有利于我们判断服务器在历史异常时间点的硬件状态趋势变化情况，或者实时监测指标到达设定的阈值">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-14T13:04:15.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.778Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="Prometheus">
+<meta property="article:tag" content="Grafana">
+<meta property="article:tag" content="IPMI">
+<meta property="article:tag" content="BMC">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>基于Prometheus和Grafana的IPMI/BMC监控系统 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="基于Prometheus和Grafana的IPMI/BMC监控系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-14 21:04" pubdate>
+          2025年3月14日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">基于Prometheus和Grafana的IPMI/BMC监控系统</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一、前言-环境准备"><a href="#一、前言-环境准备" class="headerlink" title="一、前言&amp;环境准备"></a>一、前言&amp;环境准备</h2><p>服务器BMC&#x2F;IPMI，可以看到硬件的运行情况，比如CPU温度、内存温度、风扇转速、主板电压等，这些数据默认只能通过登录web后台或者ipmitool等接口工具来实时查看，看不到历史曲线图，也做不到监控告警，当服务器出现问题时，除了日志之外，这些物理传感器指标绘制的趋势图更有利于我们判断服务器在历史异常时间点的硬件状态趋势变化情况，或者实时监测指标到达设定的阈值时自动告警。</p>
+<p>prometheus和grafana，前者作为数据采集，后者作为监控展示及告警，缺一不可，这两个组件如何安装非本文重点，本文建立在已安装两个环境之下。</p>
+<p>安装教程可以参考前一篇文章…</p>
+<p>我这里的prometheus和grafana是在VPS上安装的，方便监控多台服务器。</p>
+<p>服务器是一台超微物理服务器，IP是192.168.10.x</p>
+<p>服务器安装了PVE，是基于Debian的</p>
+<h2 id="二、安装ipmi-exporter"><a href="#二、安装ipmi-exporter" class="headerlink" title="二、安装ipmi_exporter"></a>二、安装ipmi_exporter</h2><p>到<a target="_blank" rel="noopener" href="https://github.com/prometheus-community/ipmi_exporter/releases">此页面</a>下载对应系统版本的二进制文件，解压即可。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">wget</span> https://github.com/prometheus-community/ipmi_exporter/releases/download/v1.<span class="hljs-number">10</span>.<span class="hljs-number">0</span>/ipmi_exporter-<span class="hljs-number">1</span>.<span class="hljs-number">10</span>.<span class="hljs-number">0</span>.linux-amd64.tar.gz<br><span class="hljs-attribute">tar</span> xf ipmi_exporter-<span class="hljs-number">1</span>.<span class="hljs-number">10</span>.<span class="hljs-number">0</span>.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure>
+
+<p>不添加PATH环境变量的情况下，设置一个软链接到PATH路径下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> /opt/ipmi_exporter-1.10.0.linux-amd64 /opt/ipmi_exporter<br><span class="hljs-built_in">ln</span> -sf /opt/ipmi_exporter/ipmi_exporter /usr/local/bin/ipmi_exporter<br></code></pre></td></tr></table></figure>
+
+<p>验证是否可以成功执行：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">ipmi_exporter -h</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="三、写systemctl服务并安装FreeIPMI"><a href="#三、写systemctl服务并安装FreeIPMI" class="headerlink" title="三、写systemctl服务并安装FreeIPMI"></a>三、写systemctl服务并安装FreeIPMI</h2><h3 id="ipmi-exporter-yaml配置文件"><a href="#ipmi-exporter-yaml配置文件" class="headerlink" title="ipmi_exporter yaml配置文件"></a>ipmi_exporter yaml配置文件</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> /<span class="hljs-keyword">opt</span>/ipmi_exporter/ipmi_remote.yml<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">modules</span><span class="hljs-punctuation">:</span><br>        <span class="hljs-attribute">default</span><span class="hljs-punctuation">:</span><br>                <span class="hljs-comment"># These settings are used if no module is specified, the</span><br>                <span class="hljs-comment"># specified module doesn&#x27;t exist, or of course if</span><br>                <span class="hljs-comment"># module=default is specified.</span><br>                <span class="hljs-attribute">user</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ADMIN&quot;     # 无特殊需求，填写这两行账号密码即可，IPMI用户名</span><br>                <span class="hljs-attribute">pass</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;PASSWORD&quot;  # 无特殊需求，填写这两行账号密码即可，IPMI密码</span><br>                <span class="hljs-comment"># The below settings correspond to driver-type, privilege-level, and</span><br>                <span class="hljs-comment"># session-timeout respectively, see `man 5 freeipmi.conf` (and e.g.</span><br>                <span class="hljs-comment"># `man 8 ipmi-sensors` for a list of driver types).</span><br>                <span class="hljs-attribute">driver</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LAN_2_0&quot;</span><br>                <span class="hljs-attribute">privilege</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><br>                <span class="hljs-comment"># The session timeout is in milliseconds. Note that a scrape can take up</span><br>                <span class="hljs-comment"># to (session-timeout * #-of-collectors) milliseconds, so set the scrape</span><br>                <span class="hljs-comment"># timeout in Prometheus accordingly.</span><br>                <span class="hljs-comment"># Must be larger than the retransmission timeout, which defaults to 1000.</span><br>                <span class="hljs-attribute">timeout</span><span class="hljs-punctuation">:</span> <span class="hljs-string">10000</span><br>                <span class="hljs-comment"># Available collectors are bmc, bmc-watchdog, ipmi, chassis, dcmi, sel,</span><br>                <span class="hljs-comment"># and sm-lan-mode</span><br>                <span class="hljs-comment"># If _not_ specified, bmc, ipmi, chassis, and dcmi are used</span><br>                <span class="hljs-attribute">collectors</span><span class="hljs-punctuation">:</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">bmc</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">ipmi</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">chassis</span><br>                <span class="hljs-comment"># Got any sensors you don&#x27;t care about? Add them here.</span><br>                <span class="hljs-attribute">exclude_sensor_ids</span><span class="hljs-punctuation">:</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">2</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">29</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">32</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">50</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">52</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">55</span><br>        <span class="hljs-attribute">dcmi</span><span class="hljs-punctuation">:</span><br>                <span class="hljs-comment"># Use these settings when scraped with module=dcmi.</span><br>                <span class="hljs-attribute">user</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;admin_user&quot;</span><br>                <span class="hljs-attribute">pass</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;another_pw&quot;</span><br>                <span class="hljs-attribute">privilege</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;admin&quot;</span><br>                <span class="hljs-attribute">driver</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LAN_2_0&quot;</span><br>                <span class="hljs-attribute">collectors</span><span class="hljs-punctuation">:</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">dcmi</span><br>        <span class="hljs-attribute">thatspecialhost</span><span class="hljs-punctuation">:</span><br>                <span class="hljs-comment"># Use these settings when scraped with module=thatspecialhost.</span><br>                <span class="hljs-attribute">user</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;some_user&quot;</span><br>                <span class="hljs-attribute">pass</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;secret_pw&quot;</span><br>                <span class="hljs-attribute">privilege</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;admin&quot;</span><br>                <span class="hljs-attribute">driver</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LAN&quot;</span><br>                <span class="hljs-attribute">collectors</span><span class="hljs-punctuation">:</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">ipmi</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">sel</span><br>                <span class="hljs-comment"># Need any special workaround flags set? Add them here.</span><br>                <span class="hljs-comment"># Workaround flags might be needed to address issues with specific vendor implementations</span><br>                <span class="hljs-comment"># e.g. https://www.gnu.org/software/freeipmi/freeipmi-faq.html#Why-is-the-output-from-FreeIPMI-different-than-another-software_003f</span><br>                <span class="hljs-comment"># For a full list of flags, refer to:</span><br>                <span class="hljs-comment"># https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-sensors.8.html#lbAL</span><br>                <span class="hljs-attribute">workaround_flags</span><span class="hljs-punctuation">:</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">discretereading</span><br>                <span class="hljs-comment"># If you require additional command line arguments (e.g. --bridge-sensors for ipmimonitoring),</span><br>                <span class="hljs-comment"># you can specify them per collector - BE CAREFUL, you can easily break the exporter with this!</span><br>                <span class="hljs-attribute">custom_args</span><span class="hljs-punctuation">:</span><br>                        <span class="hljs-attribute">ipmi</span><span class="hljs-punctuation">:</span><br>                        <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;--bridge-sensors&quot;</span><br>        <span class="hljs-attribute">advanced</span><span class="hljs-punctuation">:</span><br>                <span class="hljs-comment"># Use these settings when scraped with module=advanced.</span><br>                <span class="hljs-attribute">user</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;some_user&quot;</span><br>                <span class="hljs-attribute">pass</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;secret_pw&quot;</span><br>                <span class="hljs-attribute">privilege</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;admin&quot;</span><br>                <span class="hljs-attribute">driver</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LAN&quot;</span><br>                <span class="hljs-attribute">collectors</span><span class="hljs-punctuation">:</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">ipmi</span><br>                <span class="hljs-bullet">-</span> <span class="hljs-string">sel</span><br>                <span class="hljs-comment"># USING ANY OF THE BELOW VOIDS YOUR WARRANTY! YOU MAY GET BITTEN BY SHARKS!</span><br>                <span class="hljs-comment"># You can override the command to be executed for a collector. Paired with</span><br>                <span class="hljs-comment"># custom_args, this can be used to e.g. execute the IPMI tools with sudo:</span><br>                <span class="hljs-attribute">collector_cmd</span><span class="hljs-punctuation">:</span><br>                        <span class="hljs-attribute">ipmi</span><span class="hljs-punctuation">:</span> <span class="hljs-string">sudo</span><br>                        <span class="hljs-attribute">sel</span><span class="hljs-punctuation">:</span> <span class="hljs-string">sudo</span><br>                <span class="hljs-attribute">custom_args</span><span class="hljs-punctuation">:</span><br>                        <span class="hljs-attribute">ipmi</span><span class="hljs-punctuation">:</span><br>                        <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;ipmimonitoring&quot;</span><br>                        <span class="hljs-attribute">sel</span><span class="hljs-punctuation">:</span><br>                        <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;ipmi-sel&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>编辑服务文件</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>systemd<span class="hljs-regexp">/system/i</span>pmi_exporter.service<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=IPMI Exporter<br><span class="hljs-attr">Wants</span>=network-<span class="hljs-literal">on</span>line.target<br><span class="hljs-attr">After</span>=network-<span class="hljs-literal">on</span>line.target<br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">User</span>=root<br><span class="hljs-attr">Group</span>=root<br><span class="hljs-attr">Type</span>=simple<br><span class="hljs-attr">ExecStart</span>=/usr/local/bin/ipmi_exporter --config.file=/opt/ipmi_exporter/ipmi_remote.yml<br><span class="hljs-section">[Install]</span><br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure>
+
+<p>重载并启动服务：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">systemctl</span> daemon-reload<br><span class="hljs-title">systemctl</span> enable ipmi_exporter <span class="hljs-comment">--now</span><br></code></pre></td></tr></table></figure>
+
+<p>验证服务已运行成功，并且没有报错：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">journalctl</span> -u ipmi_exporter.service -f<br></code></pre></td></tr></table></figure>
+
+<h3 id="安装FreeIPMI"><a href="#安装FreeIPMI" class="headerlink" title="安装FreeIPMI"></a>安装FreeIPMI</h3><p>安装FreeIPMI即可。</p>
+<table>
+<thead>
+<tr>
+<th align="left">发行版</th>
+<th align="left">安装命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Archlinux</td>
+<td align="left">pacman -Sy extra&#x2F;freeipmi</td>
+</tr>
+<tr>
+<td align="left">Centos&#x2F;Redhat</td>
+<td align="left">yum install freeipmi -y</td>
+</tr>
+<tr>
+<td align="left">Debian&#x2F;Ubuntu</td>
+<td align="left">apt install freeipmi -y</td>
+</tr>
+<tr>
+<td align="left">Gentoo</td>
+<td align="left">emerge –ask freeipmi</td>
+</tr>
+</tbody></table>
+<h2 id="四、配置Prometheus并验证metrics"><a href="#四、配置Prometheus并验证metrics" class="headerlink" title="四、配置Prometheus并验证metrics"></a>四、配置Prometheus并验证metrics</h2><h3 id="1-配置ipmi-targets"><a href="#1-配置ipmi-targets" class="headerlink" title="1.配置ipmi_targets"></a>1.配置ipmi_targets</h3><p>写一个targets文件，填写需要监控的ipmi的IP（不是服务器上安装的系统IP）：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/prometheus/i</span>pmi_targets.yml <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-bullet">-</span> <span class="hljs-string">targets:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">xx.xx.xx.xx # 被监控的IPMI IP</span><br>  <span class="hljs-attribute">labels</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">job</span><span class="hljs-punctuation">:</span> <span class="hljs-string">ipmi_exporter</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-配置prometheus"><a href="#2-配置prometheus" class="headerlink" title="2.配置prometheus"></a>2.配置prometheus</h3><p>在prometheus主配置文件里追加以下ipmi_exporter的任务，prometheus将收集来自ipmi_exporter服务主机的metrics数据：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/prometheus/</span>prometheus.yml<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-bullet">-</span> <span class="hljs-string">job_name: ipmi_exporter</span><br>    <span class="hljs-attribute">params</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-attribute">module</span><span class="hljs-punctuation">:</span> <span class="hljs-string">[&#x27;default&#x27;]</span><br>    <span class="hljs-attribute">scrape_interval</span><span class="hljs-punctuation">:</span> <span class="hljs-string">1m</span><br>    <span class="hljs-attribute">scrape_timeout</span><span class="hljs-punctuation">:</span> <span class="hljs-string">30s</span><br>    <span class="hljs-attribute">metrics_path</span><span class="hljs-punctuation">:</span> <span class="hljs-string">/ipmi</span><br>    <span class="hljs-attribute">scheme</span><span class="hljs-punctuation">:</span> <span class="hljs-string">http</span><br>    <span class="hljs-attribute">file_sd_configs</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">files:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/etc/prometheus/ipmi_targets.yml</span><br>      <span class="hljs-attribute">refresh_interval</span><span class="hljs-punctuation">:</span> <span class="hljs-string">5m</span><br>    <span class="hljs-attribute">relabel_configs</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">source_labels: [__address__]</span><br>      <span class="hljs-attribute">separator</span><span class="hljs-punctuation">:</span> <span class="hljs-string">;</span><br>      <span class="hljs-attribute">regex</span><span class="hljs-punctuation">:</span> <span class="hljs-string">(.*)</span><br>      <span class="hljs-attribute">target_label</span><span class="hljs-punctuation">:</span> <span class="hljs-string">__param_target</span><br>      <span class="hljs-attribute">replacement</span><span class="hljs-punctuation">:</span> <span class="hljs-string">$&#123;1&#125;</span><br>      <span class="hljs-attribute">action</span><span class="hljs-punctuation">:</span> <span class="hljs-string">replace</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">source_labels: [__param_target]</span><br>      <span class="hljs-attribute">separator</span><span class="hljs-punctuation">:</span> <span class="hljs-string">;</span><br>      <span class="hljs-attribute">regex</span><span class="hljs-punctuation">:</span> <span class="hljs-string">(.*)</span><br>      <span class="hljs-attribute">target_label</span><span class="hljs-punctuation">:</span> <span class="hljs-string">instance</span><br>      <span class="hljs-attribute">replacement</span><span class="hljs-punctuation">:</span> <span class="hljs-string">$&#123;1&#125;</span><br>      <span class="hljs-attribute">action</span><span class="hljs-punctuation">:</span> <span class="hljs-string">replace</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">separator: ;</span><br>      <span class="hljs-attribute">regex</span><span class="hljs-punctuation">:</span> <span class="hljs-string">.*</span><br>      <span class="hljs-attribute">target_label</span><span class="hljs-punctuation">:</span> <span class="hljs-string">__address__</span><br>      <span class="hljs-attribute">replacement</span><span class="hljs-punctuation">:</span> <span class="hljs-string">xx.xx.xx.xx:9290 # 这里写ipmi_exporter服务所在的系统IP，不是IPMIIP，我这里使用了tailscale分配的IP</span><br>      <span class="hljs-attribute">action</span><span class="hljs-punctuation">:</span> <span class="hljs-string">replace</span><br></code></pre></td></tr></table></figure>
+
+<p>之后重启prometheus服务</p>
+<h3 id="3-验证metrics数据收集情况"><a href="#3-验证metrics数据收集情况" class="headerlink" title="3.验证metrics数据收集情况"></a>3.验证metrics数据收集情况</h3><p>此时到Prometheus的web页面，找到我们添加的ipmi_exporter任务，确保已经UP</p>
+<p>Endpoint链接点进去可以看到ipmi_exporter收集的metrics原始数据</p>
+<h2 id="五、配置grafana监控面板"><a href="#五、配置grafana监控面板" class="headerlink" title="五、配置grafana监控面板"></a>五、配置grafana监控面板</h2><h3 id="导入监控模板"><a href="#导入监控模板" class="headerlink" title="导入监控模板"></a>导入监控模板</h3><p>获取到metric数据后，最后一步则将这些数据通过监控图的方式展示出来，这里采用模板方式进行导入。</p>
+<p>在Grafana主面板中，点击<strong>导入</strong>选项</p>
+<p>填写ID为15765，之后点击<strong>Load</strong>：</p>
+<p>数据源选择Prometheus</p>
+<p>就可以了，可以根据自己的实际情况修改模板</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Prometheus/" class="print-no-link">#Prometheus</a>
+      
+        <a href="/tags/Grafana/" class="print-no-link">#Grafana</a>
+      
+        <a href="/tags/IPMI/" class="print-no-link">#IPMI</a>
+      
+        <a href="/tags/BMC/" class="print-no-link">#BMC</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>基于Prometheus和Grafana的IPMI/BMC监控系统</div>
+      <div>https://blog.quickso.cn/2025/03/14/基于Prometheus和Grafana的IPMI-BMC监控系统/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年3月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/03/22/CudyTR3000%E8%B7%AF%E7%94%B1%E5%99%A8%E5%88%B7%E6%9C%BAOpenWrt%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/" title="CudyTR3000路由器刷机OpenWrt折腾记录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CudyTR3000路由器刷机OpenWrt折腾记录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/14/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A4%9A%E8%8A%82%E7%82%B9Docker%E9%83%A8%E7%BD%B2Grafana%E3%80%81Prometheus%E3%80%81Node-Exporter%E3%80%81alertmanager%E3%80%81prometheus-alert%E5%B9%B6%E5%AF%B9%E6%8E%A5%E9%A3%9E%E4%B9%A6%E9%80%9A%E7%9F%A5/" title="服务器多节点docker部署Grafana、Prometheus、Node-Exporter、alertmanager、prometheus-alert并对接飞书通知">
+                        <span class="hidden-mobile">服务器多节点docker部署Grafana、Prometheus、Node-Exporter、alertmanager、prometheus-alert并对接飞书通知</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

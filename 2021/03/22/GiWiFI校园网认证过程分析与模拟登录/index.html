@@ -1,0 +1,998 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="前言GiWiFi是由上海寰创网络科技有限公司基于wifidog项目开发的一套网关管理系统, 通常被应用于校园网行业.  认证机制由于GiWiFi是基于wifidog项目的, 所以大致流程也差不多 基本流程用户上线 用户访问网络，通过iptables将未认证的用户dnat到wifidog进程，wifidog通过307报文将用户重定向到认证服务器 用户打开认证服务器登录页面，输入用户名密码，发送认证请">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GiWiFI校园网认证过程分析与模拟登录">
+<meta property="og:url" content="https://blog.quickso.cn/2021/03/22/GiWiFI%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%AE%A4%E8%AF%81%E8%BF%87%E7%A8%8B%E5%88%86%E6%9E%90%E4%B8%8E%E6%A8%A1%E6%8B%9F%E7%99%BB%E5%BD%95/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="前言GiWiFi是由上海寰创网络科技有限公司基于wifidog项目开发的一套网关管理系统, 通常被应用于校园网行业.  认证机制由于GiWiFi是基于wifidog项目的, 所以大致流程也差不多 基本流程用户上线 用户访问网络，通过iptables将未认证的用户dnat到wifidog进程，wifidog通过307报文将用户重定向到认证服务器 用户打开认证服务器登录页面，输入用户名密码，发送认证请">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210322234723.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210322234856.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210322234221.png">
+<meta property="article:published_time" content="2021-03-22T15:29:58.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.761Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="Giwifi">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210322234723.png">
+  
+  
+  
+  <title>GiWiFI校园网认证过程分析与模拟登录 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="GiWiFI校园网认证过程分析与模拟登录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-03-22 23:29" pubdate>
+          2021年3月22日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          26 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">GiWiFI校园网认证过程分析与模拟登录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>GiWiFi是由上海寰创网络科技有限公司基于<a target="_blank" rel="noopener" href="http://www.wifidog.org/">wifidog</a>项目开发的一套网关管理系统, 通常被应用于校园网行业.</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210322234723.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="认证机制"><a href="#认证机制" class="headerlink" title="认证机制"></a>认证机制</h1><p>由于GiWiFi是基于wifidog项目的, 所以大致流程也差不多</p>
+<h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><h3 id="用户上线"><a href="#用户上线" class="headerlink" title="用户上线"></a>用户上线</h3><ol>
+<li>用户访问网络，通过iptables将未认证的用户dnat到wifidog进程，wifidog通过307报文将用户重定向到认证服务器</li>
+<li>用户打开认证服务器登录页面，输入用户名密码，发送认证请求</li>
+<li>认证成功的话服务器会发送302报文，携带token信息重定向到wifidog页面。认证失败的话会返回失败页面</li>
+<li>用户携带token信息向wifidog发起认证请求，wifidog再向认证服务器发起请求，认证成功后授权，并将用户重定向到成功页面</li>
+</ol>
+<h3 id="保活和下线"><a href="#保活和下线" class="headerlink" title="保活和下线"></a>保活和下线</h3><ol>
+<li>wifidog会定时向认证服务器发送保活消息(相当于<strong>心跳</strong>)</li>
+<li>当用户主动请求下线后，wifidog此时并没有下线</li>
+<li>当wifidog再次发起保活请求时，认证服务器会告诉它用户已下线，此时wifidog会将用户下线</li>
+</ol>
+<h1 id="网页登录"><a href="#网页登录" class="headerlink" title="网页登录"></a>网页登录</h1><p>客户端引导下载页对于不同的设备和系统使用了UA进行区分，经过测试，提供的客户端有Windows、macOS、iOS以及Android版本（果然Linux又被忽视了，显示的是Android版的下载按钮🌝）</p>
+<p>由于对此类认证客户端的排斥和心理洁癖，我便开始寻找使用网页认证，甚至是使用脚本模拟认证的方法，果不其然，经过一番分析与搜寻，我找到了一些东西</p>
+<h4 id="你藏得好深啊，登录框"><a href="#你藏得好深啊，登录框" class="headerlink" title="你藏得好深啊，登录框"></a>你藏得好深啊，登录框</h4><p>此前网页的认证过程为</p>
+<ol>
+<li>打开任意http页面后被劫持至<code>172.17.1.1:8062/redirect</code></li>
+<li>返回307跳转至认证页</li>
+<li>在认证页里输入账号密码登录认证</li>
+<li>关闭认证页，一段时间内即可正常上网</li>
+</ol>
+<p>而现在跳转后仅显示客户端的下载按钮，直觉意识到这是一个专用于客户端引导下载的页面，真正的认证页仍另藏他处</p>
+<p>事实正是如此，对比历史记录，现在的跳转页面的域名是<code>172.17.1.1</code>(校园网网关IP)，此前的认证页则是<code>http://login.gwifi.com.cn/cmps/admin.php/api/login/</code></p>
+<h2 id="修改UA"><a href="#修改UA" class="headerlink" title="修改UA"></a>修改UA</h2><p>先修改UA为ipad（使用UA浏览器插件即可，或者浏览器里的自定义UA）</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Mozilla</span>/<span class="hljs-number">5</span>.<span class="hljs-number">0</span> (iPad; CPU OS <span class="hljs-number">6</span>_0 like Mac OS X) AppleWebKit/<span class="hljs-number">536</span>.<span class="hljs-number">26</span> (KHTML, like Gecko) Version/<span class="hljs-number">6</span>.<span class="hljs-number">0</span> Mobile/<span class="hljs-number">10</span>A5376e Safari/<span class="hljs-number">8536</span>.<span class="hljs-number">25</span><br></code></pre></td></tr></table></figure>
+
+<p>将客户端引导下载页的URL参数粘贴到认证页的URL后并打开，就能看到之前的认证页了（单纯打开首页会显示It works! ，不加任何参数打开的话则是跳转至新浪首页，阿巴阿巴~）</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/login.gwifi.com.cn/cmps</span><span class="hljs-regexp">/admin.php/api</span><span class="hljs-regexp">/login/</span><span class="hljs-string">?g</span>w_address=<span class="hljs-number">172.17</span>.<span class="hljs-number">1.1</span>&amp;gw_port=<span class="hljs-number">8060</span>&amp;gw_id=<span class="hljs-variable constant_">GWIFI</span>-zhongbeixinshang01&amp;ip=<span class="hljs-number">10.16</span>.<span class="hljs-number">100.174</span>&amp;mac=你的<span class="hljs-variable constant_">MAC</span>地址<br></code></pre></td></tr></table></figure>
+
+<p>认证页打开之后仍是一个大大的客户端下载按钮，但不要慌。打开审查元素就会发现，所有的登录框、重设密码框、注册框等都在，只是被隐藏掉了</p>
+<p>去掉隐藏样式，正常输入账号密码登录即可，和之前的操作一模一样（登录后会跳转至百度首页，看来这两个页面是同一位鬼才写的🌝）</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210322234856.png" srcset="/img/loading.gif" lazyload alt="image-20210322234856216"></p>
+<h2 id="登录接口及参数分析"><a href="#登录接口及参数分析" class="headerlink" title="登录接口及参数分析"></a>登录接口及参数分析</h2><p>找到了登录框之后，就可以开始分析接口和参数了</p>
+<p>直接看页面代码吧，写的挺乱的，好在未经过混淆，关键部分：</p>
+<h3 id="登录接口"><a href="#登录接口" class="headerlink" title="登录接口"></a>登录接口</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> loginAction  = <span class="hljs-keyword">function</span>(<span class="hljs-params">params</span>)&#123;<br>    <span class="hljs-keyword">var</span> btn = $(<span class="hljs-string">&quot;#first_button&quot;</span>);<br>    <span class="hljs-keyword">var</span> round = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">round</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>()*<span class="hljs-number">1000</span>);<br>    <span class="hljs-keyword">var</span> form = $(<span class="hljs-string">&quot;#frmLogin&quot;</span>);<br>    $.<span class="hljs-title function_">ajax</span>(&#123;<br>        <span class="hljs-attr">url</span>: <span class="hljs-string">&quot;/cmps/admin.php/api/loginaction?round=&quot;</span>+round,<br>        <span class="hljs-attr">data</span>: form.<span class="hljs-title function_">serialize</span>(),<br>        <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;post&quot;</span>,<br>        <span class="hljs-attr">async</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&quot;json&quot;</span>,<br>        <span class="hljs-attr">success</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) &#123;<br>            <span class="hljs-keyword">if</span> (data.<span class="hljs-property">status</span> === <span class="hljs-number">1</span>) &#123;<br>                <span class="hljs-keyword">if</span>(data.<span class="hljs-property">data</span>.<span class="hljs-property">reasoncode</span> == <span class="hljs-string">&quot;44&quot;</span>)&#123;<br>                    params = <span class="hljs-title function_">getWechatParams</span>(data);<br>                    <span class="hljs-comment">//showSelectMessage(params);</span><br>                    <span class="hljs-title function_">wechatAuth</span>(params.<span class="hljs-property">okParams</span>);<br>                &#125;<span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = data.<span class="hljs-property">info</span>;<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                btn.<span class="hljs-title function_">removeAttr</span>(<span class="hljs-string">&#x27;disabled&#x27;</span>);<br>                <span class="hljs-title function_">doFailedLogin</span>(data,<span class="hljs-string">&quot;frmLogin&quot;</span>);<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>    &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到接口为<code>/cmps/admin.php/api/loginaction</code>，参数都在登录表单里：</p>
+<p><em>关键部分已手动打码</em></p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>access_type</td>
+<td>2</td>
+<td>作用未知</td>
+</tr>
+<tr>
+<td>acsign</td>
+<td>***</td>
+<td>登录状态接口中的sign字段</td>
+</tr>
+<tr>
+<td>btype</td>
+<td>pc</td>
+<td>猜测为平台类型</td>
+</tr>
+<tr>
+<td>client_mac</td>
+<td>***</td>
+<td>客户端MAC</td>
+</tr>
+<tr>
+<td>contact_phone</td>
+<td>400-038-5858</td>
+<td>服务电话</td>
+</tr>
+<tr>
+<td>devicemode</td>
+<td></td>
+<td>默认空值，作用未知</td>
+</tr>
+<tr>
+<td>gw_address</td>
+<td>172.17.1.1</td>
+<td>网关地址</td>
+</tr>
+<tr>
+<td>gw_id</td>
+<td>***</td>
+<td>AP的SSID</td>
+</tr>
+<tr>
+<td>gw_port</td>
+<td>8060</td>
+<td>网关端口</td>
+</tr>
+<tr>
+<td>lastaccessurl</td>
+<td></td>
+<td>默认空值，作用未知</td>
+</tr>
+<tr>
+<td>logout_reason</td>
+<td>0</td>
+<td>作用未知</td>
+</tr>
+<tr>
+<td>mac</td>
+<td>***</td>
+<td>同client_mac</td>
+</tr>
+<tr>
+<td>name</td>
+<td>***</td>
+<td>账号</td>
+</tr>
+<tr>
+<td>online_time</td>
+<td>0</td>
+<td>猜测为在线时间，作用未知</td>
+</tr>
+<tr>
+<td>page_time</td>
+<td>1535509645</td>
+<td>登录页时间戳</td>
+</tr>
+<tr>
+<td>password</td>
+<td>***</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>***</td>
+<td>签名，可从登录表单中获取</td>
+</tr>
+<tr>
+<td>station_cloud</td>
+<td>login.gwifi.com.cn</td>
+<td>作用未知</td>
+</tr>
+<tr>
+<td>station_sn</td>
+<td>***</td>
+<td>猜测为基站ID</td>
+</tr>
+<tr>
+<td>suggest_phone</td>
+<td>400-038-5858</td>
+<td>同contact_phone</td>
+</tr>
+<tr>
+<td>url</td>
+<td><a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a></td>
+<td>登录成功后跳转的网站</td>
+</tr>
+<tr>
+<td>user_agent</td>
+<td></td>
+<td>默认空值，作用未知</td>
+</tr>
+</tbody></table>
+<p>观察后发现登录所需的大部分参数在认证页的URL参数里已经有了，剩下的有一部分已经在登录表单里填好了，另一部分需要从下文的登录状态接口中取到，将其组合起来后发送POST请求</p>
+<p>登录成功后返回JSON数据：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;info&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;http://172.17.1.1:8060/wifidog/auth?token=***&amp;info=***&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;auth_verify&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;reasoncode&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;remain_time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1053640</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;limit_time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;cost_type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;serviceplan_id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;1357&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;is_share&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;wechat_enable&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;bw_up&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2048&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;bw_down&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;10240&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;ontrial&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;need_complete_data&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;complete_data_url&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;permit_intranet&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;permit_internet&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;carrier_operator&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;3&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;network_type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>其中的<code>info</code>字段的URL用作登录验证，使用GET请求就可以完成整个认证登录的流程了</p>
+<p>登录失败的话<code>info</code>字段则会返回百度首页的URL，再次吐槽一下🌝</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;info&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;http:\/\/www.baidu.com&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="登录状态接口"><a href="#登录状态接口" class="headerlink" title="登录状态接口"></a>登录状态接口</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">initData</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-comment">//获取终端信息</span><br>    $.<span class="hljs-title function_">ajax</span>(&#123;<br>        <span class="hljs-attr">url</span>: <span class="hljs-string">&quot;http://172.17.1.1:8060/wifidog/get_auth_state?ip=***&amp;mac=***&amp;sign=***&amp;callback=***&quot;</span>,<br>        <span class="hljs-attr">dataType</span>:<span class="hljs-string">&#x27;jsonp&#x27;</span>,<br>        <span class="hljs-attr">success</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) &#123;<br>            c = <span class="hljs-built_in">eval</span>(<span class="hljs-string">&#x27;(&#x27;</span> + data.<span class="hljs-property">data</span> + <span class="hljs-string">&#x27;)&#x27;</span>);<br>            <span class="hljs-keyword">if</span>(data.<span class="hljs-property">resultCode</span> == <span class="hljs-number">0</span>)&#123;<br>                <span class="hljs-title function_">fixData</span>(c);<br>            &#125;<span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-variable language_">window</span>.<span class="hljs-property">top</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = <span class="hljs-string">&quot;http://www.baidu.com&quot;</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;,<br>        <span class="hljs-attr">error</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;,<br>        <span class="hljs-attr">cache</span>: <span class="hljs-literal">false</span><br>    &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>同样可以看到接口为<code>/wifidog/get_auth_state</code>，参数为IP、MAC、签名和回调函数名，其中的签名可以直接在页面表单里取到</p>
+<p>返回结果为JSONP数据，提取为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;resultCode&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;&#123;&quot;</span>auth_state<span class="hljs-string">&quot;:2,&quot;</span>gw_id<span class="hljs-string">&quot;:&quot;</span>***<span class="hljs-string">&quot;,&quot;</span>access_type<span class="hljs-string">&quot;:&quot;</span><span class="hljs-number">2</span><span class="hljs-string">&quot;,&quot;</span>authStaType<span class="hljs-string">&quot;:&quot;</span><span class="hljs-number">0</span><span class="hljs-string">&quot;,&quot;</span>station_sn<span class="hljs-string">&quot;:&quot;</span>***<span class="hljs-string">&quot;,&quot;</span>client_mac<span class="hljs-string">&quot;:&quot;</span>***<span class="hljs-string">&quot;,&quot;</span>online_time<span class="hljs-string">&quot;:11,&quot;</span>logout_reason<span class="hljs-string">&quot;:7,&quot;</span>contact_phone<span class="hljs-string">&quot;:&quot;</span><span class="hljs-number">400</span><span class="hljs-number">-038</span><span class="hljs-number">-5858</span><span class="hljs-string">&quot;,&quot;</span>suggest_phone<span class="hljs-string">&quot;:&quot;</span><span class="hljs-number">400</span><span class="hljs-number">-038</span><span class="hljs-number">-5858</span><span class="hljs-string">&quot;,&quot;</span>station_cloud<span class="hljs-string">&quot;:&quot;</span>login.gwifi.com.cn<span class="hljs-string">&quot;,&quot;</span>orgId<span class="hljs-string">&quot;:&quot;</span><span class="hljs-number">899</span><span class="hljs-string">&quot;,&quot;</span>sign<span class="hljs-string">&quot;:&quot;</span>***<span class="hljs-string">&quot;&#125;&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>其中的<code>auth_state</code>字段值为<code>2</code>时为正常登录状态</p>
+<p>观察登录成功后执行的操作，是替换了部分表单数据：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fixData</span>(<span class="hljs-params">data</span>) &#123;<br>    $(<span class="hljs-string">&quot;.gw_id&quot;</span>).<span class="hljs-title function_">val</span>(data.<span class="hljs-property">gw_id</span>);<br>    $(<span class="hljs-string">&quot;.access_type&quot;</span>).<span class="hljs-title function_">val</span>(data.<span class="hljs-property">access_type</span>);<br>    $(<span class="hljs-string">&quot;.station_sn&quot;</span>).<span class="hljs-title function_">val</span>(data.<span class="hljs-property">station_sn</span>);<br>    $(<span class="hljs-string">&quot;.client_mac&quot;</span>).<span class="hljs-title function_">val</span>(data.<span class="hljs-property">client_mac</span>);<br>    $(<span class="hljs-string">&quot;.online_time&quot;</span>).<span class="hljs-title function_">val</span>(data.<span class="hljs-property">online_time</span>);<br>    $(<span class="hljs-string">&quot;.logout_reason&quot;</span>).<span class="hljs-title function_">val</span>(data.<span class="hljs-property">logout_reason</span>);<br>    $(<span class="hljs-string">&quot;.contact_phone&quot;</span>).<span class="hljs-title function_">val</span>(data.<span class="hljs-property">contact_phone</span>);<br>    $(<span class="hljs-string">&quot;.suggest_phone&quot;</span>).<span class="hljs-title function_">val</span>(data.<span class="hljs-property">suggest_phone</span>);<br>    $(<span class="hljs-string">&quot;.station_cloud&quot;</span>).<span class="hljs-title function_">val</span>(data.<span class="hljs-property">station_cloud</span>);<br>    $(<span class="hljs-string">&quot;.acsign&quot;</span>).<span class="hljs-title function_">val</span>(data.<span class="hljs-property">sign</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>进行模拟登录时也应一一替换</p>
+<p><em>需要注意的是参数<code>callback</code>是必需的，不然将不会返回<code>sign</code>字段值</em></p>
+<h3 id="登出接口"><a href="#登出接口" class="headerlink" title="登出接口"></a>登出接口</h3><p>登出功能在客户端引导下载页上，接口及参数为<code>http://172.17.1.1/getApp.htm?action=logout</code></p>
+<p>返回数据为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;resultCode&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>其中<code>resultCode</code>字段值为<code>0</code>时登出成功</p>
+<h2 id="模拟登录脚本"><a href="#模拟登录脚本" class="headerlink" title="模拟登录脚本"></a>模拟登录脚本</h2><p>现在登录相关接口和所需参数已经了解，可以开始写模拟登录了</p>
+<p>这里使用Python来实现，理论上对所有GiWiFi系统通用</p>
+<p>这里需要事先安装好Python以及requests、netifaces库</p>
+<p>你可能会用到<a target="_blank" rel="noopener" href="https://huangenet.lanzous.com/iMFn0n7nnvc">Visualcppbuildtools</a>（安装C++插件）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> argparse<br><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> netifaces<br><span class="hljs-keyword">from</span> getpass <span class="hljs-keyword">import</span> getpass<br><span class="hljs-keyword">from</span> urllib.parse <span class="hljs-keyword">import</span> urlparse, parse_qs<br><br>SCRIPT_VERSION = <span class="hljs-string">&quot;1.0.3.2&quot;</span><br><br>HEADERS = &#123;<br>    <span class="hljs-string">&#x27;User-Agent&#x27;</span>: <span class="hljs-string">&#x27;Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25&#x27;</span>,<br>    <span class="hljs-string">&#x27;accept-encoding&#x27;</span>: <span class="hljs-string">&#x27;gzip, deflate, br&#x27;</span>,<br>    <span class="hljs-string">&#x27;accept-language&#x27;</span>: <span class="hljs-string">&#x27;zh-CN,zh-TW;q=0.8,zh;q=0.6,en;q=0.4,ja;q=0.2&#x27;</span>,<br>    <span class="hljs-string">&#x27;cache-control&#x27;</span>: <span class="hljs-string">&#x27;max-age=0&#x27;</span><br>&#125;<br><br>PARSER = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, <br>    description=<span class="hljs-string">&#x27;GiWiFi认证登录脚本&#x27;</span>, <br>    epilog=<span class="hljs-string">&#x27;(c) 2018 journey.ad&#x27;</span>)<br>PARSER.add_argument(<span class="hljs-string">&#x27;-g&#x27;</span>, <span class="hljs-string">&#x27;--gateway&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;网关IP&#x27;</span>)<br>PARSER.add_argument(<span class="hljs-string">&#x27;-u&#x27;</span>, <span class="hljs-string">&#x27;--username&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;用户名&#x27;</span>)<br>PARSER.add_argument(<span class="hljs-string">&#x27;-p&#x27;</span>, <span class="hljs-string">&#x27;--password&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;密码&#x27;</span>)<br>PARSER.add_argument(<span class="hljs-string">&#x27;-q&#x27;</span>, <span class="hljs-string">&#x27;--quit&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;登出&#x27;</span>)<br>PARSER.add_argument(<span class="hljs-string">&#x27;-d&#x27;</span>, <span class="hljs-string">&#x27;--daemon&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;在后台守护运行&#x27;</span>)<br>PARSER.add_argument(<span class="hljs-string">&#x27;-v&#x27;</span>, <span class="hljs-string">&#x27;--verbose&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;额外输出一些技术性信息&#x27;</span>)<br>PARSER.add_argument(<span class="hljs-string">&#x27;-V&#x27;</span>, <span class="hljs-string">&#x27;--version&#x27;</span>, action=<span class="hljs-string">&#x27;version&#x27;</span>, <br>        version=<span class="hljs-string">&#x27;giwifi-auth-helper &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(SCRIPT_VERSION))<br><br>CONFIG = PARSER.parse_args()<br><br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> CONFIG.quit:<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> CONFIG.gateway:<br>        CONFIG.gateway = netifaces.gateways()[<span class="hljs-string">&#x27;default&#x27;</span>][netifaces.AF_INET][<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> CONFIG.password:<br>            CONFIG.gateway = <span class="hljs-built_in">input</span>(<span class="hljs-string">&#x27;请输入网关地址(%s):&#x27;</span> % (CONFIG.gateway)) <span class="hljs-keyword">or</span> CONFIG.gateway<br><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> CONFIG.username:<br>        CONFIG.username = <span class="hljs-built_in">input</span>(<span class="hljs-string">&#x27;请输入上网账号:&#x27;</span>)<br><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> CONFIG.password:<br>        CONFIG.password = getpass(<span class="hljs-string">&#x27;请输入账号密码:&#x27;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> CONFIG.gateway:<br>        CONFIG.gateway = netifaces.gateways()[<span class="hljs-string">&#x27;default&#x27;</span>][netifaces.AF_INET][<span class="hljs-number">0</span>]<br>        CONFIG.gateway = <span class="hljs-built_in">input</span>(<span class="hljs-string">&#x27;请输入网关地址(%s):&#x27;</span> % (CONFIG.gateway)) <span class="hljs-keyword">or</span> CONFIG.gateway<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    logcat(<span class="hljs-string">&#x27;正在获取网关信息…&#x27;</span>)<br><br>    <span class="hljs-keyword">try</span>:<br>        authUrl = requests.get(<span class="hljs-string">&#x27;http://%s:8062/redirect&#x27;</span> % (CONFIG.gateway), timeout=<span class="hljs-number">5</span>).url<br>        authParmas = &#123;k: v[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> parse_qs(urlparse(authUrl).query).items()&#125;<br><br>        loginPage = requests.get(<span class="hljs-string">&#x27;http://login.gwifi.com.cn/cmps/admin.php/api/login/?&#x27;</span> + urlparse(authUrl).query, headers=HEADERS, timeout=<span class="hljs-number">5</span>).text<br><br>        pagetime = re.search(<span class="hljs-string">r&#x27;name=&quot;page_time&quot; value=&quot;(.*?)&quot;&#x27;</span>, loginPage).group(<span class="hljs-number">1</span>)<br>        sign = re.search(<span class="hljs-string">r&#x27;name=&quot;sign&quot; value=&quot;(.*?)&quot;&#x27;</span>, loginPage).group(<span class="hljs-number">1</span>)<br><br>    <span class="hljs-keyword">except</span> requests.exceptions.ConnectionError:<br>        logcat(<span class="hljs-string">&#x27;连接失败，请检查网关地址是否正确&#x27;</span>)<br>        <span class="hljs-keyword">return</span><br><br>    <span class="hljs-keyword">except</span> requests.exceptions.Timeout:<br>        logcat(<span class="hljs-string">&#x27;连接超时，可能已超出上网区间&#x27;</span>)<br>        <span class="hljs-keyword">return</span><br><br>    <span class="hljs-keyword">except</span> AttributeError:<br>        logcat(<span class="hljs-string">&#x27;解析失败，可能网关设备重启或系统已更新&#x27;</span>)<br>        <span class="hljs-keyword">return</span><br><br>    authState = getAuthState(authParmas, sign)<br><br>    <span class="hljs-keyword">if</span> CONFIG.quit:<br>        logout(authParmas)<br><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> authState:<br>        <span class="hljs-keyword">return</span><br><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">if</span> authState[<span class="hljs-string">&#x27;auth_state&#x27;</span>] == <span class="hljs-number">2</span>:<br>            printStatus(authParmas, authState)<br>            logcat(<span class="hljs-string">&#x27;你已登录，无需再次登录&#x27;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            data = &#123;<br>                <span class="hljs-string">&#x27;access_type&#x27;</span>: authState[<span class="hljs-string">&#x27;access_type&#x27;</span>],<br>                <span class="hljs-string">&#x27;acsign&#x27;</span>: authState[<span class="hljs-string">&#x27;sign&#x27;</span>],<br>                <span class="hljs-string">&#x27;btype&#x27;</span>: <span class="hljs-string">&#x27;pc&#x27;</span>,<br>                <span class="hljs-string">&#x27;client_mac&#x27;</span>: authState[<span class="hljs-string">&#x27;client_mac&#x27;</span>],<br>                <span class="hljs-string">&#x27;contact_phone&#x27;</span>: <span class="hljs-string">&#x27;400-038-5858&#x27;</span>,<br>                <span class="hljs-string">&#x27;devicemode&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>,<br>                <span class="hljs-string">&#x27;gw_address&#x27;</span>: authParmas[<span class="hljs-string">&#x27;gw_address&#x27;</span>],<br>                <span class="hljs-string">&#x27;gw_id&#x27;</span>: authParmas[<span class="hljs-string">&#x27;gw_id&#x27;</span>],<br>                <span class="hljs-string">&#x27;gw_port&#x27;</span>: authParmas[<span class="hljs-string">&#x27;gw_port&#x27;</span>],<br>                <span class="hljs-string">&#x27;lastaccessurl&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>,<br>                <span class="hljs-string">&#x27;logout_reason&#x27;</span>: authState[<span class="hljs-string">&#x27;logout_reason&#x27;</span>],<br>                <span class="hljs-string">&#x27;mac&#x27;</span>: authParmas[<span class="hljs-string">&#x27;mac&#x27;</span>],<br>                <span class="hljs-string">&#x27;name&#x27;</span>: CONFIG.username,<br>                <span class="hljs-string">&#x27;online_time&#x27;</span>: authState[<span class="hljs-string">&#x27;online_time&#x27;</span>],<br>                <span class="hljs-string">&#x27;page_time&#x27;</span>: pagetime,<br>                <span class="hljs-string">&#x27;password&#x27;</span>: CONFIG.password,<br>                <span class="hljs-string">&#x27;sign&#x27;</span>: sign,<br>                <span class="hljs-string">&#x27;station_cloud&#x27;</span>: <span class="hljs-string">&#x27;login.gwifi.com.cn&#x27;</span>,<br>                <span class="hljs-string">&#x27;station_sn&#x27;</span>: authState[<span class="hljs-string">&#x27;station_sn&#x27;</span>],<br>                <span class="hljs-string">&#x27;suggest_phone&#x27;</span>: <span class="hljs-string">&#x27;400-038-5858&#x27;</span>,<br>                <span class="hljs-string">&#x27;url&#x27;</span>: <span class="hljs-string">&#x27;http://www.baidu.com&#x27;</span>,<br>                <span class="hljs-string">&#x27;user_agent&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>,<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> CONFIG.verbose:<br>                logcat(data)<br><br>            result = login(data)<br>            <span class="hljs-keyword">if</span> result[<span class="hljs-string">&#x27;status&#x27;</span>]:<br>                authState = getAuthState(authParmas, sign)<br>                printStatus(authParmas, authState)<br><br>                <span class="hljs-keyword">if</span> authState[<span class="hljs-string">&#x27;auth_state&#x27;</span>] == <span class="hljs-number">2</span>:<br>                    logcat(<span class="hljs-string">&#x27;认证成功&#x27;</span>)<br>                <span class="hljs-keyword">else</span>:<br>                    logcat(<span class="hljs-string">&#x27;认证失败&#x27;</span>)<br>            <span class="hljs-keyword">else</span>:<br>                logcat(<span class="hljs-string">&#x27;认证失败，提示信息：%s&#x27;</span> % (result[<span class="hljs-string">&#x27;info&#x27;</span>]))<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">login</span>(<span class="hljs-params">data</span>):<br>    logcat(<span class="hljs-string">&#x27;正在尝试认证…&#x27;</span>)<br><br>    <span class="hljs-keyword">try</span>:<br>        resp = json.loads(requests.post(<span class="hljs-string">&#x27;http://login.gwifi.com.cn/cmps/admin.php/api/loginaction&#x27;</span>, data=data, timeout=<span class="hljs-number">5</span>).text)<br>        result = &#123;<br>            <span class="hljs-string">&#x27;status&#x27;</span>: <span class="hljs-literal">False</span>,<br>            <span class="hljs-string">&#x27;info&#x27;</span>: <span class="hljs-literal">None</span><br>        &#125;<br><br>        <span class="hljs-keyword">if</span> CONFIG.verbose:<br>            logcat(resp)<br><br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;wifidog/auth&#x27;</span> <span class="hljs-keyword">in</span> resp[<span class="hljs-string">&#x27;info&#x27;</span>]:<br>            requests.get(resp[<span class="hljs-string">&#x27;info&#x27;</span>])<br>            result[<span class="hljs-string">&#x27;status&#x27;</span>] = <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">else</span>:<br>            result[<span class="hljs-string">&#x27;info&#x27;</span>] = resp[<span class="hljs-string">&#x27;info&#x27;</span>]<br><br>    <span class="hljs-keyword">except</span> requests.exceptions.Timeout:<br>        logcat(<span class="hljs-string">&#x27;连接超时，可能已超出上网区间&#x27;</span>)<br>        <br>    <span class="hljs-keyword">finally</span>:<br>        <span class="hljs-keyword">return</span> result<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">logout</span>(<span class="hljs-params">authParmas</span>):<br>    <span class="hljs-keyword">try</span>:<br>        resp = json.loads(requests.get(<span class="hljs-string">&#x27;http://%s/getApp.htm?action=logout&#x27;</span> % (authParmas[<span class="hljs-string">&#x27;gw_address&#x27;</span>])).text)<br>        <br>    <span class="hljs-keyword">except</span> requests.exceptions.Timeout:<br>        logcat(<span class="hljs-string">&#x27;连接超时，可能已超出上网区间&#x27;</span>)<br>        <span class="hljs-keyword">return</span><br><br>    <span class="hljs-keyword">if</span> resp[<span class="hljs-string">&#x27;resultCode&#x27;</span>] == <span class="hljs-number">0</span>:<br>        logcat(<span class="hljs-string">&#x27;下线成功&#x27;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        logcat(<span class="hljs-string">&#x27;下线失败&#x27;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">getAuthState</span>(<span class="hljs-params">authParmas, sign</span>):<br>    <span class="hljs-keyword">try</span>:<br>        params = &#123;<br>            <span class="hljs-string">&#x27;ip&#x27;</span>: authParmas[<span class="hljs-string">&#x27;ip&#x27;</span>],<br>            <span class="hljs-string">&#x27;mac&#x27;</span>: authParmas[<span class="hljs-string">&#x27;mac&#x27;</span>],<br>            <span class="hljs-string">&#x27;sign&#x27;</span>: sign,<br>            <span class="hljs-string">&#x27;callback&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span><br>        &#125;<br>    <br>        resp = json.loads(requests.get(<span class="hljs-string">&#x27;http://%s:%s/wifidog/get_auth_state&#x27;</span> % (authParmas[<span class="hljs-string">&#x27;gw_address&#x27;</span>], authParmas[<span class="hljs-string">&#x27;gw_port&#x27;</span>]), params=params, timeout=<span class="hljs-number">5</span>).text[<span class="hljs-number">1</span>:-<span class="hljs-number">1</span>])<br>            <br>    <span class="hljs-keyword">except</span> KeyError:<br>        logcat(<span class="hljs-string">&#x27;所需参数不存在&#x27;</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>    <span class="hljs-keyword">except</span> requests.exceptions.Timeout:<br>        logcat(<span class="hljs-string">&#x27;连接超时，可能已超出上网区间&#x27;</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>    <span class="hljs-keyword">if</span> CONFIG.verbose:<br>        logcat(resp)<br><br>    <span class="hljs-keyword">if</span> resp[<span class="hljs-string">&#x27;resultCode&#x27;</span>] == <span class="hljs-number">0</span>:<br>        <span class="hljs-keyword">return</span> json.loads(resp[<span class="hljs-string">&#x27;data&#x27;</span>])<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">printStatus</span>(<span class="hljs-params">authParmas, authState</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> CONFIG.verbose:<br>        clear()<br><br>    <span class="hljs-built_in">print</span>(<br><span class="hljs-string">&#x27;&#x27;&#x27;--------------------------------------------</span><br><span class="hljs-string">SSID:             %s</span><br><span class="hljs-string">AP MAC:           %s</span><br><span class="hljs-string">GateWay:          %s</span><br><span class="hljs-string">IP:               %s</span><br><span class="hljs-string">MAC:              %s</span><br><span class="hljs-string">Station SN:       %s</span><br><span class="hljs-string">Logged:           %s</span><br><span class="hljs-string">--------------------------------------------&#x27;&#x27;&#x27;</span><br>    % (<br>            authParmas[<span class="hljs-string">&#x27;gw_id&#x27;</span>],<br>            authParmas[<span class="hljs-string">&#x27;apmac&#x27;</span>],<br>            authParmas[<span class="hljs-string">&#x27;gw_address&#x27;</span>],<br>            authParmas[<span class="hljs-string">&#x27;ip&#x27;</span>],<br>            authParmas[<span class="hljs-string">&#x27;mac&#x27;</span>],<br>            authState[<span class="hljs-string">&#x27;station_sn&#x27;</span>],<br>            <span class="hljs-string">&#x27;yes&#x27;</span> <span class="hljs-keyword">if</span>(authState[<span class="hljs-string">&#x27;auth_state&#x27;</span>] == <span class="hljs-number">2</span>) <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;no&#x27;</span><br>        )<br>    )<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">clear</span>():<br>    os.system(<span class="hljs-string">&#x27;cls&#x27;</span> <span class="hljs-keyword">if</span> os.name == <span class="hljs-string">&#x27;nt&#x27;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;clear&#x27;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">logcat</span>(<span class="hljs-params">msg, level=<span class="hljs-string">&#x27;I&#x27;</span></span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;%s %s: %s&#x27;</span> % (time.ctime().split(<span class="hljs-string">&#x27; &#x27;</span>)[-<span class="hljs-number">2</span>], level, msg))<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-keyword">if</span> CONFIG.daemon:<br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            main()<br>            time.sleep(<span class="hljs-number">30</span>)<br>    <span class="hljs-keyword">else</span>:<br>        main()<br>        <span class="hljs-built_in">input</span>()<br></code></pre></td></tr></table></figure>
+
+<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210322234221.png" srcset="/img/loading.gif" lazyload alt="image-20210322234221276"></p>
+<p>本文参考：</p>
+<p>1.<a target="_blank" rel="noopener" href="https://nocilol.me/archives/lab/giwifi-auth-process-analysis-and-simulation-login/">https://nocilol.me/archives/lab/giwifi-auth-process-analysis-and-simulation-login/</a></p>
+<p>2.<a target="_blank" rel="noopener" href="https://github.com/icepie/giwifi-gear/wiki/GiWiFi-%E5%88%86%E6%9E%90">https://github.com/icepie/giwifi-gear/wiki/GiWiFi-%E5%88%86%E6%9E%90</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Giwifi/" class="print-no-link">#Giwifi</a>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>GiWiFI校园网认证过程分析与模拟登录</div>
+      <div>https://blog.quickso.cn/2021/03/22/GiWiFI校园网认证过程分析与模拟登录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/28/%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98-OneManager-Heroku-CFWorkers%E5%AE%9E%E7%8E%B0%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E7%BD%91%E7%BB%9C%E6%8C%82%E8%BD%BD/" title="阿里云盘+OneManager+Heroku+CFWorkers实现阿里云盘网络挂载">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">阿里云盘+OneManager+Heroku+CFWorkers实现阿里云盘网络挂载</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/13/ShadowsocksR%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/" title="ShadowsocksR一键安装脚本">
+                        <span class="hidden-mobile">ShadowsocksR一键安装脚本</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

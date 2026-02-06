@@ -1,0 +1,870 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="AnyLink是一个企业级远程办公 ssl vpn 软件，可以支持多人同时在线使用。基于 openconnect 协议开发，并且借鉴了 ocserv 的开发思路，可以完全兼容 AnyConnect 客户端。   开源仓库：https:&#x2F;&#x2F;github.com&#x2F;bjdgyc&#x2F;anylink AnyLink 最主要的功能莫过于用户分组功能.通过设置分组权限可以使不同用户或员工能访问的网段和路由也不同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker部署开源企业级远程办公VPN及软件安装-AnyLink">
+<meta property="og:url" content="https://blog.quickso.cn/2025/02/11/docker%E9%83%A8%E7%BD%B2%E5%BC%80%E6%BA%90%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%ACVPN-%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85-AnyLink/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="AnyLink是一个企业级远程办公 ssl vpn 软件，可以支持多人同时在线使用。基于 openconnect 协议开发，并且借鉴了 ocserv 的开发思路，可以完全兼容 AnyConnect 客户端。   开源仓库：https:&#x2F;&#x2F;github.com&#x2F;bjdgyc&#x2F;anylink AnyLink 最主要的功能莫过于用户分组功能.通过设置分组权限可以使不同用户或员工能访问的网段和路由也不同">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/online.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/3933217940.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191625076.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191655733.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191205518.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191032651.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250209113308300.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191743260.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250209113446838.png">
+<meta property="article:published_time" content="2025-02-11T11:01:27.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.772Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="VPN">
+<meta property="article:tag" content="Anylink">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/online.jpg">
+  
+  
+  
+  <title>docker部署开源企业级远程办公VPN及软件安装-AnyLink - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="docker部署开源企业级远程办公VPN及软件安装-AnyLink"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-11 19:01" pubdate>
+          2025年2月11日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">docker部署开源企业级远程办公VPN及软件安装-AnyLink</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>AnyLink是一个企业级远程办公 ssl vpn 软件，可以支持多人同时在线使用。基于 openconnect 协议开发，并且借鉴了 ocserv 的开发思路，可以完全兼容 AnyConnect 客户端。</p>
+</blockquote>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/online.jpg" srcset="/img/loading.gif" lazyload alt="online"></p>
+<p>开源仓库：<a target="_blank" rel="noopener" href="https://github.com/bjdgyc/anylink">https://github.com/bjdgyc/anylink</a></p>
+<p><strong>AnyLink</strong> 最主要的功能莫过于<code>用户分组功能</code>.通过设置分组权限可以使不同用户或员工能访问的网段和路由也不同,加上支持 <strong>SMTP</strong> 邮件来分发密码,同时也支持 <strong>TOTP 动态令牌</strong> ,确实更适合小型企业的远程访问管理.但是<code>并不能</code>像 <strong>Openconnect VPN</strong> 一样支持证书登录,<strong>所以每次连接都需要手动输入密码</strong>.</p>
+<h2 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h2><h4 id="1-安装Docker环境-解析域名"><a href="#1-安装Docker环境-解析域名" class="headerlink" title="1.安装Docker环境&amp;解析域名"></a>1.安装Docker环境&amp;解析域名</h4><p>参考 <a target="_blank" rel="noopener" href="https://getdocker.quickso.cn/">https://getdocker.quickso.cn/</a></p>
+<p>将你的域名解析到服务器</p>
+<h4 id="2-拉取镜像"><a href="#2-拉取镜像" class="headerlink" title="2.拉取镜像"></a>2.拉取镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull bjdgyc/anylink:latest<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-生成密码和-jwt-secret"><a href="#3-生成密码和-jwt-secret" class="headerlink" title="3.生成密码和 jwt secret"></a>3.生成密码和 jwt secret</h4><p>首次运行以下命令来创建管理员密码.以下命令中含<code>rm</code>参数,仅用于执行创建密码的命令,会自行删除.将生成的<code>Passwd</code>和<code>secret</code>保存.</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs applescript">docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> <span class="hljs-comment">--rm bjdgyc/anylink tool -p your_password</span><br><span class="hljs-comment"># 生成 Passwd</span><br><span class="hljs-comment"># Passwd:$2a$10$iKPApINPOwuyUhZC/b7P0eI8chEukkpyxPEbYxqdS3BPTtImqStGW</span><br><br>docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> <span class="hljs-comment">--rm bjdgyc/anylink tool -s</span><br><span class="hljs-comment"># 生成 jwt secret</span><br><span class="hljs-comment"># Secret:r4-21-eDOrSAjtXL4k06PK0NFudNshMKh9euV09EQrsa9oEYlKaSgoa-CdY</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/3933217940.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h4 id="4-获取配置目录"><a href="#4-获取配置目录" class="headerlink" title="4.获取配置目录"></a>4.获取配置目录</h4><p>复制以下命令,首次启动容器,拷贝配置文件到宿主机后删除容器.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -itd --name anylink --privileged=<span class="hljs-literal">true</span> bjdgyc/anylink<br></code></pre></td></tr></table></figure>
+
+<p>使用 docker cp 将配置文件目录拷贝到当前目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker <span class="hljs-built_in">cp</span> anylink:/app/conf .<br></code></pre></td></tr></table></figure>
+
+<p>删除容器</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">docker stop anylink<br>docker rm anylink<br></code></pre></td></tr></table></figure>
+
+<h4 id="5-正式启动容器"><a href="#5-正式启动容器" class="headerlink" title="5.正式启动容器"></a>5.正式启动容器</h4><p>将 docker cp 拷贝出来的<code>conf</code>目录中的<code>server.toml</code>，进行修改</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191625076.png" srcset="/img/loading.gif" lazyload alt="image-20250211191625076"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191655733.png" srcset="/img/loading.gif" lazyload alt="image-20250211191655733"></p>
+<p>参考以下命令正式启动容器,注意本文示例<code>conf</code>目录存放于<code>/root</code>下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d \<br>    --name anylink \<br>    --restart always \<br>    --privileged=<span class="hljs-literal">true</span> \<br>    -p 55555:443 \<br>    -p 8800:8800 \<br>    -v /root/conf:/app/conf \<br>bjdgyc/anylink -c=/app/conf/server.toml<br></code></pre></td></tr></table></figure>
+
+<h4 id="6-管理后台"><a href="#6-管理后台" class="headerlink" title="6.管理后台"></a>6.管理后台</h4><p>访问<code>内网IP:端口</code>,例如<code>https://IP:8800</code>输入<code>admin</code>密码登陆后台管理系统.</p>
+<p><a target="_blank" rel="noopener" href="https://ip:55555/">https://IP:55555</a> 即为VPN首页，可以自定义</p>
+<p>后台管理非常简单明了,只需要配置<code>用户组</code>,<code>用户</code>即可开始使用,如需邮件分发密码功能可以在<code>邮件设置</code>中配置.</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191205518.png" srcset="/img/loading.gif" lazyload alt="image-20250211191205518"></p>
+<p><code>其他设置</code>中可以配置Banner信息、自定义首页（支持HTML代码）、邮件分发模版等，可以根据自己的需求修改</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191032651.png" srcset="/img/loading.gif" lazyload alt="image-20250211191032651"></p>
+<h4 id="7-用户组信息"><a href="#7-用户组信息" class="headerlink" title="7.用户组信息"></a>7.用户组信息</h4><p><code>添加用户组</code>只需要填写组名,其他保持默认,则表示该组用户所有流量都将被 VPN 服务器代理,属于完整的<code>全局代理</code>.</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250209113308300.png" srcset="/img/loading.gif" lazyload alt="image-20250209113308300"></p>
+<p><code>包含路由</code>如果添加内网网段,例如网段为<code>10.0.0.0/24</code>,则表示该组用户<strong>可以访问内网设备</strong>,而互联网请求依旧使用<code>客户端本地的网络访问</code>.</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191743260.png" srcset="/img/loading.gif" lazyload alt="image-20250211191743260"></p>
+<p><code>DNS 服务器</code>可根据需求自行设置</p>
+<h4 id="8-用户信息"><a href="#8-用户信息" class="headerlink" title="8.用户信息"></a>8.用户信息</h4><p><code>添加新用户</code>并且分配<strong>用户组</strong>,<code>PIN 码</code>为客户端的登录密码,如果配置了 <strong>SMTP</strong> 并勾选了<code>发送邮件</code>,则会创建随机密码以邮件的形式发送.也可以手动设置密码.<code>OTP</code>功能如果没有需求关闭即可.</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250209113446838.png" srcset="/img/loading.gif" lazyload alt="image-20250209113446838"></p>
+<p>自定义首页模板</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;zh-CN&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>XXXVPN系统<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">        * &#123;</span><br><span class="language-css">            <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;</span><br><span class="language-css">            <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;</span><br><span class="language-css">            <span class="hljs-attribute">box-sizing</span>: border-box;</span><br><span class="language-css">            <span class="hljs-attribute">font-family</span>: <span class="hljs-string">&#x27;Segoe UI&#x27;</span>, Arial, sans-serif;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-tag">body</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f0f4f8</span>;</span><br><span class="language-css">            <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.6</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-class">.header</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-number">135deg</span>, <span class="hljs-number">#1a73e8</span>, <span class="hljs-number">#0d47a1</span>);</span><br><span class="language-css">            <span class="hljs-attribute">color</span>: white;</span><br><span class="language-css">            <span class="hljs-attribute">padding</span>: <span class="hljs-number">2rem</span> <span class="hljs-number">1rem</span>;</span><br><span class="language-css">            <span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css">            <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">2px</span> <span class="hljs-number">10px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.1</span>);</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-class">.container</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">max-width</span>: <span class="hljs-number">1200px</span>;</span><br><span class="language-css">            <span class="hljs-attribute">margin</span>: <span class="hljs-number">2rem</span> auto;</span><br><span class="language-css">            <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">1rem</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-class">.card</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">background</span>: white;</span><br><span class="language-css">            <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">10px</span>;</span><br><span class="language-css">            <span class="hljs-attribute">padding</span>: <span class="hljs-number">2rem</span>;</span><br><span class="language-css">            <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">1.5rem</span>;</span><br><span class="language-css">            <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">2px</span> <span class="hljs-number">15px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.1</span>);</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-class">.download-btn</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">display</span>: inline-block;</span><br><span class="language-css">            <span class="hljs-attribute">background</span>: <span class="hljs-number">#1a73e8</span>;</span><br><span class="language-css">            <span class="hljs-attribute">color</span>: white;</span><br><span class="language-css">            <span class="hljs-attribute">padding</span>: <span class="hljs-number">12px</span> <span class="hljs-number">30px</span>;</span><br><span class="language-css">            <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">25px</span>;</span><br><span class="language-css">            <span class="hljs-attribute">text-decoration</span>: none;</span><br><span class="language-css">            <span class="hljs-attribute">font-weight</span>: bold;</span><br><span class="language-css">            <span class="hljs-attribute">transition</span>: transform <span class="hljs-number">0.2s</span>;</span><br><span class="language-css">            <span class="hljs-attribute">margin</span>: <span class="hljs-number">1rem</span> <span class="hljs-number">0</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-class">.download-btn</span><span class="hljs-selector-pseudo">:hover</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">2px</span>);</span><br><span class="language-css">            <span class="hljs-attribute">background</span>: <span class="hljs-number">#1557b0</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-tag">h2</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">color</span>: <span class="hljs-number">#1a73e8</span>;</span><br><span class="language-css">            <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">1rem</span>;</span><br><span class="language-css">            <span class="hljs-attribute">border-left</span>: <span class="hljs-number">4px</span> solid <span class="hljs-number">#1a73e8</span>;</span><br><span class="language-css">            <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">1rem</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-tag">ul</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">list-style</span>: none;</span><br><span class="language-css">            <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-tag">li</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">padding</span>: <span class="hljs-number">0.5rem</span> <span class="hljs-number">0</span>;</span><br><span class="language-css">            <span class="hljs-attribute">display</span>: flex;</span><br><span class="language-css">            <span class="hljs-attribute">align-items</span>: center;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-tag">li</span><span class="hljs-selector-pseudo">::before</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;✔&quot;</span>;</span><br><span class="language-css">            <span class="hljs-attribute">color</span>: <span class="hljs-number">#1a73e8</span>;</span><br><span class="language-css">            <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">1rem</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-class">.notice</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">background</span>: <span class="hljs-number">#fff3cd</span>;</span><br><span class="language-css">            <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;</span><br><span class="language-css">            <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;</span><br><span class="language-css">            <span class="hljs-attribute">margin</span>: <span class="hljs-number">1rem</span> <span class="hljs-number">0</span>;</span><br><span class="language-css">            <span class="hljs-attribute">border-left</span>: <span class="hljs-number">4px</span> solid <span class="hljs-number">#ffc107</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-tag">footer</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css">            <span class="hljs-attribute">padding</span>: <span class="hljs-number">1.5rem</span>;</span><br><span class="language-css">            <span class="hljs-attribute">background</span>: <span class="hljs-number">#1a273e</span>;</span><br><span class="language-css">            <span class="hljs-attribute">color</span>: white;</span><br><span class="language-css">            <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">3rem</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">768px</span>) &#123;</span><br><span class="language-css">            <span class="hljs-selector-class">.container</span> &#123;</span><br><span class="language-css">                <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">0.5rem</span>;</span><br><span class="language-css">            &#125;</span><br><span class="language-css">            </span><br><span class="language-css">            <span class="hljs-selector-class">.card</span> &#123;</span><br><span class="language-css">                <span class="hljs-attribute">padding</span>: <span class="hljs-number">1.5rem</span>;</span><br><span class="language-css">            &#125;</span><br><span class="language-css">        &#125;</span><br><span class="language-css">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;header&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>XXXVPN系统<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>安全连接 · 高效访问<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>客户端下载<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://ocserv.yydy.link:2023/&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;download-btn&quot;</span>&gt;</span>立即下载VPN客户端<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>支持版本：Windows / macOS / Linux / Android / iOS<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>支持客户端<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Cisco AnyConnect 客户端<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>OpenConnect 客户端<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>兼容标准SSL VPN协议<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>使用说明<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;notice&quot;</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>🔔 首次使用请先下载安装客户端，使用公司账号登录<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">ol</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;padding-left: 2rem;&quot;</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>下载并安装对应客户端软件<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>输入服务器地址：vpn.abc.com<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>使用公司分配的账号密码登录<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>连接成功后即可访问内部资源<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">footer</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>© 2025 欢哥科技 版权所有<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>技术支持：admin@huangetech.com<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="客户端安装"><a href="#客户端安装" class="headerlink" title="客户端安装"></a>客户端安装</h2><p><strong>下载客户端</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.cisco.com/">AnyConnect Secure Client</a> ( Windows&#x2F;macOS&#x2F;Linux&#x2F;Android&#x2F;iOS)</p>
+<p><a target="_blank" rel="noopener" href="https://gitlab.com/openconnect/openconnect">OpenConnect</a> (Windows&#x2F;macOS&#x2F;Linux)</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tlslink/anylink-client">三方 AnyLink Secure Client</a> (Windows&#x2F;macOS&#x2F;Linux)</p>
+<p>【推荐】三方客户端下载地址( Windows&#x2F;macOS&#x2F;Linux&#x2F;Android&#x2F;iOS) <a target="_blank" rel="noopener" href="https://ocserv.yydy.link:2023/">国内地址</a> <a target="_blank" rel="noopener" href="https://cisco.yydy.link/#/">国外地址</a></p>
+<p>OpenConnect Linux 客户端登陆脚本 （NAS可用）</p>
+<p> <a target="_blank" rel="noopener" href="https://github.com/muzihuaner/Openconnect-Login-Linux-ShellScript">https://github.com/muzihuaner/Openconnect-Login-Linux-ShellScript</a></p>
+<p><strong>使用客户端</strong></p>
+<p>安装客户端后，输入VPN服务器地址（有端口加端口）</p>
+<p>点击链接，输入用户组、用户名、密码链接即可…</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
+      
+        <a href="/tags/VPN/" class="print-no-link">#VPN</a>
+      
+        <a href="/tags/Anylink/" class="print-no-link">#Anylink</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>docker部署开源企业级远程办公VPN及软件安装-AnyLink</div>
+      <div>https://blog.quickso.cn/2025/02/11/docker部署开源企业级远程办公VPN-及软件安装-AnyLink/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年2月11日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/02/22/Minecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E8%B5%84%E6%BA%90%E5%A4%A7%E6%9D%82%E7%83%A9/" title="Minecraft服务器搭建资源大杂烩">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Minecraft服务器搭建资源大杂烩</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/02/Termux%20+%20Debian%20+%20Ollama%20%E5%AE%9E%E7%8E%B0%E5%9C%A8%E6%89%8B%E6%9C%BA%E4%B8%8A%E9%83%A8%E7%BD%B2%20DeepSeek-R1-1.5B/" title="Termux + Debian + Ollama 实现在手机上部署 DeepSeek-R1-1.5B">
+                        <span class="hidden-mobile">Termux + Debian + Ollama 实现在手机上部署 DeepSeek-R1-1.5B</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

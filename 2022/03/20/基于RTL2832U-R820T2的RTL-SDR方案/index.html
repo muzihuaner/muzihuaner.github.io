@@ -1,0 +1,836 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="软件定义无线电（Software-defined radio；SDR）是一项新技术，它可以代替笨重的模拟无线电，提供更大的灵活性，性能和更小的尺寸。从手机到无线耳机，再到有线调制解调器，SDR如今无处不在。然而大多数SDR设备都非常昂贵，特别是HackRF，BladeRF等等。  RTL-SDR是一款超廉价的软件定义无线电，基于带有RTL2832U芯片的DVB-T电视调谐器。RTL-SDR可用作宽">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于RTL2832U+R820T2的RTL-SDR方案">
+<meta property="og:url" content="https://blog.quickso.cn/2022/03/20/%E5%9F%BA%E4%BA%8ERTL2832U-R820T2%E7%9A%84RTL-SDR%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="软件定义无线电（Software-defined radio；SDR）是一项新技术，它可以代替笨重的模拟无线电，提供更大的灵活性，性能和更小的尺寸。从手机到无线耳机，再到有线调制解调器，SDR如今无处不在。然而大多数SDR设备都非常昂贵，特别是HackRF，BladeRF等等。  RTL-SDR是一款超廉价的软件定义无线电，基于带有RTL2832U芯片的DVB-T电视调谐器。RTL-SDR可用作宽">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202236047.gif">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202236628.jpeg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202237497.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202238533.gif">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202238955.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202238977.jpeg">
+<meta property="article:published_time" content="2022-03-20T14:34:55.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.779Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="无线电">
+<meta property="article:tag" content="SDR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202236047.gif">
+  
+  
+  
+  <title>基于RTL2832U+R820T2的RTL-SDR方案 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="基于RTL2832U+R820T2的RTL-SDR方案"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-20 22:34" pubdate>
+          2022年3月20日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          951 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">基于RTL2832U+R820T2的RTL-SDR方案</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>软件定义无线电（Software-defined radio；SDR）是一项新技术，它可以代替笨重的模拟无线电，提供更大的灵活性，性能和更小的尺寸。从手机到无线耳机，再到有线调制解调器，SDR如今无处不在。然而大多数SDR设备都非常昂贵，特别是HackRF，BladeRF等等。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202236047.gif" srcset="/img/loading.gif" lazyload alt="rtl2832u-r820t2-tuner-ic-large-image.gif"></p>
+<p>RTL-SDR是一款超廉价的软件定义无线电，基于带有RTL2832U芯片的DVB-T电视调谐器。RTL-SDR可用作宽带无线电扫描仪。可能会让业余无线电爱好者或硬件黑客感兴趣。</p>
+<h2 id="硬件环境"><a href="#硬件环境" class="headerlink" title="硬件环境"></a>硬件环境</h2><h3 id="RTL2838U"><a href="#RTL2838U" class="headerlink" title="RTL2838U"></a>RTL2838U</h3><p>由Realtek公司制造<br><a target="_blank" rel="noopener" href="http://culmart.com/play/go/aHR0cHM6Ly93d3cucmVhbHRlay5jb20vZW4vcHJvZHVjdHMvY29tbXVuaWNhdGlvbnMtbmV0d29yay1pY3MvaXRlbS9ydGwyODMydQ==">https://www.realtek.com/en/products/communications-network-ics/item/rtl2832u</a></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202236628.jpeg" srcset="/img/loading.gif" lazyload alt="RTL2832U+R820T2.jpg"></p>
+<p>市场最常见这种RTL2832U解调器+R820T2调谐器方案。</p>
+<h3 id="RTL-SDR原理图"><a href="#RTL-SDR原理图" class="headerlink" title="RTL-SDR原理图"></a>RTL-SDR原理图</h3><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202237497.png" srcset="/img/loading.gif" lazyload alt="533933-20181206162952661-988862207.png"><br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202238533.gif" srcset="/img/loading.gif" lazyload alt="rtl2832u-r820t2-tuner.gif"></p>
+<h3 id="RTL2832U解调器"><a href="#RTL2832U解调器" class="headerlink" title="RTL2832U解调器"></a>RTL2832U解调器</h3><p>RTL2832U是一款高性能DVB-T COFDM解调器，支持USB 2.0接口。 RTL2832U符合NorDig Unified 1.0.3，D-Book 5.0和EN300 744（ETSI规范）。它支持2K或8K模式，带宽为6,7和8MHz。自动检测调制参数，例如码率和保护间隔。</p>
+<p>RTL2832U支持IF（中频，36.125MHz），低中频（4.57MHz）或使用28.8MHz晶振的零中频输出的调谐器，并包括FM &#x2F; DAB &#x2F; DAB +无线电支持。 RTL2832U内置高级ADC（模数转换器），在便携式接收中具有高稳定性。</p>
+<p>最先进的RTL2832U采用Realtek专有算法，包括卓越的信道估计，同频道接口抑制，长回声信道接收和脉冲噪声消除，为各种各样的算法提供理想的解决方案。 PC-TV的应用，如USB加密狗和MiniCard &#x2F; USB，以及通过USB接口的嵌入式系统。</p>
+<h3 id="R820T2调谐器"><a href="#R820T2调谐器" class="headerlink" title="R820T2调谐器"></a>R820T2调谐器</h3><p>R820T数字硅调谐器源自Rafael Micro最先进的架构，可实现最低功耗和最小字体系数。 R820T为所有数字广播电视标准提供无与伦比的RF性能，包括DVB-T，ATSC，DMB-T，ISDB-T。</p>
+<p>凭借创新的AccuTuneTM和TrueRFTM机制，R820T在灵敏度，线性度，相邻信道抗扰度和镜像抑制方面具有卓越的性能。该芯片嵌入了智能功率检测器，以优化不同的输入功率情况以及无杂散动态范围。</p>
+<p>R820T是一款高度集成的硅调谐器，内置低噪声放大器（LNA），混频器，分数PLL，VGA，稳压器和跟踪滤波器，无需外部SAW滤波器，LNA，平衡 - 不平衡转换器和LDO。得益于LNA架构，R820T为数字电视应用提供了最低成本和高性能的解决方案。片上LDO，高性能LNA和小型封装使R820T成为成本和字体因子敏感应用的完美解决方案。</p>
+<p>凭借专有的GreenRF技术，R820T实现了高性能和最低功耗，完全符合全球趋势。 R820T采用小巧轻薄的QFN RoHs封装。</p>
+<h2 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h2><h3 id="zadig"><a href="#zadig" class="headerlink" title="zadig"></a>zadig</h3><p>给SDR接收机安装usb驱动的工具。<br><a target="_blank" rel="noopener" href="http://culmart.com/play/go/aHR0cHM6Ly96YWRpZy5ha2VvLmllLw==">https://zadig.akeo.ie/</a></p>
+<h3 id="SDR"><a href="#SDR" class="headerlink" title="SDR"></a>SDR</h3><p>最常用的频谱观察，音频解调软件，支持AM、FM、SSB等多种调制方式。<br><a target="_blank" rel="noopener" href="http://culmart.com/play/go/aHR0cHM6Ly9haXJzcHkuY29tLw==">https://airspy.com/</a></p>
+<h3 id="RelWithDebInfo"><a href="#RelWithDebInfo" class="headerlink" title="RelWithDebInfo"></a>RelWithDebInfo</h3><p><a target="_blank" rel="noopener" href="http://culmart.com/play/go/aHR0cDovL3Nkci5vc21vY29tLm9yZy90cmFjL3Jhdy1hdHRhY2htZW50L3dpa2kvcnRsLXNkci8=">http://sdr.osmocom.org/trac/raw-attachment/wiki/rtl-sdr/</a><br>解压RelWithDebInfo.zip， 把RelWithDebInfo.ziprtl-sdr-releasex32 下的 rtlsdr.dll和libusb-1.0.dll 复制到 SDR# 的目录下。</p>
+<h3 id="重要提示"><a href="#重要提示" class="headerlink" title="重要提示"></a>重要提示</h3><p>理论上完成以上安装就可以开玩。不过，如果显示驱动程序出错的问题，可能需要按照以下步骤安装zadig：</p>
+<p>或者，最保险的方式是执行SDR#目录里面的install-rtlsdr.bat自动安装zadig，以及所需要的RelWithDebInfo。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202238955.png" srcset="/img/loading.gif" lazyload alt="install-rtlsdr.bat"></p>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="zadig-1"><a href="#zadig-1" class="headerlink" title="zadig"></a>zadig</h3><p>go to “Options-&gt;List All Devices” and make sure this option is checked. If you are using Windows 10, in some cases you may need to also uncheck “Ignore Hubs or Composite Parents”.</p>
+<p>Select “Bulk-In, Interface (Interface 0)” from the drop down list. Note on some PCs you may see something like RTL2832UHIDIR or RTL2832U instead of the bulk in interface. This is also a valid selection. </p>
+<h3 id="SDR-1"><a href="#SDR-1" class="headerlink" title="SDR"></a>SDR</h3><p>打开SDR#下的SDRSharp.exe</p>
+<p>设置信号源类型。set the “Source” drop down box to ‘RTL-SDR (USB)’.<br>点击开始按钮。Press the Play button (the right facing triangle).<br>调节增益。Don’t forget to also adjust the RF gain settings by pressing the Configure button (looks like a cog) up the top next to the Play button. By default the RF gain is set at zero. A gain of zero will probably receive nothing but very strong broadcast FM - increase the gain until you start seeing other signals.</p>
+<ul>
+<li>rtl-sdr软件大全 <a target="_blank" rel="noopener" href="http://culmart.com/play/go/aHR0cHM6Ly93d3cucnRsLXNkci5jb20vYmlnLWxpc3QtcnRsLXNkci1zdXBwb3J0ZWQtc29mdHdhcmUv">https://www.rtl-sdr.com/big-list-rtl-sdr-supported-software/</a></li>
+<li>有关rtl-sdr的专业网站 <a target="_blank" rel="noopener" href="http://culmart.com/play/go/aHR0cHM6Ly93d3cucnRsLXNkci5jb20v">https://www.rtl-sdr.com/</a></li>
+</ul>
+<h2 id="RTL-SDR的应用"><a href="#RTL-SDR的应用" class="headerlink" title="RTL-SDR的应用"></a>RTL-SDR的应用</h2><h3 id="在PC上听电台"><a href="#在PC上听电台" class="headerlink" title="在PC上听电台"></a>在PC上听电台</h3><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/202203202238977.jpeg" srcset="/img/loading.gif" lazyload alt="b40d47da81cb39db88a8470bd9160924aa18304f.jpg"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" class="print-no-link">#无线电</a>
+      
+        <a href="/tags/SDR/" class="print-no-link">#SDR</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>基于RTL2832U+R820T2的RTL-SDR方案</div>
+      <div>https://blog.quickso.cn/2022/03/20/基于RTL2832U-R820T2的RTL-SDR方案/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/07/07/4g%E9%9A%8F%E8%BA%ABWi-Fi%E5%88%B7%E6%9C%BA%E6%95%99%E7%A8%8B/" title="4g随身Wi-Fi刷机教程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">4g随身Wi-Fi刷机教程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/20/ADB%E4%B8%8B%E8%BD%BD%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="ADB下载使用方法及常用命令">
+                        <span class="hidden-mobile">ADB下载使用方法及常用命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

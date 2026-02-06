@@ -1,0 +1,1487 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="哪吒监控开源、轻量、易用的服务器监控与运维工具 官方网站：https:&#x2F;&#x2F;nezha.wiki&#x2F; Github：https:&#x2F;&#x2F;github.com&#x2F;nezhahq&#x2F;nezhahq.github.io  START最近，哪吒面板进行了V1版本的更新，页面UI和系统操作逻辑和V0相比有了非常大的变化， 所以写一篇新的教程教大家如何搭建安装。  安装 Dashboard准备工作搭建哪吒监控的 Das">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哪吒面板新版本v1安装教程">
+<meta property="og:url" content="https://blog.quickso.cn/2024/12/01/%E5%93%AA%E5%90%92%E9%9D%A2%E6%9D%BF%E6%96%B0%E7%89%88%E6%9C%ACv1%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="哪吒监控开源、轻量、易用的服务器监控与运维工具 官方网站：https:&#x2F;&#x2F;nezha.wiki&#x2F; Github：https:&#x2F;&#x2F;github.com&#x2F;nezhahq&#x2F;nezhahq.github.io  START最近，哪吒面板进行了V1版本的更新，页面UI和系统操作逻辑和V0相比有了非常大的变化， 所以写一篇新的教程教大家如何搭建安装。  安装 Dashboard准备工作搭建哪吒监控的 Das">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241201150437124.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241201152638638.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241201150358094.png">
+<meta property="article:published_time" content="2024-12-01T06:23:25.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.777Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="VPS">
+<meta property="article:tag" content="哪吒面板">
+<meta property="article:tag" content="探针">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241201150437124.png">
+  
+  
+  
+  <title>哪吒面板新版本v1安装教程 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="哪吒面板新版本v1安装教程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-12-01 14:23" pubdate>
+          2024年12月1日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">哪吒面板新版本v1安装教程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<h1 id="哪吒监控"><a href="#哪吒监控" class="headerlink" title="哪吒监控"></a>哪吒监控</h1><p>开源、轻量、易用的服务器监控与运维工具</p>
+<p>官方网站：<a target="_blank" rel="noopener" href="https://nezha.wiki/">https://nezha.wiki/</a></p>
+<p>Github：<a target="_blank" rel="noopener" href="https://github.com/nezhahq/nezhahq.github.io">https://github.com/nezhahq/nezhahq.github.io</a></p>
+</blockquote>
+<h1 id="START"><a href="#START" class="headerlink" title="START"></a>START</h1><p>最近，哪吒面板进行了V1版本的更新，页面UI和系统操作逻辑和V0相比有了非常大的变化，</p>
+<p>所以写一篇新的教程教大家如何搭建安装。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241201150437124.png" srcset="/img/loading.gif" lazyload alt="image-20241201150437124"></p>
+<h1 id="安装-Dashboard"><a href="#安装-Dashboard" class="headerlink" title="安装 Dashboard"></a>安装 Dashboard</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>搭建哪吒监控的 Dashboard，你需要：</p>
+<ol>
+<li>一台可以连接公网的服务器。防火墙和安全策略需放行 8008 端口，否则无法访问或接收数据。单核 512MB 内存的服务器即可满足大多数使用场景。</li>
+<li>一个已设置好 A 记录，指向 Dashboard 服务器 IP 的域名。</li>
+</ol>
+<blockquote>
+<p>如果你想使用 CDN，请准备两个域名：</p>
+<ul>
+<li>一个配置好 CDN，用作公开访问，CDN 需支持 WebSocket 协议；</li>
+<li>另一个域名不使用 CDN，用作 Agent 与 Dashboard 的通信。</li>
+</ul>
+<p>本文档以 “dashboard.example.com” 和 “data.example.com” 为例。</p>
+</blockquote>
+<h2 id="在服务器中安装-Dashboard"><a href="#在服务器中安装-Dashboard" class="headerlink" title="在服务器中安装 Dashboard"></a>在服务器中安装 Dashboard</h2><p>在面板服务器中，运行以下安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -L https://raw.githubusercontent.com/nezhahq/scripts/refs/heads/main/install.sh -o nezha.sh &amp;&amp; <span class="hljs-built_in">chmod</span> +x nezha.sh &amp;&amp; <span class="hljs-built_in">sudo</span> ./nezha.sh<br></code></pre></td></tr></table></figure>
+
+<p>如果你的服务器位于中国大陆，可以使用镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -L https://gitee.com/naibahq/scripts/raw/main/install.sh -o nezha.sh &amp;&amp; <span class="hljs-built_in">chmod</span> +x nezha.sh &amp;&amp; <span class="hljs-built_in">sudo</span> CN=<span class="hljs-literal">true</span> ./nezha.sh<br></code></pre></td></tr></table></figure>
+
+<p>以 Docker 安装为例，安装完成后按提示输入以下信息：</p>
+<ul>
+<li><code>请输入站点标题:</code> - 自定义站点标题。</li>
+<li><code>请输入暴露端口:</code> - 公开访问端口（默认 8008，可自定义，如果是云服务器记得在安全组开启8008端口）。</li>
+<li><code>请指定后台语言:</code> - 选择语言偏好。</li>
+</ul>
+<p>输入完成后，等待拉取 Docker 镜像。安装结束后，如果一切正常，你可以通过域名和端口号访问 Dashboard，例如：<br><code>http://dashboard.example.com:8008</code></p>
+<p>如果需要再次运行安装脚本，可输入以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./nezha.sh<br></code></pre></td></tr></table></figure>
+
+<p>打开管理脚本。</p>
+<h2 id="登录到-Dashboard-配置界面"><a href="#登录到-Dashboard-配置界面" class="headerlink" title="登录到 Dashboard 配置界面"></a>登录到 Dashboard 配置界面</h2><p>后台管理界面的路径为 <code>/dashboard</code>，你只需访问：<br><code>http://dashboard.example.com:8008/dashboard</code></p>
+<p>首次登录的默认用户名和密码均为 <code>admin</code>。</p>
+<blockquote>
+<p><strong>WARNING</strong></p>
+<p>默认密码为弱密码，对于高权限的面板来说，使用弱密码非常危险！<br>建议安装后立即进入管理页面：点击头像 → “个人信息” → “更新个人资料”修改密码。<br>建议密码长度至少 18 位，并混合大小写字母、数字及符号。</p>
+</blockquote>
+<h2 id="配置反向代理"><a href="#配置反向代理" class="headerlink" title="配置反向代理"></a>配置反向代理</h2><p><strong>本教程以1panel配置反向代理 Dashboard 的过程作为示范。</strong></p>
+<blockquote>
+<p>WARNING</p>
+<p>本项目并不依赖1panel面板。你可以使用任何服务器面板，或手动安装 Nginx 或 Caddy 来配置 SSL 和反向代理。</p>
+<p>如果你认为无需通过 80 或 443 端口访问 Dashboard，可以直接使用安装脚本部署并运行哪吒监控，无需安装 Nginx 或其他 Web 服务器。</p>
+</blockquote>
+<p>以1panel面板为例，在1panel面板中<strong>新建网站</strong>，选择<strong>反向代理</strong>，<strong>主域名</strong>填写公开访问域名，如 <code>http://dashboard.example.com</code>，然后填写“<strong>代理地址</strong>”。</p>
+<p>在“代理地址”中填入：<br><code>http://127.0.0.1:8008</code><br>点击“确定”。</p>
+<p>现在，你可以直接通过域名访问面板，例如：<br><code>http://dashboard.example.com</code></p>
+<h2 id="更新-Dashboard"><a href="#更新-Dashboard" class="headerlink" title="更新 Dashboard"></a>更新 Dashboard</h2><p>运行脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./nezha.sh<br></code></pre></td></tr></table></figure>
+
+<p>选择重启面板并更新。</p>
+<h1 id="安装-Agent"><a href="#安装-Agent" class="headerlink" title="安装 Agent"></a>安装 Agent</h1><blockquote>
+<p><strong>哪吒监控的被控端服务被称为 Agent</strong></p>
+<p>Agent 二进制文件仓库地址为：<a target="_blank" rel="noopener" href="https://github.com/nezhahq/agent/releases">https://github.com/nezhahq/agent/releases</a></p>
+</blockquote>
+<h2 id="一键安装-Agent"><a href="#一键安装-Agent" class="headerlink" title="一键安装 Agent"></a>一键安装 Agent</h2><p>哪吒监控支持在 Windows、macOS 和 Linux 上一键安装 Agent。遵循本文档的步骤，你可以轻松地在服务器上部署它。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241201152638638.png" srcset="/img/loading.gif" lazyload alt="image-20241201152638638"></p>
+<h3 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h3><p>在安装前，需要提前在管理面板中设置通信域名，该域名不可以接入 CDN。本文档以示例通信域名 “data.example.com” 为例。</p>
+<ol>
+<li>在后台管理面板点击头像，进入“系统设置”页。</li>
+<li>在“仪表板服务器域名&#x2F;IP（无 CDN）”项中填入通信域名。</li>
+<li>点击“确认”保存设置。</li>
+</ol>
+<h3 id="一键安装步骤"><a href="#一键安装步骤" class="headerlink" title="一键安装步骤"></a>一键安装步骤</h3><ol>
+<li>在 <code>服务器</code> 页面中，点击 <code>安装命令</code> 并选择对应操作系统，安装命令将自动复制到你的剪贴板。</li>
+<li>在被控端服务器中运行安装命令，等待安装完成后返回到 <code>服务器</code> 页面查看是否上线。</li>
+<li>如果安装成功，页面中将自动弹出新的服务器，你可以点击编辑按钮为其设置名称。</li>
+</ol>
+<h3 id="平台特有问题说明"><a href="#平台特有问题说明" class="headerlink" title="平台特有问题说明"></a>平台特有问题说明</h3><h4 id="1-不小心多执行了几次，多了好多一样的Agent怎么办？"><a href="#1-不小心多执行了几次，多了好多一样的Agent怎么办？" class="headerlink" title="1.不小心多执行了几次，多了好多一样的Agent怎么办？"></a>1.不小心多执行了几次，多了好多一样的Agent怎么办？</h4><p>如果有多个 <code>nezha-agent</code> 服务实例，你可以运行以下命令来查看所有相关服务并停止它们：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl list-units --<span class="hljs-built_in">type</span>=service | grep nezha-agent<br></code></pre></td></tr></table></figure>
+
+<p>然后，针对每个服务运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl stop &lt;service-name&gt;<br></code></pre></td></tr></table></figure>
+<p>最后，删除&#x2F;opt&#x2F;nezha&#x2F;agent&#x2F;nezha-agent&#x2F;xxx-config.yml 文件</p>
+<h4 id="2-Windows-特殊说明"><a href="#2-Windows-特殊说明" class="headerlink" title="2.Windows 特殊说明"></a>2.Windows 特殊说明</h4><ol>
+<li><p>在 Windows 服务器中，运行 PowerShell。</p>
+</li>
+<li><p>在 PowerShell 中粘贴并运行安装命令(复制命令后修改并按下面方法执行)。</p>
+</li>
+</ol>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment">#分别执行</span><br><span class="hljs-variable">$env:NZ_SERVER</span>=<span class="hljs-string">&quot;xxxx:8008&quot;</span> <span class="hljs-comment">#记得加&quot;&quot;</span><br><span class="hljs-variable">$env:NZ_TLS</span>=<span class="hljs-string">&quot;false&quot;</span> <br><span class="hljs-variable">$env:NZ_CLIENT_SECRET</span>=<span class="hljs-string">&quot;xxxx&quot;</span><br><span class="hljs-comment">#然后执行</span><br>  <br>[<span class="hljs-type">Net.ServicePointManager</span>]::SecurityProtocol = [<span class="hljs-type">Net.SecurityProtocolType</span>]::Ssl3 <span class="hljs-operator">-bor</span> [<span class="hljs-type">Net.SecurityProtocolType</span>]::Tls <span class="hljs-operator">-bor</span> [<span class="hljs-type">Net.SecurityProtocolType</span>]::Tls11 <span class="hljs-operator">-bor</span> [<span class="hljs-type">Net.SecurityProtocolType</span>]::Tls12;<span class="hljs-built_in">set-ExecutionPolicy</span> RemoteSigned;<span class="hljs-built_in">Invoke-WebRequest</span> https://raw.githubusercontent.com/nezhahq/scripts/main/agent/install.ps1 <span class="hljs-literal">-OutFile</span> C:install.ps1;powershell.exe C:install.ps1<br></code></pre></td></tr></table></figure>
+<ol start="4">
+<li>如遇到「执行策略变更」确认提示，输入 <code>Y</code> 并回车。</li>
+</ol>
+<h4 id="3-Agent-有-Docker-镜像吗？"><a href="#3-Agent-有-Docker-镜像吗？" class="headerlink" title="3.Agent 有 Docker 镜像吗？"></a>3.Agent 有 Docker 镜像吗？</h4><p><strong>Agent 目前没有推出 Docker 镜像。</strong><br>Agent 的设计思路和 Dashboard 相反：Dashboard 的目标是尽量减少对宿主机的干扰，而 Agent 则需要深度与宿主机集成以执行监控服务和命令任务。</p>
+<p>虽然将 Agent 放入容器中可以继续执行监控任务，但 WebShell 等功能将无法正常运行，因此官方不提供 Docker 镜像支持。</p>
+<h1 id="设置三网监控"><a href="#设置三网监控" class="headerlink" title="设置三网监控"></a>设置三网监控</h1><p>要新增一个网络波动监控，请按照以下步骤操作：</p>
+<ol>
+<li><strong>进入管理面板</strong><br>转到 <strong><code>服务</code></strong> 页，点击 <strong><code>+</code></strong> 按钮添加新的服务监控。</li>
+<li><strong>配置参数</strong><br>在新增监控时，设置以下参数：<ul>
+<li><strong>名称</strong>：为此服务自定义一个名称。</li>
+<li>目标<ul>
+<li><code>TCP Ping</code>：输入运营商 IP 地址&#x2F;域名并添加端口号，例如：<code>1.1.1.1:80</code> 或 <code>example.com:22</code>。</li>
+</ul>
+</li>
+<li><strong>类型</strong>：选择监控类型（<code>TCP Ping</code>）。</li>
+<li><strong>服务中显示</strong>：选择是否向游客显示此监控（隐私性选项）。</li>
+<li><strong>间隔</strong>：设置监控间隔时间（单位：秒）。</li>
+<li><strong>覆盖范围</strong>：选择一条规则来确定哪些 Agent 请求目标。</li>
+<li><strong>特定服务器</strong>：指定覆盖范围内需要使用的 Agent。</li>
+<li><strong>通知组 ID</strong>：选择已在 <strong><code>通知</code></strong> 页中配置的通知方式，详见 <a target="_blank" rel="noopener" href="https://nezha.wiki/guide/notifications.html#%E7%81%B5%E6%B4%BB%E7%9A%84%E9%80%9A%E7%9F%A5%E6%96%B9%E5%BC%8F">通知方式配置</a>。</li>
+<li><strong>启用失败通知</strong>：可选择在目标故障时接收通知（默认为不启用）。</li>
+</ul>
+</li>
+<li><strong>提交监控</strong><br>点击 <strong><code>提交</code></strong> 按钮保存配置，稍等片刻后返回主页查看监控结果。</li>
+</ol>
+<p><strong>效果：</strong></p>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241201150358094.png" srcset="/img/loading.gif" lazyload alt="image-20241201150358094"></p>
+<h3 id="全国三网IP地址"><a href="#全国三网IP地址" class="headerlink" title="全国三网IP地址"></a>全国三网IP地址</h3><ul>
+<li>河北</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>61.182.138.156</td>
+<td>111.62.229.100</td>
+<td>27.185.242.215</td>
+</tr>
+</tbody></table>
+<ul>
+<li>山西</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>60.221.18.41</td>
+<td>183.201.244.91</td>
+<td>1.71.157.41</td>
+</tr>
+</tbody></table>
+<ul>
+<li>辽宁</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>218.61.211.132</td>
+<td>36.131.156.145</td>
+<td>123.184.58.41</td>
+</tr>
+</tbody></table>
+<ul>
+<li>吉林</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>122.143.8.41</td>
+<td>111.27.127.176</td>
+<td>123.172.127.217</td>
+</tr>
+</tbody></table>
+<ul>
+<li>黑龙江</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>113.7.211.140</td>
+<td>111.42.190.25</td>
+<td>42.101.84.132</td>
+</tr>
+</tbody></table>
+<ul>
+<li>江苏</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>122.96.235.165</td>
+<td>36.156.92.132</td>
+<td>58.215.210.220</td>
+</tr>
+</tbody></table>
+<ul>
+<li>浙江</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>101.69.194.224</td>
+<td>117.147.213.41</td>
+<td>115.220.14.91</td>
+</tr>
+</tbody></table>
+<ul>
+<li>安徽</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>112.132.208.41</td>
+<td>112.29.198.100</td>
+<td>223.247.108.251</td>
+</tr>
+</tbody></table>
+<ul>
+<li>福建</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>36.248.48.139</td>
+<td>112.50.96.88</td>
+<td>106.126.10.28</td>
+</tr>
+</tbody></table>
+<ul>
+<li>江西</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>116.153.69.224</td>
+<td>117.168.150.249</td>
+<td>106.227.22.132</td>
+</tr>
+</tbody></table>
+<ul>
+<li>山东</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>112.240.56.143</td>
+<td>120.220.145.91</td>
+<td>144.123.160.140</td>
+</tr>
+</tbody></table>
+<ul>
+<li>河南</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>123.6.65.101</td>
+<td>111.7.99.220</td>
+<td>171.15.110.220</td>
+</tr>
+</tbody></table>
+<ul>
+<li>湖北</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>122.189.226.138</td>
+<td>111.47.131.101</td>
+<td>111.170.8.60</td>
+</tr>
+</tbody></table>
+<ul>
+<li>湖南</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>116.162.28.220</td>
+<td>120.226.192.91</td>
+<td>113.240.117.108</td>
+</tr>
+</tbody></table>
+<ul>
+<li>广东</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>112.90.211.100</td>
+<td>183.240.65.191</td>
+<td>183.36.23.111</td>
+</tr>
+</tbody></table>
+<ul>
+<li>海南</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>153.0.226.35</td>
+<td>111.29.29.219</td>
+<td>124.225.43.220</td>
+</tr>
+</tbody></table>
+<ul>
+<li>四川</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>101.206.163.49</td>
+<td>183.220.151.41</td>
+<td>118.123.218.220</td>
+</tr>
+</tbody></table>
+<ul>
+<li>贵州</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>117.187.254.132</td>
+<td>61.243.18.220</td>
+<td>58.42.61.132</td>
+</tr>
+</tbody></table>
+<ul>
+<li>云南</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>14.204.150.41</td>
+<td>36.147.44.219</td>
+<td>222.221.102.220</td>
+</tr>
+</tbody></table>
+<ul>
+<li>陕西</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>123.139.127.132</td>
+<td>111.19.148.100</td>
+<td>124.115.14.100</td>
+</tr>
+</tbody></table>
+<ul>
+<li>甘肃</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>59.81.94.53</td>
+<td>117.157.16.41</td>
+<td>118.182.228.91</td>
+</tr>
+</tbody></table>
+<ul>
+<li>青海</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>116.177.237.137</td>
+<td>111.12.152.170</td>
+<td>223.221.216.219</td>
+</tr>
+</tbody></table>
+<ul>
+<li>内蒙古</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>116.114.98.41</td>
+<td>117.161.76.41</td>
+<td>110.76.186.70</td>
+</tr>
+</tbody></table>
+<ul>
+<li>广西</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>171.39.5.51</td>
+<td>36.136.112.41</td>
+<td>222.217.93.55</td>
+</tr>
+</tbody></table>
+<ul>
+<li>西藏</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>43.242.165.35</td>
+<td>117.180.234.41</td>
+<td>113.62.176.89</td>
+</tr>
+</tbody></table>
+<ul>
+<li>宁夏</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>116.129.226.28</td>
+<td>111.51.155.214</td>
+<td>222.75.44.220</td>
+</tr>
+</tbody></table>
+<ul>
+<li>新疆</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>116.178.77.40</td>
+<td>36.189.208.164</td>
+<td>110.157.243.45</td>
+</tr>
+</tbody></table>
+<ul>
+<li>北京</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>202.108.29.159</td>
+<td>222.35.73.1</td>
+<td>220.181.173.35</td>
+</tr>
+</tbody></table>
+<ul>
+<li>天津</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>116.78.119.56</td>
+<td>111.31.236.35</td>
+<td>42.81.98.35</td>
+</tr>
+</tbody></table>
+<ul>
+<li>上海</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>59.81.65.42</td>
+<td>183.194.219.220</td>
+<td>101.227.191.14</td>
+</tr>
+</tbody></table>
+<ul>
+<li>重庆</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>联通</th>
+<th>移动</th>
+<th>电信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>113.207.69.190</td>
+<td>221.178.81.101</td>
+<td>119.84.131.101</td>
+</tr>
+</tbody></table>
+<h1 id="通知设置"><a href="#通知设置" class="headerlink" title="通知设置"></a>通知设置</h1><blockquote>
+<p>哪吒监控支持对服务器的负载、CPU、内存、硬盘、流量、月流量、进程数和连接数进行监控，并在达到用户设定的阈值时发送通知。</p>
+</blockquote>
+<h4 id="1-先设置一个通知方式"><a href="#1-先设置一个通知方式" class="headerlink" title="1.先设置一个通知方式"></a>1.先设置一个通知方式</h4><p>我这里是用飞书</p>
+<p><strong>获取 URL 参数</strong></p>
+<ol>
+<li><strong>创建机器人</strong>：在飞书群设置中添加自定义机器人（Webhook）。</li>
+<li><strong>获取 Webhook URL</strong>：创建完成后获得。</li>
+</ol>
+<p><strong>通知配置：</strong></p>
+<ul>
+<li><strong>名称</strong>：哪吒面板 Bot</li>
+<li><strong>URL</strong>：<code>https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxxxxxxxxxxxxx</code></li>
+<li><strong>请求方式</strong>：<code>POST</code></li>
+<li><strong>请求类型</strong>：<code>JSON</code></li>
+<li><strong>Body</strong>：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;msg_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;text&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;content&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;【哪吒通知消息】\n🕐 时间：\n#DATETIME#\n📋 事件：\n#NEZHA#&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>更多通知方式：</p>
+<p><a target="_blank" rel="noopener" href="https://nezha.wiki/guide/notifications.html">https://nezha.wiki/guide/notifications.html</a></p>
+<blockquote>
+<p>如果对通知配置有疑问，可以使用以下第三方配置生成器简化操作（哪吒监控不对第三方生成器的功能性作任何保证）：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://nz.sina.us.kg/">Nezha Rule Generator</a>：适用于大多数场景。</li>
+<li><a target="_blank" rel="noopener" href="https://wiziscool.github.io/Nezha-Traffic-Alarm-Generator/">Nezha-Traffic-Alarm-Generator</a>：专注于周期流量通知规则生成。</li>
+</ul>
+</blockquote>
+<h4 id="2-设置告警"><a href="#2-设置告警" class="headerlink" title="2.设置告警"></a>2.设置告警</h4><p><a target="_blank" rel="noopener" href="https://nezha.wiki/guide/notifications.html#%E8%AD%A6%E6%8A%A5%E8%A7%84%E5%88%99%E8%AF%B4%E6%98%8E">https://nezha.wiki/guide/notifications.html#%E8%AD%A6%E6%8A%A5%E8%A7%84%E5%88%99%E8%AF%B4%E6%98%8E</a></p>
+<hr>
+<h4 id="3-设置通知分组"><a href="#3-设置通知分组" class="headerlink" title="3.设置通知分组"></a>3.设置通知分组</h4><blockquote>
+<p>通知分组允许用户将多个通知方式组合成一个通知组，通知组可用作任务或告警的通知目标，实现一键发送多种方式的通知。</p>
+</blockquote>
+<p>配置步骤</p>
+<p>1.点击“<strong>分组</strong>”-“<strong>通知分组</strong>”</p>
+<p>2.选择你要已经设置好的通知方式。</p>
+<h4 id="4-应用通知组"><a href="#4-应用通知组" class="headerlink" title="4.应用通知组"></a>4.应用通知组</h4><p>在任务或告警规则中选择通知组作为通知目标，触发时会同时通过分组内的所有通知方式发送通知。</p>
+<h1 id="END"><a href="#END" class="headerlink" title="END"></a>END</h1><p>好了，这样基本就安装好了。其他内容可以看<a target="_blank" rel="noopener" href="https://nezha.wiki/">官方文档</a></p>
+<p>DEMO：<a target="_blank" rel="noopener" href="https://serverstatus.quickso.cn/">https://serverstatus.quickso.cn/</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/VPS/" class="print-no-link">#VPS</a>
+      
+        <a href="/tags/%E5%93%AA%E5%90%92%E9%9D%A2%E6%9D%BF/" class="print-no-link">#哪吒面板</a>
+      
+        <a href="/tags/%E6%8E%A2%E9%92%88/" class="print-no-link">#探针</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>哪吒面板新版本v1安装教程</div>
+      <div>https://blog.quickso.cn/2024/12/01/哪吒面板新版本v1安装教程/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年12月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/12/24/Virtualizor%E9%83%A8%E7%BD%B2%E5%8F%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E5%AF%B9%E6%8E%A5whmcs/" title="Virtualizor部署及安装并对接whmcs">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Virtualizor部署及安装并对接whmcs</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/05/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF6crDroid%E7%B1%BB%E5%8E%9F%E7%94%9F%E5%AE%89%E5%8D%9314%E7%B3%BB%E7%BB%9F%E5%88%B7%E6%9C%BA/" title="小米平板6crDroid类原生安卓14系统刷机">
+                        <span class="hidden-mobile">小米平板6crDroid类原生安卓14系统刷机</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

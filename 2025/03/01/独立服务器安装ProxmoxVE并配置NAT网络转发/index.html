@@ -1,0 +1,944 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="最近买了一台美国独服，只有一个IPv4，这里记录一下ProxmoxVE安装以及网络配置 1.安装Debian12这里使用服务商提供的IPMI面板 登陆 ipmi，获取 jnlp 文件 根据上图，点击监视窗口下载 jnlp。第一步完成 安装 jdk 环境，用来打开 jnlp 文件这里推荐 jdk 版本 1.7 版本。这里也贴心的准备两个直连下载地址  win 32 位： http:&#x2F;&#x2F;iso.nom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="独立服务器安装ProxmoxVE并配置NAT网络转发">
+<meta property="og:url" content="https://blog.quickso.cn/2025/03/01/%E7%8B%AC%E7%AB%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85ProxmoxVE%E5%B9%B6%E9%85%8D%E7%BD%AENAT%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="最近买了一台美国独服，只有一个IPv4，这里记录一下ProxmoxVE安装以及网络配置 1.安装Debian12这里使用服务商提供的IPMI面板 登陆 ipmi，获取 jnlp 文件 根据上图，点击监视窗口下载 jnlp。第一步完成 安装 jdk 环境，用来打开 jnlp 文件这里推荐 jdk 版本 1.7 版本。这里也贴心的准备两个直连下载地址  win 32 位： http:&#x2F;&#x2F;iso.nom">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi1.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301075419142.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301074925018.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi2.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301075155342.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi3.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi4.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/netboot.xyz-d976acd5e46c61339230d38e767fbdc2.gif">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301101749350.png">
+<meta property="article:published_time" content="2025-02-28T23:36:10.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.783Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="独立服务器">
+<meta property="article:tag" content="ProxmoxVE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi1.png">
+  
+  
+  
+  <title>独立服务器安装ProxmoxVE并配置NAT网络转发 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="独立服务器安装ProxmoxVE并配置NAT网络转发"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-01 07:36" pubdate>
+          2025年3月1日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">独立服务器安装ProxmoxVE并配置NAT网络转发</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>最近买了一台美国独服，只有一个IPv4，这里记录一下ProxmoxVE安装以及网络配置</p>
+<h1 id="1-安装Debian12"><a href="#1-安装Debian12" class="headerlink" title="1.安装Debian12"></a>1.安装Debian12</h1><p>这里使用服务商提供的IPMI面板</p>
+<h3 id="登陆-ipmi，获取-jnlp-文件"><a href="#登陆-ipmi，获取-jnlp-文件" class="headerlink" title="登陆 ipmi，获取 jnlp 文件"></a>登陆 ipmi，获取 jnlp 文件</h3><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi1.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>根据上图，点击监视窗口下载 jnlp。第一步完成</p>
+<h3 id="安装-jdk-环境，用来打开-jnlp-文件"><a href="#安装-jdk-环境，用来打开-jnlp-文件" class="headerlink" title="安装 jdk 环境，用来打开 jnlp 文件"></a>安装 jdk 环境，用来打开 jnlp 文件</h3><p>这里推荐 jdk 版本 1.7 版本。这里也贴心的准备两个直连下载地址</p>
+<ol>
+<li>win 32 位： <a target="_blank" rel="noopener" href="http://iso.nomao.top/iso/jdk1.732.exe">http://iso.nomao.top/iso/jdk1.732.exe</a></li>
+<li>win 64 位：<a target="_blank" rel="noopener" href="http://iso.nomao.top/iso/jdk1.7.exe">http://iso.nomao.top/iso/jdk1.7.exe</a></li>
+</ol>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301075419142.png" srcset="/img/loading.gif" lazyload alt="image-20250301075419142"></p>
+<h3 id="双击打开-jnlp-文件，挂载-iso，进行安装"><a href="#双击打开-jnlp-文件，挂载-iso，进行安装" class="headerlink" title="双击打开 jnlp 文件，挂载 iso，进行安装"></a>双击打开 jnlp 文件，挂载 iso，进行安装</h3><h3 id="ipmi-白名单"><a href="#ipmi-白名单" class="headerlink" title="ipmi 白名单"></a>ipmi 白名单</h3><p>ipmi 为了安全，都会启用白名单 ip 访问，因此 java ikvm 也需要使用此白名单 ip 访问。<br>但是国外的服务器，使用国内的 ip 访问 java ikvm 会很缓慢，连接失败都问题。<br>因此：解决方案有两个<br>①使用真全局代理（我使用的是这个)</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301074925018.png" srcset="/img/loading.gif" lazyload alt="image-20250301074925018">②使用国外 win 机器，连接 java ikvm</p>
+<p>成功连接 java ikvm 后，你会看到以下画面，请看图！</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi2.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>选择 virtual storage</li>
+<li>选择 cdrom&amp;iso</li>
+<li>选择 iso 文件</li>
+<li>打开文件夹选择 iso 文件</li>
+<li>插入</li>
+</ol>
+<p>这里为了方便，使用Netboot安装镜像(在线安装)</p>
+<p><a target="_blank" rel="noopener" href="https://netboot.xyz/downloads/">https://netboot.xyz/downloads/</a></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301075155342.png" srcset="/img/loading.gif" lazyload alt="image-20250301075155342"></p>
+<h3 id="重启服务器，狂按-F11，进入-启动项菜单"><a href="#重启服务器，狂按-F11，进入-启动项菜单" class="headerlink" title="重启服务器，狂按 F11，进入 启动项菜单"></a>重启服务器，狂按 F11，进入 启动项菜单</h3><p>怕有人不会，上一张图</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi3.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi4.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>根据你选择挂载，我刚刚挂载是 cdrom，因此选择是 cdrom 这个启动项。</p>
+<p>进入后填写你的公网IP、子网掩码、网关、DNS安装即可，具体步骤略</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/netboot.xyz-d976acd5e46c61339230d38e767fbdc2.gif" srcset="/img/loading.gif" lazyload alt="netboot.xyz menu"></p>
+<h1 id="2-安装Proxmox-VE"><a href="#2-安装Proxmox-VE" class="headerlink" title="2.安装Proxmox VE"></a>2.安装Proxmox VE</h1><h3 id="1-配置hosts文件"><a href="#1-配置hosts文件" class="headerlink" title="1.配置hosts文件"></a>1.配置hosts文件</h3><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">nano /etc/hosts<br>修改为下面格式，prox4m1为你的主机名，可以自定义。<span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">15</span>.<span class="hljs-number">77</span>为公网IP<br><span class="hljs-number">127.0.0.1</span>       localhost<br><span class="hljs-number">192.168.15.77</span>   prox4m1.proxmox.com prox4m1<br><br># The following lines are desirable for IPv6 capable hosts<br>::<span class="hljs-number">1</span>     localhost ip6-localhost ip6-loopback<br>ff02::<span class="hljs-number">1</span> ip6-allnodes<br>ff02::<span class="hljs-number">2</span> ip6-allrouters<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-安装Proxmox-VE-1"><a href="#2-安装Proxmox-VE-1" class="headerlink" title="2.安装Proxmox VE"></a>2.安装Proxmox VE</h3><p>添加 Proxmox VE 仓库</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">echo <span class="hljs-string">&quot;deb [arch=amd64] http://download.proxmox.com/debian/pve bookworm pve-no-subscription&quot;</span> &gt; /etc/apt/sources<span class="hljs-meta">.list</span>.d/pve-install-repo<span class="hljs-meta">.list</span><br></code></pre></td></tr></table></figure>
+
+<p>添加仓库 key </p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">wget https://enterprise.proxmox.com/debian/proxmox-<span class="hljs-keyword">release</span>-bookworm.gpg -O /etc/apt/<span class="hljs-keyword">trusted</span>.gpg.d/proxmox-<span class="hljs-keyword">release</span>-bookworm.gpg <br># verify<br>sha512sum /etc/apt/<span class="hljs-keyword">trusted</span>.gpg.d/proxmox-<span class="hljs-keyword">release</span>-bookworm.gpg <br><span class="hljs-number">7</span>da6fe34168adc6e479327ba517796d4702fa2f8b4f0a9833f5ea6e6b48f6507a6da403a274fe201595edc86a84463d50383d07f64bdde2e3658108db7d6dc87 /etc/apt/<span class="hljs-keyword">trusted</span>.gpg.d/proxmox-<span class="hljs-keyword">release</span>-bookworm.gpg <br></code></pre></td></tr></table></figure>
+
+<p>更新软件源和系统:</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">apt <span class="hljs-keyword">update</span> &amp;&amp; apt <span class="hljs-keyword">full</span>-upgrade<br></code></pre></td></tr></table></figure>
+
+<p>安装 Proxmox VE 内核</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nsis">apt install proxmox-default-kernel<br><br><span class="hljs-params">system</span>ctl <span class="hljs-keyword">reboot</span><br></code></pre></td></tr></table></figure>
+
+<p>安装 Proxmox VE 软件包</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift">apt install proxmox<span class="hljs-operator">-</span>ve <span class="hljs-keyword">postfix</span> <span class="hljs-keyword">open</span><span class="hljs-operator">-</span>iscsi chrony<br></code></pre></td></tr></table></figure>
+
+<p>移除Debian内核</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">apt <span class="hljs-built_in">remove</span> linux-<span class="hljs-built_in">image</span>-amd64 &#x27;linux-<span class="hljs-built_in">image</span>-<span class="hljs-number">6.1</span>*&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>更新grub配置</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">update-grub</span><br></code></pre></td></tr></table></figure>
+
+<p>移除os-prober包</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">apt <span class="hljs-built_in">remove</span> <span class="hljs-built_in">os</span>-prober<br></code></pre></td></tr></table></figure>
+
+<p>Proxmox VE 网页访问</p>
+<p>连接到管理Web界面（<code>https：// your-ip-address：8006</code>）。如果尚未添加任何用户，则应选择PAM身份验证领域并使用“ root”用户帐户登录。</p>
+<h3 id="3-配置网络"><a href="#3-配置网络" class="headerlink" title="3.配置网络"></a>3.配置网络</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /etc/network<br><span class="hljs-built_in">cp</span> interfaces interfaces.bk <span class="hljs-comment">#备份一下</span><br></code></pre></td></tr></table></figure>
+
+<p>修改interfaces</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># network interface settings; autogenerated</span><br><span class="hljs-comment"># Please do NOT modify this file directly, unless you know what</span><br><span class="hljs-comment"># you&#x27;re doing.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># If you want to manage parts of the network configuration manually,</span><br><span class="hljs-comment"># please utilize the &#x27;source&#x27; or &#x27;source-directory&#x27; directives to do</span><br><span class="hljs-comment"># so.</span><br><span class="hljs-comment"># PVE will preserve these directives, but will NOT read its network</span><br><span class="hljs-comment"># configuration from sourced files, so do not attempt to move any of</span><br><span class="hljs-comment"># the PVE managed interfaces into external files!</span><br><br><span class="hljs-attribute">source</span> /etc/network/interfaces.d/*<br><br><span class="hljs-attribute">auto</span> lo<br><span class="hljs-attribute">iface</span> lo inet loopback<br><br><span class="hljs-attribute">auto</span> eno1<br><span class="hljs-attribute">iface</span> eno1 inet static<br>	<span class="hljs-attribute">address</span> 公网IP/<span class="hljs-number">31</span><br>	<span class="hljs-attribute">gateway</span> 公网网关<br>	<span class="hljs-attribute">dns</span>-nameservers <span class="hljs-number">8.8.8.8</span><br><span class="hljs-comment"># dns-* options are implemented by the resolvconf package, if installed</span><br><br><span class="hljs-attribute">iface</span> enp0s25 inet manual<br><br><span class="hljs-attribute">auto</span> vmbr0<br><span class="hljs-comment">#private sub network</span><br><span class="hljs-attribute">iface</span> vmbr0 inet static<br>        <span class="hljs-attribute">address</span>  <span class="hljs-number">10.10.10.1</span>/<span class="hljs-number">24</span><br>        <span class="hljs-attribute">bridge</span>-ports none<br>        <span class="hljs-attribute">bridge</span>-stp <span class="hljs-literal">off</span><br>        <span class="hljs-attribute">bridge</span>-fd <span class="hljs-number">0</span><br><br>        <span class="hljs-attribute">post</span>-up   echo <span class="hljs-number">1</span> &gt; /proc/sys/net/ipv4/ip_forward<br>        <span class="hljs-attribute">post</span>-up   iptables -t nat -A POSTROUTING -s &#x27;<span class="hljs-number">10.10.10.0</span>/<span class="hljs-number">24</span>&#x27; -o eno1 -j MASQUERADE<br>        <span class="hljs-attribute">post</span>-down iptables -t nat -D POSTROUTING -s &#x27;<span class="hljs-number">10.10.10.0</span>/<span class="hljs-number">24</span>&#x27; -o eno1 -j MASQUERADE<br></code></pre></td></tr></table></figure>
+
+<p>重启网络</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">systemctl restart networking</span><br></code></pre></td></tr></table></figure>
+
+<p>配置好后是这样</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">执行 route -n<br>Kernel IP routing table<br>Destination     Gateway         Genmask         Flags Metric Ref    Use Iface<br><span class="hljs-number">0.0.0.0</span>         x.x.x.x   <span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>         UG    <span class="hljs-number">0</span>      <span class="hljs-number">0</span>        <span class="hljs-number">0</span> eno1<br><span class="hljs-number">10.10.10.0</span>      <span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>         <span class="hljs-number">255</span>.<span class="hljs-number">255</span>.<span class="hljs-number">255</span>.<span class="hljs-number">0</span>   U     <span class="hljs-number">0</span>      <span class="hljs-number">0</span>        <span class="hljs-number">0</span> vmbr0<br>x.x.x.x   <span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>         <span class="hljs-number">255</span>.<span class="hljs-number">255</span>.<span class="hljs-number">255</span>.<span class="hljs-number">254</span> U     <span class="hljs-number">0</span>      <span class="hljs-number">0</span>        <span class="hljs-number">0</span> eno1<br></code></pre></td></tr></table></figure>
+
+<h1 id="3-创建kvm虚拟机"><a href="#3-创建kvm虚拟机" class="headerlink" title="3.创建kvm虚拟机"></a>3.创建kvm虚拟机</h1><blockquote>
+<p>不是CT，pve直接可下载CT的模版</p>
+<p>除了下面的方法，你也可以使用iso镜像安装</p>
+</blockquote>
+<h3 id="1-创建一个新的虚拟机"><a href="#1-创建一个新的虚拟机" class="headerlink" title="1.创建一个新的虚拟机"></a>1.创建一个新的虚拟机</h3><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">qm create 103</span> <span class="hljs-literal">--</span><span class="hljs-comment">memory 2048</span> <span class="hljs-literal">--</span><span class="hljs-comment">core 2</span> <span class="hljs-literal">--</span><span class="hljs-comment">name ubuntu</span><span class="hljs-literal">-</span><span class="hljs-comment">cloud</span> <span class="hljs-literal">--</span><span class="hljs-comment">net0 virtio</span><span class="hljs-string">,</span><span class="hljs-comment">bridge=vmbr0</span><br></code></pre></td></tr></table></figure>
+
+<p>这里是创建 id 为 103 的虚拟机，内存大小为 2G ， CPU 核心数量 2，名称是 ubuntu-cloud </p>
+<p>并设置网卡桥接到 vmbr0</p>
+<h3 id="2-准备-Cloud-Init-镜像"><a href="#2-准备-Cloud-Init-镜像" class="headerlink" title="2.准备 Cloud-Init 镜像"></a>2.准备 Cloud-Init 镜像</h3><p>Cloud-Init 需要特定镜像支持。推荐使用官方提供的预装 Cloud-Init 的镜像，例如：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cloud.debian.org/images/cloud/">https://cloud.debian.org/images/cloud/</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud-images.ubuntu.com/releases/">https://cloud-images.ubuntu.com/releases/</a></li>
+<li><a target="_blank" rel="noopener" href="https://down.idc.wiki/Image/realServer-Template/current/qcow2/">https://down.idc.wiki/Image/realServer-Template/current/qcow2/</a></li>
+</ul>
+<p>下载镜像后，上传到 PVE 存储：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># 示例：将 镜像上传到 PVE 的 `<span class="hljs-keyword">local</span>` 存储<br>qm importdisk &lt;VMID&gt; /<span class="hljs-type">path</span>/<span class="hljs-keyword">to</span>/xxx.img <span class="hljs-keyword">local</span><br>或者<br>qm importdisk &lt;VMID&gt; /<span class="hljs-type">path</span>/<span class="hljs-keyword">to</span>/xxx.qcow2 <span class="hljs-keyword">local</span> <span class="hljs-comment">--format=qcow</span><br></code></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">qm importdisk <span class="hljs-number">103</span> noble-<span class="hljs-keyword">server</span>-cloudimg-amd64.img <span class="hljs-keyword">local</span><br></code></pre></td></tr></table></figure>
+
+<p>将新导入的磁盘以 scsi 驱动器的方式装载到新建的虚拟机的 scsi 控制器</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">qm</span> set <span class="hljs-number">103</span> --scsihw virtio-scsi-pci --scsi0 local-lvm/vm-<span class="hljs-number">103</span>-disk-<span class="hljs-number">0</span><br><span class="hljs-attribute">qm</span> set <span class="hljs-number">103</span> --scsihw virtio-scsi-pci --scsi0 local:<span class="hljs-number">103</span>/vm-<span class="hljs-number">103</span>-disk-<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301101749350.png" srcset="/img/loading.gif" lazyload alt="image-20250301101749350"></p>
+<h3 id="添加-cloud-init-驱动器"><a href="#添加-cloud-init-驱动器" class="headerlink" title="添加 cloud init 驱动器"></a>添加 cloud init 驱动器</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">qm <span class="hljs-keyword">set</span> <span class="hljs-number">103</span> <span class="hljs-comment">--ide2 local:cloudinit</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="将-cloud-init-驱动器设置为可启动并限制-BIOS-仅从磁盘启动"><a href="#将-cloud-init-驱动器设置为可启动并限制-BIOS-仅从磁盘启动" class="headerlink" title="将 cloud init 驱动器设置为可启动并限制 BIOS 仅从磁盘启动"></a>将 cloud init 驱动器设置为可启动并限制 BIOS 仅从磁盘启动</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">qm <span class="hljs-keyword">set</span> 103 <span class="hljs-params">--boot</span> c <span class="hljs-params">--bootdisk</span> scsi0<br></code></pre></td></tr></table></figure>
+
+<h3 id="添加串口控制台"><a href="#添加串口控制台" class="headerlink" title="添加串口控制台"></a>添加串口控制台</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">qm <span class="hljs-keyword">set</span> 103 <span class="hljs-params">--serial0</span> socket <span class="hljs-params">--vga</span> serial0<br></code></pre></td></tr></table></figure>
+
+<h2 id="现在先不要启动虚拟机"><a href="#现在先不要启动虚拟机" class="headerlink" title="现在先不要启动虚拟机"></a>现在先不要启动虚拟机</h2><p>现在可以配置新虚拟机的硬件和 cloud init 选项，配置好之后转换成模板。磁盘大小的调整可以在转换成模板前调整，或者从模板克隆出新的虚拟机时候再调整。</p>
+<ul>
+<li>用户：root</li>
+<li>密码：改为你想要的root密码</li>
+<li>IP配置：<br>IPv4&#x2F;CIDR：填你想要的静态IP，如：10.10.10.2&#x2F;24<br>网关：第2步你自己配置的虚拟网卡，如：10.10.10.1</li>
+</ul>
+<h3 id="创建模板（也可以在-Web-UI-操作）"><a href="#创建模板（也可以在-Web-UI-操作）" class="headerlink" title="创建模板（也可以在 Web UI 操作）"></a>创建模板（也可以在 Web UI 操作）</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">qm</span> template <span class="hljs-number">103</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="克隆模板（也可以在-Web-UI-操作）"><a href="#克隆模板（也可以在-Web-UI-操作）" class="headerlink" title="克隆模板（也可以在 Web UI 操作）"></a>克隆模板（也可以在 Web UI 操作）</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">qm <span class="hljs-keyword">clone</span> <span class="hljs-title">103</span> <span class="hljs-number">135</span> --name huihui --full<br></code></pre></td></tr></table></figure>
+
+<h2 id="排障"><a href="#排障" class="headerlink" title="排障"></a>排障</h2><p>如果需要重置机器 id</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -f /etc/machine-id<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -f /var/lib/dbus/machine-id<br></code></pre></td></tr></table></figure>
+
+<p>然后关机，下次启动会生成新的机器 id，如果没有生成，可以运行以下命令：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">sudo systemd-machine-<span class="hljs-built_in">id</span>-setup<br></code></pre></td></tr></table></figure>
+
+<p>也可以使用我的脚本快速创建模板</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/muzihuaner/ProxmoxVE-template-maker">https://github.com/muzihuaner/ProxmoxVE-template-maker</a></p>
+<h3 id="5-开机"><a href="#5-开机" class="headerlink" title="5.开机"></a>5.开机</h3><p>点启动，开机后先用pve控制台打开登录你设置的root和密码</p>
+<ul>
+<li>运行<code>ip a</code>，看下静态IP类似10.10.10.2</li>
+<li>看下外网通吗，再运行<code>ping 8.8.8.8</code></li>
+</ul>
+<h3 id="6-配置nat端口转发"><a href="#6-配置nat端口转发" class="headerlink" title="6.配置nat端口转发"></a>6.配置nat端口转发</h3><p><a target="_blank" rel="noopener" href="https://github.com/muzihuaner/NATScript/">https://github.com/muzihuaner/NATScript/</a></p>
+<blockquote>
+<p>[!NOTE]</p>
+<p>没网？<br>如果到最后一步，你发现nat机无法连接外网，可能是转发规则设置错了<br>在宿主机运行 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> iptables -t nat -A POSTROUTING -s <span class="hljs-string">&#x27;你的内网网关ip/24&#x27;</span> -o 你宿主机的网卡接口 -j MASQUERADE<br></code></pre></td></tr></table></figure>
+
+<p>例如：<code>sudo iptables -t nat -A POSTROUTING -s &#39;10.10.10.0/24&#39; -o eno1 -j MASQUERADE</code></p>
+</blockquote>
+<p>大概就这些…有其他的我再更新…未完待续</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%BF%90%E7%BB%B4/" class="print-no-link">#运维</a>
+      
+        <a href="/tags/%E7%8B%AC%E7%AB%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="print-no-link">#独立服务器</a>
+      
+        <a href="/tags/ProxmoxVE/" class="print-no-link">#ProxmoxVE</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>独立服务器安装ProxmoxVE并配置NAT网络转发</div>
+      <div>https://blog.quickso.cn/2025/03/01/独立服务器安装ProxmoxVE并配置NAT网络转发/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年3月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/03/09/%E5%B9%B4%E8%BD%BB%E4%BA%BA%E7%9A%84%E7%AC%AC%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E2%80%94%E2%80%94SuperMicroSuperServer5018D-MF+X10SLL-F%E4%B8%BB%E6%9D%BF%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/" title="年轻人的第一台服务器——SuperMicro SuperServer5018D-MF+X10SLL-F主板使用体验">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">年轻人的第一台服务器——SuperMicro SuperServer5018D-MF+X10SLL-F主板使用体验</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/28/VMwareESXI%E5%AF%86%E9%92%A5-ISO%E9%95%9C%E5%83%8F/" title="VMwareESXI密钥/ISO镜像">
+                        <span class="hidden-mobile">VMwareESXI密钥/ISO镜像</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

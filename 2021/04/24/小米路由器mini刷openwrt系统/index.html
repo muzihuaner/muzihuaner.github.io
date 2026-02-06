@@ -1,0 +1,867 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="前言这个路由器有16M的ROM，还能装点东西，比斐讯K2还是好使得多，可以刷功能较齐备的openwrt，顺便搞个去广告，科学上网等 刷机步骤小米路由器要刷其他系统，需要先获得SSH权限，而获得SSH权限则需要先刷开发版 只有开发版系统才能开启SSH权限，所以第一步我们需要将路由器系统刷为开发版。到小米路由官网去下载开发版系统ROM，建议直接刷这个版本小米路由器mini MiWiFi 开发版 0.8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小米路由器mini刷openwrt系统">
+<meta property="og:url" content="https://blog.quickso.cn/2021/04/24/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8mini%E5%88%B7openwrt%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="前言这个路由器有16M的ROM，还能装点东西，比斐讯K2还是好使得多，可以刷功能较齐备的openwrt，顺便搞个去广告，科学上网等 刷机步骤小米路由器要刷其他系统，需要先获得SSH权限，而获得SSH权限则需要先刷开发版 只有开发版系统才能开启SSH权限，所以第一步我们需要将路由器系统刷为开发版。到小米路由官网去下载开发版系统ROM，建议直接刷这个版本小米路由器mini MiWiFi 开发版 0.8">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210424200506.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210424201327.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210424201406.png">
+<meta property="article:published_time" content="2021-04-24T11:58:22.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.780Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="路由器">
+<meta property="article:tag" content="小米">
+<meta property="article:tag" content="Openwrt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210424200506.png">
+  
+  
+  
+  <title>小米路由器mini刷openwrt系统 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="小米路由器mini刷openwrt系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-04-24 19:58" pubdate>
+          2021年4月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">小米路由器mini刷openwrt系统</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a target="_blank" rel="noopener" href="https://www.mi.com/miwifilite/specs">这个路由器</a>有16M的ROM，还能装点东西，比斐讯K2还是好使得多，可以刷功能较齐备的openwrt，顺便搞个去广告，科学上网等</p>
+<h1 id="刷机步骤"><a href="#刷机步骤" class="headerlink" title="刷机步骤"></a>刷机步骤</h1><p>小米路由器要刷其他系统，需要先获得SSH权限，而获得SSH权限则需要先刷开发版</p>
+<p>只有开发版系统才能开启SSH权限，所以第一步我们需要将路由器系统刷为开发版。<br>到<a target="_blank" rel="noopener" href="http://www.miui.com/thread-1776173-1-1.html">小米路由官网</a>去下载开发版系统ROM，建议直接刷这个版本<a target="_blank" rel="noopener" href="http://bigota.miwifi.com/xiaoqiang/rom/r1cm/miwifi_r1cm_firmware_426e6_0.8.11.bin">小米路由器mini MiWiFi 开发版 0.8.11</a></p>
+<blockquote>
+<p>非常重要，如果版本高了，不能开启SSH，版本低了没有修改root用户的api。</p>
+</blockquote>
+<h3 id="刷开发版"><a href="#刷开发版" class="headerlink" title="刷开发版"></a>刷开发版</h3><p>刷入开发版非常简单，步骤如下：</p>
+<ol>
+<li>将上面下载好的固件改名为：<code>miwifi.bin</code> ，放入一个U盘的根目录，U盘需要是 <code>FAT32</code> 格式</li>
+<li>U盘插到路由屁股上，拿根取卡针等尖头物件顶住 <code>reset</code> ，然后插入电源</li>
+<li>路由器指示灯先会常亮黄色，等指示灯狂闪后就可以松开 <code>reset</code> 了，然后静候路由器指示灯变成蓝色</li>
+</ol>
+<p>以上做完就完成刷入开发版的步骤了。如果指示灯是红色，那么代表这个固件有问题，重新更换固件，断电再走一遍流程就可以了，不用担心会变砖。</p>
+<h3 id="开启SSH权限"><a href="#开启SSH权限" class="headerlink" title="开启SSH权限"></a>开启SSH权限</h3><p>系统刷好开发版后，我们就可以开启系统的SSH权限了。开启SSH权限，需要登录<a target="_blank" rel="noopener" href="http://d.miwifi.com/rom/ssh">官方网站</a>下载对应的工具包：</p>
+<ol>
+<li>请将下载的工具包 <code>bin</code> 文件复制到U盘（<code>FAT/FAT32</code> 格式）的根目录下，保证文件名为 <code>miwifi_ssh.bin</code> 「如果之前刷开发版用的同一个U盘，那之前放的 <code>miwifi.bin</code> 删除掉不需要多说吧？」；</li>
+<li>断开小米路由器的电源，将U盘插入USB接口；</li>
+<li>抵住 <code>reset</code> 按钮之后重新插上电源，指示灯变为黄色闪烁状态即可松开 <code>reset</code> 键；</li>
+<li>等待3-5秒后安装完成之后，小米路由器会自动重启</li>
+</ol>
+<blockquote>
+<p>官方给每个账号提供了一个随机的root密码，为了管理方便，我们可以登录后用 <code>passwd</code> 命令将root密码改成我们自己好记得的</p>
+</blockquote>
+<p>刷完 <code>miwifi_ssh.bin</code> 后，我们可以用Xshell等SSH客户端连接登录路由器，我这里使用的是FinalShell</p>
+<p>如果不成功（红灯）就换个固件或者U盘</p>
+<h3 id="刷Breed"><a href="#刷Breed" class="headerlink" title="刷Breed"></a>刷Breed</h3><p>SSH权限搞定后，我们要做的是换个BootLoder系统，大名鼎鼎的Breed（Boot and Recovery Environment for Embedded Devices）便是不二选择。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210424200506.png" srcset="/img/loading.gif" lazyload alt="Breed Web 恢复控制台"></p>
+<p>要刷入Breed也不复杂，操作步骤如下：</p>
+<h3 id="1-下载Breed固件"><a href="#1-下载Breed固件" class="headerlink" title="1.下载Breed固件"></a>1.下载Breed固件</h3><p>在<a target="_blank" rel="noopener" href="https://breed.hackpascal.net/">Breed固件列表</a>，查找自己设备所需的版本，小米路由器mini需要的是这个：<a target="_blank" rel="noopener" href="https://breed.hackpascal.net/breed-mt7620-xiaomi-mini.bin">breed-mt7620-xiaomi-mini.bin</a></p>
+<h3 id="2-备份原有的BootLoder"><a href="#2-备份原有的BootLoder" class="headerlink" title="2.备份原有的BootLoder"></a>2.备份原有的BootLoder</h3><p>使用SSH客户端连接登录路由系统，输入以下命令：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">dd <span class="hljs-attribute">if</span>=/dev/mtd1 <span class="hljs-attribute">of</span>=/tmp/xiaomi_uboot.bin<br></code></pre></td></tr></table></figure>
+
+<p>系统返回，说明已经将原来的xiaomi_uboot.bin备份到&#x2F;tmp：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">384</span>+<span class="hljs-number">0</span> records in<br><span class="hljs-attribute">384</span>+<span class="hljs-number">0</span> records out<br></code></pre></td></tr></table></figure>
+
+<p>备份完成后将备份文件下载到本地妥善保存，用不到就最好了。不知道怎么下载？那就扔了不要了吧，就当这步备份操作白做了，反正出了问题自己负责o(<em>￣︶￣</em>)o</p>
+<h3 id="3-刷Breed"><a href="#3-刷Breed" class="headerlink" title="3.刷Breed"></a>3.刷Breed</h3><p>用sftp之类工具把Breed固件上传到 <code>/tmp</code> 目录下，如果不会传那也可以ssh登录路由系统后执行下面的命令直接从网上下载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /tmp<br>wget http://down.sobaigu.com/files/breed-mt7620-xiaomi-mini.bin<br></code></pre></td></tr></table></figure>
+
+<p>这里，我的路由器wget用不了，所以下载<a target="_blank" rel="noopener" href="https://winscp.net/eng/docs/lang:chs">WinSCP</a>，把下载好的固件上传到 <code>/tmp</code> 目录下</p>
+<p>然后执行以下写入命令：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">mtd -r <span class="hljs-keyword">write</span> <span class="hljs-regexp">/tmp/</span>breed-mt7620-xiaomi-mini.bin Bootloader<br></code></pre></td></tr></table></figure>
+
+<p>眨眼的功夫就刷写完成了，完成后关闭路由拔掉电源，找取卡针之类的尖物件抵住 <code>reset</code> 按钮，插上电源开机，等到路由指示灯狂闪的时候，就可以松开 <code>reset</code> 键，然后在用网线连接在该路由上的Wan口浏览器登录 <code>192.168.1.1</code> 就可以进入 <code>Breed web恢复控制台</code> 界面了，就如上面那个截图。</p>
+<h3 id="刷固件"><a href="#刷固件" class="headerlink" title="刷固件"></a>刷固件</h3><p>在刷固件前，建议使用Breed固件备份功能，将原路由所有的项目备份好以备用，同样的用不到最好。</p>
+<p>因为路由有16M的ROM，所以可选的固件还是蛮多的，潘朵拉，华硕改等固件都行，在此推荐一个，个人觉着还蛮不错的，功能也齐全：<a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-423219-1-1.html">小米路由器Mini Lean R9.7.6 自编译固件</a></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210424201327.png" srcset="/img/loading.gif" lazyload alt="固件更新"></p>
+<p>选择 <code>固件更新</code> 》点击 <code>固件</code> 右侧的 <code>选择文件</code> ，选择刚下载的固件文件，然后点上传，不一会儿就完成了，新系统默认后台信息为：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dns">IP：   <span class="hljs-number">192.168.1.1</span><br>用户： root<br>密码： password<br></code></pre></td></tr></table></figure>
+
+<p>至此，路由器系统脱胎换骨完成，有广告屏蔽，有科学上网还支持订阅地址，V2Ray，支持局域网网络唤醒设备，提供打印机服务…… 有点小瑕疵，可能有内存泄露开久了会死机，带宽监控统计图表不展示之类的，设置下每周定时重启，完全OK，知足常乐！</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210424201406.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="更换Wan口的MAC地址"><a href="#更换Wan口的MAC地址" class="headerlink" title="更换Wan口的MAC地址"></a>更换Wan口的MAC地址</h3><p>在SSH中输入</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">vi /etc/config/network<br></code></pre></td></tr></table></figure>
+
+<p>修改其中一段</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs stylus">config <span class="hljs-string">&#x27;interface&#x27;</span> <span class="hljs-string">&#x27;lan&#x27;</span><br>        <span class="hljs-selector-tag">option</span> <span class="hljs-string">&#x27;type&#x27;</span> <span class="hljs-string">&#x27;bridge&#x27;</span><br>        <span class="hljs-selector-tag">option</span> <span class="hljs-string">&#x27;ifname&#x27;</span> <span class="hljs-string">&#x27;eth0.0&#x27;</span><br>        <span class="hljs-selector-tag">option</span> <span class="hljs-string">&#x27;proto&#x27;</span> <span class="hljs-string">&#x27;static&#x27;</span><br>        <span class="hljs-selector-tag">option</span> <span class="hljs-string">&#x27;netmask&#x27;</span> <span class="hljs-string">&#x27;255.255.255.0&#x27;</span><br>        <span class="hljs-selector-tag">option</span> <span class="hljs-string">&#x27;ipaddr&#x27;</span> <span class="hljs-string">&#x27;192.168.200.1&#x27;</span><br>        <span class="hljs-selector-tag">option</span> <span class="hljs-string">&#x27;macaddr&#x27;</span> <span class="hljs-string">&#x27;d8:64:c7:5e:f1:c6&#x27;</span><br><br>config <span class="hljs-string">&#x27;interface&#x27;</span> <span class="hljs-string">&#x27;wan&#x27;</span><br>        <span class="hljs-selector-tag">option</span> <span class="hljs-string">&#x27;ifname&#x27;</span> <span class="hljs-string">&#x27;eth0.1&#x27;</span><br>        <span class="hljs-selector-tag">option</span> <span class="hljs-string">&#x27;proto&#x27;</span> <span class="hljs-string">&#x27;dhcp&#x27;</span><br>        <span class="hljs-selector-tag">option</span> <span class="hljs-string">&#x27;macaddr&#x27;</span> <span class="hljs-string">&#x27;d8:64:c7:5e:f1:c6&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>修改Wan口Mac地址即可</p>
+<p>之后保存，reboot 重启，就能看到所有修改都生效了。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" class="print-no-link">#路由器</a>
+      
+        <a href="/tags/%E5%B0%8F%E7%B1%B3/" class="print-no-link">#小米</a>
+      
+        <a href="/tags/Openwrt/" class="print-no-link">#Openwrt</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>小米路由器mini刷openwrt系统</div>
+      <div>https://blog.quickso.cn/2021/04/24/小米路由器mini刷openwrt系统/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年4月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/20/%E5%9F%BA%E4%BA%8E%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%9A%84Google%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B/" title="基于宝塔面板的Google镜像网站设置教程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">基于宝塔面板的Google镜像网站设置教程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/09/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85MySQL%E5%92%8CPhpMyAdmin/" title="为玩客云或树莓派安装LNMP和PhpMyAdmin">
+                        <span class="hidden-mobile">为玩客云或树莓派安装LNMP和PhpMyAdmin</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

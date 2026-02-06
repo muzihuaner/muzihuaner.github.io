@@ -1,0 +1,999 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="进行操作前首先请先备份树莓派数据，防止操作过程中出现的问题导致数据丢失！连接杜邦线的长度不宜过长，防止发射范围超过法律规定，切勿违犯无线电管理条例！操作过程中会设置force_turbo&#x3D;1强制超频将使得树莓派官方保修失效！请考虑好再进行操作。  《中华人民共和国无线电管理条例》早就听说过树莓派能够发射广播信号，奈何当时没有树莓派，无法进行尝试。 现在有了一个树莓派3B，可以玩了～ 接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用树莓派搭建自己的FM电台并进行直播">
+<meta property="og:url" content="https://blog.quickso.cn/2024/01/14/%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84FM%E7%94%B5%E5%8F%B0%E5%B9%B6%E8%BF%9B%E8%A1%8C%E7%9B%B4%E6%92%AD/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="进行操作前首先请先备份树莓派数据，防止操作过程中出现的问题导致数据丢失！连接杜邦线的长度不宜过长，防止发射范围超过法律规定，切勿违犯无线电管理条例！操作过程中会设置force_turbo&#x3D;1强制超频将使得树莓派官方保修失效！请考虑好再进行操作。  《中华人民共和国无线电管理条例》早就听说过树莓派能够发射广播信号，奈何当时没有树莓派，无法进行尝试。 现在有了一个树莓派3B，可以玩了～ 接">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141557337.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141555065.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141555703.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141555768.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141555459.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141555388.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556484.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556410.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556855.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556084.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556054.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556177.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556801.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556472.png">
+<meta property="og:image" content="https://github.com/F5OEO/rpitx/raw/master/doc/Tunerpitx.png">
+<meta property="og:image" content="https://github.com/F5OEO/rpitx/raw/master/doc/chirprpitx.png">
+<meta property="og:image" content="https://github.com/F5OEO/rpitx/raw/master/doc/spectrumrpitx.png">
+<meta property="og:image" content="https://github.com/F5OEO/rpitx/raw/master/doc/rfmyface.png">
+<meta property="og:image" content="https://github.com/F5OEO/rpitx/raw/master/doc/fmrds.png">
+<meta property="og:image" content="https://github.com/F5OEO/rpitx/raw/master/doc/ssbrpitx.png">
+<meta property="og:image" content="https://github.com/F5OEO/rpitx/raw/master/doc/sstvrpitx.JPG">
+<meta property="og:image" content="https://github.com/F5OEO/rpitx/raw/master/doc/pocsagrpitx.JPG">
+<meta property="og:image" content="https://github.com/F5OEO/rpitx/raw/master/doc/freedvrpitx.JPG">
+<meta property="og:image" content="https://github.com/F5OEO/rpitx/raw/master/doc/operarpitx.JPG">
+<meta property="article:published_time" content="2024-01-14T06:50:50.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.784Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="业余无线电">
+<meta property="article:tag" content="树莓派">
+<meta property="article:tag" content="电台">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141557337.png">
+  
+  
+  
+  <title>用树莓派搭建自己的FM电台并进行直播 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="用树莓派搭建自己的FM电台并进行直播"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-14 14:50" pubdate>
+          2024年1月14日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          31 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">用树莓派搭建自己的FM电台并进行直播</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>进行操作前首先请先备份树莓派数据，防止操作过程中出现的问题导致数据丢失！<br>连接杜邦线的长度不宜过长，防止发射范围超过法律规定，切勿违犯无线电管理条例！<br>操作过程中会设置force_turbo&#x3D;1强制超频将使得树莓派官方保修失效！请考虑好再进行操作。</p>
+</blockquote>
+<h2 id="《中华人民共和国无线电管理条例》"><a href="#《中华人民共和国无线电管理条例》" class="headerlink" title="《中华人民共和国无线电管理条例》"></a><a target="_blank" rel="noopener" href="https://www.gov.cn/zhengce/content/2016-11/25/content_5137687.htm">《中华人民共和国无线电管理条例》</a></h2><p>早就听说过树莓派能够发射广播信号，奈何当时没有树莓派，无法进行尝试。</p>
+<p>现在有了一个树莓派3B，可以玩了～</p>
+<p>接下来教你如何用树莓派搭建一个自己的FM电台并发射直播信号进行直播</p>
+<p>所需要的材料：电脑一台、树莓派（看适配列表）一个，杜邦线一条（选配，也可以用铜线、铜丝代替），收音机一台（或者有FM收音功能的设备，比如手机，对讲机，电台）</p>
+<p>主要用到的软件：rpitx。它可以让树莓派发射5 KHz到1500 MHz之间的广播信号。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx">https://github.com/F5OEO/rpitx</a></p>
+<p>除此之外你还可以用</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ChristopheJacquet/PiFmRds">https://github.com/ChristopheJacquet/PiFmRds</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/markondej/fm_transmitter">https://github.com/markondej/fm_transmitter</a></p>
+<p>适配列表</p>
+<table>
+<thead>
+<tr>
+<th>树莓派型号</th>
+<th align="center">状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Pizero</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>PizeroW</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>PiA+</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>PiB</td>
+<td align="center">部分</td>
+</tr>
+<tr>
+<td>PiB+</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>P2B</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>Pi3B</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>Pi3B+</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>Pi4</td>
+<td align="center">测试</td>
+</tr>
+</tbody></table>
+<p>注：切勿在没有带通滤波器的情况下使用天线传输</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141557337.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="安装rpitx"><a href="#安装rpitx" class="headerlink" title="安装rpitx"></a>安装rpitx</h2><p>实测在<a target="_blank" rel="noopener" href="https://downloads.raspberrypi.org/">Raspberry Pi OS 64位</a>版本上安装成功并能正常运行。</p>
+<ol>
+<li>先更新树莓派上的软件包：<code>sudo apt update</code></li>
+<li>之后安装Git： <code>sudo apt install git</code></li>
+</ol>
+<p>注：rpitx软件源在Github，国内直接访问可能有些许困难，安装过程也需要一直连接Github安装依赖。因此安装好Git后建议提前给树莓派上的Git配置好代理，可以保证之后的安装比较顺利。搜索关键字：Git 配置代理</p>
+<ol>
+<li><p>cd到合适的位置(有权限的位置)，拉取rpitx在Github的代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/F5OEO/rpitx<br></code></pre></td></tr></table></figure></li>
+<li><p>进入rpitx文件夹：<code>cd rpitx</code></p>
+</li>
+<li><p>安装rpitx：<code>./install.sh</code></p>
+</li>
+</ol>
+<p>之后就是漫长的安装过程了，中间会有一些报错，但是只要安装没有停下来就问题不大。</p>
+<p>在安装最后，会提示是否允许修改 <code>/boot/config.txt</code>，这一步要求我们将GPU的频率锁定在250Mhz，并设置 <code>force_turbo=1</code>强制超频。 <strong>注意！设置 <code>force_turbo=1</code>强制超频将使得树莓派保修失效。</strong> 输入y并回车，之后重启树莓派即可。（不要修改 <code>config.txt</code>文件）</p>
+<h2 id="rpitx测试"><a href="#rpitx测试" class="headerlink" title="rpitx测试"></a>rpitx测试</h2><p>现在让我们测试一下是否正确安装了rpitx。如果你的树莓派有金属保护壳的话，将保护壳拿下来，把树莓派暴露出来，否则收音机收不到足够的信号。</p>
+<ol>
+<li>先进入rpitx目录：<code>cd rpitx</code></li>
+<li>然后输入rpitx自带的测试命令：<code>./easytest.sh</code></li>
+<li>输入命令之后窗口会变成蓝色，首先需要输入发射的频率，我国FM收音机的能接受的频率在87.5~108之间，输入一个这段频率之间的、你本地没有其他电台占用的频率，回车即可。<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141555065.png" srcset="/img/loading.gif" lazyload alt="选择频率"></li>
+<li>之后就进入选择发射方式的菜单了，按方向键选择“FmRds”的选项，按回车键确认。<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141555703.png" srcset="/img/loading.gif" lazyload alt="选择发射方式"></li>
+<li>屏幕上就会显示出下面的界面，拿出收音机，调到刚刚输入的频率，试着听一下，是不是有一段男声播报”Pi FmFds”的测试语音啦？按空格键可以返回上层菜单，再按ESC键退出测试。<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141555768.png" srcset="/img/loading.gif" lazyload alt="正在发射"></li>
+</ol>
+<p>如果只持续了几秒，信号就断了，可以执行</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">sudo</span> rmmod <span class="hljs-built_in">w1</span>-gpio<br></code></pre></td></tr></table></figure>
+
+<p>但是这样发射的范围特别近，收音机离开树莓派一两米就没有信号了。这时候就可以拿出杜邦线，插在树莓派的GPIO 4引脚（图中7号引脚）实测加一段十几厘米的线能将发射范围拓展到两三间屋子，加到半米左右能覆盖大半层宿舍楼。但是要注意，范围不要太大，否则可能就违反无线电相关的法律条例了。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141555459.png" srcset="/img/loading.gif" lazyload alt="树莓派引脚"></p>
+<h2 id="使用rpitx播放音乐"><a href="#使用rpitx播放音乐" class="headerlink" title="使用rpitx播放音乐"></a>使用rpitx播放音乐</h2><p>rpitx支持直接播放WAV格式的音频，命令如下：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl">sudo ./pifmrds -fre<span class="hljs-string">q [frequency]</span> -audio [filename.wav]   <br></code></pre></td></tr></table></figure>
+
+<p>比如你要在88.0MHZ进行发射，播放根目录下的music.wav文件，就可以输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> ./pifmrds -freq 88.0 -audio /music.wav   <br></code></pre></td></tr></table></figure>
+
+<p>但是如果音乐的格式是MP3格式或者是其他格式呢？当然是可以事先转换成WAV格式的音频的，但这样太麻烦了。这时候就可以请出音频处理的瑞士军刀——sox了。</p>
+<p>先安装sox，直接从包管理器中安装就可以：<code>sudo apt install sox libsox-fmt-all</code></p>
+<p>安装完成后就可以使用如下的命令来实时转换MP3文件到WAV文件进行播放了，其中的”-“就是大名鼎鼎的Linux管道符了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sox -t [format] [filename] -t wav - | <span class="hljs-built_in">sudo</span> ./pifmrds -freq XX -audio -   <br></code></pre></td></tr></table></figure>
+
+<p>比如你要在88.0MHZ进行发射，播放根目录下的music.mp3文件，就可以输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sox -t mp3 /music.mp3 -t wav - | <span class="hljs-built_in">sudo</span> ./pifmrds -freq 88.0 -audio /music.wav   <br></code></pre></td></tr></table></figure>
+
+<p>播放的MP3文件不一定是本地的，网络上的MP3文件或者MP3的直播源(流)也是可以的，比如可以用sox+rpitx的组合发射法广或俄罗斯卫星广播电台的直播节目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sox -t mp3 https://rfienchinois64k.ice.infomaniak.ch/rfienchinois-64.mp3 -t wav - | <span class="hljs-built_in">sudo</span> ./pifmrds -freq 80 -audio -sox -t mp3 http://icecast-ruvr.cdnvideo.ru/rian.voicechi -t wav - | <span class="hljs-built_in">sudo</span> ./pifmrds -freq 80 -audio -   <br></code></pre></td></tr></table></figure>
+
+<h2 id="使用rpitx播放网络串流"><a href="#使用rpitx播放网络串流" class="headerlink" title="使用rpitx播放网络串流"></a>使用rpitx播放网络串流</h2><p>上面简单提到了如何使用sox配合rpitx来发射MP3，并且可以直播发射一小部分格式为MP3音频流的直播串流。但是很多串流是M3U8格式的，并不是MP3音频流。这个时候可以请出来Linux上(Windows上也是啊Kora)的播放神器——VLC。</p>
+<p>下面的步骤最好是先为树莓派设置VNC连接或Xrdp远程桌面连接，连接到树莓派的图形化界面上，操作会更加方便些。这里推荐这篇文章，可以作为参考：<a target="_blank" rel="noopener" href="https://raspberrypi.club/322.html">如何在 Raspberry Pi 上安装 Xrdp Server (远程桌面) - 树莓派俱乐部</a></p>
+<ol>
+<li>使用VNC或远程桌面连接到树莓派。</li>
+<li>先安装VLC，可以用apt命令行安装，也可以用图形化界面下的包管理器进行安装。</li>
+<li>打开VLC，选择媒体菜单中的“流”并进入“打开媒体”对话框。<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141555388.png" srcset="/img/loading.gif" lazyload alt="VLC"></li>
+<li>选择“网络”选项卡，在输入框中输入M3U8源地址，之后点击“串流”按钮，弹出“流输出”对话框。弹出的新对话框中，第一个“下一个”按钮直接点击即可。</li>
+<li>在此之后的菜单中选择”HTTP”这一选项，点击”添加”按钮。之后的端口号和路径可以不进行修改(当然端口号如果被占用了当然要进行修改，下面的命令中也要同步修改)，直接下一步即可。<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556484.png" srcset="/img/loading.gif" lazyload alt="流输出对话框"></li>
+<li>之后保持默认设置，配置文件为”Audio - MP3”，直接下一步，然后再点击”流”按钮，VLC这一部分就完成了。<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556410.png" srcset="/img/loading.gif" lazyload alt="流输出对话框2"></li>
+<li>再使用sox+rpitx的组合拳，把串流直播出来：</li>
+</ol>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sox</span> -t mp3 http://<span class="hljs-number">127.0.0.1:8080</span>/ -t wav - | sudo ./pifmrds -freq <span class="hljs-number">80</span> -audio -   <br></code></pre></td></tr></table></figure>
+
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556855.png" srcset="/img/loading.gif" lazyload alt="直播成功"></p>
+<p>(上图中我换了一个端口号，因为8080被占用了.)现在打开收音机，听一听，是不是能听到清晰的直播节目了？</p>
+<h2 id="采集树莓派系统声音-并使用rpitx实时发射"><a href="#采集树莓派系统声音-并使用rpitx实时发射" class="headerlink" title="采集树莓派系统声音 并使用rpitx实时发射"></a>采集树莓派系统声音 并使用rpitx实时发射</h2><p>下面将会简单介绍，如何采集树莓派系统声音，并使用rpitx实时发射。不管是在树莓派中打开音乐播放器播放的音乐，还是打开视频播放器播放视频的声音，还是浏览网页上网页的声音，都可以被实时采集并通过rpitx发射出去。</p>
+<ol>
+<li>先查看一下可以捕捉的声卡，使用命令：<code>pacmd list | grep &quot;.monitor&quot;</code>。如果命令行返回的是”没有 PulseAudio 守护进程在运行，或者没有作为会话守护进程运行“或者是相同含义的英语，那么就先执行一下 <code>pulseaudio --start &amp;</code>，启动一下PulseAudio 守护进程，再重新执行这条命令。正常返回的截图如下，将画红线部分的monitor name复制下来备用，不同系统版本的树莓派可能会有一些差异：<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556084.png" srcset="/img/loading.gif" lazyload alt="获取monitor name"></li>
+<li>进入rpitx文件夹，输入命令：</li>
+</ol>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl">pacat --record -d [monitor_name] | sox -t raw -b <span class="hljs-number">16</span> -c <span class="hljs-number">2</span> -v <span class="hljs-number">1</span> -r <span class="hljs-number">44100</span> -L -e signed-integer - -t wav - | sudo ./pifmrds -fre<span class="hljs-string">q [frequency]</span> -audio -   <br></code></pre></td></tr></table></figure>
+
+<p>简单解释一下这一句长长的命令：其中，<code>[monitor_name]</code>就是第一步中我们得到的 <code>monitor name</code>，<code>[frequency]</code>是你想要发射的频率。sox命令后所跟的参数，-b代表采样的比特位数，-c代表声道的个数，-v代表转换音量的大小，-r代表采样率的多少。前面的-t代表是从raw格式进行转换，后面的-t代表转换成wav格式。当时研究出这条命令，花费了我足足半天的时间呢……</p>
+<p>本文的标题里面还有一句“并进行直播”，这一部分就是对直播的简单实践。当然要直播自己的声音，或者直播其他设备上的声音，理论上也是可行的。有两种方案：</p>
+<ol>
+<li>购买一个USB声卡，安装好USB声卡的驱动后，连接好麦克风或者AUX输入，再从树莓派端进行采集和捕获。（推荐）</li>
+<li>建立一个局域网内的直播服务器，使用其他设备进行收音并推流刀直播服务器，从树莓派上拉流进行直播。</li>
+</ol>
+<h2 id="模拟输入-采集其他设备的音频输出进行发射"><a href="#模拟输入-采集其他设备的音频输出进行发射" class="headerlink" title="模拟输入 采集其他设备的音频输出进行发射"></a>模拟输入 采集其他设备的音频输出进行发射</h2><ol>
+<li>先查询一下当前系统中的声音输入设备：<code>pacmd list | grep &quot;input&quot;</code> 可以看到，有一个名叫 <code>alsa_input.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.mono-fallback</code>的设备。复制设备的设备名称备用。<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556054.jpg" srcset="/img/loading.gif" lazyload alt="input"></li>
+<li>cd到rpitx的目录，执行上面提到的输出命令：</li>
+</ol>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pacat</span> --record -d alsa_input.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-<span class="hljs-number">00</span>.mono-fallback | sox -t raw -b <span class="hljs-number">16</span> -c <span class="hljs-number">2</span> -v <span class="hljs-number">1</span> -r <span class="hljs-number">44100</span> -L -e signed-integer - -t wav - | sudo ./pifmrds -freq <span class="hljs-number">100</span>.<span class="hljs-number">3</span> -audio -   <br></code></pre></td></tr></table></figure>
+
+<p>打开收音机，调整到正确的频率上，是不是能听到输出设备中的声音啦？部分输出设备的音量要调大一些才能取得不错的效果。另外根据声卡的好坏，会有些许延迟，这是正常情况。到此，用树莓派搭建自己的FM电台并进行直播这一终极目标终于实现，我们可以利用树莓派发射自己喜欢的节目咯。</p>
+<h2 id="利用蓝牙-将其他设备的声音传送到树莓派上发射"><a href="#利用蓝牙-将其他设备的声音传送到树莓派上发射" class="headerlink" title="利用蓝牙 将其他设备的声音传送到树莓派上发射"></a>利用蓝牙 将其他设备的声音传送到树莓派上发射</h2><p>要想让其他设备能连接上树莓派，并且将音频信号传送给树莓派，首先得让其他设备认为树莓派是音频设备（比如蓝牙耳机），这样才能将音频输出切换到树莓派上，并自然的传送音频信号给树莓派进行发射了。实测可以将Android、IOS和Linux设备上的声音通过蓝牙传送到树莓派上，而Windows则提示“耳机已拔出”，一直没能成功。</p>
+<ol>
+<li>在树莓派上运行命令 <code>sudo hciconfig hci0 up</code> 打开树莓派的蓝牙。</li>
+<li>执行命令 <code>sudo hciconfig hci0 class 0x200420</code> 这一步是将树莓派的蓝牙属性改为“音频设备”，这样就能让其他设备将树莓派识别成音频设备，乖乖的把音频流往树莓派上传送了。</li>
+<li>执行命令 <code>hciconfig -a</code>，看看树莓派的蓝牙属性是否成功被修改了。没有成功的话，反复开关蓝牙，多尝试几次。正常的显示如下图：<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556177.png" srcset="/img/loading.gif" lazyload alt="树莓派显示"></li>
+<li>进入树莓派桌面环境，蓝牙菜单在桌面右上角，开启树莓派和其他设备的蓝牙可发现，将树莓派和其他设备进行配对与连接。</li>
+<li>连接成功，其他设备就能向树莓派传送音频啦！如下图。这时，在其他设备上随便播放一段音乐或者视频。<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556801.png" srcset="/img/loading.gif" lazyload alt="音频输出"></li>
+<li>查询一下当前树莓派中的声音输入设备：<code>pacmd list | grep &quot;a2dp_source&quot;</code> 可以看到，有一个名叫 <code>bluez_source.XX_XX_XX_XX_XX_XX.a2dp_source</code>的设备，具体名称跟其他设备的蓝牙MAC地址有关。复制设备的设备名称备用。<br><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/202401141556472.png" srcset="/img/loading.gif" lazyload alt="树莓派显示"></li>
+<li>cd到rpitx的目录，执行上面提到的输出命令：</li>
+</ol>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pacat</span> --record -d abluez_source.XX_XX_XX_XX_XX_XX.a2dp_source | sox -t raw -b <span class="hljs-number">16</span> -c <span class="hljs-number">2</span> -v <span class="hljs-number">1</span> -r <span class="hljs-number">44100</span> -L -e signed-integer - -t wav - | sudo ./pifmrds -freq <span class="hljs-number">100</span>.<span class="hljs-number">3</span> -audio -   <br></code></pre></td></tr></table></figure>
+
+<p>打开收音机，调整到正确的频率上，是不是能听到输出设备中的声音啦？</p>
+<p>但是有一点不太好，其他设备上的音乐或者视频一旦暂停，就会停止向树莓派输出音频流，我们的发射也随之戛然而止。也就是只要一小会没有进程使用音频输出，其他设备就会暂停向树莓派输出音频流。怎么办呢？</p>
+<p>让某个进程一直循环播放一段无声音频不就行了吗？没有其他进程播放音乐时，是一直占用着音频通道，因此就不会暂停输出音频流；当其他应用想要播放音频时，这个“守护进程”又没有声音，所以也不会影响到其他进程播放声音进行发射。当即用OBS录制了一段无声音频，效果杠杠的！这样，利用蓝牙，将其他设备的声音传送到树莓派上发射就完美了。</p>
+<p>当然除此之外，rpitx还可以发射其他信号</p>
+<h3 id="载波"><a href="#载波" class="headerlink" title="载波"></a>载波</h3><p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx/blob/master/doc/Tunerpitx.png"><img src="https://github.com/F5OEO/rpitx/raw/master/doc/Tunerpitx.png" srcset="/img/loading.gif" lazyload alt="Carrier"></a> 一段产生于 434MHZ 的简单载波。</p>
+<h3 id="啁啾"><a href="#啁啾" class="headerlink" title="啁啾"></a>啁啾</h3><p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx/blob/master/doc/chirprpitx.png"><img src="https://github.com/F5OEO/rpitx/raw/master/doc/chirprpitx.png" srcset="/img/loading.gif" lazyload alt="Chirp"></a> 一段围绕434MHZ移动的载波。</p>
+<h3 id="波谱"><a href="#波谱" class="headerlink" title="波谱"></a>波谱</h3><p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx/blob/master/doc/spectrumrpitx.png"><img src="https://github.com/F5OEO/rpitx/raw/master/doc/spectrumrpitx.png" srcset="/img/loading.gif" lazyload alt="Spectrum"></a> SDR 上的瀑布上会显示一张图片。 请注意，您应该根据您的接收情况和您使用的 SDR 软件进行一些调整，以获得正确的对比度和尺寸。</p>
+<h3 id="射频我的脸"><a href="#射频我的脸" class="headerlink" title="射频我的脸"></a>射频我的脸</h3><p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx/blob/master/doc/rfmyface.png"><img src="https://github.com/F5OEO/rpitx/raw/master/doc/rfmyface.png" srcset="/img/loading.gif" lazyload alt="Rfmyface"></a> 使用 raspicam 对您的脸部进行波谱绘画，乐趣无穷！</p>
+<h3 id="FM广播"><a href="#FM广播" class="headerlink" title="FM广播"></a>FM广播</h3><p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx/blob/master/doc/fmrds.png"><img src="https://github.com/F5OEO/rpitx/raw/master/doc/fmrds.png" srcset="/img/loading.gif" lazyload alt="FMRDS"></a> 使用 RDS 广播 FM。 您可以通过 SDR 收到它。 这是可以在调频收音机或接收器上听到的调制，但这里频率太高。</p>
+<h3 id="SSB单边带"><a href="#SSB单边带" class="headerlink" title="SSB单边带"></a>SSB单边带</h3><p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx/blob/master/doc/ssbrpitx.png"><img src="https://github.com/F5OEO/rpitx/raw/master/doc/ssbrpitx.png" srcset="/img/loading.gif" lazyload alt="SSB"></a> 这是经典的业余无线电模拟语音调制。 使用 SDR在 USB 模式下。</p>
+<h3 id="SSTV-慢扫描电视"><a href="#SSTV-慢扫描电视" class="headerlink" title="SSTV 慢扫描电视"></a>SSTV 慢扫描电视</h3><p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx/blob/master/doc/sstvrpitx.JPG"><img src="https://github.com/F5OEO/rpitx/raw/master/doc/sstvrpitx.JPG" srcset="/img/loading.gif" lazyload alt="SSTV"></a> 这是一种使用音频调制的图像传输模式（USB模式）。 您需要一个额外的软件来解码和显示它（qsstv，msstv …）。 演示使用sstv的Martin1模式。</p>
+<h3 id="Pocsag（寻呼机模式）"><a href="#Pocsag（寻呼机模式）" class="headerlink" title="Pocsag（寻呼机模式）"></a>Pocsag（寻呼机模式）</h3><p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx/blob/master/doc/pocsagrpitx.JPG"><img src="https://github.com/F5OEO/rpitx/raw/master/doc/pocsagrpitx.JPG" srcset="/img/loading.gif" lazyload alt="pocsag"></a> 这是寻呼机使用的模式。 您需要额外的软件来解码。 将 SDR 设置为 NBFM 模式。</p>
+<h3 id="Freedv（数字语音）"><a href="#Freedv（数字语音）" class="headerlink" title="Freedv（数字语音）"></a>Freedv（数字语音）</h3><p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx/blob/master/doc/freedvrpitx.JPG"><img src="https://github.com/F5OEO/rpitx/raw/master/doc/freedvrpitx.JPG" srcset="/img/loading.gif" lazyload alt="freedv"></a> 这是最先进的开源数字调制。 您需要 Freedv 进行解调。</p>
+<h3 id="Opera-信标台"><a href="#Opera-信标台" class="headerlink" title="Opera (信标台)"></a>Opera (<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BF%A1%E6%A0%87%E5%8F%B0/5872163">信标台</a>)</h3><p><a target="_blank" rel="noopener" href="https://github.com/F5OEO/rpitx/blob/master/doc/operarpitx.JPG"><img src="https://github.com/F5OEO/rpitx/raw/master/doc/operarpitx.JPG" srcset="/img/loading.gif" lazyload alt="opera"></a> 这是一种听起来像莫尔斯电码的信标模式。 您需要模式 0.5 的 Opera模式 才能解码。</p>
+<p>更多内容 可以看 <a href="">https://github.com/F5OEO/rpitx</a></p>
+<p>参考</p>
+<p><a target="_blank" rel="noopener" href="https://blog.xmgspace.me/archives/set-up-fm-station-with-raspberry-pi.html">用树莓派搭建自己的FM电台并进行直播</a></p>
+<p><a target="_blank" rel="noopener" href="https://mabbs.github.io/2022/03/27/radio.html">用树莓派自制FM电台</a></p>
+<p><a href="">https://github.com/ChristopheJacquet/PiFmRds/issues/161</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/" class="print-no-link">#业余无线电</a>
+      
+        <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" class="print-no-link">#树莓派</a>
+      
+        <a href="/tags/%E7%94%B5%E5%8F%B0/" class="print-no-link">#电台</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>用树莓派搭建自己的FM电台并进行直播</div>
+      <div>https://blog.quickso.cn/2024/01/14/用树莓派搭建自己的FM电台并进行直播/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年1月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/01/19/%E7%9F%AD%E6%B3%A2%E6%B0%94%E8%B1%A1%E4%BC%A0%E7%9C%9F%E6%8E%A5%E6%94%B6%E6%8C%87%E5%8D%97/" title="短波气象传真接收指南（JMH）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">短波气象传真接收指南（JMH）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/30/%E5%9B%BD%E5%86%85%E5%BC%80%E6%BA%90%E9%95%9C%E5%83%8F%E7%AB%99%E7%82%B9%E6%B1%87%E6%80%BB/" title="国内开源镜像站点汇总">
+                        <span class="hidden-mobile">国内开源镜像站点汇总</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

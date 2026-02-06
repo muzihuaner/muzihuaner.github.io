@@ -1,0 +1,860 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="群晖系统本身的安全设置能隔绝多数网络威胁，通过简单的设置只要不瞎搞基本能安全无忧！ 注：本文内容大部分来自 无尽光芒 的 “群晖系统安全设置”PDF文档，暂未找到具体出处网址。 一、群晖的基本安全设置修改1、禁用admin账户DSM7默认就是禁用admin作为管理员账户的，如实DSM6或者升级到7的可以新建管理员后再禁用admin  2、使用高强度密码 3、修改等候超时默认是网页上15分钟没操作自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="群晖系统安全设置禁止所有外国IP访问 添加网络威胁黑名单">
+<meta property="og:url" content="https://blog.quickso.cn/2023/12/12/%E7%BE%A4%E6%99%96%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE%E7%A6%81%E6%AD%A2%E6%89%80%E6%9C%89%E5%A4%96%E5%9B%BDIP%E8%AE%BF%E9%97%AE%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E9%BB%91%E5%90%8D%E5%8D%95/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="群晖系统本身的安全设置能隔绝多数网络威胁，通过简单的设置只要不瞎搞基本能安全无忧！ 注：本文内容大部分来自 无尽光芒 的 “群晖系统安全设置”PDF文档，暂未找到具体出处网址。 一、群晖的基本安全设置修改1、禁用admin账户DSM7默认就是禁用admin作为管理员账户的，如实DSM6或者升级到7的可以新建管理员后再禁用admin  2、使用高强度密码 3、修改等候超时默认是网页上15分钟没操作自">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imnks.com/2022/10/2584009654.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/1104970198.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/2587833162.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/2296208027.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/906380087.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/570795422.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/2129729179.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/208038144.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/47474197.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/1852161711.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/799088048.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/3105674518.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/3483480270.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/3367593950.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/3554383717.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/3523239348.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/4132601483.png!I">
+<meta property="og:image" content="https://i.imnks.com/2022/10/182347195.png!I">
+<meta property="article:published_time" content="2023-12-12T03:19:13.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.785Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="安全">
+<meta property="article:tag" content="软路由">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.imnks.com/2022/10/2584009654.png!I">
+  
+  
+  
+  <title>群晖系统安全设置禁止所有外国IP访问 添加网络威胁黑名单 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="群晖系统安全设置禁止所有外国IP访问 添加网络威胁黑名单"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-12 11:19" pubdate>
+          2023年12月12日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          629 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          6 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">群晖系统安全设置禁止所有外国IP访问 添加网络威胁黑名单</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>群晖系统本身的安全设置能隔绝多数网络威胁，通过简单的设置只要不瞎搞基本能安全无忧！</p>
+<p>注：本文内容大部分来自 无尽光芒 的 “群晖系统安全设置”PDF文档，暂未找到具体出处网址。</p>
+<h1 id="一、群晖的基本安全设置修改"><a href="#一、群晖的基本安全设置修改" class="headerlink" title="一、群晖的基本安全设置修改"></a>一、群晖的基本安全设置修改</h1><h2 id="1、禁用admin账户"><a href="#1、禁用admin账户" class="headerlink" title="1、禁用admin账户"></a>1、禁用admin账户</h2><p>DSM7默认就是禁用admin作为管理员账户的，如实DSM6或者升级到7的可以新建管理员后再禁用admin</p>
+<p><img src="https://i.imnks.com/2022/10/2584009654.png!I" srcset="/img/loading.gif" lazyload alt="2584009654.png" title="2584009654.png"></p>
+<h2 id="2、使用高强度密码"><a href="#2、使用高强度密码" class="headerlink" title="2、使用高强度密码"></a>2、使用高强度密码</h2><p><img src="https://i.imnks.com/2022/10/1104970198.png!I" srcset="/img/loading.gif" lazyload alt="1104970198.png" title="1104970198.png"></p>
+<h2 id="3、修改等候超时"><a href="#3、修改等候超时" class="headerlink" title="3、修改等候超时"></a>3、修改等候超时</h2><p>默认是网页上15分钟没操作自动退出登录，按需修改，时间太短会影响使用体验</p>
+<p><img src="https://i.imnks.com/2022/10/2587833162.png!I" srcset="/img/loading.gif" lazyload alt="2587833162.png" title="2587833162.png"></p>
+<h2 id="4、开启双重验证"><a href="#4、开启双重验证" class="headerlink" title="4、开启双重验证"></a>4、开启双重验证</h2><p>DSM7的双重验证支持OPT验证码（Synology Secure SignIn或者Google Authenticator）</p>
+<p>也支持硬件安全秘钥（x86机型才有），比如USB秘钥类（Fido2）的YubiKey、飞天Key</p>
+<p><img src="https://i.imnks.com/2022/10/2296208027.png!I" srcset="/img/loading.gif" lazyload alt="2296208027.png" title="2296208027.png"></p>
+<p><img src="https://i.imnks.com/2022/10/906380087.png!I" srcset="/img/loading.gif" lazyload alt="906380087.png" title="906380087.png"></p>
+<h2 id="5、关闭SHH访问"><a href="#5、关闭SHH访问" class="headerlink" title="5、关闭SHH访问"></a>5、关闭SHH访问</h2><p>如确实需要使用，修改默认的22端口为10000以上的端口，并使用后及时关闭！</p>
+<p><img src="https://i.imnks.com/2022/10/570795422.png!I" srcset="/img/loading.gif" lazyload alt="570795422.png" title="570795422.png"></p>
+<h2 id="6、对外端口映射"><a href="#6、对外端口映射" class="headerlink" title="6、对外端口映射"></a>6、对外端口映射</h2><p>如有公网IP在路由器端口映射时对外不要使用默认的5000、5001、5005、5006、6690等！对外依旧建议10000以上的端口</p>
+<p><img src="https://i.imnks.com/2022/10/2129729179.png!I" srcset="/img/loading.gif" lazyload alt="2129729179.png" title="2129729179.png"></p>
+<h2 id="7、关闭root账户"><a href="#7、关闭root账户" class="headerlink" title="7、关闭root账户"></a>7、关闭root账户</h2><p>非常不建议开启群晖的root账户，如必需用请修改为高强度的root密码，也可使用完毕后关闭！</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">synouser <span class="hljs-attr">--setpw</span> root qpzm<span class="hljs-keyword">@1639</span>&amp;IMNKS.COM<br></code></pre></td></tr></table></figure>
+
+<p>或者直接关闭root登录</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift">sed <span class="hljs-operator">-</span>i &#x27;s<span class="hljs-regexp">/PermitRootLogin yes/</span>#<span class="hljs-type">PermitRootLogin</span> prohibit<span class="hljs-operator">-</span>password<span class="hljs-regexp">/g&#x27; /</span>etc<span class="hljs-regexp">/ssh/</span>sshd_config<br></code></pre></td></tr></table></figure>
+
+<h1 id="二、配置防火墙禁止国外IP"><a href="#二、配置防火墙禁止国外IP" class="headerlink" title="二、配置防火墙禁止国外IP"></a>二、配置防火墙禁止国外IP</h1><h2 id="1、启用防火墙"><a href="#1、启用防火墙" class="headerlink" title="1、启用防火墙"></a>1、启用防火墙</h2><p><img src="https://i.imnks.com/2022/10/208038144.png!I" srcset="/img/loading.gif" lazyload alt="208038144.png" title="208038144.png"></p>
+<h2 id="2、编译配置文件default"><a href="#2、编译配置文件default" class="headerlink" title="2、编译配置文件default"></a>2、编译配置文件default</h2><p>新增防火墙规则，下面三个按需设置，设置禁止国外IP访问前 必需 先设置好 允许内网IP访问、允许中国IP！！！</p>
+<h3 id="允许内网IP访问"><a href="#允许内网IP访问" class="headerlink" title="允许内网IP访问"></a>允许内网IP访问</h3><p>内网这个按照实际情况添加，如过多个IP段内网可以互访都要相应的加入，包括虚拟组网的IP段！</p>
+<p><img src="https://i.imnks.com/2022/10/47474197.png!I" srcset="/img/loading.gif" lazyload alt="47474197.png" title="47474197.png"></p>
+<p>如何docker使用了bridge桥接网络，也需要添加到允许访问的名单内</p>
+<p><img src="https://i.imnks.com/2022/10/1852161711.png!I" srcset="/img/loading.gif" lazyload alt="1852161711.png" title="1852161711.png"></p>
+<h3 id="允许中国IP访问-如果要外网只能访问特定端口，不要添加这个！"><a href="#允许中国IP访问-如果要外网只能访问特定端口，不要添加这个！" class="headerlink" title="允许中国IP访问(如果要外网只能访问特定端口，不要添加这个！)"></a>允许中国IP访问(如果要外网只能访问特定端口，不要添加这个！)</h3><p><img src="https://i.imnks.com/2022/10/799088048.png!I" srcset="/img/loading.gif" lazyload alt="799088048.png" title="799088048.png"></p>
+<h3 id="禁止国外IP访问（注意：排序永远是最后一个！）"><a href="#禁止国外IP访问（注意：排序永远是最后一个！）" class="headerlink" title="禁止国外IP访问（注意：排序永远是最后一个！）"></a>禁止国外IP访问（注意：排序永远是最后一个！）</h3><p><img src="https://i.imnks.com/2022/10/3105674518.png!I" srcset="/img/loading.gif" lazyload alt="3105674518.png" title="3105674518.png"></p>
+<p><img src="https://i.imnks.com/2022/10/3483480270.png!I" srcset="/img/loading.gif" lazyload alt="3483480270.png" title="3483480270.png"></p>
+<h1 id="三、添加网络威胁黑名单"><a href="#三、添加网络威胁黑名单" class="headerlink" title="三、添加网络威胁黑名单"></a>三、添加网络威胁黑名单</h1><p>东北大学网络威胁黑名单系统（已恢复访问） <a target="_blank" rel="noopener" href="https://imnks.com/go/aHR0cDovL2FudGl2aXJ1cy5uZXUuZWR1LmNuL3NjYW4v">http://antivirus.neu.edu.cn/scan/</a></p>
+<p>下载文本格式的黑名单导入群晖系统的封锁名单：<a target="_blank" rel="noopener" href="https://imnks.com/go/aHR0cDovL2FudGl2aXJ1cy5uZXUuZWR1LmNuL3NzaC9saXN0cy9uZXUudHh0">http://antivirus.neu.edu.cn/ssh/lists/neu.txt</a></p>
+<p><img src="https://i.imnks.com/2022/10/3367593950.png!I" srcset="/img/loading.gif" lazyload alt="3367593950.png" title="3367593950.png"></p>
+<p><img src="https://i.imnks.com/2022/10/3554383717.png!I" srcset="/img/loading.gif" lazyload alt="3554383717.png" title="3554383717.png"></p>
+<p><img src="https://i.imnks.com/2022/10/3523239348.png!I" srcset="/img/loading.gif" lazyload alt="3523239348.png" title="3523239348.png"></p>
+<h1 id="四、安全顾问扫描"><a href="#四、安全顾问扫描" class="headerlink" title="四、安全顾问扫描"></a>四、安全顾问扫描</h1><p><img src="https://i.imnks.com/2022/10/4132601483.png!I" srcset="/img/loading.gif" lazyload alt="4132601483.png" title="4132601483.png"></p>
+<p><img src="https://i.imnks.com/2022/10/182347195.png!I" srcset="/img/loading.gif" lazyload alt="182347195.png" title="182347195.png"></p>
+<p>本文来自<a target="_blank" rel="noopener" href="https://imnks.com/6807.html">https://imnks.com/6807.html</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BE%A4%E6%99%96/" class="print-no-link">#群晖</a>
+      
+        <a href="/tags/%E5%AE%89%E5%85%A8/" class="print-no-link">#安全</a>
+      
+        <a href="/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/" class="print-no-link">#软路由</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>群晖系统安全设置禁止所有外国IP访问 添加网络威胁黑名单</div>
+      <div>https://blog.quickso.cn/2023/12/12/群晖系统安全设置禁止所有外国IP访问添加网络威胁黑名单/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/12/%E4%BD%BF%E7%94%A8Cloudflare%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F%E7%AB%99/" title="使用Cloudflare创建镜像站">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用Cloudflare创建镜像站</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/28/CloudflareR2%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97%E6%95%99%E7%A8%8B/" title="CloudflareR2快速开始使用(白嫖)指南">
+                        <span class="hidden-mobile">CloudflareR2快速开始使用(白嫖)指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

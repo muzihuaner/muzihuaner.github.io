@@ -1,0 +1,928 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="Virtualizor 是一款强大的虚拟化管理面板，允许用户轻松地创建、管理和维护虚拟机。它支持多种虚拟化技术，包括 KVM、Xen、OpenVZ 和 LXC 等，是一个广泛用于托管公司和云服务提供商的工具。 主要功能： 多种虚拟化技术支持：如上所述，Virtualizor 支持 KVM、Xen、OpenVZ 和 LXC，不同的虚拟化技术可以根据需求进行选择。 简化的用户界面：它为管理员和最终用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Virtualizor部署及安装并对接whmcs">
+<meta property="og:url" content="https://blog.quickso.cn/2024/12/24/Virtualizor%E9%83%A8%E7%BD%B2%E5%8F%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E5%AF%B9%E6%8E%A5whmcs/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="Virtualizor 是一款强大的虚拟化管理面板，允许用户轻松地创建、管理和维护虚拟机。它支持多种虚拟化技术，包括 KVM、Xen、OpenVZ 和 LXC 等，是一个广泛用于托管公司和云服务提供商的工具。 主要功能： 多种虚拟化技术支持：如上所述，Virtualizor 支持 KVM、Xen、OpenVZ 和 LXC，不同的虚拟化技术可以根据需求进行选择。 简化的用户界面：它为管理员和最终用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727222546709.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/84c2f0972238eb24379e5fba3595f621.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAchmFWWG1-YxSFgX44Dfm8oto7QmCAAClQ8AAmSdsVRyc9RxCZRc3TQE.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727222801136.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727222940727.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223001776.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224401783.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223132894.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223145385.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223257276.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223356933.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223420233.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAblmFWSrXI7ehP8U0bkPMiZos9LgvAAChg8AAmSdsVQd6DSmi3CdPjQE.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223656029.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223551621.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223755030.png">
+<meta property="article:published_time" content="2024-12-24T11:36:32.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.771Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Virtualizor">
+<meta property="article:tag" content="WHMCS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727222546709.png">
+  
+  
+  
+  <title>Virtualizor部署及安装并对接whmcs - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Virtualizor部署及安装并对接whmcs"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-12-24 19:36" pubdate>
+          2024年12月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Virtualizor部署及安装并对接whmcs</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p><strong>Virtualizor</strong> 是一款强大的虚拟化管理面板，允许用户轻松地创建、管理和维护虚拟机。它支持多种虚拟化技术，包括 KVM、Xen、OpenVZ 和 LXC 等，是一个广泛用于托管公司和云服务提供商的工具。</p>
+<h3 id="主要功能："><a href="#主要功能：" class="headerlink" title="主要功能："></a>主要功能：</h3><ol>
+<li><strong>多种虚拟化技术支持</strong>：如上所述，Virtualizor 支持 KVM、Xen、OpenVZ 和 LXC，不同的虚拟化技术可以根据需求进行选择。</li>
+<li><strong>简化的用户界面</strong>：它为管理员和最终用户提供了简洁且易于使用的管理界面，用户可以通过浏览器轻松访问并管理虚拟机。</li>
+<li><strong>自动化创建和管理虚拟机</strong>：管理员可以自动化虚拟机的创建、删除、重启和克隆等任务。</li>
+<li><strong>资源监控和统计</strong>：提供对虚拟机的资源使用情况（如 CPU、内存、硬盘和网络带宽等）的实时监控。</li>
+<li><strong>用户管理</strong>：支持多用户系统，管理员可以创建多个虚拟主机账户，并根据权限限制其管理功能。</li>
+<li><strong>多种操作系统支持</strong>：支持多种主流操作系统，如 Linux、Windows 等的虚拟化。</li>
+<li><strong>高可用性与灾备</strong>：对于企业级用户，Virtualizor 提供高可用性（HA）功能，确保虚拟机在物理服务器出现故障时可以继续运行。</li>
+</ol>
+<h3 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h3><ul>
+<li><strong>VPS托管</strong>：Virtualizor 是虚拟专用服务器（VPS）托管提供商常用的工具，能够帮助他们提供给客户管理虚拟主机的接口。</li>
+<li><strong>云计算平台</strong>：它可用作管理云计算资源的工具，支持基于虚拟机的弹性伸缩。</li>
+<li><strong>企业数据中心管理</strong>：对于需要管理大量虚拟化资源的企业，Virtualizor 提供了简便的集中式管理功能。</li>
+</ul>
+</blockquote>
+<h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>环境准备：使用<strong>Almalinux8</strong>作为演示系统。在执行操作前，建议您备份所有数据。</p>
+<p>更新一下</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">yum update -<span class="hljs-attribute">y</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="1-开心一下"><a href="#1-开心一下" class="headerlink" title="1.开心一下"></a>1.开心一下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;152.53.227.142 api.virtualizor.com&quot;</span> &gt;&gt; /etc/hosts<br><span class="hljs-built_in">sudo</span> chattr +i /etc/hosts <span class="hljs-comment"># 锁定hosts</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-创建虚拟磁盘"><a href="#2-创建虚拟磁盘" class="headerlink" title="2.创建虚拟磁盘"></a>2.创建虚拟磁盘</h3><p>这时候创建的磁盘就是待会开lxc小鸡时，小鸡用的硬盘。创建的硬盘是一个弹性硬盘，也就是一开始的占用大小为0，所以可以大幅超售😋</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#不占空间，写个80G</span><br><span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/zero of=/lxcdisk.img bs=1M seek=80000 count=0<br>losetup /dev/loop0 /lxcdisk.img<br><span class="hljs-comment">#加入开机启动</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;losetup /dev/loop0 /lxcdisk.img&quot;</span>&gt;&gt;/etc/rc.local<br><span class="hljs-built_in">chmod</span> +x /etc/rc.local<br><span class="hljs-comment">#分区</span><br>fdisk /dev/loop0<br></code></pre></td></tr></table></figure>
+
+<p>执行如图操作，空的地方直接回车使用默认值就好。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727222546709.png" srcset="/img/loading.gif" lazyload alt="1743823603418.png"></p>
+<p>然后运行<code>partprobe</code>刷新磁盘，报错不用管。然后，运行以下命令给硬盘添加新的卷，第二个命令执行后输入y确认。<code>lxcDisk01</code>只是卷名，可以随便起，只能英文加数字应该是，跟之后的一个地方相同就好</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">yum install lvm2 -y<br>pvcreate <span class="hljs-regexp">/dev/</span>loop0<br>vgcreate -s <span class="hljs-number">32</span>M lxcDisk01 <span class="hljs-regexp">/dev/</span>loop0<br></code></pre></td></tr></table></figure>
+
+<p>重启后虚拟磁盘可能挂载会掉，请输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">losetup /dev/loop0 /lxcdisk.img<br></code></pre></td></tr></table></figure>
+
+<p>重新挂载。</p>
+<h3 id="3-安装Virtualizor"><a href="#3-安装Virtualizor" class="headerlink" title="3.安装Virtualizor"></a>3.安装Virtualizor</h3><p>执行如下命令，将email后换成您自己的，安装后输入y确认重启。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">wget –<span class="hljs-keyword">N</span> http://<span class="hljs-keyword">files</span>.virtualizor.<span class="hljs-keyword">com</span>/install.<span class="hljs-keyword">sh</span><br>chmod <span class="hljs-number">0755</span> install.<span class="hljs-keyword">sh</span><br>./install.<span class="hljs-keyword">sh</span> email=your@email.<span class="hljs-keyword">com</span> kernel=lxc<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/84c2f0972238eb24379e5fba3595f621.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>推荐使用国外服务器，国内服务器第二步有点慢～</p>
+<p>可以将脚本里的改成我的Softaculous国内镜像 websoft.quickso.cn</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">mirror_url</span>=files.softaculous.com<br></code></pre></td></tr></table></figure>
+
+<p>然后打开您的IP:4085&#x2F;4084访问管理页面，使用您的root密码登录</p>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAchmFWWG1-YxSFgX44Dfm8oto7QmCAAClQ8AAmSdsVRyc9RxCZRc3TQE.png" srcset="/img/loading.gif" lazyload alt="Alt Text"></p>
+<p>Virtualizor使用的端口为4081 - 4085，如果登不上可以考虑防火墙的问题：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nsis">首先确保防火墙是开启状态：<br><span class="hljs-params">system</span>ctl status firewalld<br>开启防火墙：<br><span class="hljs-params">system</span>ctl start firewalld<br>关闭防火墙：<br><span class="hljs-params">system</span>ctl stop firewalld<br>开机启动防火墙：<br><span class="hljs-params">system</span>ctl enable firewalld<br>取消开机启动防火墙：<br><span class="hljs-params">system</span>ctl disable firewalld<br></code></pre></td></tr></table></figure>
+
+<p>添加存储：打开Virtualizor Admin Panel -&gt; Storage -&gt; Add Storage，按下面介绍填写并提交。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-type">Name</span>：随意<br><span class="hljs-keyword">Server</span>：localhost<br><span class="hljs-keyword">Storage</span> <span class="hljs-keyword">Type</span> ：LVM<br><span class="hljs-keyword">Storage</span> <span class="hljs-type">Path</span>： 储存路径(LVM卷组路径，如果用我上面的那种的话就填/dev/lxcDisk01)<br>Overcommit：虚拟盘有多大写多大,这里是<span class="hljs-number">80</span><br>Alert Threshold: 告警(就是如果硬盘占用超过这个值就会提示你，一般不变就行了)<br><span class="hljs-keyword">Primary</span> <span class="hljs-keyword">Storage</span>: 如果你只有这一个硬盘请勾选，否则WHMCS开机器会报错<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727222801136.png" srcset="/img/loading.gif" lazyload alt="1743831638913.png"></p>
+<h3 id="4-构建虚拟网卡"><a href="#4-构建虚拟网卡" class="headerlink" title="4.构建虚拟网卡"></a>4.构建虚拟网卡</h3><p>虚拟网卡用于小鸡的端口转发等网络通讯，类似于交换机。</p>
+<p>首先，安装libvirt，并启用他：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install libvirt -y<br>systemctl <span class="hljs-built_in">enable</span> libvirtd<br>systemctl start libvirtd<br></code></pre></td></tr></table></figure>
+
+<p>然后我们会使用如下例子创建NAT环境：</p>
+<blockquote>
+<p>Network: 10.0.0.0<br>Netmask: 255.0.0.0<br>Prefix: 8<br>Gateway: 10.0.0.1<br>Usable IPs: 10.0.0.100 to 10.0.0.250</p>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vi <span class="hljs-regexp">/etc/</span>libvirt<span class="hljs-regexp">/qemu/</span>networks/HAProxy.xml<br></code></pre></td></tr></table></figure>
+
+<p>并写入如下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;network&gt;<br>  &lt;name&gt;HAProxy&lt;/name&gt;<br>  &lt;forward mode=<span class="hljs-string">&#x27;nat&#x27;</span>/&gt;<br>  &lt;bridge name=<span class="hljs-string">&#x27;HAProxy&#x27;</span> stp=<span class="hljs-string">&#x27;on&#x27;</span> delay=<span class="hljs-string">&#x27;0&#x27;</span> /&gt;<br>  &lt;ip address=<span class="hljs-string">&#x27;10.0.0.1&#x27;</span> netmask=<span class="hljs-string">&#x27;255.0.0.0&#x27;</span>&gt;<br>  &lt;/ip&gt;<br>&lt;/network&gt;<br></code></pre></td></tr></table></figure>
+
+<p>然后运行下面命令启用他：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">virsh net-define /etc/libvirt/qemu/networks/HAProxy.xml<br>virsh net-autostart HAProxy<br>virsh net-start HAProxy<br></code></pre></td></tr></table></figure>
+
+<p>如果在执行最后一条命令遇到如下错误：</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727222940727.png" srcset="/img/loading.gif" lazyload alt="1743833013517.png"></p>
+<p>请运行<code>ifdown eth1</code>后重新运行<code>virsh net-start HAProxy</code>。</p>
+<p>打开<code>Virtualizor Admin Panel -&gt; IP Pool -&gt; Create IP Pool</code>，按照下图填写并提交。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223001776.png" srcset="/img/loading.gif" lazyload alt="1743834523116.png"></p>
+<h3 id="5-下载系统镜像"><a href="#5-下载系统镜像" class="headerlink" title="5.下载系统镜像"></a>5.下载系统镜像</h3><p>打开Virtualizor Admin Panel -&gt; Media -&gt; OS Templates Browser，Type选LXC，勾上你想要的，提交。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20241225224401783.png" srcset="/img/loading.gif" lazyload alt="image-20241225224401783"></p>
+<h3 id="6-设置端口转发"><a href="#6-设置端口转发" class="headerlink" title="6.设置端口转发"></a>6.设置端口转发</h3><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223132894.png" srcset="/img/loading.gif" lazyload alt="1743834860515.png"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223145385.png" srcset="/img/loading.gif" lazyload alt="1743834963788.png"></p>
+<p>设置完这两个地方，对接了whmcs之后就可以在用户端面板设置端口转发了。</p>
+<p>这个时候，还需要执行一条iptables指令，才能让VPS正常联网：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -j MASQUERADE<br></code></pre></td></tr></table></figure>
+
+<h3 id="7-对接WHMCS"><a href="#7-对接WHMCS" class="headerlink" title="7.对接WHMCS"></a>7.对接WHMCS</h3><p>创建一个plan，之后要是想设置不同配置的产品的话创建新的plan即可。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223257276.png" srcset="/img/loading.gif" lazyload alt="1743835613055.png"></p>
+<p>这里要提一下的是CPU Units，这是类似优先值的概念，比如你开了两台小鸡，一台CPU Units设置为1000，另一台设置为2000，那么当CPU跑满的时候 第一台会占有1000 &#x2F; (1000+2000)的CPU资源，第二台会占有2000 &#x2F; (1000+2000)的CPU资源 CPU%是指占所有核心的百分数，比如你有四个核心，想要VPS最多用一半的性能，你可以设置CPU%为50，那么他最多使用 2 ÷ 4 x 100 &#x3D; 50 (CPU%)</p>
+<p>下载<a target="_blank" rel="noopener" href="https://www.virtualizor.com/docs/billing/whmcs-module/">Virtualizor_For_WHMCS</a>插件，上传到&#x2F;path&#x2F;to&#x2F;whmcs&#x2F;modules&#x2F;servers&#x2F;目录<br>WHMCS管理面板-&gt;设置-&gt;产品&#x2F;服务-&gt;服务器设置</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223356933.png" srcset="/img/loading.gif" lazyload alt="1743837418698.png"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223420233.png" srcset="/img/loading.gif" lazyload alt="1743837454588.png"></p>
+<p>点击下方的测试连接，如果报错<code>FAILED: Could not connect to Virtualizor.Please make sure that all Ports from 4081 to 4085 are open on your WHMCS Server or please check the server details entered are as displayed on Admin Panel &gt;&gt; Configuration &gt;&gt; Server Info -- Can not get any response from admin panel. Please check ip:port</code>可以重置一下api keys，再把新的key和pass填进去，一般就可以了。测试连接成功后会给你蹦出来个更详细的界面，这上面信息你看着填就行，主机名要和ip一样，最后点保存就好</p>
+<p>创建产品：产品&#x2F;服务–&gt;新增分组，新增产品</p>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/BQACAgUAAx0Ea55INgACAblmFWSrXI7ehP8U0bkPMiZos9LgvAAChg8AAmSdsVQd6DSmi3CdPjQE.png" srcset="/img/loading.gif" lazyload alt="Alt Text"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223656029.png" srcset="/img/loading.gif" lazyload alt="1743837871686.png"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223551621.png" srcset="/img/loading.gif" lazyload alt="1743837968304.png"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250727223755030.png" srcset="/img/loading.gif" lazyload alt="1743838086785.png"></p>
+<p>到这就完成了！</p>
+<p>写入必要的开机启动项，<code>vi /etc/rc.local</code>加入以下一行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">virsh net-start HAProxy<br></code></pre></td></tr></table></figure>
+
+<h3 id="Q-A"><a href="#Q-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p>出现The viifbr0 is not started. Please run<strong>service virtnetwork start</strong></p>
+<p>解决方案：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo<span class="hljs-built_in"> ip </span>link <span class="hljs-built_in">add</span> viifbr0<span class="hljs-built_in"> type bridge</span><br><span class="hljs-built_in"></span>sudo<span class="hljs-built_in"> ip </span>link <span class="hljs-built_in">set</span> dev viifbr0 up<br></code></pre></td></tr></table></figure>
+
+<h3 id="文章参考"><a href="#文章参考" class="headerlink" title="文章参考"></a>文章参考</h3><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-216025-1">https://www.nodeseek.com/post-216025-1</a></p>
+<p><a target="_blank" rel="noopener" href="https://duantong.net/post-10.html">https://duantong.net/post-10.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://xy.sd/archives/429">https://xy.sd/archives/429</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.xuei.ru/2023/07/31/virtualizor%E5%BC%80lxc-nat-vps%E5%B9%B6%E5%AF%B9%E6%8E%A5whmcs/#%E4%B8%80%EF%BC%9A%E5%87%86%E5%A4%87%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83">https://www.xuei.ru/2023/07/31/virtualizor%E5%BC%80lxc-nat-vps%E5%B9%B6%E5%AF%B9%E6%8E%A5whmcs/#%E4%B8%80%EF%BC%9A%E5%87%86%E5%A4%87%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83</a></p>
+<p><a target="_blank" rel="noopener" href="https://maofun.com/3241.html">https://maofun.com/3241.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.sdnie.fun/archives/vt-whmcs.html">https://blog.sdnie.fun/archives/vt-whmcs.html</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+        <a href="/tags/Virtualizor/" class="print-no-link">#Virtualizor</a>
+      
+        <a href="/tags/WHMCS/" class="print-no-link">#WHMCS</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Virtualizor部署及安装并对接whmcs</div>
+      <div>https://blog.quickso.cn/2024/12/24/Virtualizor部署及安装并对接whmcs/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年12月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/01/01/CaddyDocker%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" title="Caddy Docker版本安装部署">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Caddy Docker版本安装部署</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/12/01/%E5%93%AA%E5%90%92%E9%9D%A2%E6%9D%BF%E6%96%B0%E7%89%88%E6%9C%ACv1%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" title="哪吒面板新版本v1安装教程">
+                        <span class="hidden-mobile">哪吒面板新版本v1安装教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

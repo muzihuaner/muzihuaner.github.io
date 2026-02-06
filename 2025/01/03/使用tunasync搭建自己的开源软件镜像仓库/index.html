@@ -1,0 +1,916 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="在开源软件的使用中，镜像仓库（Mirror Repository）扮演着至关重要的角色。它们为全球用户提供快速、可靠的软件下载服务。特别是在国内，由于网络限制，访问官方仓库往往较为缓慢，因此搭建一个自己的镜像仓库就显得尤为重要。而 TunaSync，作为一个开源的同步工具，提供了简便的方式来搭建和管理自己的镜像仓库。 tunasync 是清华大学 TUNA 镜像源目前使用的镜像方案。 1. 准备工">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用tunasync搭建自己的开源软件镜像仓库">
+<meta property="og:url" content="https://blog.quickso.cn/2025/01/03/%E4%BD%BF%E7%94%A8tunasync%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="在开源软件的使用中，镜像仓库（Mirror Repository）扮演着至关重要的角色。它们为全球用户提供快速、可靠的软件下载服务。特别是在国内，由于网络限制，访问官方仓库往往较为缓慢，因此搭建一个自己的镜像仓库就显得尤为重要。而 TunaSync，作为一个开源的同步工具，提供了简便的方式来搭建和管理自己的镜像仓库。 tunasync 是清华大学 TUNA 镜像源目前使用的镜像方案。 1. 准备工">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-03T15:43:01.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.774Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="开源">
+<meta property="article:tag" content="tunasync">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>使用tunasync搭建自己的开源软件镜像仓库 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="使用tunasync搭建自己的开源软件镜像仓库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-01-03 23:43" pubdate>
+          2025年1月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">使用tunasync搭建自己的开源软件镜像仓库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>在开源软件的使用中，镜像仓库（Mirror Repository）扮演着至关重要的角色。它们为全球用户提供快速、可靠的软件下载服务。特别是在国内，由于网络限制，访问官方仓库往往较为缓慢，因此搭建一个自己的镜像仓库就显得尤为重要。而 <strong><a target="_blank" rel="noopener" href="https://github.com/tuna/tunasync/">TunaSync</a></strong>，作为一个开源的同步工具，提供了简便的方式来搭建和管理自己的镜像仓库。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tuna/tunasync">tunasync</a> 是<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">清华大学 TUNA 镜像源</a>目前使用的镜像方案。</p>
+<h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h2><p>镜像站需要一台服务器，如果有条件，建议准备一台专用的X86物理服务器作为镜像站的服务器。服务器推荐配置：</p>
+<blockquote>
+<p>CPU: 8 核心 2.5GHz 以上</p>
+<p>内存: 64 GB以上</p>
+<p>硬盘: 3TB 以上，越大越好</p>
+<p>网络: 千兆上行带宽及以上</p>
+<p>系统：Centos8&#x2F;9及其衍生版本、Debian10&#x2F;11&#x2F;12及其衍生版本</p>
+</blockquote>
+<p>当然，如果条件不具备，以上配置可以无视，选择自己最好配置的机器即可，毕竟服务器配置还是取决于最终用户的需求。</p>
+<p>特别说要说明的是，硬盘大小要求必须超过需要同步的源文件大小，比如需要同时同步 CentOS 与 Ubuntu，就需要准备一块 1.6T 以上大小的硬盘。每个镜像的具体大小可以在清华大学开源软件镜像站 <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/status/#syncing-status">同步状态</a> 页面查到。</p>
+<h2 id="2-同步源与架构选择"><a href="#2-同步源与架构选择" class="headerlink" title="2. 同步源与架构选择"></a>2. 同步源与架构选择</h2><p>在官方提供的源列表中选择最方便的同步源（最好是支持 rsync 的国内镜像源，但国内目前提供 rsync 服务的镜像源不多，以下是网络收集的部分 rsync 源）。</p>
+<p>Ubuntu 源列表：<a target="_blank" rel="noopener" href="https://launchpad.net/ubuntu/+archivemirrors">https://launchpad.net/ubuntu/+archivemirrors</a></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">rsync:<span class="hljs-regexp">//mi</span>rrors.shuosc.org<span class="hljs-regexp">/ubuntu/</span><br>rsync:<span class="hljs-regexp">//mi</span>rrors.sohu.com<span class="hljs-regexp">/ubuntu/</span><br>rsync:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/ubuntu/</span><br>rsync:<span class="hljs-regexp">//mi</span>rrors.ustc.edu.cn<span class="hljs-regexp">/ubuntu/</span><br>rsync:<span class="hljs-regexp">//mi</span>rrors.yun-idc.com<span class="hljs-regexp">/ubuntu/</span><br></code></pre></td></tr></table></figure>
+
+<p>CentOS 源列表：<a target="_blank" rel="noopener" href="https://www.centos.org/download/mirrors/">https://www.centos.org/download/mirrors/</a></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">rsync:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/centos/</span><br>rsync:<span class="hljs-regexp">//mi</span>rror.es.its.nyu.edu<span class="hljs-regexp">/centos/</span><br>rsync:<span class="hljs-regexp">//</span>centos.sonn.com<span class="hljs-regexp">/CentOS/</span><br></code></pre></td></tr></table></figure>
+
+<p>EPEL 源列表：<a target="_blank" rel="noopener" href="https://www.centos.org/download/mirrors/">https://admin.fedoraproject.org/mirrormanager/mirrors/EPEL</a></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">rsync:</span><span class="hljs-comment">//mirrors.yun-idc.com/epel</span><br><span class="hljs-symbol">rsync:</span><span class="hljs-comment">//rsync.mirrors.ustc.edu.cn/epel</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-开始安装"><a href="#3-开始安装" class="headerlink" title="3.开始安装"></a>3.开始安装</h2><h4 id="安装需要的软件"><a href="#安装需要的软件" class="headerlink" title="安装需要的软件"></a>安装需要的软件</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">yum <span class="hljs-keyword">install</span> rsync wget<br></code></pre></td></tr></table></figure>
+
+<h4 id="下载tunasync"><a href="#下载tunasync" class="headerlink" title="下载tunasync"></a>下载tunasync</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget https:<span class="hljs-regexp">//g</span>h-proxy.com<span class="hljs-regexp">/https:/</span><span class="hljs-regexp">/github.com/</span>tuna<span class="hljs-regexp">/tunasync/</span>releases<span class="hljs-regexp">/download/</span>v0.<span class="hljs-number">8.0</span>/tunasync-linux-amd64-bin.tar.gz<br><span class="hljs-comment">#基于amd64，如果是ARM系列，请去https://github.com/tuna/tunasync/releases自行替换下载一个</span><br>tar xf tunasync-linux-amd64-bin.tar.gz<br>mv tunasync <span class="hljs-regexp">/usr/</span>bin/<br>mv tunasynctl <span class="hljs-regexp">/usr/</span>bin/<br></code></pre></td></tr></table></figure>
+
+<h4 id="创建仓库文件夹"><a href="#创建仓库文件夹" class="headerlink" title="创建仓库文件夹"></a>创建仓库文件夹</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mkdir -p /home/www/mirrors<br></code></pre></td></tr></table></figure>
+
+<h4 id="创建日志文件夹"><a href="#创建日志文件夹" class="headerlink" title="创建日志文件夹"></a>创建日志文件夹</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mkdir -p /home/www/mirrors/logs<br></code></pre></td></tr></table></figure>
+
+<h4 id="创建配置文件夹"><a href="#创建配置文件夹" class="headerlink" title="创建配置文件夹"></a>创建配置文件夹</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> /etc/tunasync<br></code></pre></td></tr></table></figure>
+
+<h4 id="创建manager的配置文件"><a href="#创建manager的配置文件" class="headerlink" title="创建manager的配置文件"></a>创建manager的配置文件</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> /etc/tunasync/manager.<span class="hljs-keyword">conf</span><br></code></pre></td></tr></table></figure>
+
+<p>将以下内容根据自己的需求修改后写入manager的配置文件内</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">debug</span> = <span class="hljs-literal">false</span><br> <br><span class="hljs-section">[server]</span><br><span class="hljs-attr">addr</span> = <span class="hljs-string">&quot;127.0.0.1&quot;</span> <span class="hljs-comment">#manager服务的监听地址，默认127.0.0.1一般就可以了</span><br><span class="hljs-attr">port</span> = <span class="hljs-number">12345</span> <span class="hljs-comment"># manager服务监听端口</span><br><span class="hljs-attr">ssl_cert</span> = <span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment">#证书配置，可为空</span><br><span class="hljs-attr">ssl_key</span> = <span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment">#证书配置，可为空</span><br> <br><span class="hljs-section">[files]</span><br><span class="hljs-attr">db_type</span> = <span class="hljs-string">&quot;bolt&quot;</span><br><span class="hljs-attr">db_file</span> = <span class="hljs-string">&quot;/etc/tunasync/manager.db&quot;</span> <span class="hljs-comment">#数据库文件位置</span><br><span class="hljs-attr">ca_cert</span> = <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="创建worker-conf配置文件"><a href="#创建worker-conf配置文件" class="headerlink" title="创建worker.conf配置文件"></a>创建worker.conf配置文件</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> /etc/tunasync/worker.<span class="hljs-keyword">conf</span><br></code></pre></td></tr></table></figure>
+
+<p>将以下内容根据自己的需求修改后写入worker的配置文件内，mirrors部分仅作示范写了两个，可以根据自身需要自由添加或删减</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[global]</span><br><span class="hljs-attr">name</span> = <span class="hljs-string">&quot;worker&quot;</span> <span class="hljs-comment"># worker名字</span><br><span class="hljs-attr">log_dir</span> = <span class="hljs-string">&quot;/home/www/mirrors/logs/&#123;&#123;.Name&#125;&#125;&quot;</span> <span class="hljs-comment"># 日志存储位置</span><br><span class="hljs-attr">mirror_dir</span> = <span class="hljs-string">&quot;/home/www/mirrors&quot;</span> <span class="hljs-comment"># 仓库存储位置</span><br><span class="hljs-attr">concurrent</span> = <span class="hljs-number">10</span> <span class="hljs-comment"># 线程数</span><br><span class="hljs-attr">interval</span> = <span class="hljs-number">240</span> <span class="hljs-comment"># 同步周期，单位分钟</span><br> <br><span class="hljs-section">[manager]</span><br><span class="hljs-attr">api_base</span> = <span class="hljs-string">&quot;http://127.0.0.1:12345&quot;</span> <span class="hljs-comment"># manager的API地址</span><br><span class="hljs-attr">token</span> = <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-attr">ca_cert</span> = <span class="hljs-string">&quot;&quot;</span><br> <br><span class="hljs-section">[cgroup]</span><br><span class="hljs-attr">enable</span> = <span class="hljs-literal">false</span><br><span class="hljs-attr">base_path</span> = <span class="hljs-string">&quot;/sys/fs/cgroup&quot;</span><br><span class="hljs-attr">group</span> = <span class="hljs-string">&quot;tunasync&quot;</span><br> <br><span class="hljs-section">[server]</span><br><span class="hljs-attr">hostname</span> = <span class="hljs-string">&quot;localhost&quot;</span><br><span class="hljs-attr">listen_addr</span> = <span class="hljs-string">&quot;127.0.0.1&quot;</span><br><span class="hljs-attr">listen_port</span> = <span class="hljs-number">6000</span><br><span class="hljs-attr">ssl_cert</span> = <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-attr">ssl_key</span> = <span class="hljs-string">&quot;&quot;</span><br> <br><span class="hljs-section">[[mirrors]]</span><br><span class="hljs-attr">name</span> = <span class="hljs-string">&quot;centos&quot;</span><br><span class="hljs-attr">provider</span> = <span class="hljs-string">&quot;rsync&quot;</span><br><span class="hljs-attr">upstream</span> = <span class="hljs-string">&quot;rsync://ftp.kaist.ac.kr/CentOS/&quot;</span><br><span class="hljs-attr">use_ipv6</span> = <span class="hljs-literal">false</span><br> <br><span class="hljs-section">[[mirrors]]</span><br><span class="hljs-attr">name</span> = <span class="hljs-string">&quot;ubuntu&quot;</span><br><span class="hljs-attr">provider</span> = <span class="hljs-string">&quot;rsync&quot;</span><br><span class="hljs-attr">upstream</span> = <span class="hljs-string">&quot;rsync://ftp.kaist.ac.kr/ubuntu/&quot;</span><br><span class="hljs-attr">use_ipv6</span> = <span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="自定义同步脚本"><a href="#自定义同步脚本" class="headerlink" title="自定义同步脚本"></a>自定义同步脚本</h4><p>以Github为例</p>
+<p>创建文件夹</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mkdir -p /home/www/mirrors/scripts<br></code></pre></td></tr></table></figure>
+
+<p>在worker.conf文件添加</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[[mirrors]]</span><br><span class="hljs-attr">name</span> = <span class="hljs-string">&quot;github-release&quot;</span><br><span class="hljs-attr">provider</span> = <span class="hljs-string">&quot;command&quot;</span><br><span class="hljs-attr">upstream</span> = <span class="hljs-string">&quot;https://api.github.com/repos/&quot;</span><br><span class="hljs-attr">command</span> = <span class="hljs-string">&quot;/home/www/mirrors/scripts/github-release.py&quot;</span><br><span class="hljs-attr">interval</span> = <span class="hljs-number">1440</span><br><span class="hljs-attr">docker_image</span> = <span class="hljs-string">&quot;tunathu/tunasync-scripts:latest&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>下载同步脚本</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget -P scripts<span class="hljs-regexp">/ https:/</span><span class="hljs-regexp">/gh-proxy.com/</span>https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/muzihuaner/mi</span>rrors<span class="hljs-regexp">/refs/</span>heads<span class="hljs-regexp">/new/mi</span>rrors<span class="hljs-regexp">/scripts/gi</span>thub-release.py<br>wget -P scripts<span class="hljs-regexp">/ https:/</span><span class="hljs-regexp">/gh-proxy.com/</span>https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/muzihuaner/mi</span>rrors<span class="hljs-regexp">/refs/</span>heads<span class="hljs-regexp">/new/mi</span>rrors<span class="hljs-regexp">/scripts/gi</span>thub-release.json<br>chmod +x scripts/github-release.py<br>vim scripts/github-release.py<br>vim scripts/github-release.json <span class="hljs-comment">#修改你要同步的仓库</span><br></code></pre></td></tr></table></figure>
+
+<p>可以先检验一下此脚本能否正常运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 scripts/github-release.py<br></code></pre></td></tr></table></figure>
+
+
+
+<p>更多配置：<a target="_blank" rel="noopener" href="https://github.com/tuna/tunasync/blob/master/docs/zh_CN/workers.conf">https://github.com/tuna/tunasync/blob/master/docs/zh_CN/workers.conf</a></p>
+<p>更多脚本：<a target="_blank" rel="noopener" href="https://github.com/tuna/tunasync-scripts">https://github.com/tuna/tunasync-scripts</a></p>
+<h4 id="下载tunasync启动停止脚本"><a href="#下载tunasync启动停止脚本" class="headerlink" title="下载tunasync启动停止脚本"></a>下载tunasync启动停止脚本</h4><p><a target="_blank" rel="noopener" href="https://github.com/whsir/tunasync-bin">https://github.com/whsir/tunasync-bin</a></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget -P <span class="hljs-regexp">/etc/i</span>nit.d<span class="hljs-regexp">/ https:/</span><span class="hljs-regexp">/gh-proxy.com/</span>https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/whsir/</span>tunasync-bin<span class="hljs-regexp">/master/</span>tunasync-manager<br>wget -P <span class="hljs-regexp">/etc/i</span>nit.d<span class="hljs-regexp">/ https:/</span><span class="hljs-regexp">/gh-proxy.com/</span>https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/whsir/</span>tunasync-bin<span class="hljs-regexp">/master/</span>tunasync-worker<br>chmod +x <span class="hljs-regexp">/etc/i</span>nit.d/tunasync-manager<br>chmod +x <span class="hljs-regexp">/etc/i</span>nit.d/tunasync-worker<br></code></pre></td></tr></table></figure>
+
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">/etc/init.d/tuna<span class="hljs-built_in">sync-manager</span> <span class="hljs-built_in">start</span><br>/etc/init.d/tuna<span class="hljs-built_in">sync-worker</span> <span class="hljs-built_in">start</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-regexp">/etc/</span><span class="hljs-keyword">init</span>.d<span class="hljs-operator">/</span>tunasync<span class="hljs-operator">-</span>manager restart<br><span class="hljs-regexp">/etc/</span><span class="hljs-keyword">init</span>.d<span class="hljs-operator">/</span>tunasync<span class="hljs-operator">-</span>worker restart<br></code></pre></td></tr></table></figure>
+
+<p>查看服务状态</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-regexp">/etc/</span><span class="hljs-keyword">init</span>.d<span class="hljs-operator">/</span>tunasync<span class="hljs-operator">-</span>manager status<br><span class="hljs-regexp">/etc/</span><span class="hljs-keyword">init</span>.d<span class="hljs-operator">/</span>tunasync<span class="hljs-operator">-</span>worker status<br></code></pre></td></tr></table></figure>
+
+<p>到这里为止，自建仓库就算完成了，可以通过以下命令来查看进程</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">tunasynctl</span> list -p <span class="hljs-number">12345</span> --<span class="hljs-literal">all</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="添加计划任务"><a href="#添加计划任务" class="headerlink" title="添加计划任务"></a>添加计划任务</h4><p>创建日志文件</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">touch <span class="hljs-regexp">/home/</span>www<span class="hljs-regexp">/mirrors/</span>logs/wget.log<br></code></pre></td></tr></table></figure>
+
+<p> 获取任务状态信息并保存为 json 文件</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">crontab -e</span><br></code></pre></td></tr></table></figure>
+
+<p>添加</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">*<span class="hljs-regexp">/1 * * * * wget -q http:/</span><span class="hljs-regexp">/127.0.0.1:12345/</span>jobs -O <span class="hljs-regexp">/home/</span>www<span class="hljs-regexp">/mirrors/</span>jobs.json -o <span class="hljs-regexp">/home/</span>www<span class="hljs-regexp">/mirrors/</span>logs/wget.log<br></code></pre></td></tr></table></figure>
+
+<p>验证</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">crontab -l</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="安装-Caddy-Web服务器"><a href="#安装-Caddy-Web服务器" class="headerlink" title="安装 Caddy Web服务器"></a>安装 Caddy Web服务器</h4><h4 id="配置访问权限"><a href="#配置访问权限" class="headerlink" title="配置访问权限"></a>配置访问权限</h4><p>镜像目录权限设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> 755 /home/www/mirrors<br></code></pre></td></tr></table></figure>
+
+<p>SELINUX权限设置(可选)</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">chcon -R -t <span class="hljs-type">httpd_sys_content_t</span> /home/www/mirrors<br></code></pre></td></tr></table></figure>
+
+<h4 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h4><p>如果你还没有安装 Docker，可以使用脚本安装 Docker：</p>
+<p><a target="_blank" rel="noopener" href="https://getdocker.quickso.cn/">https://getdocker.quickso.cn/</a></p>
+<p>创建Caddy文件夹</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mkdir -p /home/www/Caddy<br></code></pre></td></tr></table></figure>
+
+<p>创建Caddyfile</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arcade">:<span class="hljs-number">80</span> &#123;<br>    root * <span class="hljs-regexp">/usr/</span>share/caddy<br>    file_server browse<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>为了简化部署，可以使用 <code>Docker Compose</code> 来管理 Caddy 服务和配置。</p>
+<h4 id="创建-docker-compose-yml"><a href="#创建-docker-compose-yml" class="headerlink" title="创建 docker-compose.yml"></a>创建 <code>docker-compose.yml</code></h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span><br><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">caddy:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">caddy:latest</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">caddy</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;80:80&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;443:443&quot;</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/home/www/Caddy/Caddyfile:/etc/caddy/Caddyfile</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/home/www/mirrors:/usr/share/caddy</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">caddy_data:/data</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">caddy_config:/config</span><br><br><span class="hljs-attr">volumes:</span><br>  <span class="hljs-attr">caddy_data:</span><br>  <span class="hljs-attr">caddy_config:</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="启动-Caddy-服务"><a href="#启动-Caddy-服务" class="headerlink" title="启动 Caddy 服务"></a>启动 Caddy 服务</h4><p>运行以下命令启动 Caddy 服务：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose up -d</span><br></code></pre></td></tr></table></figure>
+
+<p>并根据需要补充 <code>index.html</code> 和配置的 web 文件到 <code>/mirrors</code> 目录。</p>
+<p>网页文件可以在 <a target="_blank" rel="noopener" href="https://github.com/muzihuaner/mirrors/tree/new/mirrors%E4%B8%8A%E4%B8%8B%E8%BD%BD%E4%BD%BF%E7%94%A8%EF%BC%88%E6%89%80%E6%9C%89">https://github.com/muzihuaner/mirrors/tree/new/mirrors上下载使用（所有</a> web 文件放到 <code>/mirrors</code> 目录即可）。</p>
+<p>文件夹层级</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs axapta">.<br>└── www<br>    └── mirrors 网站根目录<br>        ├── <span class="hljs-keyword">index</span>.html 首页<br>        ├── jobs.json 状态信息<br>        ├── logs 日志<br>        ├── scripts 脚本<br>        ├── <span class="hljs-keyword">static</span> 网页静态资源<br>        ├── status 服务器状态网页目录<br></code></pre></td></tr></table></figure>
+
+<p>至此，同步服务以及 web 访问服务全部搭建完成，内网的小伙伴们可以通过浏览器访问镜像站了 <a target="_blank" rel="noopener" href="http://服务器ip/">http:&#x2F;&#x2F;服务器IP&#x2F;</a>。</p>
+<h4 id="文章参考"><a href="#文章参考" class="headerlink" title="文章参考"></a>文章参考</h4><p><a target="_blank" rel="noopener" href="http://weyo.me/pages/techs/how-to-make-a-mirror-site/">http://weyo.me/pages/techs/how-to-make-a-mirror-site/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.lussac.net/archives/342/">https://blog.lussac.net/archives/342/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tuna/tunasync">https://github.com/tuna/tunasync</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.whsir.com/post-5094.html">https://blog.whsir.com/post-5094.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.shellop.com/archives/36">https://www.shellop.com/archives/36</a></p>
+<p><a target="_blank" rel="noopener" href="https://fangpsh.github.io/posts/2014/2014-01-01.html">https://fangpsh.github.io/posts/2014/2014-01-01.html</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%BC%80%E6%BA%90/" class="print-no-link">#开源</a>
+      
+        <a href="/tags/tunasync/" class="print-no-link">#tunasync</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>使用tunasync搭建自己的开源软件镜像仓库</div>
+      <div>https://blog.quickso.cn/2025/01/03/使用tunasync搭建自己的开源软件镜像仓库/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年1月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/01/27/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%85%8D%E8%B4%B9%E5%BC%80%E6%BA%90DeepSeek-R1%E5%A4%A7%E6%A8%A1%E5%9E%8B/" title="本地部署免费开源DeepSeek-R1大模型">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">本地部署免费开源DeepSeek-R1大模型</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/01/01/CaddyDocker%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" title="Caddy Docker版本安装部署">
+                        <span class="hidden-mobile">Caddy Docker版本安装部署</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

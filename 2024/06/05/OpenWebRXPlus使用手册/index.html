@@ -1,0 +1,1222 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="OpenWebRX是一款基于网络的软件定义无线电(SDR)接收器应用程序。它允许用户通过网页浏览器访问和控制连接的SDR硬件设备,用于无线电收听和监控。  本文档是关于 OpenWebRX+  的，它是基于 OpenWebRX 的改进和扩展版本 。由于原始项目缺少诸如降噪、调整步骤和对许多数字模式的支持等必要功能，**Marat Fayzullin**决定分支OpenWebRX项目并添加他认为有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenWebRXPlus使用手册">
+<meta property="og:url" content="https://blog.quickso.cn/2024/06/05/OpenWebRXPlus%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="OpenWebRX是一款基于网络的软件定义无线电(SDR)接收器应用程序。它允许用户通过网页浏览器访问和控制连接的SDR硬件设备,用于无线电收听和监控。  本文档是关于 OpenWebRX+  的，它是基于 OpenWebRX 的改进和扩展版本 。由于原始项目缺少诸如降噪、调整步骤和对许多数字模式的支持等必要功能，**Marat Fayzullin**决定分支OpenWebRX项目并添加他认为有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=NDQzNDE5MTY4ZjBlNzE0YThmNmUyYjJkYzA4NDNkNmJfM3Z3SW84Rzh1U3FUcG9wYUduRkdVM3k0amVhN0FieFhfVG9rZW46V2hVT2JpQ0dIb0lRWVl4Zm9YRmNKQnhBbkNiXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA">
+<meta property="og:image" content="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=Mjg3NWFkMWVhMjk2YjY1Zjc0MDczNWNkMzk4YjhhYjNfbXU3VkR5S1hXZWQ1akhCcDhjdTZaZ2xPbXBueTF1RzFfVG9rZW46TThwZ2JaaHdPb0o2ZFJ4UWFDYWNIbzlIbmtiXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA">
+<meta property="og:image" content="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=MjA2MWQ0NDFmN2IwNjcxNjMzNTAxZTg2MzdhYTJkMzZfM2NmbUpzdVYyd2ZzVUNsRTNFU0FQWmdGMDlKYnpLenVfVG9rZW46S1pzdmJaS0Vub3d1a0Z4WmNxdGNIaUxrbmpoXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA">
+<meta property="article:published_time" content="2024-06-05T06:16:07.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.767Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="OpenWebRXPlus">
+<meta property="article:tag" content="业余无线电">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=NDQzNDE5MTY4ZjBlNzE0YThmNmUyYjJkYzA4NDNkNmJfM3Z3SW84Rzh1U3FUcG9wYUduRkdVM3k0amVhN0FieFhfVG9rZW46V2hVT2JpQ0dIb0lRWVl4Zm9YRmNKQnhBbkNiXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA">
+  
+  
+  
+  <title>OpenWebRXPlus使用手册 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="OpenWebRXPlus使用手册"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-06-05 14:16" pubdate>
+          2024年6月5日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          123 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">OpenWebRXPlus使用手册</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>OpenWebRX是一款基于网络的软件定义无线电(SDR)接收器应用程序。它允许用户通过网页浏览器访问和控制连接的SDR硬件设备,用于无线电收听和监控。</p>
+</blockquote>
+<p>本文档是关于 <a target="_blank" rel="noopener" href="https://luarvique.github.io/ppa/">OpenWebRX+</a>  的，它是基于 <a target="_blank" rel="noopener" href="https://www.openwebrx.de/">OpenWebRX</a> 的改进和扩展版本 。由于原始项目缺少诸如降噪、调整步骤和对许多数字模式的支持等必要功能，**<a target="_blank" rel="noopener" href="https://fms.komkon.org/">Marat Fayzullin</a>**决定分支OpenWebRX项目并添加他认为有必要、有趣或人们广泛要求的功能。</p>
+<p>请注意，以下文档涵盖了<strong>原始</strong>OpenWebRX 和扩展版本的 OpenWebRX+。OpenWebRX+ 特有的功能已标记为如此。</p>
+<h1 id="使用OpenWebRXPlus系统，请遵守你所在国家-地区的法律法规！！！"><a href="#使用OpenWebRXPlus系统，请遵守你所在国家-地区的法律法规！！！" class="headerlink" title="使用OpenWebRXPlus系统，请遵守你所在国家&#x2F;地区的法律法规！！！"></a>使用OpenWebRXPlus系统，请遵守你所在国家&#x2F;地区的法律法规！！！</h1><h1 id="本网页及文档内容仅供学习与技术交流，切勿用于非法用途。"><a href="#本网页及文档内容仅供学习与技术交流，切勿用于非法用途。" class="headerlink" title="本网页及文档内容仅供学习与技术交流，切勿用于非法用途。"></a><strong>本网页及文档内容仅供学习与技术交流，切勿用于非法用途。</strong></h1><p><a target="_blank" rel="noopener" href="https://wap.miit.gov.cn/gyhxxhb/jgsj/cyzcyfgs/bmgz/wxdl/art/2024/art_9a2dba77d86942cebd1e9cbacd2d4b20.html">《中华人民共和国业余无线电台管理办法》</a></p>
+<h1 id="相关链接："><a href="#相关链接：" class="headerlink" title="相关链接："></a>相关链接：</h1><p><a target="_blank" rel="noopener" href="https://www.openwebrx.de/">https://www.openwebrx.de/</a></p>
+<p><a target="_blank" rel="noopener" href="https://fms.komkon.org/OWRX/">https://fms.komkon.org/OWRX/</a></p>
+<p><a target="_blank" rel="noopener" href="https://luarvique.github.io/ppa/">https://luarvique.github.io/ppa/</a></p>
+<h1 id="如何安装-OpenWebRX"><a href="#如何安装-OpenWebRX" class="headerlink" title="如何安装 OpenWebRX+"></a><strong>如何安装 OpenWebRX+</strong></h1><h1 id="设备："><a href="#设备：" class="headerlink" title="设备："></a>设备：</h1><p>1.HackRF系列</p>
+<p>2.RTL-SDR系列</p>
+<p>3.SDRplay系列</p>
+<p>4.Airspy系列</p>
+<p>………</p>
+<h3 id="OpenWebRX-包存储库"><a href="#OpenWebRX-包存储库" class="headerlink" title="OpenWebRX+ 包存储库"></a><a target="_blank" rel="noopener" href="https://luarvique.github.io/ppa">OpenWebRX+ 包存储库</a></h3><p>支持Docker、树莓派、Ubuntu、Debian安装</p>
+<p>这是 OpenWebRX Plus的软件包存储库。此版本的 OpenWebRX 提供以下新的和原始的功能：</p>
+<ul>
+<li>内置 FAX、SSTV、AIS、FLEX、POCSAG、ISM、RDS、CW、RTTY、SITOR-B 和 SAM 解码器。</li>
+<li>内置 HFDL、VDL2、ADSB 和 ACARS 航空解码器。</li>
+<li>内置 DTMF、EEA、EIA、CCIR 和多个 ZVEY SELCALL 解码器。</li>
+<li>接收者用户之间的内置聊天。</li>
+<li>内置 MP3 录音，用于录制接收音频。</li>
+<li>内置扫描仪。</li>
+<li>管理员能够查看用户连接并禁止用户滥用。</li>
+<li>使用浏览器对接收到的图像进行后台 SSTV 和 FAX 解码。</li>
+<li>基于谱减法的可调噪声过滤。</li>
+<li>可调整的调谐步长。</li>
+<li>自动生成短波广播的书签。</li>
+<li>自动为附近的 业余无线电 中继器生成书签。</li>
+<li>改进了触摸屏操作，具有平移和缩放功能。</li>
+<li>改进的滚轮支持，具有调整和缩放功能。</li>
+<li>改进了 CW 模式下的调谐。</li>
+<li>带通滤波器可通过滚轮调节。</li>
+<li>SDRPlay 设备操作更可靠。</li>
+<li>地图显示了来自世界各地的其他在线SDR站点。</li>
+<li>地图显示了来自世界各地的短波广播站。</li>
+<li>地图显示航空解码器获得的飞机位置。</li>
+<li>地图显示附近的 业余无线电 中继器。</li>
+<li>更好的地图信息，包括距离、APRS 路径、天气等。</li>
+<li>可配置会话超时，带有策略页面。</li>
+<li>HTTPS 协议支持（需要 SSL 证书）。</li>
+<li>可折叠接收器面板，具有可配置的不透明度。</li>
+<li>频谱显示。</li>
+</ul>
+<p>该存储库包含适用于以下 Linux 发行版的软件包：</p>
+<ul>
+<li>适用于 amd64、arm64 架构的 Ubuntu 22.04 (Jammy Jellyfish)</li>
+<li>适用于 amd64、arm64、armhf 架构的 Debian 11 (Bullseye)</li>
+</ul>
+<h3 id="树莓派安装"><a href="#树莓派安装" class="headerlink" title="树莓派安装"></a>树莓派安装</h3><p><a target="_blank" rel="noopener" href="https://github.com/luarvique/openwebrx/releases/">Stanislav (LZ2SLL)</a>为树莓派 4构建了SD 卡镜像，其中包含纯净的 OpenWebRX+ 安装版本。该镜像支持大部分开箱即用的常见 SDR 设备。RTL-SDR 和 SDRPlay 设备无需对镜像进行任何额外修改即可工作。请记住，该镜像可能不是OpenWebRX+ 的最新版本。</p>
+<p>请注意，此 SD 卡镜像不提供数字模式（DMR、NXDN 等）的软件支持，因为这些模式的软件解码器 (mbelib) 的来源有问题。为了在此镜像中启用数字模式，请通过 ssh 登陆并输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Plain">sudo install-softmbe.sh<br></code></pre></td></tr></table></figure>
+
+<h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><p>Stanislav (LZ2SLL) 制作了两个 OpenWebRX+ Docker 镜像，可以在任何 x64 PC、arm32  或 arm64 设备 上运行。<a target="_blank" rel="noopener" href="https://hub.docker.com/r/slechev/openwebrxplus-nightly">Nightly 版本</a>每天都会更新，并基于最新的 OpenWebRX+ 源。<a target="_blank" rel="noopener" href="https://hub.docker.com/r/slechev/openwebrxplus">正式版</a> 基于最新发布的 OpenWebRX+ 软件包，与 Debian 上正常的 OpenWebRX+ 安装版本相同。正式版的镜像大小稍大一些，但也更稳定。</p>
+<p>注意：安装Docker镜像前需要在宿主机添加设备黑名单，防止因内核占用导致容器无法调用SDR，完成后重启。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-built_in">cat</span> &gt; /etc/modprobe.d/owrx-blacklist.conf &lt;&lt; <span class="hljs-string">_EOF_</span><br><span class="hljs-string">blacklist dvb_usb_rtl28xxu</span><br><span class="hljs-string">blacklist sdr_msi3101</span><br><span class="hljs-string">blacklist msi001</span><br><span class="hljs-string">blacklist msi2500</span><br><span class="hljs-string">blacklist hackrf</span><br><span class="hljs-string">_EOF_</span><br></code></pre></td></tr></table></figure>
+
+<p>**安装 Docker 和 Docker Compose。**具体步骤取决于你的 Linux 发行版。你需要自行研究。</p>
+<p><strong>创建文件夹来存储持久数据</strong>（设置、配置文件、插件等）。在这里，我们将使用*“&#x2F;opt&#x2F;owrx-docker”*作为存储所有数据的基本文件夹，但您也可以使用其他文件夹：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo mkdir -p <span class="hljs-regexp">/opt/</span>owrx-docker<span class="hljs-regexp">/var /</span>opt<span class="hljs-regexp">/owrx-docker/</span>etc <span class="hljs-regexp">/opt/</span>owrx-docker<span class="hljs-regexp">/plugins/</span>&#123;receiver,map&#125;<br></code></pre></td></tr></table></figure>
+
+<p>创建 <strong>docker-compose.yaml</strong></p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">services</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">owrx</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">image</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&#x27;slechev/openwebrxplus-softmbe:latest&#x27;</span><br>    <span class="hljs-attribute">container_name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">owrx-mbe</span><br>    <span class="hljs-attribute">restart</span><span class="hljs-punctuation">:</span> <span class="hljs-string">unless-stopped</span><br>    <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;8073:8073&#x27;</span><br>    <span class="hljs-attribute">environment</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-attribute">TZ</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Asia/Shanghai</span><br>      <span class="hljs-attribute">OPENWEBRX_ADMIN_USER</span><span class="hljs-punctuation">:</span> <span class="hljs-string">admin</span><br>      <span class="hljs-attribute">OPENWEBRX_ADMIN_PASSWORD</span><span class="hljs-punctuation">:</span> <span class="hljs-string">password</span><br>    <span class="hljs-attribute">devices</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/dev/bus/usb:/dev/bus/usb</span><br>    <span class="hljs-attribute">volumes</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/owrx-docker/etc:/etc/openwebrx</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/owrx-docker/var:/var/lib/openwebrx</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/owrx-docker/plugins:/usr/lib/python3/dist-packages/htdocs/plugins</span><br></code></pre></td></tr></table></figure>
+
+<p>启动容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /opt/owrx-docker &amp;&amp; <span class="hljs-built_in">sudo</span> docker compose up -d<br></code></pre></td></tr></table></figure>
+
+<p>升级容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /opt/owrx-docker &amp;&amp; <span class="hljs-built_in">sudo</span> docker compose pull &amp;&amp; <span class="hljs-built_in">sudo</span> docker compose down &amp;&amp; docker compose up -d<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE]</p>
+<p>重要：如果您在使用 SDRPlay 设备，每次重启主机或重新连接设备时，请重新启动容器。除非容器已重启，否则页面不会展示新的 SDRPlay 设备。</p>
+</blockquote>
+<p>完成后就可以浏览器访问“IP:8073”打开页面了（如需外网访问请自行申请公网IP或者搭建内网穿透，并使用强壮密码，请勿随意分享自己的站点，更不要触及敏感波段，切记！！！），浏览守听无需登录，需要对站点进行自定义时点击右上角的“Settings”使用刚才创建的账号登录修改。</p>
+<h4 id="避坑指南"><a href="#避坑指南" class="headerlink" title="避坑指南"></a>避坑指南</h4><p>OpenWebRX+可能会出现FT8无法解码的情况</p>
+<p>解决办法(x86平台)：</p>
+<p>进入容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Bash">docker <span class="hljs-built_in">exec</span> -it openwebrx /bin/sh<br></code></pre></td></tr></table></figure>
+
+<p>执行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Bash">apt update<br>apt install binutils<br>strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5<br></code></pre></td></tr></table></figure>
+
+<h3 id="升级-OpenWebRX"><a href="#升级-OpenWebRX" class="headerlink" title="升级 OpenWebRX+"></a>升级 OpenWebRX+</h3><p>要从旧的 OpenWebRX+ 版本升级，请以 root 身份执行以下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">apt update<br>apt upgrade<br></code></pre></td></tr></table></figure>
+
+<h3 id="Ubuntu安装"><a href="#Ubuntu安装" class="headerlink" title="Ubuntu安装"></a>Ubuntu安装</h3><p>将此存储库添加到您的Ubuntu系统，请以 root 身份执行以下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">wget -O - https://luarvique.github.io/ppa/openwebrx-plus.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/openwebrx-plus.gpg<br>echo &quot;deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/ubuntu ./&quot; &gt; /etc/apt/sources.list.d/openwebrx-plus.list<br>apt update<br></code></pre></td></tr></table></figure>
+
+<p>然后添加OpenWebRX 存储库，因为它包含一些必要的包。为了将OpenWebRX 存储库添加到您的Ubuntu系统，请以 root 身份执行以下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">wget -O - https://repo.openwebrx.de/debian/key.gpg.txt | gpg --dearmor -o /usr/share/keyrings/openwebrx.gpg<br>echo &quot;deb [signed-by=/usr/share/keyrings/openwebrx.gpg] https://repo.openwebrx.de/ubuntu/ jammy main&quot; &gt; /etc/apt/sources.list.d/openwebrx.list<br>apt update<br></code></pre></td></tr></table></figure>
+
+<h3 id="Debian安装"><a href="#Debian安装" class="headerlink" title="Debian安装"></a>Debian安装</h3><p>为了将此存储库添加到您的Debian Bullseye系统，请以 root 身份执行以下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">wget -O - https://luarvique.github.io/ppa/openwebrx-plus.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/openwebrx-plus.gpg<br>echo &quot;deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/debian ./&quot; &gt; /etc/apt/sources.list.d/openwebrx-plus.list<br>apt update<br></code></pre></td></tr></table></figure>
+
+<p>添加OpenWebRX 存储库，因为它包含一些必要的包。为了将OpenWebRX 存储库添加到您的Debian Bullseye系统，请以 root 身份执行以下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">wget -O - https://repo.openwebrx.de/debian/key.gpg.txt | gpg --dearmor -o /usr/share/keyrings/openwebrx.gpg<br>echo &quot;deb [signed-by=/usr/share/keyrings/openwebrx.gpg] https://repo.openwebrx.de/debian/ bullseye main&quot; &gt; /etc/apt/sources.list.d/openwebrx.list<br>apt update<br></code></pre></td></tr></table></figure>
+
+<p>如果您有Debian Bookworm系统，现在有一个实验性的 OpenWebRX+ 版本可供您使用。以 root 身份执行以下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">wget -O - https://luarvique.github.io/ppa/openwebrx-plus.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/openwebrx-plus.gpg<br>echo &quot;deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/bookworm ./&quot; &gt; /etc/apt/sources.list.d/openwebrx-plus.list<br>apt update<br></code></pre></td></tr></table></figure>
+
+<p>Debian Bookworm用户不能将OpenWebRX 存储库添加到他们的系统中，因为它包含 Bullseye 软件包。</p>
+<p>添加好存储库后 请以 root 身份执行以下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">apt install openwebrx<br></code></pre></td></tr></table></figure>
+
+<p>要确保 OpenWebRX+ 正在运行，请在本地网页浏览器输入以下地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">http://localhost:8073/<br></code></pre></td></tr></table></figure>
+
+<p>您应该会看到 OpenWebRX+ Web 界面，其中包含噪声滤波器 (NR) 和调谐步长 (&gt;-&lt;) 控件。</p>
+<h3 id="SDRPlay-设备或其克隆设备"><a href="#SDRPlay-设备或其克隆设备" class="headerlink" title="SDRPlay 设备或其克隆设备"></a>SDRPlay 设备或其克隆设备</h3><p>此存储库提供了改进的 SoapySDRPlay3 设备驱动程序，与原始版本相比有以下更改：</p>
+<ul>
+<li>修复了通用增益控制，将其限制为 IFGR 设置。</li>
+<li>让 RFGR 设置一个名为“rf_gain”的单独的可选参数。</li>
+<li>固定频率校正 (ppm) 参数。</li>
+<li>修复了从 LIF 切换到宽带 ZIF 模式时的问题。</li>
+<li>修复了将设置发送到设备时的死锁。</li>
+<li>添加了当设备不接受设置时的多次重试。</li>
+<li>稍微加宽滤波器，减少大多数带宽的“驼峰”大小。</li>
+<li>添加了 1.536MHz 带宽。</li>
+</ul>
+<p>为了安装改进的 SoapySDRPlay3 软件包，请以 root 身份执行以下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">apt install soapysdr-module-sdrplay3<br></code></pre></td></tr></table></figure>
+
+<p>在安装过程中，SoapySDRPlay3 软件包还应安装最新的 SoapySDR 并从 &#x2F;usr&#x2F;local 中删除所有本地构建的 SoapySDR 文件。您仍然需要从此页面下载并安装 SDRPlay API：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">https://www.sdrplay.com/downloads/<br></code></pre></td></tr></table></figure>
+
+<p>SDRPlay API 也可以按照以下说明作为非官方包安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">https://gitlab.com/martin.herren/libsdrplay-api<br></code></pre></td></tr></table></figure>
+
+<p>安装部分内容来自：<a target="_blank" rel="noopener" href="https://luarvique.github.io/ppa">https://luarvique.github.io/ppa</a></p>
+<h1 id="如何使用-OpenWebRX"><a href="#如何使用-OpenWebRX" class="headerlink" title="如何使用 OpenWebRX+"></a><strong>如何使用 OpenWebRX+</strong></h1><h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a><strong>入门</strong></h2><p>在本节中，我们将讨论如何开始使用 OpenWebRX+、用户界面中显示的内容以及控件如何工作。</p>
+<h3 id="主页面"><a href="#主页面" class="headerlink" title="主页面"></a><strong>主页面</strong></h3><p><img src="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=NDQzNDE5MTY4ZjBlNzE0YThmNmUyYjJkYzA4NDNkNmJfM3Z3SW84Rzh1U3FUcG9wYUduRkdVM3k0amVhN0FieFhfVG9rZW46V2hVT2JpQ0dIb0lRWVl4Zm9YRmNKQnhBbkNiXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li><strong>滚动瀑布</strong> 显示您当前选择的 SDR 配置文件中的频段活动。瀑布颜色代表每个频率的信号水平，较亮的颜色对应较强的信号。因此，一个强烈、良好、持续的信号看起来就像瀑布上一条明亮的垂直条纹。不同的信号调制产生不同形状的条纹。 有关示例， 请参阅 <a target="_blank" rel="noopener" href="https://www.sigidwiki.com/wiki/Signal_Identification_Guide">信号识别指南。</a></li>
+<li>频率<strong>刻度</strong>显示实际频率以及当前调谐的频率，用黄色插入符号表示。<strong>这是您当前正在收听的</strong>频率。插入符号两侧的数字代表当前过滤器范围。您可以通过拖动插入符号两侧来更改这些边界。</li>
+<li>OpenWebRX+ 中的频谱显示显示 每个<strong>频率的当前</strong>信号电平，而不是瀑布显示的历史电平。频谱显示有一点延迟，来确保短信号仍然在频谱上留下痕迹。</li>
+<li>步进<strong>调谐按钮</strong>可让您通过左键单击来上下调整频率范围。启用“侧步”功能后，您还可以右键单击这些按钮以跳出当前选择的配置文件。</li>
+<li>书签可让您快速调至之前添加书签的频率**。**OpenWebRX 中有三种类型的书签：<ol>
+<li><strong>绿色</strong>书签代表频段规划定义的频率。除了修改频段计划之外，这些书签不可编辑。</li>
+<li><strong>黄色</strong>书签保存在OpenWebRX服务器上，可由管理员编辑。</li>
+<li><strong>蓝色</strong>书签保存在您的网络浏览器中，因此您可以创建和编辑。</li>
+</ol>
+</li>
+<li>单击页面左上角的图标即可显示 接收者**信息。**该信息由管理员填写，包括接收者的姓名、位置和硬件描述。</li>
+<li><strong>状态</strong> 按钮可切换接收器网页底部显示的 <strong>状态栏。</strong></li>
+<li>聊天按钮可切换接收者网页底部显示的<strong>日志和聊天面板。<strong>如果管理员选择禁用聊天功能，此按钮将变成</strong>“日志”</strong>，打开非交互式日志面板。</li>
+<li>接收<strong>器</strong>按钮可切换接收器的 <strong>主控制面板。</strong></li>
+<li>“<strong>地图”<strong>按钮可打开</strong>地图页面</strong> ，显示广播电台、中继器、其他在线SDR站点以及来自各种来源（例如飞机、船舶和 业余无线电操作员）的位置报告。</li>
+<li>“<strong>文件”<strong>按钮可打开</strong>文件浏览器页面</strong>，其中包含最近接收的 SSTV 图像、传真和其他数据。</li>
+<li>设置<strong>按钮</strong>可打开受密码保护的<strong>设置页面</strong>以配置 OpenWebRX+。通常，只有服务器管理员需要访问服务器设置。</li>
+<li>页面底部的状态栏显示服务器的当前状态及其与网络浏览器的 连接**。**各种面板显示网络吞吐量、服务器CPU负载和温度、音频采样率等。</li>
+</ol>
+<h3 id="主要控制装置"><a href="#主要控制装置" class="headerlink" title="主要控制装置"></a><strong>主要控制装置</strong></h3><p><img src="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=Mjg3NWFkMWVhMjk2YjY1Zjc0MDczNWNkMzk4YjhhYjNfbXU3VkR5S1hXZWQ1akhCcDhjdTZaZ2xPbXBueTF1RzFfVG9rZW46TThwZ2JaaHdPb0o2ZFJ4UWFDYWNIbzlIbmtiXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>这是接收器**当前调谐的频率。**您可以通过单击瀑布、书签或直接在此字段中输入来更改它。<strong>频率只能在当前配置文件范围内更改。</strong></li>
+<li>单击此按钮可为您当前的频率<strong>添加书签</strong>。新书签将本地存储在您的浏览器中，并在瀑布上方显示为蓝色标记。</li>
+<li>这是<strong>当前配置文件</strong>，包括 SDR 设备名称（“RSPdx”）。OpenWebRX 支持多个 SDR 设备，每个设备都有多个配置文件。选择新配置文件时，请记住，<strong>同一 SDR 设备的所有用户的配置文件</strong>都会发生变化，因此当您看到其他人使用该服务器时，请务必小心。</li>
+<li><strong>这是所有可用音频调制模式</strong> 的列表，当前模式以黄色突出显示。通过单击相应按钮选择新模式，但请记住，并非所有模式都适用。它有助于了解每个调制在瀑布上的样子。 如果不确定， 请参阅 <a target="_blank" rel="noopener" href="https://www.sigidwiki.com/wiki/Signal_Identification_Guide">信号识别指南。</a></li>
+<li><strong>如果数字解码器处于活动状态</strong> ，该按钮将会亮起。单击它可关闭数字解码。</li>
+<li>这是<strong>当前的数字解码模式</strong>（如果处于活动状态）。您可以从此处的列表中选择新的数字解码模式，但请记住，并非所有模式都适用。它有助于了解每种数字模式在瀑布上的样子。 如果不确定， 请参阅 <a target="_blank" rel="noopener" href="https://www.sigidwiki.com/wiki/Signal_Identification_Guide">信号识别指南。</a></li>
+<li>使用此滑块控制<strong>音频音量</strong>。单击扬声器按钮可将音频静音或取消静音。</li>
+<li>使用此滑块设置<strong>静噪阈值</strong>。左键单击 <strong>SQ</strong>按钮可打开和关闭静噪。当静噪打开时，任何低于所选静噪阈值的音频都将被静音。</li>
+<li>右键单击<strong>SQ</strong>按钮可切换频率扫描仪，使<strong>SQ</strong>按钮呈绿色亮起。扫描仪将自动检查所有已标记的频率以查找高于静噪阈值的信号并调谐到它们。一旦信号消失，扫描仪将继续检查书签以获取更多信号。</li>
+<li>使用此滑块设置<strong>降噪阈值</strong>。单击 <strong>NR</strong>按钮可打开和关闭降噪功能。降噪算法基于谱减法原理。它将从音频中删除任何低于所选阈值的频率，从而减少背景噪音。请记住，过度使用降噪可能会扭曲或抑制有用的声音。</li>
+<li><strong>调谐步长</strong>选择 器允许您选择频率调谐粒度。例如，如果选择 1kHz 步进，则频率将始终以 1kHz 增量进行调谐。不同的配置文件可能采用不同的默认调谐步骤，例如短波广播公司的 5kHz 或使用 SSB 调制的 HAM 运营商的 500Hz。单击相邻按钮可将当前配置文件的调整步长重置为其默认值。</li>
+<li><strong>此滑块设置“最热”瀑布颜色</strong>（通常为红色） 的信号级别。当查看强信号时将其设置得较高，当查看弱信号时将其设置得较低。</li>
+<li>左键单击相邻按钮可一次性自动调整瀑布颜色。右键单击按钮可切换瀑布颜色的连续自动调整。</li>
+<li><strong>此滑块设置“最冷”瀑布颜色</strong>（通常为蓝色） 的信号级别。当查看强信号时将其设置得较高，当查看弱信号时将其设置得较低。</li>
+<li>左键单击相邻按钮可将瀑布颜色重置为其默认值。</li>
+<li>此下拉列表允许您选择<strong>用户界面主题</strong>之一。单击相邻按钮会将用户界面重置为默认主题。</li>
+<li>该滑块控制<strong>用户界面的不透明度</strong>，使瀑布顶部的面板或多或少可见。单击相邻按钮将用户界面重置为完全不透明度。</li>
+<li>四个缩放按钮可让您放大和<strong>缩小瀑布</strong>。缩放始终围绕当前调谐频率进行，并保持显示。</li>
+<li>主面板底部的时钟显示<strong>当前的通用协调时间 (UTC)</strong>。大多数 OpenWebRX 用户界面都以 UTC 运行，因此显示此时钟是为了更方便参考。</li>
+<li>单击**“录制”<strong>按钮可随时开始</strong>录制音频。<strong>该按钮将呈红色亮起，表示正在进行录制。再次单击</strong>REC**按钮后，它将停止录制并将录制的音频保存到文件中。</li>
+<li>底部的条指示<strong>当前信号电平</strong>。它将根据 OpenWebRX 认为信号过载的情况改变颜色。还有一个数字读数，以分贝为单位显示精确值。</li>
+<li>此按钮可切换瀑布上方的**实时频谱显示。**使用它时，请记住频谱显示可能会使您的网络浏览器使用大量处理器能力。</li>
+</ol>
+<h3 id="使用鼠标和触摸"><a href="#使用鼠标和触摸" class="headerlink" title="使用鼠标和触摸"></a><strong>使用鼠标和触摸</strong></h3><p>OpenWebRX 需要使用鼠标右键。<strong>在具有单个鼠标按钮的设备（例如 Apple 计算机）上，通过按住CONTROL</strong> 键并单击鼠标 来模拟鼠标右键。</p>
+<p><strong>在基于触摸的设备</strong>（例如智能手机和平板电脑）上，通过用手指按住该位置比不常用的时间长一点来模拟鼠标右键。</p>
+<p>鼠标<strong>滚轮</strong>有两种操作模式：<strong>正常</strong>模式和 <strong>修改</strong>模式（按下鼠标右键、滚轮按钮或 SHIFT 键）：</p>
+<ul>
+<li><strong>在瀑布中：</strong> 正常的轮子旋转调整频率，修改后的轮子旋转改变缩放系数。可以通过接收器面板中的复选框来逆转此行为。</li>
+<li><strong>在频率范围内：</strong> 正常和修改的车轮旋转都会调整频率。</li>
+<li><strong>在带通滤波器（黄色插入符号）处：</strong> 正常轮旋转使滤波器向左或向右移动，修改后的轮旋转使滤波器更宽或更窄。</li>
+</ul>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a><strong>使用场景</strong></h2><p>在本节中，我们将介绍一些可以使用 OpenWebRX 进行的常见操作，例如收听广播电台、HAM 操作员以及跟踪船舶和飞机。</p>
+<h3 id="收听-FM-广播"><a href="#收听-FM-广播" class="headerlink" title="收听 FM 广播"></a><strong>收听 FM 广播</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/FM_broadcasting">什么是调频广播？</a></em></p>
+<p>FM广播一般发生在76MHz到108MHz之间。每个广播公司都分配有 100kHz 的频谱，除非它们位于美国，每个电台分配有 200kHz 的频谱。FM 广播的传输距离可达 100 公里，但受地平线限制。如果您居住在美国，可以通过 <a target="_blank" rel="noopener" href="https://radio-locator.com/">Radio Locator</a> 网站找到最近的 FM 电台。</p>
+<p>为了在 OpenWebRX 中收听 FM 广播，请选择包含上述频率的配置文件，按接收器面板上的<strong>WFM</strong> 按钮，然后调谐到其中一个信号。请注意，OpenWebRX 仅播放<strong>单声道声音</strong>，因此不会有任何立体声。</p>
+<p>OpenWebRX+ 还允许<strong>解码 FM 广播中发送的文本 RDS 信息</strong>，例如电台名称、节目名称和类型等。要查看此信息，请调谐到 FM 信号并选择 *“RDS”*数字模式。您应该会在瀑布底部看到 RDS 信息面板，其中慢慢充满了数据。</p>
+<p>由于<strong>RDS 数据在美国的编码方式</strong>与欧洲略有不同，您可能需要转到*“设置 | 解调和解码 | 其他”<em>并更改</em>“从 WFM 广播中解码美国特定的 RDS 信息”*选项以反映您的接收器位置。</p>
+<h3 id="收听-AM-广播"><a href="#收听-AM-广播" class="headerlink" title="收听 AM 广播"></a><strong>收听 AM 广播</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/AM_broadcasting">什么是 AM 广播？</a></em></p>
+<p>人们所说的“AM”通常是指在 LW 和 MW 频段（100kHz 至 1800kHz 之间）发生的无线电广播。每个电台分配有 10kHz 的频谱。白天，AM广播的距离可达200公里，但这个距离在夜间会大大增加。如果您居住在美国，可以通过 <a target="_blank" rel="noopener" href="https://radio-locator.com/">Radio Locator</a> 网站找到最近的 AM 电台。</p>
+<p>为了在 OpenWebRX 中收听 AM 广播，请选择包含上述频率的配置文件，按接收器面板上的<strong>AM</strong> 按钮，然后调谐到其中一个信号。如果您感兴趣的信号被相邻信号遮挡，请尝试使用<strong>SAM</strong>按钮。<strong>它与AM</strong>具有相同的效果，但使用了更抗干扰的不同算法。</p>
+<h3 id="短波收听-SWL"><a href="#短波收听-SWL" class="headerlink" title="短波收听 (SWL)"></a><strong>短波收听 (SWL)</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Shortwave_listening">什么是SWL？</a></em></p>
+<p>“短波”描述了 无线电广播公司、业余爱好者和专业人士使用的 1800kHz 至 30MHz 之间的<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Shortwave_bands">多个频段。</a>SWL 活动通常指的是短波广播收听，广播公司可以使用 AM 调制轻松覆盖数千公里。<a target="_blank" rel="noopener" href="https://short-wave.info/">全球短波广播时间表可在Shortwave Info</a>和 <a target="_blank" rel="noopener" href="https://shortwaveschedule.com/">Shortwave Schedule</a>网站上找到 。</p>
+<p>要在 OpenWebRX 中收听短波广播，请选择包含您感兴趣的短波频段的配置文件，按 接收器面板上的<strong>AM</strong>按钮，然后调谐到其中一个信号。如果信号被相邻信号遮挡，请尝试使用<strong>SAM</strong>按钮。<strong>它与AM</strong>具有相同的效果，但使用了更抗干扰的不同算法。</p>
+<p>OpenWebRX+每天一次<strong>查询</strong> <strong><a target="_blank" rel="noopener" href="http://www.eibispace.de/">EiBi</a></strong> <strong>数据库以获取短波广播时间表</strong>。当前广播电台在地图上用**⍑**标记表示。单击某个电台会显示其时间表，包括频率和广播时间。OpenWebRX+ 将调谐到点击的频率，只要它们在 您正在收听的 <strong>配置文件内。</strong></p>
+<p>您可以通过*“设置 | 常规 | 显示 | 短波书签范围”设置距接收器的最大范围，让 OpenWebRX+*<strong>为当前广播的短波电台</strong> 创建书签。OpenWebRX+ 只会为位于该范围内的短波电台创建书签。</p>
+<p>您还可以<strong>将短波书签限制为几个配置文件</strong> （例如 49m &#x2F; 41m &#x2F; 等）：</p>
+<ol>
+<li>*通过将“设置|常规|显示|短波书签范围”*设置为零来 禁用全局短波书签。</li>
+<li>转到*“设置 | SDR 设备和配置文件 | &lt;设备&gt; | &lt;配置文件&gt;”* ，然后单击**“添加”添加名为***“Shortwave 书签范围”*的选项。</li>
+<li>将新添加的选项设置为距接收器的最大范围，您希望在其中查看短波书签并通过单击“**应用”和“保存”**保存配置文件设置。</li>
+</ol>
+<p>需要注意的是，只有在 <em>“设置|常规|接收器信息|接收器位置”中</em>**设置正确的接收器位置，**短波电台才会正确显示。同样重要的是要记住，由于 OpenWebRX+ 每天查询<a target="_blank" rel="noopener" href="http://www.eibispace.de/">EiBi</a>一次，因此在设置接收器位置后 <strong>可能无法立即获得最新信息。</strong></p>
+<h3 id="聆听公民波段-CB"><a href="#聆听公民波段-CB" class="headerlink" title="聆听公民波段 (CB)"></a><strong>聆听公民波段 (CB)</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Citizens_band_radio">什么是CB？</a></em></p>
+<p>公民频段 (CB) 通常覆盖 27MHz 到 28MHz 之间的频谱，个人只要遵守一些规则就可以在没有许可证的情况下进行通信。CB 频段的确切范围因国家&#x2F;地区而异。它毗邻 10m 业余频段。</p>
+<p>在大多数地方，CB 频段分为 40 个通道（CB1 至 CB40），间隔为 10kHz。OpenWebRX+ 为这些频道提供默认书签。虽然 CB 最初允许所有模拟语音模式（AM、FM、LSB、USB），但美国用户通常更喜欢较低通道的 AM 和较高通道的 LSB。在英国，AM 直到最近才被禁止，FM 是最常见的 CB 模式。</p>
+<p>为了在 OpenWebRX 中收听 CB，请选择包含 CB 频段的配置文件，并通过单击瀑布或书签来调谐到其中一个信号。然后，您可能需要按 接收器面板上的 <strong>AM</strong>、<strong>FM</strong>、 <strong>LSB</strong>或<strong>USB按钮，具体取决于您正在收听的传输所使用的调制类型。</strong></p>
+<h3 id="聆听-业余无线电短波电台"><a href="#聆听-业余无线电短波电台" class="headerlink" title="聆听 业余无线电短波电台"></a><strong>聆听 业余无线电短波电台</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Amateur_radio_operator">什么是火腿？</a></em></p>
+<p>业余无线电操作员 (HAM) 的工作频率为 160m、80m、40m、20m 和其他一些 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Shortwave_bands">短波频段</a>。从莫尔斯电码到语音，再到数字传输，各种活动都发生在这些频段上。</p>
+<p>每个业余无线电通常分为三个部分：</p>
+<ul>
+<li>底部用于莫尔斯电码传输，也称为“电报”或CW。</li>
+<li>在摩尔斯电码的正上方，有一堆不同格式的数字传输，例如 RTTY、FT8、FT4 等。其中许多格式以固定频率运行，这些频率包含在 OpenWebRX 频段规划中，因此显示为绿色书签。</li>
+<li>频带的其余部分分配给使用 LSB 或 USB 调制的语音（或“电话”）传输，并加入一些 AM。LSB 调制用于 20m 以下，而 USB 用于 20m 及以上。</li>
+</ul>
+<p>为了在 OpenWebRX 中收听业余无线电操作员的广播，请选择包含您感兴趣的 HAM 频段的配置文件，按下 接收器面板上的<strong>LSB</strong>或<strong>USB</strong> 按钮，然后调谐到其中一个信号。虽然大多数业余传输发生在 1kHz 边界，但您可能需要更精确地调谐以获得更清晰的声音。</p>
+<h3 id="收听摩尔斯电码-CW"><a href="#收听摩尔斯电码-CW" class="headerlink" title="收听摩尔斯电码 (CW)"></a><strong>收听摩尔斯电码 (CW)</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Continuous_wave">什么是CW？</a></em></p>
+<p>大多数摩尔斯电码 (CW) 传输发生在业余无线电频段的低端，例如 3500-3600kHz、7000-7100kHz、14000-14100kHz 等。要在 OpenWebRX 中启用 CW 模式，请按 接收器面板上的<strong>CW按钮。<strong>在此模式下，带通滤波器缩小至 700-900Hz 范围，以获得更好的选择性。此外，在 CW 模式下，OpenWebRX+ 会将频率调至</strong>低于单击的载波频率 800Hz</strong>，以确保始终听到载波。</p>
+<p>对于那些不懂莫尔斯电码的人，OpenWebRX+ 提供 <strong>自动 CW 解码</strong>，可通过选择*“CW 解码器”*数字模式来启用。CW 解码器向您呈现一个缩放的二级瀑布，其中可能包含多个 CW 信号。一旦您点击您感兴趣的 CW 信号，解码后的文本将显示在二级瀑布下方，其中无法识别的字符显示为下划线。</p>
+<p>您还可以使 CW 解码器显示 正在解码的**原始“嘀”和“哒” 。*<em>为此，请转至</em>“设置 | 解调和解码 | 其他”<em>并启用</em>“解码 CW 时显示 CW 代码（dits &#x2F; dahs）”*选项。</p>
+<h3 id="接收电传打字机-RTTY"><a href="#接收电传打字机-RTTY" class="headerlink" title="接收电传打字机 (RTTY)"></a><strong>接收电传打字机 (RTTY)</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/RTTY">RTTY是什么？</a></em></p>
+<p>电传打字机传输由两个载波信号组成，其中一个信号指定“空格”（或零），而另一个信号指定“标记”（或一个）。连续五位组成一个字符，用博多码编码。因此，描述 RTTY 传输的三个重要参数：</p>
+<ul>
+<li><strong>带宽 (Hz)</strong> 这是两个载波信号之间的距离，以赫兹为单位。常见带宽为 85Hz、170Hz、450Hz 和 650Hz。</li>
+<li><strong>比特率（波特率）</strong> 这是传输速度，决定每秒发送多少位。常见的比特率有 45bd、45.45bd、50bd、75bd 和 100bd。</li>
+<li><strong>反向</strong> “反向”选项在应用时会翻转“空间”和“标记”频率的含义。</li>
+</ul>
+<p>OpenWebRX+ 附带三种不同的 RTTY 设置，可通过数字模式下拉列表进行选择：</p>
+<ul>
+<li><strong>RTTY-170 (45)</strong> 这是HAM运营商常用的模式，带宽170Hz，码率45bd。您可以在大多数 HAM HF 频段上找到此模式下的传输，其传输略高于莫尔斯电码传输。</li>
+<li><strong>RTTY-450 (50N)</strong> 此模式由德国气象服务使用，最常见于 10100kHz 频率。OpenWebRX+ 包含此频率和其他德国天气 RTTY 频率的默认（黄色）书签。此模式使用 450Hz 带宽和 50bd 比特率，“标记”和“空间”频率相反。</li>
+<li><strong>RTTY-85 (50N)</strong> 此模式通常用于可用带宽有限的 LF 和 VLF 频段。它具有 85Hz 带宽和 50bd 比特率，“标记”和“空间”频率相反。</li>
+</ul>
+<p>为了在 OpenWebRX+ 中接收电传打字机传输，请按 接收器面板上的<strong>USB</strong>按钮并调谐到 RTTY 传输，它看起来像两个靠近在一起的信号。然后选择上述 RTTY 解码器之一。它将向您呈现一个缩放的二级瀑布，其中可能包含多个 RTTY 信号。单击您感兴趣的 RTTY 信号后，解码后的文本将显示在二级瀑布下方，其中无法识别的字符显示为下划线。</p>
+<h3 id="接收-SSTV-图像"><a href="#接收-SSTV-图像" class="headerlink" title="接收 SSTV 图像"></a><strong>接收 SSTV 图像</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/SSTV">什么是SSTV？</a></em></p>
+<p>慢扫描电视 (SSTV) 协议允许业余无线电爱好者通过电波交换小型静态图像。大多数 SSTV 频率都列在 OpenWebRX+ 频段计划中，因此将显示为绿色书签。为了在 OpenWebRX+ 中可靠地接收 SSTV 图像，请执行以下操作：</p>
+<ol>
+<li>选择*“SSTV”*数字模式并<strong>精确</strong>调谐到 SSTV 载波频率以下 1900Hz，或使用任何提供的 SSTV 书签。</li>
+<li>等待下一次 SSTV 传输开始。OpenWebRX+<strong>将不会</strong> 接收部分 SSTV 传输，因为它需要从传输标头获取图像格式信息。</li>
+<li>接收到的 SSTV 图像将显示在瀑布显示屏顶部的单独面板中。单击图像将其下载到您的计算机或移动设备。</li>
+</ol>
+<p>OpenWebRX+ 目前支持的唯一 SSTV 格式是 Robot36、Robot72、Martin1、Martin2、Scottie1、Scottie2 和 ScottieDX。其他 SSTV 格式（包括数字 SSTV）将不会被接收。</p>
+<h3 id="接收传真图像"><a href="#接收传真图像" class="headerlink" title="接收传真图像"></a><strong>接收传真图像</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Radiofax">什么是无线传真？</a></em></p>
+<p>如今，高频无线电传真协议主要用于向海上船只广播气象图和相关信息。美国国家气象局定期发布 <a target="_blank" rel="noopener" href="https://www.weather.gov/media/marine/rfax.pdf">天气传真时间表，</a> 您可以使用它来收听附近的传真广播。此外，OpenWebRX+ 还为大多数已知的天气传真频率提供默认（黄色）书签。为了在 OpenWebRX+ 中可靠地接收传真，请执行以下操作：</p>
+<ol>
+<li>选择*“传真”*数字模式并<strong>精确</strong>调谐到低于传真载波频率 1900Hz，或使用任何提供的传真书签。</li>
+<li>等待下一次传真传输开始。OpenWebRX+<strong>将不会</strong> 接收部分传真传输，因为它需要从传输标头获取图像格式信息。</li>
+<li>收到的传真图像将显示在瀑布显示屏顶部的单独面板中。单击图像将其下载到您的计算机或移动设备。</li>
+</ol>
+<p>OpenWebRX+ 内部的传真解码器支持<strong>IOC576 和 IOC288 格式的 120LPM 传输</strong>。作为<strong>管理员</strong>，您对传真解码有一定的控制权。*“设置|常规|解调和解码|传真传输”*中提供以下选项 ：</p>
+<ul>
+<li><strong>传输速度</strong> 传输速度控制解码器期望的每分钟传真线路数。最常见的值为 120LPM。除非您完全确定需要不同的版本，否则请勿更改它。</li>
+<li><strong>对接收到的图像进行后处理以减少噪音</strong> 启用后，此选项使传真解码器对接收到的图像进行后处理以获得更好的对比度。但某些灰度梯度可能会因此丢失。</li>
+<li><strong>接收彩色图像</strong> 此实验选项应允许 OpenWebRX+ 接收彩色传真。但由于缺乏样本，尚未进行测试。</li>
+<li><strong>使用幅度调制</strong> 此实验性选项允许 OpenWebRX+ 接收使用 AM 模式编码的传真，而不是通常的 USB。目前，由于缺乏样本，尚未进行测试。</li>
+</ul>
+<h3 id="监控寻呼机消息-POCSAG"><a href="#监控寻呼机消息-POCSAG" class="headerlink" title="监控寻呼机消息 (POCSAG)"></a><strong>监控寻呼机消息 (POCSAG)</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Pager">什么是寻呼机？</a></em></p>
+<p>虽然无线寻呼机基本上是一种过时的技术，但它仍在医院、企业中使用，并用于自动报告。寻呼机流量通常出现在 150-165MHz 以及其他 VHF 和 UHF 频段。OpenWebRX+ 可以以不同的速度解码 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Radio-paging_code_No._1">POCSAG</a>和 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/FLEX_(protocol)">FLEX</a> 寻呼协议。</p>
+<p>请记住，<strong>您当地的法律可能禁止您监听寻呼机流量</strong>。做之前请先检查一下！</p>
+<p>为了监视 OpenWebRX+ 中的寻呼机消息，请选择*“寻呼”* 数字模式并调谐到寻呼机信号的精确中间位置。您将在瀑布显示屏顶部的单独面板中看到解码的寻呼机消息。</p>
+<p>许多寻呼机消息携带数字或二进制数据。作为 <strong>管理员</strong>，您可以选择忽略这些不可读的消息，方法是转到*“设置 | 常规 | 解调和解码 | 其他”<em>并启用</em>“过滤掉空的、数字的或不可读的寻呼机消息”*选项。</p>
+<h3 id="监控无线设备-ISM"><a href="#监控无线设备-ISM" class="headerlink" title="监控无线设备 (ISM)"></a><strong>监控无线设备 (ISM)</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/ISM_radio_band">什么是ISM？</a></em></p>
+<p>许多现代无线设备，例如气象站、安全传感器、轮胎压力传感器、汽车钥匙等，都使用射频进行通信。这些设备通常位于 433-435MHz、902-928MHz 和其他一些频段。为了监控 OpenWebRX+ 中的智能设备传输，请执行以下操作：</p>
+<ol>
+<li>查看 ISM 频率以查找无线设备可能产生的信号。</li>
+<li>一旦看到任何可疑信号，请在它们附近调谐并选择 *“ISM”*数字模式。ISM 解码器将监控并显示您调谐频率周围的大范围频谱。</li>
+<li>等待信号再次出现。如果 ISM 解码器能够理解它们，则解码后的数据将显示在瀑布显示屏顶部的单独面板中。</li>
+</ol>
+<p>如果您无法解码任何 ISM 信号或在瀑布上看不到任何信号，<strong>请尝试使用无线车钥匙测试解码器</strong>。不过，了解它们的信号频率很重要。</p>
+<h3 id="跟踪分组无线电-APRS"><a href="#跟踪分组无线电-APRS" class="headerlink" title="跟踪分组无线电 (APRS)"></a><strong>跟踪分组无线电 (APRS)</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Automatic_Packet_Reporting_System">什么是APRS？</a></em></p>
+<p>自动*数据包报告系统 (APRS)*使 HAM 运营商能够交换数字数据、消息并与世界共享其位置。APRS在北美使用144.39MHz频率，在欧洲使用144.8MHz。请注意，OpenWebRX 频段规划仅启用欧洲 APRS 频率。<strong>如果您的接收器位于北美，请编辑频段规划以切换到 144.39MHz 频率。</strong></p>
+<p>为了监控 OpenWebRX 中的 APRS 流量，请选择*“数据包”* 数字模式并调谐到上述频率之一。您将在瀑布显示屏顶部的单独面板中看到解码的 APRS 消息。此外，这些消息的来源将在地图上弹出，通过单击**“地图”**按钮即可显示。</p>
+<p>OpenWebRX+ 频段规划还包括一个 APRS 条目，频率为 145.825MHz。这是<em>国际空间站 (ISS) 的</em>频率。一天几次，当国际空间站飞过接收器位置上方时，您可以期望以这个频率从很远的地方看到 APRS 报告。这些报告由位于国际空间站的 APRS 中继器重新传输。</p>
+<h3 id="船舶追踪-AIS"><a href="#船舶追踪-AIS" class="headerlink" title="船舶追踪 (AIS)"></a><strong>船舶追踪 (AIS)</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Automatic_identification_system">什么是AIS？</a></em></p>
+<p>现代船舶使用称为 AIS 的甚高频无线电系统报告其位置。如果您的 OpenWebRX+ 接收器位于足够大的水域附近，它可能能够接收 AIS 位置报告并将其显示在地图上。</p>
+<p>AIS 在两个海事频带频率上运行，即 161.975MHz 和 162.025MHz。选择包含这些频率的配置文件后，您将看到它们标有绿色书签，因为它们是频段计划的一部分。单击 AIS 书签，就会出现第二个瀑布，以及显示收到的位置报告的信息面板。</p>
+<p>现在，如果单击**“地图”**按钮，您应该会在地图上看到船舶位置。单击一艘船会弹出一个气泡，显示有关该船的一些基本信息。</p>
+<p>AIS 通过一个称为 MMSI 的唯一编号来识别每艘船只。OpenWebRX+ 显示这些 MMSI 编号，并将它们超链接到 <a target="_blank" rel="noopener" href="https://www.vesselfinder.com/">Vessel Finder</a> 网站，您可以在其中找到有关每艘船只的照片和其他信息。</p>
+<h3 id="追踪飞机-ADS-B"><a href="#追踪飞机-ADS-B" class="headerlink" title="追踪飞机 (ADS-B)"></a><strong>追踪飞机 (ADS-B)</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Automatic_Dependent_Surveillance%E2%80%93Broadcast">什么是ADS-B？</a></em></p>
+<p>飞机使用 ADS-B 系统定期报告其在空中的位置，频率为 1090MHz 和 978MHz。OpenWebRX+ 可以监听这些频率并向您显示收到的航班信息。</p>
+<p>要接收 ADS-B 传输，请选择包含 ADS-B 频率之一的配置文件。由于这些传输需要 2MHz 带宽，因此配置文件在 ADS-B 频率的每一侧必须至少具有 1MHz 带宽。</p>
+<p>标准 ADS-B 频率是 OpenWebRX+ 频段计划的一部分，因此标有绿色书签。单击 ADS-B 书签后，将出现一个面板，其中显示报告的飞机及其飞行数据。</p>
+<p>如果单击**“地图”**按钮，您应该会在地图上看到飞机的位置。单击飞机会弹出一个气泡，显示有关该飞机的一些基本信息。</p>
+<p>飞机通过多个不同的 ID 进行识别，包括航班 ID、飞机尾号和 ICAO 代码（又名 S 模式应答器代码）。OpenWebRX+ 会将收到的 ID 超链接到 <a target="_blank" rel="noopener" href="https://www.flightaware.com/">FlightAware</a> 网站，您可以在其中找到飞机照片和有关每次航班的其他信息。</p>
+<h2 id="用户特征"><a href="#用户特征" class="headerlink" title="用户特征"></a><strong>用户特征</strong></h2><p>本节介绍没有管理访问权限的普通用户可以使用的各种 OpenWebRX 功能。</p>
+<h3 id="频率扫描仪"><a href="#频率扫描仪" class="headerlink" title="频率扫描仪"></a><strong>频率扫描仪</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Radio_scanner">什么是扫描仪？</a></em></p>
+<p>OpenWebRX+ 包括一个频率扫描仪，允许自动搜索当前显示的活动书签。一旦扫描仪检测到书签频率之一的信号，它将调谐到该频率。一旦频率安静下来，扫描仪将继续搜索。要使用扫描仪，请执行以下操作：</p>
+<ul>
+<li>选择一个配置文件，其中包含一些您感兴趣的书签频率。</li>
+<li>调谐到瀑布的空白部分并左键单击 <strong>SQ</strong>按钮以设置静噪级别。</li>
+<li>右键单击<strong>SQ</strong>按钮开始扫描。<strong>SQ</strong>按钮将呈绿色亮起，表示扫描仪已开启。移动设备用户只需长时间按住按钮即可模拟右键单击。</li>
+<li>完成后，再次右键单击<strong>SQ</strong>按钮以禁用扫描仪。</li>
+</ul>
+<p>请记住，<strong>扫描仪无法在数字语音通道上工作</strong>，因为即使通道上没有实际流量，它们也往往会保持信号打开。</p>
+<h3 id="中继器"><a href="#中继器" class="headerlink" title="中继器"></a><strong>中继器</strong></h3><p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Radio_repeater">什么是中继器？</a></em></p>
+<p>每天一次，OpenWebRX+ 会向 <a target="_blank" rel="noopener" href="https://www.repeaterbook.com/">RepeaterBook.com</a>查询 最接近接收器位置的中继器列表。这些中继器显示在地图上，每个中继器都用 **⋈**标记表示。</p>
+<p><em>您可以通过在“设置 | 常规 | 显示 | 中继器书签范围”</em> 中设置与接收器的最大距离，让 OpenWebRX+ 创建中继器书签。<strong>OpenWebRX+ 只会为位于预设最大距离内的中继器创建书签。</strong></p>
+<p>您还可以将中继器书签限制为仅几个配置文件（例如 VHF &#x2F; UHF）：</p>
+<ol>
+<li>*通过将“设置|常规|显示|中继器书签范围”*设置为零来 禁用全局中继器书签。</li>
+<li>转到*“设置 | SDR 设备和配置文件 | &lt;设备&gt; | &lt;配置文件&gt;”* ，然后单击**“添加”添加一个名为***“中继器书签范围”*的选项。</li>
+<li>将新添加的选项设置为与您希望看到中继器的接收器的最大距离，并通过单击**“应用”和“保存”**保存配置文件设置。</li>
+</ol>
+<p>需要注意的是，只有在*“设置|常规|接收器信息|接收器位置”中*<strong>设置正确的接收器位置，中继器才会正确显示</strong>。同样重要的是要记住，由于 OpenWebRX+ 每天查询<a target="_blank" rel="noopener" href="https://www.repeaterbook.com/">RepeaterBook.com一次，</a><strong>因此在设置接收器位置后可能无法立即获得最新的中继器信息</strong>。</p>
+<h3 id="其他在线接收器"><a href="#其他在线接收器" class="headerlink" title="其他在线接收器"></a><strong>其他在线接收器</strong></h3><p>OpenWebRX+ 将定期查询 <a target="_blank" rel="noopener" href="https://www.receiverbook.de/">ReceiverBook</a>、 <a target="_blank" rel="noopener" href="http://kiwisdr.com/">KiwiSDR</a>和 <a target="_blank" rel="noopener" href="http://websdr.org/">WebSDR.org</a> 网站以获取其他在线 SDR 接收器。这些接收器显示在地图上，每个接收器都标有**◬**标记。红色标记代表 KiwiSDR 接收器，绿色标记对应 OpenWebRX 接收器，蓝色标记代表原始 WebSDR 接收器。单击标记会显示有关接收者的一般信息，以及接收者网页的链接。</p>
+<h3 id="内置聊天"><a href="#内置聊天" class="headerlink" title="内置聊天"></a><strong>内置聊天</strong></h3><p>OpenWebRX+ 包含一个简单的聊天功能，可让连接的用户相互交谈。按 接收者网页顶部的 <strong>“聊天”按钮即可打开聊天面板。</strong></p>
+<p>当您通过在聊天窗口底部输入第一条聊天消息来发送该消息时，OpenWebRX+ 将为您分配一个随机昵称，在您的消息旁边显示给其他用户。要<strong>更改您的姓名</strong>，请在消息输入左侧输入您的新昵称。</p>
+<p>作为<strong>服务器管理员</strong>，您可能希望在 OpenWebRX+ 服务器上<strong>禁用聊天。<strong>为此，请转到*“设置|常规|接收器限制”<em>并禁用</em>“允许用户互相聊天”*选项。聊天按钮将变成</strong>日志</strong>按钮，日志面板不接受用户的任何输入 <strong>。</strong></p>
+<h2 id="管理员功能"><a href="#管理员功能" class="headerlink" title="管理员功能"></a><strong>管理员功能</strong></h2><p>本节讨论管理 OpenWebRX 服务器以及除了提供对无线电波的公共访问之外如何使用它。</p>
+<h3 id="后台解码"><a href="#后台解码" class="headerlink" title="后台解码"></a><strong>后台解码</strong></h3><p>作为<strong>服务器管理员</strong>，您可以让 OpenWebRX 服务器 在有人通过这些传输收听配置文件时**自动解码无线电传输。**此功能可用于接收 SSTV 图像、传真、监控数字 HAM 流量、跟踪飞机等。</p>
+<p>要开始后台解码，请转到*“设置|后台解码”<em>，选中</em>“启用后台解码服务”* 选项，然后选择您想要自动接收和解码的传输模式。确保只选择您真正需要的解码器，因为运行太多后台解码器会大大降低服务器速度。</p>
+<p>现在，转到要用于后台解码的 SDR 设备，让我们说*“设置 | SDR 设备和配置文件 | &lt;设备&gt;”<em>，然后添加</em>“在此设备上运行后台服务”*选项。添加此选项后，请确保已启用它。</p>
+<p>此时，每次有人连接并收听 <em><code>&lt;Device&gt;</code><em>配置文件时，OpenWebRX 都会**自动解码标有绿色书签的频率上的所有启用的信号类型</em></em>，即频段计划一部分的所有信号。如果解码的数据是图像或消息日志，这些数据将保存到*&#x2F;tmp<em>文件夹中，并在单击</em>*“文件”**按钮后显示。**当您单击“地图”**按钮时，位置报告（例如 FT8、WSPR、APRS 等）将显示在地图上。</p>
+<p>为了以不属于<strong>频段</strong> 计划的频率启用后台解码（<strong>无</strong>绿色书签），您必须通过编辑以下文件将该频率添加到频段计划中：</p>
+<p>&#x2F;etc&#x2F;openwebrx&#x2F;bands.json</p>
+<p>在编辑此文件之前，请确保<strong>创建备份副本</strong>，以防出现问题。不幸的是，目前无法通过基于网络的设置来编辑频段计划。编辑并保存文件后，按如下方式重新启动 OpenWebRX，并确保在您添加的频率处有一个绿色书签：</p>
+<p>sudo systemctl 重新启动 openwebrx</p>
+<h3 id="预定解码"><a href="#预定解码" class="headerlink" title="预定解码"></a><strong>预定解码</strong></h3><p>在<a target="_blank" rel="noopener" href="https://fms.komkon.org/OWRX/#HOW-BACKGROUND">上一节</a>中，我们讨论了 OpenWebRX 如何在有人使用时自动解码无线电传输。在本节中，我们将让OpenWebRX在没有人使用时 <strong>自行运行无线电并接收信号。</strong></p>
+<p>通过转至*“设置 | SDR 设备和配置文件 | &lt;设备&gt;”，从<em>之前启用后台服务的 SDR 设备开始。向该设备添加</em>“调度程序”选项，并在其他设置中找到新添加的调度程序选择器。*它将为您提供两种不同的时间表模型：</p>
+<ul>
+<li><strong>日光调度程序</strong> 日光调度程序允许您选择三个配置文件在白天、夜间和“灰线”时段（即黎明和黄昏）在设备上运行。由于无线电波传播取决于一天中的时间，因此该方案提供了易于配置且功能齐全的时间表。</li>
+<li><strong>静态调度程序</strong> 静态调度程序可让您以分钟的精度定义自己的日程表，其中包含任意数量的条目。虽然添加这样的时间表比较困难，但它使您可以灵活地每小时切换多个不同的配置文件。</li>
+</ul>
+<p>添加并保存日程后，<strong>只要没有人在使用该设备，OpenWebRX 就会在预定的配置文件之间切换设备</strong>。一旦所有用户断开连接，OpenWebRX 会将 SDR 设备返回到其当前计划的配置文件。它还将运行您之前启用的任何适用的后台解码器，将收到的数据报告给地图或将其保存到文件存储中。</p>
+<h3 id="报告解码数据"><a href="#报告解码数据" class="headerlink" title="报告解码数据"></a><strong>报告解码数据</strong></h3><p>在 <a target="_blank" rel="noopener" href="https://fms.komkon.org/OWRX/#HOW-BACKGROUND">前两节</a> <a target="_blank" rel="noopener" href="https://fms.komkon.org/OWRX/#HOW-SCHEDULED">中</a> ，我们讨论了如何配置 OpenWebRX 以自动解码各种无线电传输。在本节中，我们将讨论将解码后的数据发送到在线服务，例如 <a target="_blank" rel="noopener" href="https://aprs.fi/">APRS-IS</a>、 <a target="_blank" rel="noopener" href="https://pskreporter.info/">PSKReporter</a>和 <a target="_blank" rel="noopener" href="https://wsprnet.org/">WSPRnet</a>。要配置在线报告，请转至*“设置 | 发现和报告”*设置页面。那里有三个部分，用于 OpenWebRX 可以报告的三种类型的数据：</p>
+<ul>
+<li><strong>APRS-IS</strong> 接收到的APRS位置报告可以发送到 <a target="_blank" rel="noopener" href="https://www.aprs2.net/">APRS-IS网络</a>。为此，请填写您的 APRS 呼号和最近的服务器地址。您可能还需要提供 APRS-IS 网络密码。最后，选中*“将收到的 APRS 数据发送到 APRS-IS”*选项。报告的数据将显示在 <a target="_blank" rel="noopener" href="https://aprs.fi/">APRS.fi 地图</a>上。请注意， <a target="_blank" rel="noopener" href="https://aprs.fi/">APRS.fi</a> 不会显示多重报告点，因此您的某些报告可能不会显示在那里。</li>
+<li>如果您还想向 APRS-IS报告您的<strong>接收器位置，请选中</strong>*“将接收器位置发送到 APRS-IS 网络”*选项并填写有关您的接收器和天线详细信息的信息。</li>
+<li>请注意，只有一个解码器可以使用相同的呼号**向 APRS-IS 网络发送数据。**因此，如果您有多个 APRS 解码器正在运行（例如，在 144.39MHz 和 145.825MHz 下），您的某些报告将无法通过。要解决此问题，请在 bandplan 文件中 <strong>禁用除一个 APRS 频率之外的所有频率。</strong></li>
+<li><strong>PSKReporter OpenWebRX 可以向</strong><a target="_blank" rel="noopener" href="https://pskreporter.info/">PSKReporter</a> 网站 报告 FT8、FT4、JT9、JT65、FST4、JS8、Q65、WSPR、FST4W 和 MSK144 传输 。您所需要做的就是选中*“启用向 pskreporter.info 发送点”*选项，并使用唯一的名称填写呼号字段。它<strong>不一定</strong>是您的官方 HAM 呼号，但大多数拥有 HAM 呼号的人都在这里使用它们。报告的数据将显示在 <a target="_blank" rel="noopener" href="https://pskreporter.info/pskmap">PSKReporter 地图</a>上。您可能还想在天线信息字段中描述您的天线，以便其他人知道您如何接收所报告的数据。</li>
+<li></li>
+<li></li>
+<li><strong>WSPRnet</strong> WSPRnet 网站<a target="_blank" rel="noopener" href="https://wsprnet.org/">仅</a> 接受 WSPR 和 FST4W 报告。要启用它，请选中 *“启用向 wsprnet.org 发送点”*选项，然后在呼号字段中输入您的唯一名称。它<strong>不一定</strong>是您的官方 HAM 呼号，但大多数拥有 HAM 呼号的人都在这里使用它们。报告的数据将显示在 <a target="_blank" rel="noopener" href="http://www.wsprnet.org/drupal/wsprnet/map">WSPRnet 地图</a>上。</li>
+</ul>
+<h3 id="配置地图"><a href="#配置地图" class="headerlink" title="配置地图"></a><strong>配置地图</strong></h3><p>OpenWebRX+ 提供<strong>两种地图选项：<em><em><em><strong>Google 地图</strong></em>和基于</em>Leaflet库**</em>的免费地图集合</strong>。非常流行的<em>OpenStreetMap</em>就是该集合的一部分。</p>
+<p>Google<em>地图的</em>实现更加详细和完善，但它可能需要您向 Google 注册您的信用卡才能接收 API 密钥。<em>如果您超过Google 地图</em>访问的特定限制，Google 可能会向您的信用卡收取费用。</p>
+<p>OpenStreetMap和<em>Leaflet</em>中包含的其他地图 不太详细，但它们是完全免费的*。*此外，<em>Leaflet</em> 实现还包括一些用于天气、海事注释等的额外层。</p>
+<p><strong>要配置默认地图</strong>，请转到*“设置|常规|地图|地图类型”<em>，然后选择您想要默认向用户显示的地图。请记住，用户始终可以通过单击</em>*“地图”**按钮来切换地图。同一设置部分中提供的其他与地图相关的选项包括：</p>
+<ul>
+<li><strong>Google 地图 API 密钥</strong> 您可以在此处输入从 Google 收到的*Google 地图API 密钥。*如果您没有 API 密钥，请将此字段留空。很多时候， 出于某种原因，<em>谷歌地图</em>无论如何都能工作。</li>
+<li><strong>OpenWeatherMap API 密钥</strong> 如果您想在<em>Leaflet</em>地图上查看全球天气，请考虑获取<em>OpenWeatherMap</em> API 密钥并在此处输入。这些密钥是免费的，但功能有限。如果没有此密钥，OpenWebRX+ 将只能向您显示从 <em>WeatherRadar</em>获取的美国天气。</li>
+<li><strong>地图保留时间</strong> 这是接收到的位置报告在地图上保持可见的时间（以秒为单位）。一旦位置报告超过保留时间的一半，位置报告就会开始变暗。一旦达到保留时间，位置报告将从地图上消失。</li>
+<li><strong>呼号数据库 URL</strong> 这是当您在地图上单击报告的 HAM 呼号时用于查找这些呼号的网站。*“{}”*字符将替换为实际呼号。这里两个常见的选择是 <a target="_blank" rel="noopener" href="https://www.qrz.com/">qrz.com</a>和 <a target="_blank" rel="noopener" href="https://www.qrzcq.com/">qrzcq.com</a>。</li>
+<li><strong>船舶数据库 URL</strong> 这是当您在地图上单击船舶 MMSI 编号时用于查找船舶的网站。*“{}”*字符将替换为实际的 MMSI 号码。</li>
+<li><strong>航班数据库 URL</strong> 这是当您在地图上单击航空公司航班 ID 时用于查找航空公司航班 ID 的网站。*“{}”*字符将替换为实际的航班 ID。</li>
+<li><strong>飞机数据库 URL</strong> 这是当您在地图上单击飞机时用于查找飞机 S 模式 ID 的网站。*“{}”*字符将替换为实际的 S 模式 ID。</li>
+</ul>
+<h3 id="限制接收器的使用"><a href="#限制接收器的使用" class="headerlink" title="限制接收器的使用"></a><strong>限制接收器的使用</strong></h3><p>作为<strong>服务器管理员</strong>，您可能出于法律或技术原因<strong>限制</strong>公众使用您的 OpenWebRX 服务器。请务必检查您所在位置允许收听的无线电频率和模式。<strong>请勿</strong>向公众提供禁止的频率和模式。*“设置|常规|接收器限制”*中提供以下限制 ：</p>
+<ul>
+<li><strong>最大客户端数量</strong> 此设置决定有多少人可以同时连接到您的 OpenWebRX 服务器。任何尝试连接到“完整”服务器的人都会收到一条错误消息并被拒绝服务。</li>
+<li><strong>最大文件数</strong> 此设置确定 OpenWebRX+ 在开始删除最旧的文件之前允许保留从空中接收到的 SSTV 图像、传真和其他文件的数量。按接收器网页顶部的 **“文件”**按钮可以查看接收到的文件 。</li>
+<li><strong>会话超时</strong> 该值（以秒为单位）确定允许用户使用 OpenWebRX+ 接收器的时间长度。不过，重新加载接收者的网页会重新启动时间，因此超时主要发生在那些让计算机保持 OpenWebRX+ 页面打开的人身上。</li>
+<li><strong>使用策略 URL</strong> 一旦用户的会话超时，就会向用户显示此网页。默认页面解释了为什么会出现超时，并让用户可以找到其他在线接收器来收听。</li>
+<li><strong>允许用户互相聊天</strong> 如果您想禁用内置聊天功能，请禁用此选项。禁用后，聊天面板将变成不接受任何输入的日志面板。</li>
+<li><strong>允许用户录制收到的音频</strong> 如果您不希望用户录制他们正在收听的任何音频，请禁用此选项。禁用后，<strong>REC</strong> 按钮将从用户界面中消失。请记住，这<strong>不会</strong>阻止您的用户通过其他方式录制音频。</li>
+<li><strong>允许用户更改中心频率</strong> 如果您想让 OpenWebRX+ 用户通过右键单击圆形箭头按钮“回避”其当前配置文件，请启用此选项。由于侦听同一配置文件的所有用户都会发生此更改，因此在许多人侦听相同配置文件的服务器上禁用它是有意义的。</li>
+<li><strong>魔法密钥</strong> 当魔法密钥字符串被填写（即不为空）时，OpenWebRX+ 将只允许对知道魔法密钥并提供它的人进行侧步配置文件，如下所示：</li>
+<li><a target="_blank" rel="noopener" href="http://openwebrx.receiver.org:8073/#">http://openwebrx.receiver.org:8073/#</a> <strong>key&#x3D;<code>&lt;magic-key&gt;</code></strong></li>
+</ul>
+<h3 id="监控接收器的使用"><a href="#监控接收器的使用" class="headerlink" title="监控接收器的使用"></a><strong>监控接收器的使用</strong></h3><p>OpenWebRX+<strong>允许其管理员监控</strong>服务器连接并<strong>禁止滥用用户</strong>。请注意，由于 OpenWebRX 项目的主要目标是提供免费、开放的在线广播，因此应极其小心地使用该设施。如果您想拥有真正私有的 OpenWebRX 服务器，请考虑将其关闭以供公共访问。</p>
+<p><img src="https://huangetech.feishu.cn/space/api/box/stream/download/asynccode/?code=MjA2MWQ0NDFmN2IwNjcxNjMzNTAxZTg2MzdhYTJkMzZfM2NmbUpzdVYyd2ZzVUNsRTNFU0FQWmdGMDlKYnpLenVfVG9rZW46S1pzdmJaS0Vub3d1a0Z4WmNxdGNIaUxrbmpoXzE3MTc1Njg4NjM6MTcxNzU3MjQ2M19WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>为了查看当前连接的客户端，请单击 **“设置”*<em>按钮并滚动到页面底部，直到看到</em>“客户端”*显示，如上所示。在那里，您将能够在选定的时间内 <strong>禁止客户端的 IP 地址，或取消禁止</strong>以前禁止的地址。被禁止的客户端仍然可以看到地图和文件，但无法访问接收器本身。</p>
+<p>您还可以通过将消息输入到输入字段并单击 <strong>发送按钮来向所有当前连接的客户端广播消息</strong>。您的消息将显示在客户的日志&#x2F;聊天面板中。</p>
+<p><strong>如果您在 NGINX 后面运行 OpenWebRX+</strong>，您可能无法看到客户端的 IP 地址，除非您编辑此文件：</p>
+<p>&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;openwebrx</p>
+<p>并将以下行添加到<strong>位置部分</strong>：</p>
+<p>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for；</p>
+<h2 id="经常问的问题"><a href="#经常问的问题" class="headerlink" title="经常问的问题"></a><strong>经常问的问题</strong></h2><h3 id="OpenWebRX-升级后坏了！"><a href="#OpenWebRX-升级后坏了！" class="headerlink" title="OpenWebRX 升级后坏了！"></a><strong>OpenWebRX 升级后坏了！</strong></h3><p><strong>在桌面浏览器中，尝试在按住SHIFT</strong>键 的同时重新加载接收器网页 。在移动浏览器中，清除浏览器缓存并重新加载页面。如果这没有帮助，请尝试重新启动运行 OpenWebRX 的计算机。</p>
+<h3 id="新的-OpenWebRX-功能未显示！"><a href="#新的-OpenWebRX-功能未显示！" class="headerlink" title="新的 OpenWebRX 功能未显示！"></a><strong>新的 OpenWebRX 功能未显示！</strong></h3><p>单击*“设置 | 功能报告”*，查看您感兴趣的功能是否显示为已启用。如果某个功能被禁用，该报告将告诉您应该如何启用它。</p>
+<h3 id="数字语音模式不显示！"><a href="#数字语音模式不显示！" class="headerlink" title="数字语音模式不显示！"></a><strong>数字语音模式不显示！</strong></h3><p><em>数字语音模式（DMR、D-STAR、YSF、NXDN）需要Digital Voice Systems Inc</em> 获得专利的 AMBE 编解码器算法。因此，OpenWebRX 和 OpenWebRX+ 都不包含开箱即用的数字语音支持。<strong>您个人有责任</strong>将必要的部分添加到您自己的 OpenWebRX 安装中。</p>
+<p>将数字语音模式添加到 OpenWebRX 的正确且具有法律责任的方法是连接一个 在硬件中实现 AMBE 编解码器的<a target="_blank" rel="noopener" href="https://github.com/jketterl/openwebrx/wiki/AMBE-vocoder-device-notes">许可 USB 加密狗。OpenWebRX 和 OpenWebRX+ 都将以最少的配置工作</a>支持常见的 AMBE 加密狗模型 。</p>
+<p>如果您出于某种原因不想使用 AMBE 编解码器加密狗，可以使用未经许可的 <a target="_blank" rel="noopener" href="https://github.com/szechyjs/mbelib">MBELib</a> 软件实现，其来源相当可疑。MBELib 的使用可能会被解释为专利侵权。如果您同意的话，有<a target="_blank" rel="noopener" href="https://fms.komkon.org/OWRX/install-softmbe.sh">一个脚本</a>可以为 OpenWebRX 添加 MBELib 支持。运行如下：</p>
+<p>sudo install-softmbe.sh</p>
+<p>通过任一方法安装数字语音支持后，请访问 *“设置 | 功能报告”*页面以验证安装是否成功。您现在应该在接收器网页上看到数字语音按钮。</p>
+<h3 id="我的-SDRplay-设备无法可靠工作！"><a href="#我的-SDRplay-设备无法可靠工作！" class="headerlink" title="我的 SDRplay 设备无法可靠工作！"></a><strong>我的 SDRplay 设备无法可靠工作！</strong></h3><p>SDRplay 设备及其克隆设备出了名的容易出现故障，需要良好的电源才能可靠运行。如果您在使用这些设备时遇到超时或故障，请尝试通过有源 USB 集线器连接它们。如果这没有帮助，并且您拥有正品 SDRplay 设备（不是克隆设备）， 请 在 SDRplay 网站上<a target="_blank" rel="noopener" href="https://www.sdrplay.com/support/open.php">开具票证。</a>OpenWebRX 开发人员<strong>无法</strong>帮助您解决 SDRplay 硬件问题。</p>
+<h3 id="你能实现我想要的功能吗？"><a href="#你能实现我想要的功能吗？" class="headerlink" title="你能实现我想要的功能吗？"></a><strong>你能实现我想要的功能吗？</strong></h3><p>一般来说，<strong>没有</strong>。OpenWebRX 是一个非盈利项目，由极少数人在业余时间开发。这些开发人员会优先考虑他们认为个人感兴趣、很多人反复请求或易于实现的功能。</p>
+<p>话虽如此，您想要的功能很可能已经实现，或者可以通过其他方式实现，或者由于某种原因已被考虑和避免。请仔细阅读本文档，特别是<a target="_blank" rel="noopener" href="https://fms.komkon.org/OWRX/#FAQ">常见问题解答部分</a>。</p>
+<p>此外，由于 OpenWebRX 是一个开源项目，因此<strong>您可以自行添加所需的功能</strong>。查看 <a target="_blank" rel="noopener" href="https://github.com/jketterl/openwebrx">原始 OpenWebRX 源代码</a> 或 <a target="_blank" rel="noopener" href="https://github.com/luarvique/openwebrx">OpenWebRX+ 源代码</a> 并考虑参与 OpenWebRX 开发。</p>
+<h3 id="如何向用户隐藏某些个人资料？"><a href="#如何向用户隐藏某些个人资料？" class="headerlink" title="如何向用户隐藏某些个人资料？"></a><strong>如何向用户隐藏某些个人资料？</strong></h3><p>由于 OpenWebRX 是一个<strong>开放的</strong>在线接收器，因此它<strong>不允许</strong> 您向公众隐藏个人资料。如果您想私下访问您的接收器，最好的选择是使其无法通过互联网访问。</p>
+<p>话虽如此，有一个选项可以阻止用户更改连接到 OpenWebRX+ 的特定 SDR 设备上的配置文件。如果此 SDR 设备执行后台解码并根据自己的时间表更改配置文件，那么它会很有用。要启用此选项，请执行以下操作：</p>
+<ol>
+<li>转至*“设置 | 常规设置 | 接收器限制 | 魔术键” ，然后设置您想要用于*<strong>强制</strong> 在受保护设备上切换配置文件的 魔术键值。</li>
+<li>转到*“设置 | SDR 设备和配置文件 | &lt;设备&gt;”<em>，从</em>“其他可选设置”中选择“需要魔术键才能在此设备上切换配置文件”<em>，然后单击</em>*“添加”**。</li>
+<li>确保选中*“需要魔术键才能在此设备上切换配置文件”<em>复选框，然后单击</em>*“应用”和“保存”**。</li>
+</ol>
+<p>从现在开始，用户只能通过在 URL 中提供预配置的魔术键值来更改设备上的配置文件，如下所示：</p>
+<p><a target="_blank" rel="noopener" href="http://openwebrx.receiver.org:8073/#">http://openwebrx.receiver.org:8073/#</a> <strong>key&#x3D;<code>&lt;magic-key&gt;</code></strong></p>
+<h3 id="如何跳转到任意频率？"><a href="#如何跳转到任意频率？" class="headerlink" title="如何跳转到任意频率？"></a><strong>如何跳转到任意频率？</strong></h3><p>由于 OpenWebRX 根据“配置文件”（即预配置的频率范围）工作，因此您<strong>无法</strong>跳转到任意频率，因为新频率可能需要不同的配置文件设置。此外，收听相同配置文件的其他用户可能不喜欢您跳到全新的频率。</p>
+<p>尽管如此，OpenWebRX+ 确实提供了一种“回避”当前配置文件、转到相邻频率的方法。要启用侧步，请执行以下操作：</p>
+<ol>
+<li>转到*“设置|常规设置|接收器限制”*并确保选中 <em>“允许用户更改中心频率”复选框。</em></li>
+<li>如果您想使用魔术键保护频率变化，请在相邻的*“魔术键”*字段中输入。</li>
+<li>单击<strong>应用并保存</strong>以保存更改。</li>
+</ol>
+<p>从现在开始，您可以通过右键单击接收器网页顶部的大圆形箭头来超出预先配置的频率范围。没有鼠标的移动用户只需用手指按住这些大圆形箭头大约一秒钟即可。</p>
+<p>如果配置了魔术键，则只有在 URL 中提供该键时才能回避配置文件，如下所示：</p>
+<p><a target="_blank" rel="noopener" href="http://openwebrx.receiver.org:8073/#">http://openwebrx.receiver.org:8073/#</a> <strong>key&#x3D;<code>&lt;magic-key&gt;</code></strong></p>
+<h3 id="OpenWebRX-配置文件在哪里？"><a href="#OpenWebRX-配置文件在哪里？" class="headerlink" title="OpenWebRX 配置文件在哪里？"></a><strong>OpenWebRX 配置文件在哪里？</strong></h3><p>如果您想备份 OpenWebRX 配置文件，它们的位置如下：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/openwebrx/</span>settings.json<br><span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/openwebrx/</span>bookmarks.json<br><span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/openwebrx/u</span>sers.json<br><span class="hljs-regexp">/etc/</span>openwebrx/openwebrx.conf<br><span class="hljs-regexp">/etc/</span>openwebrx/bands.json<br></code></pre></td></tr></table></figure>
+
+<p>您应该<strong>避免手动编辑配置文件</strong>，因为它们通常是通过基于 Web 的设置界面进行修改的。如果您决定编辑配置文件，请务必先<strong>确保您有备份副本</strong>。更新配置文件后，使用以下命令重新启动 OpenWebRX：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl restart openwebrx<br></code></pre></td></tr></table></figure>
+
+<h3 id="如何让-OpenWebRX-使用-HTTPS-协议？"><a href="#如何让-OpenWebRX-使用-HTTPS-协议？" class="headerlink" title="如何让 OpenWebRX 使用 HTTPS 协议？"></a><strong>如何让 OpenWebRX 使用 HTTPS 协议？</strong></h3><p>虽然原始 OpenWebRX 版本不支持 HTTPS 协议，但 OpenWebRX+ 支持。为了在 OpenWebRX+ 中启用 HTTPS，<strong>您将需要 SSL 证书文件 (</strong> <em><strong>cert.pem</strong></em> <strong>) 及其密钥 (</strong> <em><strong>key.pem</strong></em> <strong>)</strong>。获得这两个文件后，请执行以下操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> &lt;cert.pem&gt; /etc/openwebrx/cert.pem<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> &lt;key.pem&gt; /etc/openwebrx/key.pem<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> openwebrx:openwebrx /etc/openwebrx/cert.pem<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> openwebrx:openwebrx /etc/openwebrx/key.pem<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> 660 /etc/openwebrx/cert.pem<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> 660 /etc/openwebrx/key.pem<br><span class="hljs-built_in">sudo</span> systemctl restart openwebrx<br></code></pre></td></tr></table></figure>
+
+<h3 id="如何去掉默认的黄色书签？"><a href="#如何去掉默认的黄色书签？" class="headerlink" title="如何去掉默认的黄色书签？"></a><strong>如何去掉默认的黄色书签？</strong></h3><p>OpenWebRX+ 附带了一些常见频率的预定义书签，例如天气信息、CB 频道等。如果您不喜欢看到这些书签，请删除它们并重新启动 OpenWebRX+，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -f /etc/openwebrx/bookmarks.d/*<br><span class="hljs-built_in">sudo</span> systemctl restart openwebrx<br></code></pre></td></tr></table></figure>
+
+<p>如果您只想删除<strong>某些书签，请删除或编辑</strong><em>&#x2F;etc&#x2F;openwebrx&#x2F;bookmarks.d</em>文件夹中的单个文件。</p>
+<p>本文档由<a target="_blank" rel="noopener" href="https://github.com/muzihuaner">木子欢儿</a>翻译制作</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.openwebrx.de/">https://www.openwebrx.de/</a></p>
+<p><a target="_blank" rel="noopener" href="https://fms.komkon.org/OWRX/">https://fms.komkon.org/OWRX/</a></p>
+<p><a target="_blank" rel="noopener" href="https://luarvique.github.io/ppa/">https://luarvique.github.io/ppa/</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/OpenWebRXPlus/" class="print-no-link">#OpenWebRXPlus</a>
+      
+        <a href="/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/" class="print-no-link">#业余无线电</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>OpenWebRXPlus使用手册</div>
+      <div>https://blog.quickso.cn/2024/06/05/OpenWebRXPlus使用手册/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年6月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/06/16/FinalCutProk%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8/" title="Final Cut Pro快捷键大全">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Final Cut Pro快捷键大全</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/19/%E7%9F%AD%E6%B3%A2%E6%B0%94%E8%B1%A1%E4%BC%A0%E7%9C%9F%E6%8E%A5%E6%94%B6%E6%8C%87%E5%8D%97/" title="短波气象传真接收指南（JMH）">
+                        <span class="hidden-mobile">短波气象传真接收指南（JMH）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

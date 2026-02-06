@@ -1,0 +1,989 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="前言最近在咸鱼上淘了一台1U半高服务器回来，型号为SuperMicro（超微） SuperServer5018D-MF+X10SLL-F主板   参数如下:    特性 详细信息    处理器支持 Intel® Xeon® E3-1200 v3&#x2F;v4, 4th Gen Core i3, Pentium, Celeron   芯片组 Intel® C222 Express PCH   内存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="年轻人的第一台服务器——SuperMicro SuperServer5018D-MF+X10SLL-F主板使用体验">
+<meta property="og:url" content="https://blog.quickso.cn/2025/03/09/%E5%B9%B4%E8%BD%BB%E4%BA%BA%E7%9A%84%E7%AC%AC%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E2%80%94%E2%80%94SuperMicroSuperServer5018D-MF+X10SLL-F%E4%B8%BB%E6%9D%BF%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="前言最近在咸鱼上淘了一台1U半高服务器回来，型号为SuperMicro（超微） SuperServer5018D-MF+X10SLL-F主板   参数如下:    特性 详细信息    处理器支持 Intel® Xeon® E3-1200 v3&#x2F;v4, 4th Gen Core i3, Pentium, Celeron   芯片组 Intel® C222 Express PCH   内存">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/4928f53d821cf8c16ab7b25cafc79c6.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/6a23b393828ac15cd89a9152c982551.jpg">
+<meta property="og:image" content="https://www.supermicro.com/CDS_Image/uploads/imagecache/600px_wide/intel_motherboard_active/x10sll-fs.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/5746c1e472bc72f8322ff20744907fe.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309215527588.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309222551310.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309222343220.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309223428520.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/5746c1e472bc72f8322ff20744907fe.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309223933922.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309224217212.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309224331195.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309224048311.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309224555376.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi2.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301075155342.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi3.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi4.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/netboot.xyz-d976acd5e46c61339230d38e767fbdc2.gif">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309225242239.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309225604976.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309225639587.png">
+<meta property="article:published_time" content="2025-03-09T13:37:04.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.780Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="服务器">
+<meta property="article:tag" content="SuperMicro">
+<meta property="article:tag" content="ipmi">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/4928f53d821cf8c16ab7b25cafc79c6.jpg">
+  
+  
+  
+  <title>年轻人的第一台服务器——SuperMicro SuperServer5018D-MF+X10SLL-F主板使用体验 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="年轻人的第一台服务器——SuperMicro SuperServer5018D-MF+X10SLL-F主板使用体验"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-09 21:37" pubdate>
+          2025年3月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">年轻人的第一台服务器——SuperMicro SuperServer5018D-MF+X10SLL-F主板使用体验</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在咸鱼上淘了一台1U半高服务器回来，型号为SuperMicro（超微） SuperServer5018D-MF+X10SLL-F主板</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/4928f53d821cf8c16ab7b25cafc79c6.jpg" srcset="/img/loading.gif" lazyload alt="4928f53d821cf8c16ab7b25cafc79c6"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/6a23b393828ac15cd89a9152c982551.jpg" srcset="/img/loading.gif" lazyload alt="6a23b393828ac15cd89a9152c982551"></p>
+<p>参数如下:</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>特性</strong></th>
+<th align="left"><strong>详细信息</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>处理器支持</strong></td>
+<td align="left">Intel® Xeon® E3-1200 v3&#x2F;v4, 4th Gen Core i3, Pentium, Celeron</td>
+</tr>
+<tr>
+<td align="left"><strong>芯片组</strong></td>
+<td align="left">Intel® C222 Express PCH</td>
+</tr>
+<tr>
+<td align="left"><strong>内存支持</strong></td>
+<td align="left">最高 32GB DDR3 ECC 1600MHz UDIMMs，4个插槽</td>
+</tr>
+<tr>
+<td align="left"><strong>网络接口</strong></td>
+<td align="left">双千兆以太网端口 (1 Intel® i217LM &amp; 1 Intel® i210AT)</td>
+</tr>
+<tr>
+<td align="left"><strong>存储接口</strong></td>
+<td align="left">2个 SATA 6Gbps，4个 SATA 3Gbps</td>
+</tr>
+<tr>
+<td align="left"><strong>扩展插槽</strong></td>
+<td align="left">1个 PCI-E 3.0 x8 (in x16)，1个 PCI-E 3.0 x8，1个 PCI-E 2.0 x4 (in x8)</td>
+</tr>
+<tr>
+<td align="left"><strong>USB 接口</strong></td>
+<td align="left">2个 USB 3.0 (1 Type-A + 1 via header)，6个 USB 2.0 (4 rear + 2 via header)</td>
+</tr>
+<tr>
+<td align="left"><strong>管理功能</strong></td>
+<td align="left">集成 IPMI 2.0 支持 KVM 和专用 LAN</td>
+</tr>
+<tr>
+<td align="left"><strong>其他特性</strong></td>
+<td align="left">SATA DOM 电源连接器支持</td>
+</tr>
+</tbody></table>
+<p>主板长这个样子</p>
+<p><img src="https://www.supermicro.com/CDS_Image/uploads/imagecache/600px_wide/intel_motherboard_active/x10sll-fs.jpg" srcset="/img/loading.gif" lazyload alt="Supermicro Motherboard Xeon Boards X10SLL-F"></p>
+<h2 id="官方资料："><a href="#官方资料：" class="headerlink" title="官方资料："></a>官方资料：</h2><p>服务器介绍页：<a target="_blank" rel="noopener" href="https://www.supermicro.org.cn/en/products/system/1u/5018/SYS-5018D-MF.cfm">5018D-MF | 1U | SuperServers | Products | Super Micro Computer, Inc</a></p>
+<p>主板介绍页:<a target="_blank" rel="noopener" href="https://www.supermicro.org.cn/zh_cn/products/motherboard/X10SLL-F">X10SLL-F | Motherboards | Products | Super Micro Computer, Inc.</a></p>
+<h2 id="为什么要买它呢？"><a href="#为什么要买它呢？" class="headerlink" title="为什么要买它呢？"></a>为什么要买它呢？</h2><p>主要还是为了体验它的IPMI</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/5746c1e472bc72f8322ff20744907fe.jpg" srcset="/img/loading.gif" lazyload alt="默认账号密码都是ADMIN"></p>
+<p>它的IPMI支持中文和Java iKVM&#x2F;HTML5 控制（更新最新BMC固件）</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309215527588.png" srcset="/img/loading.gif" lazyload alt="image-20250309215527588"></p>
+<h2 id="IPMI的使用"><a href="#IPMI的使用" class="headerlink" title="IPMI的使用"></a>IPMI的使用</h2><p>这里讲一下IPMI的使用</p>
+<blockquote>
+<p>IPMI（Intelligent Platform Management Interface，智能平台管理接口）是一种基于硬件的远程服务器管理标准，其核心组件是 <strong>BMC（Baseboard Management Controller，基板管理控制器）</strong>。BMC 是一个独立于服务器主系统的微控制器，直接嵌入在服务器主板上，通过专用网络接口（带外管理）提供对服务器的底层硬件控制与监控功能。</p>
+<h3 id="IPMI-的核心功能"><a href="#IPMI-的核心功能" class="headerlink" title="IPMI 的核心功能"></a>IPMI 的核心功能</h3><ol>
+<li><strong>带外管理（Out-of-Band Management）</strong><br>不依赖服务器操作系统和常规网络，通过独立的管理网络（如专用 IPMI&#x2F;BMC 网口）实现远程管理，即使服务器宕机或操作系统崩溃仍可操作。</li>
+<li><strong>电源控制</strong><br>远程开关机、强制重启、断电等操作，无需物理接触设备。</li>
+<li><strong>系统安装与维护</strong><br>挂载虚拟光驱（ISO 镜像）远程安装操作系统，或通过控制台重装&#x2F;修复系统。</li>
+<li><strong>硬件监控</strong><br>实时监控 CPU 温度、风扇转速、电源状态、硬盘健康等硬件指标，触发告警或自动保护措施（如过热关机）。</li>
+<li><strong>日志与故障诊断</strong><br>访问系统事件日志（SEL）、硬件错误日志，辅助定位故障原因。</li>
+<li><strong>KVM over IP</strong><br>提供远程键盘、视频、鼠标控制，直接操作服务器 BIOS 或操作系统界面。</li>
+</ol>
+<hr>
+<h3 id="BMC-的作用"><a href="#BMC-的作用" class="headerlink" title="BMC 的作用"></a>BMC 的作用</h3><ul>
+<li><strong>IPMI 的硬件实现</strong>：BMC 是 IPMI 标准的物理载体，负责执行 IPMI 指令。</li>
+<li><strong>独立运行</strong>：即使服务器断电，BMC 仍可通过备用电源（如 PSU 待机电源）保持运行。</li>
+<li><strong>安全通信</strong>：支持用户权限管理、SSL&#x2F;TLS 加密、IP 过滤等功能，保障管理通道安全。</li>
+</ul>
+<hr>
+<h3 id="厂商实现差异"><a href="#厂商实现差异" class="headerlink" title="厂商实现差异"></a>厂商实现差异</h3><p>尽管 IPMI 是通用标准，但各厂商会定制管理界面和扩展功能：</p>
+<ul>
+<li><strong>戴尔 iDRAC</strong>：集成生命周期控制器（自动化部署）、增强型硬件诊断。</li>
+<li><strong>惠普 iLO</strong>：支持智能存储配置、能耗优化工具。</li>
+<li><strong>华为 iBMC</strong>：融合智能诊断、批量固件升级。</li>
+<li><strong>超微 IPMI</strong>：功能精简，仅提供基础管理（界面较原始），但兼容性强。</li>
+<li><strong>IBM&#x2F;Lenovo IMM&#x2F;XClarity</strong>：深度集成企业级管理套件（如 Lenovo XClarity）。</li>
+</ul>
+</blockquote>
+<p>你需要准备一根网线+一台安装好Java的电脑</p>
+<p>下载并安装Java8（一路安装即可） <a target="_blank" rel="noopener" href="https://www.java.com/zh-CN/download/">https://www.java.com/zh-CN/download/</a></p>
+<p>将网线插入BMC口</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309222551310.png" srcset="/img/loading.gif" lazyload alt="image-20250309222551310"></p>
+<h3 id="配置BMC"><a href="#配置BMC" class="headerlink" title="配置BMC"></a>配置BMC</h3><p>开机+狂按<strong>Delete</strong>按键进入BIOS</p>
+<p>移动到<strong>IPMI</strong>项（有的服务器叫<strong>Server Mgmt</strong>），选择<strong>BMC Network Configuration</strong> </p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309222343220.png" srcset="/img/loading.gif" lazyload alt="image-20250309222343220"></p>
+<ol>
+<li>启用 <code>Update IPMI LAN Configuration</code> → 设为 <code>Yes</code>。</li>
+<li>选择 <code>Configuration Address Source</code> → <code>DHCP</code> 或 <code>Static</code>。</li>
+<li>若选择 <code>Static</code>：<ul>
+<li>填写 <code>Station IP Address</code>、<code>Subnet Mask</code>、<code>Gateway IP Address</code>。</li>
+<li>例如 IP地址192.168.10.2 、子网掩码：255.255.255.0、网关：192.168.10.1</li>
+</ul>
+</li>
+<li>保存设置并重启服务器，使配置生效。</li>
+</ol>
+<blockquote>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a><strong>注意事项</strong></h3><ul>
+<li><strong>DHCP 模式</strong>：需确保网络中存在 DHCP 服务器，且 IPMI 能正常获取 IP。</li>
+<li><strong>Static 模式</strong>：避免 IP 地址冲突，建议提前规划局域网 IP 分配。</li>
+<li><strong>MAC 地址</strong>：用于网络绑定或防火墙规则时需记录此地址。</li>
+<li><strong>远程访问</strong>：配置完成后，可通过 IP 地址访问 IPMI Web 界面（默认端口 443&#x2F;623）。</li>
+</ul>
+</blockquote>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309223428520.png" srcset="/img/loading.gif" lazyload alt="image-20250309223428520"></p>
+<h3 id="使用IPMI"><a href="#使用IPMI" class="headerlink" title="使用IPMI"></a>使用IPMI</h3><p>然后连接服务器BMC口和电脑，在浏览器输入你配置的IP</p>
+<p><a target="_blank" rel="noopener" href="https://192.168.10.x/">https://192.168.10.x</a>  (一定是https:&#x2F;&#x2F;)</p>
+<p>输入账号密码 默认账号密码都是ADMIN</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/5746c1e472bc72f8322ff20744907fe.jpg" srcset="/img/loading.gif" lazyload alt="默认账号密码都是ADMIN"></p>
+<p>登录后可以切换为中文</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309223933922.png" srcset="/img/loading.gif" lazyload alt="image-20250309223933922"></p>
+<p>这里我们使用Java IKVM来控制服务器、安装系统等</p>
+<p>首先需要配置一下Java</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309224217212.png" srcset="/img/loading.gif" lazyload alt="image-20250309224217212"></p>
+<p>将你的IPMI地址加入例外站点列表</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309224331195.png" srcset="/img/loading.gif" lazyload alt="image-20250309224331195"></p>
+<p>点击重定向控制台，会下载下来一个<strong>launch.jnlp</strong>文件，双击，一路同意即可进入控制台</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309224048311.png" srcset="/img/loading.gif" lazyload alt="image-20250309224048311"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309224555376.png" srcset="/img/loading.gif" lazyload alt="image-20250309224555376"></p>
+<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h3><p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi2.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>选择 <strong>virtual storage</strong></li>
+<li>选择 <strong>cdrom&amp;iso</strong></li>
+<li>选择 iso 文件</li>
+<li>打开文件夹选择 iso 文件</li>
+<li>插入</li>
+</ol>
+<p>这里为了方便，使用Netboot安装镜像(在线安装)</p>
+<p><a target="_blank" rel="noopener" href="https://netboot.xyz/downloads/">https://netboot.xyz/downloads/</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301075155342.png"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250301075155342.png" srcset="/img/loading.gif" lazyload alt="image-20250301075155342"></a></p>
+<p>重启服务器，狂按 F11，进入 启动项菜单</p>
+<p>怕有人不会，上一张图</p>
+<p><a target="_blank" rel="noopener" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi3.png"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi3.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi4.png"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/ipmi4.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>根据你选择挂载，我刚刚挂载是 cdrom，因此选择是 cdrom 这个启动项。</p>
+<p>进入后填写你的公网IP、子网掩码、网关、DNS安装即可，具体步骤略</p>
+<p><a target="_blank" rel="noopener" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/netboot.xyz-d976acd5e46c61339230d38e767fbdc2.gif"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/netboot.xyz-d976acd5e46c61339230d38e767fbdc2.gif" srcset="/img/loading.gif" lazyload alt="netboot.xyz menu"></a></p>
+<h2 id="升级BMC固件"><a href="#升级BMC固件" class="headerlink" title="升级BMC固件"></a>升级BMC固件</h2><p>下载 BIOS &#x2F; BMC &#x2F; Bundle Firmware for MBD-X10SLL-F</p>
+<p> <a target="_blank" rel="noopener" href="https://www.supermicro.com/zh_cn/support/resources/downloadcenter/firmware/MBD-X10SLL-F/BMC">https://www.supermicro.com/zh_cn/support/resources/downloadcenter/firmware/MBD-X10SLL-F/BMC</a></p>
+<p>解压、上传你的固件升级即可</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309225242239.png" srcset="/img/loading.gif" lazyload alt="image-20250309225242239"></p>
+<h2 id="升级BIOS"><a href="#升级BIOS" class="headerlink" title="升级BIOS"></a>升级BIOS</h2><p>超微的主板自带的 IPMI 有些高级功能是需要授权才能解锁的，比如在线更新 BIOS，RAID 管理等等</p>
+<p>这里一个密钥生成器</p>
+<p><a target="_blank" rel="noopener" href="https://tql.ink/ipmi/">https://tql.ink/ipmi/</a></p>
+<p>填写你的 IPMI MAC 地址，生成一个即可</p>
+<h3 id="BMC-MAC-地址在哪查看？"><a href="#BMC-MAC-地址在哪查看？" class="headerlink" title="BMC MAC 地址在哪查看？"></a>BMC MAC 地址在哪查看？</h3><p>登录你的主板 IPMI，首页就能看到 BMC MAC 地址</p>
+<h3 id="怎么激活？"><a href="#怎么激活？" class="headerlink" title="怎么激活？"></a>怎么激活？</h3><p>登录 IPMI，找到下拉栏的 Other（其他），然后 Activate License 这个页面</p>
+<p>把生成出来的 License Key 填进去就行了</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309225604976.png" srcset="/img/loading.gif" lazyload alt="image-20250309225604976"></p>
+<p>升级步骤还是一样</p>
+<p>下载BIOS升级文件</p>
+<p>BIOS &#x2F; BMC &#x2F; Bundle Firmware for MBD-X10SLL-F</p>
+<p><a target="_blank" rel="noopener" href="https://www.supermicro.com/zh_cn/support/resources/downloadcenter/firmware/MBD-X10SLL-F/BIOS">https://www.supermicro.com/zh_cn/support/resources/downloadcenter/firmware/MBD-X10SLL-F/BIOS</a></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250309225639587.png" srcset="/img/loading.gif" lazyload alt="image-20250309225639587"></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这个服务器用起来还是不错的，噪音还是挺小的</p>
+<p>就先写到这里</p>
+<p>更多内容（使用手册、各种驱动、适配的硬件）可以看</p>
+<p><a target="_blank" rel="noopener" href="https://www.supermicro.org.cn/zh_cn/products/motherboard/X10SLL-F">https://www.supermicro.org.cn/zh_cn/products/motherboard/X10SLL-F</a></p>
+<p>未完待续….</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="print-no-link">#服务器</a>
+      
+        <a href="/tags/SuperMicro/" class="print-no-link">#SuperMicro</a>
+      
+        <a href="/tags/ipmi/" class="print-no-link">#ipmi</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>年轻人的第一台服务器——SuperMicro SuperServer5018D-MF+X10SLL-F主板使用体验</div>
+      <div>https://blog.quickso.cn/2025/03/09/年轻人的第一台服务器——SuperMicroSuperServer5018D-MF+X10SLL-F主板使用体验/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年3月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/03/14/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A4%9A%E8%8A%82%E7%82%B9Docker%E9%83%A8%E7%BD%B2Grafana%E3%80%81Prometheus%E3%80%81Node-Exporter%E3%80%81alertmanager%E3%80%81prometheus-alert%E5%B9%B6%E5%AF%B9%E6%8E%A5%E9%A3%9E%E4%B9%A6%E9%80%9A%E7%9F%A5/" title="服务器多节点docker部署Grafana、Prometheus、Node-Exporter、alertmanager、prometheus-alert并对接飞书通知">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">服务器多节点docker部署Grafana、Prometheus、Node-Exporter、alertmanager、prometheus-alert并对接飞书通知</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/01/%E7%8B%AC%E7%AB%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85ProxmoxVE%E5%B9%B6%E9%85%8D%E7%BD%AENAT%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91/" title="独立服务器安装ProxmoxVE并配置NAT网络转发">
+                        <span class="hidden-mobile">独立服务器安装ProxmoxVE并配置NAT网络转发</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,935 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="这几个月最火的路由器就是cudy多酷TR3000了，这是一款便携迷你随身路由器，MT7981B方案。Cudy很多人没听过，这是一家正规厂家专门做外贸的，可能是库存压力大，转内销了，不要你399，仅需隔壁MT3000三分之一的价格，让你带回家。我花了差不多150买下了它。 配置说明： ️ 无线规格：AX3000 160MHz 128MB闪存&#x2F;512MB内存 2.5G&#x2F;1G 双网口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CudyTR3000路由器刷机OpenWrt折腾记录">
+<meta property="og:url" content="https://blog.quickso.cn/2025/03/22/CudyTR3000%E8%B7%AF%E7%94%B1%E5%99%A8%E5%88%B7%E6%9C%BAOpenWrt%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="这几个月最火的路由器就是cudy多酷TR3000了，这是一款便携迷你随身路由器，MT7981B方案。Cudy很多人没听过，这是一家正规厂家专门做外贸的，可能是库存压力大，转内销了，不要你399，仅需隔壁MT3000三分之一的价格，让你带回家。我花了差不多150买下了它。 配置说明： ️ 无线规格：AX3000 160MHz 128MB闪存&#x2F;512MB内存 2.5G&#x2F;1G 双网口">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-d4c3a49ecd15f28740c4949bd1f00de0_1440w.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-795f8c986717b57a31d77ba7365e13a6_720w.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250307193946798218.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064215770704.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064152518202.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064242092959.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064255109819.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064333472465.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064319780174.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064358681730.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064412354461.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064421175014.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064429075371.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228105043963861.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228105136846623.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228105100941890.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228105202561399.webp">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-2d44d001f27b472e6d7d6064a77acd45_1440w.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-c3bc75bbbf6b57534884598c60594a33_1440w.jpg">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-e729892c18624b81d036312f9388c5af_1440w.jpg">
+<meta property="article:published_time" content="2025-03-22T05:10:52.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.760Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="刷机">
+<meta property="article:tag" content="Cudy">
+<meta property="article:tag" content="路由器">
+<meta property="article:tag" content="OpenWrt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-d4c3a49ecd15f28740c4949bd1f00de0_1440w.jpg">
+  
+  
+  
+  <title>CudyTR3000路由器刷机OpenWrt折腾记录 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CudyTR3000路由器刷机OpenWrt折腾记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-22 13:10" pubdate>
+          2025年3月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">CudyTR3000路由器刷机OpenWrt折腾记录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>这几个月最火的路由器就是cudy多酷TR3000了，这是一款便携迷你随身路由器，MT7981B方案。Cudy很多人没听过，这是一家正规厂家专门做外贸的，可能是库存压力大，转内销了，不要你399，仅需隔壁MT3000三分之一的价格，让你带回家。我花了差不多150买下了它。</p>
+<h2 id="配置说明："><a href="#配置说明：" class="headerlink" title="配置说明："></a>配置说明：</h2><ul>
+<li>️ 无线规格：AX3000 160MHz</li>
+<li>128MB闪存&#x2F;512MB内存</li>
+<li>2.5G&#x2F;1G 双网口, USB3.0接口,Type-C供电（5V&#x2F;3A）</li>
+<li>️ 隔壁MT3000平替(1&#x2F;3价格)，MT3000有主动散热、闪存256MB</li>
+<li>支持OpenWrt，配合 4&#x2F;5G 随身WiFi，变身CPE路由器，办公、旅行、车载。</li>
+<li>❗缺点：闪存小，装不了几个插件，USB接口供电不足</li>
+</ul>
+<p>路由器通电开机进入官方系统看看，</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-d4c3a49ecd15f28740c4949bd1f00de0_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>▲ 后台首页可以看到路由器的基本信息、运行状态、接入终端的设备、网络等信息。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-795f8c986717b57a31d77ba7365e13a6_720w.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>▲ 高级设置里面有的功能，经过测试USB接口不能共享网络，官方系统没有这个功能。</p>
+<p>官方固件整体上比较简洁、只有一些基础功能，像是USB共享网络，移动通信模块、打印机共享等都没有，下面开始折腾刷机。</p>
+<h2 id="刷openwrt系统"><a href="#刷openwrt系统" class="headerlink" title="刷openwrt系统"></a><strong>刷openwrt系统</strong></h2><h2 id="准备资料"><a href="#准备资料" class="headerlink" title="准备资料"></a>准备资料</h2><p><strong>由于文件名比较相似，请注意辨别。本文末尾所有文件均有下载。</strong></p>
+<h4 id="过渡包："><a href="#过渡包：" class="headerlink" title="过渡包："></a>过渡包：</h4><p>cudy_tr3000-v1-sysupgrade.bin</p>
+<h4 id="FIP分区只读破解包："><a href="#FIP分区只读破解包：" class="headerlink" title="FIP分区只读破解包："></a>FIP分区只读破解包：</h4><p>openwrt-mediatek-filogic-cudy_tr3000-v1-squashfs-sysupgrade.bin</p>
+<h4 id="中文三分区DHCP-UBOOT："><a href="#中文三分区DHCP-UBOOT：" class="headerlink" title="中文三分区DHCP UBOOT："></a>中文三分区DHCP UBOOT：</h4><p>dhcp-mt7981_cudy_tr3000-fip-fixed-parts-multi-layout.bin</p>
+<h4 id="固件："><a href="#固件：" class="headerlink" title="固件："></a><strong>固件：</strong></h4><p><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-8415516-1-1.html">cudy tr3000v1 lede源码6.6内核</a></p>
+<p>114m-lede-openwrt6.6.673-mediatek-filogic-cudy_tr3000-v1-squashfs-sysupgrade.bin</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250307193946798218.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250307193946798218.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><strong>刷机过程中涉及到和电脑连接的时候，请使用网线连接TR3000的千兆网口和电脑。</strong></p>
+<h3 id="1，刷入过渡包"><a href="#1，刷入过渡包" class="headerlink" title="1，刷入过渡包"></a>1，刷入过渡包</h3><p>本步骤刷入过渡包，是为了下一步刷入 FIP分区只读破解包。</p>
+<ul>
+<li>进入TR3000官方后台 基本设置-&gt;固件升级</li>
+<li>刷入 cudy_tr3000-v1-sysupgrade.bin</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228064215770704.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064215770704.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>刷写完成后，自动重启。此时浏览器输入192.168.1.1，进入过渡包后台（密码password）</p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228064152518202.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064152518202.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h3 id="2，刷入FIP分区只读破解包"><a href="#2，刷入FIP分区只读破解包" class="headerlink" title="2，刷入FIP分区只读破解包"></a>2，刷入FIP分区只读破解包</h3><p>在过渡包后台打开 系统-&gt;备份与升级 进入刷机界面，点击 刷写固件 开始选择刷入FIP分区只读破解包刷入。</p>
+<p>FIP分区只读破解包：openwrt-mediatek-filogic-cudy_tr3000-v1-squashfs-sysupgrade.bin</p>
+<p>记得<strong>不要</strong>勾选保留当前设置。</p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228064242092959.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064242092959.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228064255109819.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064255109819.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>刷写完成后，自动重启。此时浏览器输入192.168.1.1，进入FIP分区只读破解包后台（密码password）</p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228064333472465.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064333472465.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h3 id="3，刷入第三方Uboot"><a href="#3，刷入第三方Uboot" class="headerlink" title="3，刷入第三方Uboot"></a>3，刷入第三方Uboot</h3><p>本文提供的是fry2022大佬的多分区布局中文uboot</p>
+<h4 id="3-1，上传uboot"><a href="#3-1，上传uboot" class="headerlink" title="3.1，上传uboot"></a>3.1，上传uboot</h4><p>在FIP分区只读破解包后台 打开 系统-&gt;文件传输 选择 dhcp-mt7981_cudy_tr3000-fip-fixed-parts-multi-layout.bin 上传</p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228064319780174.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064319780174.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h4 id="3-2，刷入Uboot"><a href="#3-2，刷入Uboot" class="headerlink" title="3.2，刷入Uboot"></a>3.2，刷入Uboot</h4><p>在FIP分区只读破解包后台 打开系统-&gt;TTYD终端 默认用户名 root&#x2F;密码 password</p>
+<p>进入uboot文件上传目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /tmp/upload/<br></code></pre></td></tr></table></figure>
+
+<p>刷入ubtoot</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">mtd <span class="hljs-built_in">write</span> dhcp-mt7981_cudy_tr3000-fip-fixed-parts-multi-layout.bin FIP<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228064358681730.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064358681730.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h3 id="4，刷入第三方固件"><a href="#4，刷入第三方固件" class="headerlink" title="4，刷入第三方固件"></a>4，刷入第三方固件</h3><h4 id="4-1，进入uboot界面"><a href="#4-1，进入uboot界面" class="headerlink" title="4.1，进入uboot界面"></a>4.1，进入uboot界面</h4><p>4.1.1，TR3000断电</p>
+<p>4.1.2，路由器LAN口先用网线连接电脑</p>
+<p>4.1.3，按住路由器<strong>Reset键不松手</strong>，随即接通电源</p>
+<p>4.1.4，<strong>闪烁4次白灯后转为红灯常亮</strong> 表示成功进入U-Boot，此时可以松开Reset键。</p>
+<p>4.1.5，浏览器输入192.168.1.1进入web刷机界面刷机<a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228064412354461.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064412354461.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h4 id="4-2，刷入第三方固件"><a href="#4-2，刷入第三方固件" class="headerlink" title="4.2，刷入第三方固件"></a>4.2，刷入第三方固件</h4><p>注意此uboot支持多种分区，本文提供的是114M大分区固件，所以 mtd分区 请选择 <strong>maximum-114m</strong></p>
+<p>选择 114m-lede-openwrt6.6.673-mediatek-filogic-cudy_tr3000-v1-squashfs-sysupgrade.bin 刷入。</p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228064421175014.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064421175014.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>刷机完成后自动启动固件，首次启动可能时间比较长大约需要5分钟。</p>
+<p>固件后台：192.168.2.1  用户&#x2F;密码：root&#x2F;password</p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228064429075371.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228064429075371.webp" srcset="/img/loading.gif" lazyload alt="第三方固件后台界面"></a></p>
+<h2 id="关于后续刷机"><a href="#关于后续刷机" class="headerlink" title="关于后续刷机"></a>关于后续刷机</h2><ul>
+<li>如果你的固件是114M分区也就是和当前固件同一分区类型。</li>
+</ul>
+<p>那么打开 系统-&gt;备份与升级 刷固件即可。</p>
+<ul>
+<li>如果你的固件是其他分区</li>
+</ul>
+<p>请进入uboot选择合适的分区布局，然后刷入。</p>
+<h2 id="关于刷回原厂"><a href="#关于刷回原厂" class="headerlink" title="关于刷回原厂"></a>关于刷回原厂</h2><h3 id="1，体验原厂固件"><a href="#1，体验原厂固件" class="headerlink" title="1，体验原厂固件"></a>1，体验原厂固件</h3><p>如果你只是想体验原厂固件而保留第三方uboot.</p>
+<p>那么请进入uboot选择 <strong>default</strong> 分区布局，然后刷入分割好的官方固件</p>
+<p>本文网盘链接中提供原厂2.3.7分割好的固件：uboot刷cudy_tr3000v1-GF2.3.7.bin</p>
+<h3 id="2，彻底恢复原厂"><a href="#2，彻底恢复原厂" class="headerlink" title="2，彻底恢复原厂"></a>2，彻底恢复原厂</h3><p>如果你因为某些原因，想彻底恢复原厂固件，请看下面的操作。</p>
+<h4 id="2-1，准备材料："><a href="#2-1，准备材料：" class="headerlink" title="2.1，准备材料："></a>2.1，准备材料：</h4><p>原厂uboot(FIP)：恢复原厂&#x2F;FIP.bin</p>
+<p>原厂救砖包：recovery.bin（recovery.zip包内）</p>
+<p>tftp工具：tftpd64.exe（recovery.zip包内）</p>
+<h4 id="2-2，刷回原厂uboot-FIP"><a href="#2-2，刷回原厂uboot-FIP" class="headerlink" title="2.2，刷回原厂uboot(FIP)"></a>2.2，刷回原厂uboot(FIP)</h4><p>进入当前的uboot页面，点击 更新U-Boot</p>
+<p>然后选择FIP.bin更新</p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228105043963861.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228105043963861.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h4 id="2-3-电脑手动设置IP"><a href="#2-3-电脑手动设置IP" class="headerlink" title="2.3,电脑手动设置IP"></a>2.3,电脑手动设置IP</h4><p>TR3000断电，然后设置IP</p>
+<p>路径为 控制面板-&gt;网络和 Internet-&gt;网络连接-&gt;以太网-&gt;属性-&gt;Internet协议版本4(TCP&#x2F;IPv4)</p>
+<p>设置如下：</p>
+<p>如果你是2025年以前的机器：ip地址为：192.168.1.88，网关地址为192.168.1.112</p>
+<p><strong>如果你是2025年以后的机器：ip地址为：192.168.1.2，网关地址为192.168.1.1</strong></p>
+<p>当然IP区分不一定绝对，如果你始终用一组IP，无法刷机的时候，建议换一组。</p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228105136846623.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228105136846623.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h4 id="2-4，tftp设置"><a href="#2-4，tftp设置" class="headerlink" title="2.4，tftp设置"></a>2.4，tftp设置</h4><p>TR3000断电，然后打开tftp.exe</p>
+<p><strong>Current Directory</strong> 为你recovery.bin所在的目录，默认是tftp.exe所在的目录。recovery.bin和tftp.exe在一个目录即可。</p>
+<p><strong>Server interface</strong> 选择你上一步设置的IP地址192.168.1.88或者192.168.1.2，我自己的是192.168.1.2。</p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228105100941890.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228105100941890.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<h4 id="2-5，刷入原厂救砖包"><a href="#2-5，刷入原厂救砖包" class="headerlink" title="2.5，刷入原厂救砖包"></a>2.5，刷入原厂救砖包</h4><p>2.5.1，TR3000断电</p>
+<p>2.5.2，路由器LAN口先用网线连接电脑</p>
+<p>2.5.3，按住路由器<strong>Reset键不松手</strong>，随即接通电源</p>
+<p>2.5.4，指示灯红色粉色交替闪烁，tftp显示刷机过程，此时可以松开Reset键。</p>
+<p>刷机完成后自动重启</p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/wp-content/uploads/2025/02/20250228105202561399.webp"><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250228105202561399.webp" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p>2.5.5，电脑IP地址改回自动获取</p>
+<p>此时访问192.168.10.1 就是原厂固件了，可以更新从官网下载的固件了。</p>
+<h2 id="关于使用USB共享"><a href="#关于使用USB共享" class="headerlink" title="关于使用USB共享"></a>关于使用USB共享</h2><p>手机或者随身wifi插入USB网口</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-2d44d001f27b472e6d7d6064a77acd45_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-c3bc75bbbf6b57534884598c60594a33_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>▲ 网络→接口里新建一个接口，名称随意，协议DHCP，设备选择eth2（没有的话重新拔插一下），有的固件是usb设备，根据具体情况选择，防火墙设置WAN区域，其他保持默认，保存应用。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/v2-e729892c18624b81d036312f9388c5af_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>▲ 路由器通过USB接口上网，USB网口当做WAN口，随便测个速</p>
+<h2 id="刷机资料下载"><a href="#刷机资料下载" class="headerlink" title="刷机资料下载"></a>刷机资料下载</h2><p><a target="_blank" rel="noopener" href="https://www.123865.com/s/9a5rVv-Vp2sH">https://www.123865.com/s/9a5rVv-Vp2sH</a></p>
+<p>提取码:z9Mp</p>
+<p>其他固件下载<br><a target="_blank" rel="noopener" href="https://www.right.com.cn/FORUM/thread-8411618-1-1.html">https://www.right.com.cn/FORUM/thread-8411618-1-1.html</a></p>
+<h2 id="文章参考"><a href="#文章参考" class="headerlink" title="文章参考"></a>文章参考</h2><p><a target="_blank" rel="noopener" href="https://mao.fan/article/216">https://mao.fan/article/216</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.wifilu.com/3592.html">https://www.wifilu.com/3592.html</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%88%B7%E6%9C%BA/" class="print-no-link">#刷机</a>
+      
+        <a href="/tags/Cudy/" class="print-no-link">#Cudy</a>
+      
+        <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" class="print-no-link">#路由器</a>
+      
+        <a href="/tags/OpenWrt/" class="print-no-link">#OpenWrt</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CudyTR3000路由器刷机OpenWrt折腾记录</div>
+      <div>https://blog.quickso.cn/2025/03/22/CudyTR3000路由器刷机OpenWrt折腾记录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/26/%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%B7%A5%E5%85%B7Easytier%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="去中心化异地组网工具Easytier搭建与使用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">去中心化异地组网工具Easytier搭建与使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/14/%E5%9F%BA%E4%BA%8EPrometheus%E5%92%8CGrafana%E7%9A%84IPMI-BMC%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" title="基于Prometheus和Grafana的IPMI/BMC监控系统">
+                        <span class="hidden-mobile">基于Prometheus和Grafana的IPMI/BMC监控系统</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

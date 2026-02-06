@@ -1,0 +1,869 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="很久没用youtube-dl这个工具了，然后在油管上看到想下载的视频，发现下载速度超慢，只有几十KB最多。 于是，搜一下，发现可能是被限速了吧。 找到了这个 yt-dlp 的代替工具。项目地址：https:&#x2F;&#x2F;github.com&#x2F;yt-dlp&#x2F;yt-dlp 这个下载，就看个人网速了，因为我晚上下载有时候1M&#x2F;s、几百K&#x2F;s都有，白天下载有时候10几M&#x2F;s、20~30">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yt-dlp使用教程">
+<meta property="og:url" content="https://blog.quickso.cn/2023/12/16/yt-dlp%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="很久没用youtube-dl这个工具了，然后在油管上看到想下载的视频，发现下载速度超慢，只有几十KB最多。 于是，搜一下，发现可能是被限速了吧。 找到了这个 yt-dlp 的代替工具。项目地址：https:&#x2F;&#x2F;github.com&#x2F;yt-dlp&#x2F;yt-dlp 这个下载，就看个人网速了，因为我晚上下载有时候1M&#x2F;s、几百K&#x2F;s都有，白天下载有时候10几M&#x2F;s、20~30">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i007it.com/img/yt-dlp.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20250107214027574.png">
+<meta property="article:published_time" content="2023-12-16T09:50:04.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.772Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="Youtube">
+<meta property="article:tag" content="yt-dlp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i007it.com/img/yt-dlp.png">
+  
+  
+  
+  <title>yt-dlp使用教程 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="yt-dlp使用教程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-16 17:50" pubdate>
+          2023年12月16日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">yt-dlp使用教程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>很久没用youtube-dl这个工具了，然后在油管上看到想下载的视频，发现下载速度超慢，只有几十KB最多。</p>
+<p>于是，搜一下，发现可能是被限速了吧。</p>
+<p>找到了这个 yt-dlp 的代替工具。<br>项目地址：<a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp">https://github.com/yt-dlp/yt-dlp</a></p>
+<p>这个下载，就看个人网速了，因为我晚上下载有时候1M&#x2F;s、几百K&#x2F;s都有，白天下载有时候10几M&#x2F;s、20~30M&#x2F;s来回跳，几M&#x2F;s都有。</p>
+<p>发现它就是从youtube-dl fork过来的，就理解为是从youtube-dl复制过来的，做了一些修复和添加了一些东西。</p>
+<h2 id="安装yt-dlp"><a href="#安装yt-dlp" class="headerlink" title="安装yt-dlp"></a>安装yt-dlp</h2><h3 id="1-安装Python和ffmpeg"><a href="#1-安装Python和ffmpeg" class="headerlink" title="1.安装Python和ffmpeg"></a>1.安装Python和ffmpeg</h3><p>是从youtube-dl复制过来的，所以，原来如果有使用youtube-dl的话，就简单了，原来都已经安装过了。就直接安装yt-dlp就可以了，用法都一样。</p>
+<p>安装：</p>
+<ul>
+<li>Python：安装时把pip和添加系统环境变量都选上</li>
+<li>ffmpeg：下载好exe文件，把目录添加到系统环境变量就行</li>
+</ul>
+<h3 id="2-安装yt-dlp"><a href="#2-安装yt-dlp" class="headerlink" title="2.安装yt-dlp"></a>2.安装yt-dlp</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> yt-dlp<br></code></pre></td></tr></table></figure>
+
+
+<p>如果不想用pip安装的，就去项目地址下载exe版本：<br><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp#release-files">https://github.com/yt-dlp/yt-dlp#release-files</a></p>
+<p>然后把yt-dlp.exe 也一样放到系统环境的目录下就行。比如就放到ffmpeg的bin目录下，跟ffmpeg.exe和youtube-dl.exe放一起就行。</p>
+<h2 id="下载视频"><a href="#下载视频" class="headerlink" title="下载视频"></a>下载视频</h2><p>支持下载哪些网站，项目文档上也有：<br><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md">https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md</a></p>
+<p>我这里就有下载油管的视频举例。</p>
+<p>比如我想下载这个视频：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kNU2WCHVVBk">https://www.youtube.com/watch?v=kNU2WCHVVBk</a><br>视频格式为：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=">https://www.youtube.com/watch?v=</a>*************</p>
+<h3 id="1-直接下载"><a href="#1-直接下载" class="headerlink" title="1.直接下载"></a>1.直接下载</h3><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-meta"># 默认格式，高于720P的格式一般是 webm 格式</span><br>yt-dlp https:<span class="hljs-comment">//www.youtube.com/watch?v=kNU2WCHVVBk</span><br><br><span class="hljs-meta"># 下载视频转换成mp4（用--merge-output-format参数）</span><br>yt-dlp --merge-<span class="hljs-keyword">output</span>-<span class="hljs-keyword">format</span> mp4 https:<span class="hljs-comment">//www.youtube.com/watch?v=kNU2WCHVVBk</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-查看视频所有分辨率"><a href="#2-查看视频所有分辨率" class="headerlink" title="2.查看视频所有分辨率"></a>2.查看视频所有分辨率</h3><p>跟用 youtube-dl命令一样，先用 <code>-F</code>参数查看有哪些分辨率。</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">yt<span class="hljs-punctuation">-</span>dlp <span class="hljs-punctuation">-</span>F https<span class="hljs-punctuation">:</span><span class="hljs-comment">//www.youtube.com/watch?v=kNU2WCHVVBk</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://i007it.com/img/yt-dlp.png" srcset="/img/loading.gif" lazyload></p>
+<p>结果跟用 youtube-dl命令的差不多，标题行含义： &gt; ID：文件ID &gt; EXT：格式 &gt; RESOLUTION：分辨率 &gt; FPS：视频的帧率 &gt; FILESIZE：文件大小 &gt; VCODEC：audio only表示仅音频 &gt; ACODEC：video only表示仅视频（没有音频）；像mp4a.40.2（720p）就直接包含了音频</p>
+<h3 id="3-下载指定分辨率"><a href="#3-下载指定分辨率" class="headerlink" title="3.下载指定分辨率"></a>3.下载指定分辨率</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-comment"># 1.只下载音频</span><br><span class="hljs-comment"># 找m4a格式，列表越靠后越清晰。比如ID：140 | EXT：m4a | audio only</span><br>yt-dlp -f140 https:<span class="hljs-regexp">//</span>www.youtube.com/watch?v=kNU2WCHVVBk<br><br><span class="hljs-comment"># 2.下载音频转换成mp3（加上-x --audio-format参数）</span><br>yt-dlp -f140 -<span class="hljs-keyword">x</span> --audio-<span class="hljs-keyword">format</span> mp3 https:<span class="hljs-regexp">//</span>www.youtube.com/watch?v=kNU2WCHVVBk<br><br><span class="hljs-comment"># 3.下载视频（带音频）ID：22 | EXT：mp4 | 1280*720</span><br>yt-dlp -f22 https:<span class="hljs-regexp">//</span>www.youtube.com/watch?v=kNU2WCHVVBk<br><br><span class="hljs-comment"># 4.下载指定分辨率视频+音频（为了方便就直接下载mp4格式了）</span><br><span class="hljs-comment"># 1080及以上分辨率的音频和视频是分开的，所以一般会音频和视频一起下载</span><br>yt-dlp -f299+<span class="hljs-number">140</span> https:<span class="hljs-regexp">//</span>www.youtube.com/watch?v=kNU2WCHVVBk<br><br><span class="hljs-comment"># 5.(通用）下载最佳mp4视频+最佳m4a音频格式并合成mp4</span><br>yt-dlp -f <span class="hljs-string">&#x27;bv[ext=mp4]+ba[ext=m4a]&#x27;</span> --embed-metadata --merge-output-<span class="hljs-keyword">format</span> mp4 https:<span class="hljs-regexp">//</span>www.youtube.com/watch?v=kNU2WCHVVBk<br><br><span class="hljs-comment"># 6.指定文件名下载（用-o参数）</span><br><span class="hljs-comment"># 默认下载的文件格式是：title+空格+[id].格式，比如***** [kNU2WCHVVBk].mp4</span><br><span class="hljs-comment"># 文件名只要标题，不要id，加上 -o &#x27;%(title)s.mp4&#x27;</span><br>yt-dlp -f <span class="hljs-string">&#x27;bv[ext=mp4]+ba[ext=m4a]&#x27;</span> --embed-metadata --merge-output-<span class="hljs-keyword">format</span> mp4 https:<span class="hljs-regexp">//</span>www.youtube.com/watch?v=kNU2WCHVVBk -o <span class="hljs-string">&#x27;%(title)s.mp4&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>最方便直接用，可以直接用最后一种通用的下载最佳视频的方式。</p>
+<h3 id="5-下载播放列表所有视频"><a href="#5-下载播放列表所有视频" class="headerlink" title="5.下载播放列表所有视频"></a>5.下载播放列表所有视频</h3><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">yt-dlp https://www.youtube.com/playlist?list=<span class="hljs-strong">*****</span><span class="hljs-strong">*****</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="6-yt-dlp无法使用–cookies-from-browser解决方法"><a href="#6-yt-dlp无法使用–cookies-from-browser解决方法" class="headerlink" title="6.yt-dlp无法使用–cookies-from-browser解决方法"></a>6.yt-dlp无法使用–cookies-from-browser解决方法</h3><p><strong>安装扩展插件Get cookies.txt LOCALLY：</strong></p>
+<p>打开Chrome，输入网址</p>
+<p><a target="_blank" rel="noopener" href="https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc?pli=1">https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc?pli=1</a></p>
+<p>之后点击安装扩展。</p>
+<p>安装后可以将插件固定在浏览器显示中</p>
+<p><strong>使用插件手动获取youtube的相关cookies：</strong></p>
+<p>打开youtube，点击Export，就可以成功导出并下载与youtube相关的cookies文件。</p>
+<p><img src="https://cdn.jsdmirror.com/gh/muzihuaner/huancdn//img/image-20250107214027574.png" srcset="/img/loading.gif" lazyload alt="image-20250107214027574"></p>
+<p><strong>使用cookies文件下载相关视频：</strong></p>
+<p>下载好cookies文件后，将原代码中的–cookies-from-browser chrome替换成–cookies [下载的cookies所在的文件路径]</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">yt-dlp <span class="hljs-attr">--cookies</span> /root/www<span class="hljs-selector-class">.youtube</span><span class="hljs-selector-class">.com_cookies</span><span class="hljs-selector-class">.txt</span> https:<span class="hljs-comment">//www.youtube.com/watch?v=XXX</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-常用命令总结"><a href="#7-常用命令总结" class="headerlink" title="7.常用命令总结"></a>7.常用命令总结</h3><ol>
+<li><p><strong>下载视频：</strong></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">yt<span class="hljs-punctuation">-</span>dlp https<span class="hljs-punctuation">:</span><span class="hljs-comment">//www.youtube.com/watch?v=example</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>下载音频：</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">yt-dlp -<span class="hljs-attribute">x</span> <span class="hljs-attr">--audio-format</span> mp3 https://www.youtube.com/watch?v=example<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>下载播放列表：</strong></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">yt<span class="hljs-punctuation">-</span>dlp https<span class="hljs-punctuation">:</span><span class="hljs-comment">//www.youtube.com/playlist?list=example</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>选择视频格式：</strong></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">yt<span class="hljs-punctuation">-</span>dlp <span class="hljs-punctuation">-</span>f best https<span class="hljs-punctuation">:</span><span class="hljs-comment">//www.youtube.com/watch?v=example</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>保存到特定文件夹：</strong></p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">yt-dlp -o &#x27;/path/to/<span class="hljs-built_in">directory</span>/<span class="hljs-symbol">%</span>(<span class="hljs-built_in">title</span>)s.<span class="hljs-symbol">%</span>(ext)s&#x27; https://www.youtube.com/watch?v=<span class="hljs-built_in">example</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>限制下载速度：</strong></p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs hsp">yt-dlp --rate-<span class="hljs-keyword">limit</span> <span class="hljs-number">500</span>K https:<span class="hljs-comment">//www.youtube.com/watch?v=example</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>下载字幕：</strong></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">yt-dlp <span class="hljs-params">--write-sub</span> <span class="hljs-params">--sub-lang</span> en https:<span class="hljs-string">//www.youtube.com/watch</span>?v=example<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><code>yt-dlp</code> 还有更多高级选项，你可以通过运行 <code>yt-dlp --help</code> 来查看详细的帮助文档</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Youtube/" class="print-no-link">#Youtube</a>
+      
+        <a href="/tags/yt-dlp/" class="print-no-link">#yt-dlp</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>yt-dlp使用教程</div>
+      <div>https://blog.quickso.cn/2023/12/16/yt-dlp使用教程/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/26/JetBrainsIntelliJ%E7%B3%BB%E5%88%97%E5%85%A8%E5%AE%B6%E6%A1%B6%E6%BF%80%E6%B4%BB%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="JetBrains IntelliJ系列全家桶激活服务器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JetBrains IntelliJ系列全家桶激活服务器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/12/%E4%BD%BF%E7%94%A8Cloudflare%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F%E7%AB%99/" title="使用Cloudflare创建镜像站">
+                        <span class="hidden-mobile">使用Cloudflare创建镜像站</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,863 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="最近从某海鲜市场花了200软妹币购买了Nexus9，2+32GB的，具体参数可以看这里，NVIDIA Tegra K1的CPU  原系统是谷歌原生7.X，把玩了半天，发现卡的不能，所以还是刷个鸡吧！顺便记录一下 步骤1.解锁BL锁下载安装Nexus Root Toolkit 官方： NRT_v2.1.9.sfx.exe | by WugFresh for Generic Device&#x2F;O">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nexus9刷机全纪录">
+<meta property="og:url" content="https://blog.quickso.cn/2021/06/29/Nexus9%E5%88%B7%E6%9C%BA%E5%85%A8%E7%BA%AA%E5%BD%95/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="最近从某海鲜市场花了200软妹币购买了Nexus9，2+32GB的，具体参数可以看这里，NVIDIA Tegra K1的CPU  原系统是谷歌原生7.X，把玩了半天，发现卡的不能，所以还是刷个鸡吧！顺便记录一下 步骤1.解锁BL锁下载安装Nexus Root Toolkit 官方： NRT_v2.1.9.sfx.exe | by WugFresh for Generic Device&#x2F;O">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210629143729.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210629144612.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210629151718.png">
+<meta property="article:published_time" content="2021-06-29T06:35:05.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.766Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="Nexus9">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210629143729.png">
+  
+  
+  
+  <title>Nexus9刷机全纪录 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Nexus9刷机全纪录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-06-29 14:35" pubdate>
+          2021年6月29日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          676 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          6 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Nexus9刷机全纪录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>最近从某海鲜市场花了200软妹币购买了Nexus9，2+32GB的，具体参数可以看<a target="_blank" rel="noopener" href="https://product.pconline.com.cn/tabletpc/google/571146_detail.html">这里</a>，NVIDIA Tegra K1的CPU</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210629143729.png" srcset="/img/loading.gif" lazyload></p>
+<p>原系统是谷歌原生7.X，把玩了半天，发现卡的不能，所以还是刷个鸡吧！顺便记录一下</p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="1-解锁BL锁"><a href="#1-解锁BL锁" class="headerlink" title="1.解锁BL锁"></a>1.解锁BL锁</h2><p><strong>下载安装Nexus Root Toolkit</strong></p>
+<p>官方：</p>
+<p><a target="_blank" rel="noopener" href="https://androidfilehost.com/?fid=24728673521238129">NRT_v2.1.9.sfx.exe | by WugFresh for Generic Device&#x2F;Other (androidfilehost.com)</a></p>
+<p>我的网盘：</p>
+<p><a target="_blank" rel="noopener" href="https://huangenet.lanzoui.com/iDtZZqtet5i">NRT_v2.1.9.sfx.exe - 蓝奏云 (lanzoui.com)</a></p>
+<p>一路next安装好后，按照图示数字开启刷机之旅……</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210629144612.png" srcset="/img/loading.gif" lazyload></p>
+<p>开发者选项，打开 OEM 锁，打开 USB 调试<br>点 unlock 解锁（好像也可以用命令 [adb fastboot flashing unlock &#x2F; fastboot oem unlock]</p>
+<p>装 adb 环境（好像装 nexus root toolkit 时会自动把 adb 也装上）</p>
+<p>解锁好后 进入bootloader 会显示 unlocked</p>
+<h2 id="2-安装第三方REC-twrp"><a href="#2-安装第三方REC-twrp" class="headerlink" title="2.安装第三方REC-twrp"></a>2.安装第三方REC-twrp</h2><p><strong>下载（下载最新版本即可）：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://twrp.me/">TeamWin - TWRP</a></p>
+<p><strong>拷贝twrp到指定目录</strong><br>以twrp-3.5.2_9-0-flounder.img为例，将twrp-3.5.2_9-0-flounder.img拷贝到Nexus Root Toolkit的默认安装目录下</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">C:<span class="hljs-string">\Program</span> Files (x86)<span class="hljs-string">\WugFresh</span> Development<span class="hljs-string">\Nexus</span> Root Toolkit<span class="hljs-string">\data</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>进入bootloader模式</strong><br>设备关机，<em><strong>*同时按住电源键和音量键上（直到进入界面后方可松开）*</strong></em>，选择进入bootloader模式</p>
+<p>当然你也可以用命令</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">adb reboot bootloade</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>刷入twrp</strong><br>在dos模式下进入C:\Program Files (x86)\WugFresh Development\Nexus Root Toolkit\data目录，输入如下命令：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">fastboot</span> flash recovery twrp-<span class="hljs-number">3</span>.<span class="hljs-number">5</span>.<span class="hljs-number">2</span>_9-<span class="hljs-number">0</span>-flounder.img<br></code></pre></td></tr></table></figure>
+
+<p>之后</p>
+<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gml">fastboot boot twrp-<span class="hljs-variable language_">x</span>.<span class="hljs-variable language_">x</span>.<span class="hljs-variable language_">x</span>-<span class="hljs-variable language_">x</span>.img<br></code></pre></td></tr></table></figure>
+
+<p>进入REC模式</p>
+<p><strong>之后的操作都在 twrp 里进行</strong></p>
+<h2 id="3-刷机"><a href="#3-刷机" class="headerlink" title="3.刷机"></a>3.刷机</h2><p>⑴<strong>备份</strong>（也可以忽略）</p>
+<p>* 点 backup<br>* 命令 [adb pull xxx xxx] 保存到电脑里</p>
+<p>（2）<strong>清除数据</strong>（三清）<br>点 wipe，全选<br>点 format data </p>
+<p>还有一个滑动的那个也执行了</p>
+<p>（3）<strong>刷机</strong></p>
+<p>命令 [adb push xxx &#x2F;sdcard&#x2F;] 把需要装的包传进手机</p>
+<p>①点 install，刷 [驱动] <a target="_blank" rel="noopener" href="https://androidfilehost.com/?fid=817906626617936176">vendor-flounder-n9f27m.img</a>，在文件列表的右下角，点 install image 才会显示 img 后缀的文件</p>
+<p>②点 install，刷 [系统] <a target="_blank" rel="noopener" href="https://androidfilehost.com/?w=files&flid=149860&sort_by=date&sort_dir=DESC">Resurrection Remix Oreo for Nexus 9</a></p>
+<p> ③点 install，刷 [内核]  <a target="_blank" rel="noopener" href="https://elementalx.org/devices/nexus-9/">ElementalX-N9</a> （8.1.0的那个）</p>
+<p>④点 install，刷 [gapps] <a target="_blank" rel="noopener" href="https://opengapps.org/?arch=arm64&api=8.1&variant=nano">The Open GApps Project</a></p>
+<p>⑤点 install，刷 [root] <a target="_blank" rel="noopener" href="https://huangenet.lanzoui.com/ilj6Hqtgfij">root包</a></p>
+<p><a target="_blank" rel="noopener" href="https://huangenet.lanzoui.com/iB0lqqtisne">SuperSU-v2.82-nexus9</a></p>
+<p>⑥刷机完成</p>
+<h2 id="4-跳过激活"><a href="#4-跳过激活" class="headerlink" title="4.跳过激活"></a>4.<strong>跳过激活</strong></h2><p>原因你懂的，安装android原生系统后，无法在wifi环境下激活，因此强烈推荐手工修改系统文件跳过激活步骤</p>
+<p>A、设备关机，同时按住电源键和音量键（直到进入界面后方可松开），进入bootloader状态</p>
+<p>B、选择音量增减键进入recovery模式</p>
+<p>C、选择界面中mount，勾选system分区并挂载</p>
+<p>D、adb修改系统文件</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd C:\Program Files (x86)\WugFresh Development\Nexus Root Toolkit\data<br>adb shell<br>echo <span class="hljs-string">&quot;ro.setupwizard.mode=DISABLED&quot;</span> &gt;&gt; <span class="hljs-regexp">/system/</span>build.prop<br><span class="hljs-keyword">exit</span><br>adb reboot<br></code></pre></td></tr></table></figure>
+
+
+
+<p>小伙伴终于可以愉快玩耍了</p>
+<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/20210629151718.png" srcset="/img/loading.gif" lazyload></p>
+<p>平板应用推荐</p>
+<p><a target="_blank" rel="noopener" href="https://www.coolapk.com/album/28085545">https://www.coolapk.com/album/28085545</a></p>
+<p>参考文档：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chj113/article/details/96460552">nexus9刷机全记录_chj113的专栏-CSDN博客_nexus9刷机</a></p>
+<p><a target="_blank" rel="noopener" href="https://tieba.baidu.com/p/5987428550">刷机 全过程 记录 LineageOS 14.1 Nexus 9 (Wi-Fi)【nexus9吧】_百度贴吧 (baidu.com)</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://forum.xda-developers.com/t/rom-official-lineageos-14-1-for-nexus-9-flounder.3617907/">ROM][OFFICIAL] LineageOS 14.1 for Nexus 9 (flounder) | XDA Forums (xda-developers.com)</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://www.cyanogenmods.org/forums/topic/resurrection-remix-oreo-for-nexus-9-android-8-1/">RR OREO] Nexus 9 Resurrection Remix OREO 8. 1 Download (cyanogenmods.org)</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://forum.xda-developers.com/t/kernel-january-29-elementalx-n9-5-17-nougat-7-03-oreo.2931657/">KERNEL] [January 29] ElementalX-N9 5.17 (Nougat) 7.03 (Oreo) | XDA Forums (xda-developers.com)</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Nexus9/" class="print-no-link">#Nexus9</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Nexus9刷机全纪录</div>
+      <div>https://blog.quickso.cn/2021/06/29/Nexus9刷机全纪录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年6月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/02/Github%E4%B8%AA%E4%BA%BA%E9%A6%96%E9%A1%B5%E7%BE%8E%E5%8C%96%E6%8C%87%E5%8C%97/" title="Github个人首页美化指北">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Github个人首页美化指北</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%87%AA%E5%8A%A8%E5%8C%96%E6%8E%A8%E6%B5%81%E6%91%84%E5%83%8F%E5%A4%B4%E5%88%B0Bilibili%E7%9B%B4%E6%92%AD/" title="树莓派自动化推流摄像头到Bilibili直播">
+                        <span class="hidden-mobile">树莓派自动化推流摄像头到Bilibili直播</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

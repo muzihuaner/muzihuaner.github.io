@@ -1,0 +1,909 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="RustFS 简介RustFS是使用目前全球最流行的、内存安全的Rust语言开发的 高性能 ， 分布式对象存储软件。RustFS 同时具备简单、高效的特点，也是一种高效、开源、自由、可以进行本地私有云部署的对象存储解决方案。RustFS 100% 兼容 S3 协议，使用 Apache2 许可证发行的开源软件。RustFS 使用目前全世界最受欢迎的、内存安全的语言 Rust 语言编写。 它是由全世界">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RustFS对象存储Docker部署">
+<meta property="og:url" content="https://blog.quickso.cn/2025/12/27/RustFS%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8Docker%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="RustFS 简介RustFS是使用目前全球最流行的、内存安全的Rust语言开发的 高性能 ， 分布式对象存储软件。RustFS 同时具备简单、高效的特点，也是一种高效、开源、自由、可以进行本地私有云部署的对象存储解决方案。RustFS 100% 兼容 S3 协议，使用 Apache2 许可证发行的开源软件。RustFS 使用目前全世界最受欢迎的、内存安全的语言 Rust 语言编写。 它是由全世界">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-27T01:35:12.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.768Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="对象存储">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>RustFS对象存储Docker部署 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="RustFS对象存储Docker部署"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-27 09:35" pubdate>
+          2025年12月27日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">RustFS对象存储Docker部署</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="RustFS-简介"><a href="#RustFS-简介" class="headerlink" title="RustFS 简介"></a>RustFS 简介</h1><p>RustFS是使用目前全球最流行的、内存安全的Rust语言开发的 <code>高性能</code> ， <code>分布式</code>对象存储软件。RustFS 同时具备简单、高效的特点，也是一种高效、开源、自由、可以进行本地私有云部署的对象存储解决方案。RustFS 100% 兼容 S3 协议，使用 Apache2 许可证发行的开源软件。RustFS 使用目前全世界最受欢迎的、内存安全的语言 Rust 语言编写。 它是由全世界优秀的工程师参与并贡献的一款对于商用友好的分布式对象存储产品，RustFS 可以平替非常多非友好开源协议的对象存储产品。</p>
+<p>官方网站:</p>
+<p><a target="_blank" rel="noopener" href="https://rustfs.com.cn/">https://rustfs.com.cn/</a></p>
+<p>官方文档:</p>
+<p><a target="_blank" rel="noopener" href="https://docs.rustfs.com.cn/">https://docs.rustfs.com.cn/</a></p>
+<h2 id="一、前置准备"><a href="#一、前置准备" class="headerlink" title="一、前置准备"></a>一、前置准备</h2><p><strong>主机要求</strong></p>
+<ul>
+<li>已安装 Docker（≥ 20.10）并能正常拉取镜像与运行容器</li>
+<li>本地路径 <code>/mnt/rustfs/data</code>（或自定义路径）用于挂载对象数据</li>
+</ul>
+<p><strong>网络与防火墙</strong></p>
+<ul>
+<li>确保宿主机 9000\9001 端口对外开放（或自定义端口一致）</li>
+</ul>
+<h2 id="运行-RustFS-容器"><a href="#运行-RustFS-容器" class="headerlink" title="运行 RustFS 容器"></a>运行 RustFS 容器</h2><p>RustFS SNSD Docker 运行方式，结合上述镜像与配置，执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建 data 和 logs 文件夹</span><br><span class="hljs-built_in">mkdir</span> -p /mnt/rustfs &amp;&amp; <span class="hljs-built_in">cd</span> /mnt/rustfs<br><span class="hljs-built_in">mkdir</span> -p data logs<br><br> <span class="hljs-comment"># 修改权限</span><br> <span class="hljs-built_in">chown</span> -R 10001:10001 data logs<br><br> <span class="hljs-comment"># Docker RUN</span><br> docker run -d -p 9000:9000 -p 9001:9001 -v /mnt/rustfs/data:/data -v /mnt/rustfs/logs:/logs rustfs/rustfs:latest<br></code></pre></td></tr></table></figure>
+
+<p>各参数说明：</p>
+<ul>
+<li><code>-p 9000:9000</code>：映射宿主机 9000 Endpoint端口到容器</li>
+<li><code>-p 9001:9001</code>：映射宿主机 9001 Console端口到容器</li>
+<li><code>-v /mnt/rustfs/data:/data</code>：挂载数据卷</li>
+<li><code>--name rustfs_local</code>：容器自定义名称</li>
+<li><code>-d</code>：后台运行</li>
+</ul>
+<h3 id="完整参数配置示例"><a href="#完整参数配置示例" class="headerlink" title="完整参数配置示例"></a>完整参数配置示例</h3><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d <span class="hljs-string">\</span><br>  --name rustfs_container <span class="hljs-string">\</span><br>  -p <span class="hljs-number">9000</span>:<span class="hljs-number">9000</span> <span class="hljs-string">\</span><br>  -p <span class="hljs-number">9001</span>:<span class="hljs-number">9001</span> <span class="hljs-string">\</span><br>  -v /mnt/rustfs/data:/data <span class="hljs-string">\</span><br>  -e RUSTFS_ACCESS_KEY=admin <span class="hljs-string">\</span><br>  -e RUSTFS_SECRET_KEY=修改成你的密码 <span class="hljs-string">\</span><br>  -e RUSTFS_CONSOLE_ENABLE=<span class="hljs-literal">true</span> <span class="hljs-string">\</span><br>  -e RUSTFS_SERVER_DOMAINS=s3.example.com <span class="hljs-string">\</span><br>  rustfs/rustfs:latest <span class="hljs-string">\</span><br>  --address :<span class="hljs-number">9000</span> <span class="hljs-string">\</span><br>  --console-enable <span class="hljs-string">\</span><br>  --server-domains s3.example.com <span class="hljs-string">\</span><br>  --access-key admin <span class="hljs-string">\</span><br>  --secret-key 修改成你的密码 <span class="hljs-string">\</span><br>  /data<br></code></pre></td></tr></table></figure>
+
+<h4 id="Docker-Compose-配置"><a href="#Docker-Compose-配置" class="headerlink" title="Docker Compose 配置"></a>Docker Compose 配置</h4><p>创建 <code>docker-compose.yml</code> 文件：</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">version</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3.8&quot;</span><br><br><span class="hljs-attribute">services</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">rustfs</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">image</span><span class="hljs-punctuation">:</span> <span class="hljs-string">rustfs/rustfs:latest</span><br>    <span class="hljs-attribute">container_name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">rustfs-server</span><br>    <span class="hljs-attribute">security_opt</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;no-new-privileges:true&quot;</span><br>    <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;9000:9000&quot;   # S3 API 对外端口</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;9001:9001&quot;   # 控制台对外端口</span><br>    <span class="hljs-attribute">environment</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-comment"># 数据卷（多个路径用逗号分隔）</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTFS_VOLUMES=/data/rustfs0</span><br>      <span class="hljs-comment"># API 和控制台监听地址</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTFS_ADDRESS=0.0.0.0:9000</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTFS_CONSOLE_ADDRESS=0.0.0.0:9001</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTFS_CONSOLE_ENABLE=true</span><br>      <span class="hljs-comment"># CORS 设置，控制台与 S3 API 都放开来源</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTFS_CORS_ALLOWED_ORIGINS=*</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTFS_CONSOLE_CORS_ALLOWED_ORIGINS=*</span><br>      <span class="hljs-comment"># 访问密钥（生产环境请修改为强密码）</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTFS_ACCESS_KEY=admin</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTFS_SECRET_KEY=改为你的密码</span><br>      <span class="hljs-comment"># 日志级别</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTFS_OBS_LOGGER_LEVEL=info</span><br><br>    <span class="hljs-attribute">volumes</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-comment"># 存储数据卷（请根据实际情况修改路径）</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./deploy/data/pro:/data</span><br>      <span class="hljs-comment"># 日志目录</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./deploy/logs:/app/logs</span><br><br>    <span class="hljs-attribute">networks</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">rustfs-network</span><br>    <span class="hljs-attribute">restart</span><span class="hljs-punctuation">:</span> <span class="hljs-string">unless-stopped</span><br>    <span class="hljs-attribute">healthcheck</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-attribute">test</span><span class="hljs-punctuation">:</span> <span class="hljs-string">[&quot;CMD&quot;, &quot;sh&quot;, &quot;-c&quot;, &quot;curl -f http://localhost:9000/health &amp;&amp; curl -f http://localhost:9001/health&quot;]</span><br>      <span class="hljs-attribute">interval</span><span class="hljs-punctuation">:</span> <span class="hljs-string">30s</span><br>      <span class="hljs-attribute">timeout</span><span class="hljs-punctuation">:</span> <span class="hljs-string">10s</span><br>      <span class="hljs-attribute">retries</span><span class="hljs-punctuation">:</span> <span class="hljs-string">3</span><br>      <span class="hljs-attribute">start_period</span><span class="hljs-punctuation">:</span> <span class="hljs-string">40s</span><br><br><span class="hljs-attribute">networks</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">rustfs-network</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">driver</span><span class="hljs-punctuation">:</span> <span class="hljs-string">bridge</span><br>    <span class="hljs-attribute">ipam</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-attribute">config</span><span class="hljs-punctuation">:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">subnet: 172.20.0.0/16</span><br></code></pre></td></tr></table></figure>
+
+<p>启动服务：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker compose up -d</span><br></code></pre></td></tr></table></figure>
+
+<p>通过 <code>http://localhost:9000</code> 访问，默认用户名和密码均为 <code>rustfsadmin</code>。</p>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><ul>
+<li><strong>访问方式</strong>：<ul>
+<li>S3 API 端：<code>https://s3.example.com</code> (端口 9000)</li>
+<li>控制台端：<code>https://console.example.com</code> (端口 9001)</li>
+</ul>
+</li>
+<li><strong>特性</strong>：支持 HTTPS、CORS、健康检查</li>
+</ul>
+<h4 id="Nginx-反向代理配置"><a href="#Nginx-反向代理配置" class="headerlink" title="Nginx 反向代理配置"></a>Nginx 反向代理配置</h4><h5 id="S3-API-端配置"><a href="#S3-API-端配置" class="headerlink" title="S3 API 端配置"></a>S3 API 端配置</h5><p>为 S3 API 创建 Nginx 配置文件（如 <code>/www/server/panel/vhost/nginx/s3.example.com.conf</code>）：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># S3 API 负载均衡配置</span><br>upstream rustfs &#123;<br>    least_conn;<br>    server <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">9000</span>;  <span class="hljs-comment"># S3 API 服务端口</span><br>&#125;<br><br><span class="hljs-comment"># HTTP 重定向到 HTTPS</span><br>server &#123;<br>    listen <span class="hljs-number">80</span>;<br>    listen [::]:<span class="hljs-number">80</span>;<br>    server_name s3.example.com;  <span class="hljs-comment"># 替换为你的 S3 API 域名</span><br><br>    return <span class="hljs-number">301</span> https:<span class="hljs-regexp">//</span><span class="hljs-variable">$host</span><span class="hljs-variable">$request_uri</span>;<br>&#125;<br><br><span class="hljs-comment"># HTTPS 主配置</span><br>server &#123;<br>    listen <span class="hljs-number">443</span> ssl;<br>    listen [::]:<span class="hljs-number">443</span> ssl;<br>    http2 on;<br>    server_name s3.example.com;  <span class="hljs-comment"># 替换为你的 S3 API 域名</span><br><br>    <span class="hljs-comment"># SSL 证书配置（请替换为实际证书路径）</span><br>    ssl_certificate     <span class="hljs-regexp">/www/</span>server<span class="hljs-regexp">/panel/</span>vhost<span class="hljs-regexp">/cert/</span>s3.example.com/fullchain.pem;<br>    ssl_certificate_key <span class="hljs-regexp">/www/</span>server<span class="hljs-regexp">/panel/</span>vhost<span class="hljs-regexp">/cert/</span>s3.example.com/privkey.pem;<br>    ssl_protocols       TLSv1.<span class="hljs-number">2</span> TLSv1.<span class="hljs-number">3</span>;<br>    ssl_ciphers         EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+<span class="hljs-number">3</span>DES:RSA+<span class="hljs-number">3</span>DES:!MD5;<br>    ssl_prefer_server_ciphers on;<br>    ssl_session_cache   shared:SSL:<span class="hljs-number">10</span>m;<br>    ssl_session_timeout <span class="hljs-number">10</span>m;<br>    add_header Strict-Transport-Security <span class="hljs-string">&quot;max-age=31536000&quot;</span>;<br><br>    <span class="hljs-comment"># 反向代理 RustFS S3 API</span><br>    location / &#123;<br>        proxy_set_header Host <span class="hljs-variable">$host</span>;<br>        proxy_set_header X-Real-IP         <span class="hljs-variable">$remote_addr</span>;<br>        proxy_set_header X-Forwarded-For   <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;<br>        proxy_set_header X-Forwarded-Proto <span class="hljs-variable">$scheme</span>;<br>        proxy_set_header X-Forwarded-Port  <span class="hljs-variable">$server_port</span>;<br>        proxy_set_header X-Forwarded-Host  <span class="hljs-variable">$host</span>;<br><br>        <span class="hljs-comment"># 关键配置：禁用 HEAD 请求转换，避免 S3 V4 签名失效</span><br>        proxy_cache_convert_head off;<br>        proxy_connect_timeout <span class="hljs-number">300</span>;<br>        proxy_http_version <span class="hljs-number">1.1</span>;<br>        proxy_set_header Connection <span class="hljs-string">&quot;&quot;</span>;<br><br>        proxy_pass http:<span class="hljs-regexp">//</span>rustfs;  <span class="hljs-comment"># 代理到 S3 API</span><br>    &#125;<br><br>    <span class="hljs-comment"># 日志配置（请根据实际情况修改路径）</span><br>    access_log  <span class="hljs-regexp">/www/</span>wwwlogs/s3.example.com.log;<br>    error_log   <span class="hljs-regexp">/www/</span>wwwlogs/s3.example.com.error.log;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="控制台端配置"><a href="#控制台端配置" class="headerlink" title="控制台端配置"></a>控制台端配置</h5><p>为控制台创建 Nginx 配置文件（如 <code>/www/server/panel/vhost/nginx/console.example.com.conf</code>）：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 控制台负载均衡配置</span><br>upstream rustfs-console &#123;<br>    least_conn;<br>    server <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">9001</span>;  <span class="hljs-comment"># 控制台服务端口</span><br>&#125;<br><br><span class="hljs-comment"># HTTP 重定向到 HTTPS</span><br>server &#123;<br>    listen <span class="hljs-number">80</span>;<br>    listen [::]:<span class="hljs-number">80</span>;<br>    server_name console.example.com;  <span class="hljs-comment"># 替换为你的控制台域名</span><br><br>    return <span class="hljs-number">301</span> https:<span class="hljs-regexp">//</span><span class="hljs-variable">$host</span><span class="hljs-variable">$request_uri</span>;<br>&#125;<br><br><span class="hljs-comment"># HTTPS 主配置</span><br>server &#123;<br>    listen <span class="hljs-number">443</span> ssl;<br>    listen [::]:<span class="hljs-number">443</span> ssl;<br>    http2 on;<br>    server_name console.example.com;  <span class="hljs-comment"># 替换为你的控制台域名</span><br><br>    <span class="hljs-comment"># SSL 证书配置（请替换为实际证书路径）</span><br>    ssl_certificate     <span class="hljs-regexp">/www/</span>server<span class="hljs-regexp">/panel/</span>vhost<span class="hljs-regexp">/cert/</span>console.example.com/fullchain.pem;<br>    ssl_certificate_key <span class="hljs-regexp">/www/</span>server<span class="hljs-regexp">/panel/</span>vhost<span class="hljs-regexp">/cert/</span>console.example.com/privkey.pem;<br>    ssl_protocols       TLSv1.<span class="hljs-number">2</span> TLSv1.<span class="hljs-number">3</span>;<br>    ssl_ciphers         EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+<span class="hljs-number">3</span>DES:RSA+<span class="hljs-number">3</span>DES:!MD5;<br>    ssl_prefer_server_ciphers on;<br>    ssl_session_cache   shared:SSL:<span class="hljs-number">10</span>m;<br>    ssl_session_timeout <span class="hljs-number">10</span>m;<br>    add_header Strict-Transport-Security <span class="hljs-string">&quot;max-age=31536000&quot;</span>;<br><br>    <span class="hljs-comment"># 反向代理 RustFS 控制台</span><br>    location / &#123;<br>        proxy_set_header Host <span class="hljs-variable">$host</span>;<br>        proxy_set_header X-Real-IP         <span class="hljs-variable">$remote_addr</span>;<br>        proxy_set_header X-Forwarded-For   <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;<br>        proxy_set_header X-Forwarded-Proto <span class="hljs-variable">$scheme</span>;<br>        proxy_set_header X-Forwarded-Port  <span class="hljs-variable">$server_port</span>;<br>        proxy_set_header X-Forwarded-Host  <span class="hljs-variable">$host</span>;<br><br>        <span class="hljs-comment"># 禁用 HEAD 请求转换</span><br>        proxy_cache_convert_head off;<br>        proxy_connect_timeout <span class="hljs-number">300</span>;<br>        proxy_http_version <span class="hljs-number">1.1</span>;<br>        proxy_set_header Connection <span class="hljs-string">&quot;&quot;</span>;<br><br>        proxy_pass http:<span class="hljs-regexp">//</span>rustfs-console;  <span class="hljs-comment"># 代理到控制台</span><br>    &#125;<br><br>    <span class="hljs-comment"># 日志配置（请根据实际情况修改路径）</span><br>    access_log  <span class="hljs-regexp">/www/</span>wwwlogs/console.example.com.log;<br>    error_log   <span class="hljs-regexp">/www/</span>wwwlogs/console.example.com.error.log;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>重载 Nginx 配置：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">nginx <span class="hljs-punctuation">-</span>t <span class="hljs-meta">&amp;&amp; nginx -s reload</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="测试S3"><a href="#测试S3" class="headerlink" title="测试S3"></a>测试S3</h2><p>这里使用S3cmd</p>
+<p>S3cmd 是一个用于操作 Amazon S3 和其他兼容 S3 的云存储服务的命令行工具。它提供了广泛的命令，允许用户上传、下载、同步和管理存储在 S3 上的文件。</p>
+<h3 id="使用包管理器安装"><a href="#使用包管理器安装" class="headerlink" title="使用包管理器安装"></a>使用包管理器安装</h3><p>在大多数 Linux 发行版中，您可以使用包管理器来安装 S3cmd。以下是在几种常见 Linux 发行版上安装 S3cmd 的命令。</p>
+<p>对于基于 Debian 的系统（如 Ubuntu），您可以使用 <code>apt-get</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get update<br><span class="hljs-built_in">sudo</span> apt-get install s3cmd<br></code></pre></td></tr></table></figure>
+
+<p>对于基于 Red Hat 的系统（如 CentOS），您可以使用 <code>yum</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> yum install s3cmd<br></code></pre></td></tr></table></figure>
+
+<p>对于基于 Arch Linux 的系统，您可以使用 <code>pacman</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> pacman -S s3cmd<br></code></pre></td></tr></table></figure>
+
+<h2 id="配置-S3cmd"><a href="#配置-S3cmd" class="headerlink" title="配置 S3cmd"></a>配置 S3cmd</h2><p>在安装完 S3cmd 之后，您需要对其进行配置，以便连接到您的 S3 存储服务。配置 S3cmd 涉及设置您的 AWS 访问密钥 ID 和秘密访问密钥，这些是您在 AWS 账户中创建的访问权限凭证。</p>
+<h3 id="运行配置向导"><a href="#运行配置向导" class="headerlink" title="运行配置向导"></a>运行配置向导</h3><p>最简单的方法是运行 S3cmd 的配置向导。在命令行中输入以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">s3cmd --configure<br></code></pre></td></tr></table></figure>
+
+<p>该命令将启动一个交互式配置程序，提示您输入所需的配置信息，包括：</p>
+<ul>
+<li>S3 服务端点（写入<code>s3.example.com</code>）</li>
+<li>访问密钥 ID</li>
+<li>秘密访问密钥</li>
+<li>默认存储桶名称</li>
+<li>是否使用 HTTPS</li>
+<li>是否启用服务端加密等</li>
+</ul>
+<p>参考</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs vhdl">root@iv-ydya2ilgcgqc6ilqbabf:~# s3cmd <span class="hljs-comment">--configure</span><br><br>Enter <span class="hljs-keyword">new</span> values <span class="hljs-keyword">or</span> accept defaults <span class="hljs-keyword">in</span> brackets <span class="hljs-keyword">with</span> Enter.<br>Refer <span class="hljs-keyword">to</span> user manual <span class="hljs-keyword">for</span> detailed description <span class="hljs-keyword">of</span> <span class="hljs-keyword">all</span> options.<br><br><span class="hljs-keyword">Access</span> key <span class="hljs-keyword">and</span> Secret key are your identifiers <span class="hljs-keyword">for</span> Amazon S3. Leave them empty <span class="hljs-keyword">for</span> using the env variables.<br><span class="hljs-keyword">Access</span> Key: admin<br>Secret Key: passwd<br><span class="hljs-keyword">Default</span> Region [US]:<br><br><span class="hljs-keyword">Use</span> <span class="hljs-string">&quot;s3.amazonaws.com&quot;</span> <span class="hljs-keyword">for</span> S3 Endpoint <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> modify it <span class="hljs-keyword">to</span> the target Amazon S3.<br>S3 Endpoint [s3.amazonaws.com]: s3.xxx.cn<br><br><span class="hljs-keyword">Use</span> <span class="hljs-string">&quot;%(bucket)s.s3.amazonaws.com&quot;</span> <span class="hljs-keyword">to</span> the target Amazon S3. <span class="hljs-string">&quot;%(bucket)s&quot;</span> <span class="hljs-keyword">and</span> <span class="hljs-string">&quot;%(location)s&quot;</span> vars can be used<br><span class="hljs-keyword">if</span> the target S3 system supports dns based buckets.<br>DNS-style bucket+hostname:<span class="hljs-keyword">port</span> template <span class="hljs-keyword">for</span> accessing a bucket [%(bucket)s.s3.amazonaws.com]:<br><br>Encryption password <span class="hljs-keyword">is</span> used <span class="hljs-keyword">to</span> protect your files from reading<br>by unauthorized persons <span class="hljs-keyword">while</span> <span class="hljs-keyword">in</span> transfer <span class="hljs-keyword">to</span> S3<br>Encryption password: passwd<br>Path <span class="hljs-keyword">to</span> GPG program [/usr/bin/gpg]:<br><br><span class="hljs-keyword">When</span> using secure HTTPS protocol <span class="hljs-keyword">all</span> communication <span class="hljs-keyword">with</span> Amazon S3<br>servers <span class="hljs-keyword">is</span> <span class="hljs-keyword">protected</span> from <span class="hljs-number">3</span>rd party eavesdropping. This method <span class="hljs-keyword">is</span><br>slower than plain HTTP, <span class="hljs-keyword">and</span> can only be proxied <span class="hljs-keyword">with</span> Python <span class="hljs-number">2.7</span> <span class="hljs-keyword">or</span> newer<br><span class="hljs-keyword">Use</span> HTTPS protocol [Yes]:<br><br><span class="hljs-keyword">On</span> some networks <span class="hljs-keyword">all</span> internet <span class="hljs-keyword">access</span> must go through a HTTP proxy.<br>Try setting it here <span class="hljs-keyword">if</span> you can<span class="hljs-symbol">&#x27;t</span> connect <span class="hljs-keyword">to</span> S3 directly<br>HTTP Proxy server name:<br><br><span class="hljs-keyword">New</span> settings:<br>  <span class="hljs-keyword">Access</span> Key: admin<br>  Secret Key: passwd<br>  <span class="hljs-keyword">Default</span> Region: US<br>  S3 Endpoint: s3.quickso.cn<br>  DNS-style bucket+hostname:<span class="hljs-keyword">port</span> template <span class="hljs-keyword">for</span> accessing a bucket: %(bucket)s.s3.amazonaws.com<br>  Encryption password: passwd<br>  Path <span class="hljs-keyword">to</span> GPG program: /usr/bin/gpg<br>  <span class="hljs-keyword">Use</span> HTTPS protocol: <span class="hljs-literal">True</span><br>  HTTP Proxy server name:<br>  HTTP Proxy server <span class="hljs-keyword">port</span>: <span class="hljs-number">0</span><br><br>Test <span class="hljs-keyword">access</span> <span class="hljs-keyword">with</span> supplied credentials? [Y/n] y<br>Please <span class="hljs-keyword">wait</span>, attempting <span class="hljs-keyword">to</span> list <span class="hljs-keyword">all</span> buckets...<br>Success. Your <span class="hljs-keyword">access</span> key <span class="hljs-keyword">and</span> secret key worked fine :-)<br><br>Now verifying that encryption works...<br>Success. Encryption <span class="hljs-keyword">and</span> decryption worked fine :-)<br><br>Save settings? [y/N] y<br><span class="hljs-keyword">Configuration</span> saved <span class="hljs-keyword">to</span> &#x27;/root/.s3cfg&#x27;<br>root@iv-ydya2ilgcgqc6ilqbabf:~# s3cmd ls<br><span class="hljs-number">2025</span>-<span class="hljs-number">12</span>-<span class="hljs-number">27</span> <span class="hljs-number">01</span>:<span class="hljs-number">19</span>  s3://test<br><br></code></pre></td></tr></table></figure>
+
+<p>出于安全考虑，您的配置文件应该只有您自己能够读写。设置适当的文件权限可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> 600 ~/.s3cfg<br></code></pre></td></tr></table></figure>
+
+<p>这样，您就完成了 S3cmd 的基本配置，可以开始使用它来管理您的 S3 存储桶了</p>
+<h2 id="基本命令与操作"><a href="#基本命令与操作" class="headerlink" title="基本命令与操作"></a>基本命令与操作</h2><p>S3cmd 提供了一系列命令，用于执行与 Amazon S3 存储桶相关的各种操作。以下是一些常用的 S3cmd 命令及其基本用法。</p>
+<h3 id="1-列出存储桶"><a href="#1-列出存储桶" class="headerlink" title="1 列出存储桶"></a>1 列出存储桶</h3><p>要列出所有可用的存储桶，可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">s3cmd <span class="hljs-built_in">ls</span><br></code></pre></td></tr></table></figure>
+
+<p>这将显示您有权访问的所有存储桶的列表。</p>
+<h3 id="2-上传文件"><a href="#2-上传文件" class="headerlink" title="2 上传文件"></a>2 上传文件</h3><p>要将文件上传到存储桶，使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">s3cmd put /path/to/your/file s3://bucket-name/file-name<br></code></pre></td></tr></table></figure>
+
+<p>请将 <code>/path/to/your/file</code> 替换为您要上传的文件的本地路径，将 <code>bucket-name</code> 替换为您的 S3 存储桶名称，将 <code>file-name</code> 替换为您希望文件在 S3 上保存的名称。</p>
+<h3 id="3-下载文件"><a href="#3-下载文件" class="headerlink" title="3 下载文件"></a>3 下载文件</h3><p>要从存储桶下载文件，使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">s3cmd get s3://bucket-name/file-name /path/to/your/local/directory<br></code></pre></td></tr></table></figure>
+
+<p>请将 <code>bucket-name</code> 和 <code>file-name</code> 替换为存储桶名称和文件名称，将 <code>/path/to/your/local/directory</code> 替换为您希望保存下载文件的本地路径。</p>
+<h3 id="4-删除文件"><a href="#4-删除文件" class="headerlink" title="4 删除文件"></a>4 删除文件</h3><p>要删除存储桶中的文件，使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">s3cmd <span class="hljs-built_in">rm</span> s3://bucket-name/file-name<br></code></pre></td></tr></table></figure>
+
+<p>请确保在执行此操作之前正确地确认了文件名称，因为此操作是不可逆的。</p>
+<h3 id="5-同步文件"><a href="#5-同步文件" class="headerlink" title="5 同步文件"></a>5 同步文件</h3><p>S3cmd 的同步功能允许您同步本地目录与 S3 存储桶中的内容。以下是如何使用该命令的示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">s3cmd <span class="hljs-built_in">sync</span> /path/to/your/local/directory s3://bucket-name/<br></code></pre></td></tr></table></figure>
+
+<p>这个命令会检查本地目录和 S3 存储桶中的文件，并根据需要上传或下载文件以保持同步。</p>
+<h3 id="6-查看文件信息"><a href="#6-查看文件信息" class="headerlink" title="6 查看文件信息"></a>6 查看文件信息</h3><p>要查看存储在 S3 上的文件的元数据，可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">s3cmd info s3://bucket-name/file-name<br></code></pre></td></tr></table></figure>
+
+<p>这将显示关于指定文件的信息，包括其大小、存储类、ETag 等。</p>
+<p>通过掌握这些基本命令，您可以开始有效地管理您的 S3 存储桶中的文件。S3cmd 还有更多高级功能，如批量删除、复制对象、设置权限等，可以通过查阅官方文档来了解这些高级用法。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/" class="print-no-link">#对象存储</a>
+      
+        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>RustFS对象存储Docker部署</div>
+      <div>https://blog.quickso.cn/2025/12/27/RustFS对象存储Docker部署/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/02/06/Pritunl-OPENVPN-Docker%E9%83%A8%E7%BD%B2/" title="Pritunl-OPENVPN-Docker部署">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Pritunl-OPENVPN-Docker部署</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/26/Debian12%E4%B8%8A%E4%BD%BF%E7%94%A8K3s%E9%83%A8%E7%BD%B2Kubernetes%E9%9B%86%E7%BE%A4/" title="Debian12上使用K3s部署Kubernetes集群">
+                        <span class="hidden-mobile">Debian12上使用K3s部署Kubernetes集群</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

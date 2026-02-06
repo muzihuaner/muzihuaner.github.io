@@ -1,0 +1,874 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="Caddy 是一款强大的 Web 服务器，具有自动 HTTPS 配置、简易的配置文件和多功能反向代理等功能。本文将通过 Docker 容器的方式部署 Caddy，并介绍如何配置 HTTPS、Web 服务、反向代理和负载均衡。 官方网站:https:&#x2F;&#x2F;caddyserver.com&#x2F; 官方文档:https:&#x2F;&#x2F;caddyserver.com&#x2F;docs&#x2F; 1. 安装和部署 Caddy Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Caddy Docker版本安装部署">
+<meta property="og:url" content="https://blog.quickso.cn/2025/01/01/CaddyDocker%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="Caddy 是一款强大的 Web 服务器，具有自动 HTTPS 配置、简易的配置文件和多功能反向代理等功能。本文将通过 Docker 容器的方式部署 Caddy，并介绍如何配置 HTTPS、Web 服务、反向代理和负载均衡。 官方网站:https:&#x2F;&#x2F;caddyserver.com&#x2F; 官方文档:https:&#x2F;&#x2F;caddyserver.com&#x2F;docs&#x2F; 1. 安装和部署 Caddy Docker">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-01T03:58:52.000Z">
+<meta property="article:modified_time" content="2026-02-06T13:40:34.759Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="Caddy">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Caddy Docker版本安装部署 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":21062591,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>项目</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://zhiurl.cn" target="_self">
+                    
+                    <span>知链短链</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.quickso.cn/api/sjbz/index.php?lx=dongman') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Caddy Docker版本安装部署"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-01-01 11:58" pubdate>
+          2025年1月1日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Caddy Docker版本安装部署</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Caddy 是一款强大的 Web 服务器，具有自动 HTTPS 配置、简易的配置文件和多功能反向代理等功能。本文将通过 Docker 容器的方式部署 Caddy，并介绍如何配置 HTTPS、Web 服务、反向代理和负载均衡。</p>
+<p>官方网站:<a target="_blank" rel="noopener" href="https://caddyserver.com/">https://caddyserver.com/</a></p>
+<p>官方文档:<a target="_blank" rel="noopener" href="https://caddyserver.com/docs/">https://caddyserver.com/docs/</a></p>
+<h3 id="1-安装和部署-Caddy-Docker-容器"><a href="#1-安装和部署-Caddy-Docker-容器" class="headerlink" title="1. 安装和部署 Caddy Docker 容器"></a>1. 安装和部署 Caddy Docker 容器</h3><h4 id="1-1-安装-Docker"><a href="#1-1-安装-Docker" class="headerlink" title="1.1 安装 Docker"></a>1.1 安装 Docker</h4><p>如果你还没有安装 Docker，可以通过以下命令安装 Docker：</p>
+<p><a target="_blank" rel="noopener" href="https://getdocker.quickso.cn/">https://getdocker.quickso.cn/</a></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -fsSL https:<span class="hljs-regexp">//</span>cdn.jsdelivr.net<span class="hljs-regexp">/gh/mu</span>zihuaner<span class="hljs-regexp">/docker-install@master/i</span>nstall.sh -o install-docker.sh<br></code></pre></td></tr></table></figure>
+
+<h4 id="1-2-拉取-Caddy-Docker-镜像"><a href="#1-2-拉取-Caddy-Docker-镜像" class="headerlink" title="1.2 拉取 Caddy Docker 镜像"></a>1.2 拉取 Caddy Docker 镜像</h4><p>通过 Docker Hub 拉取 Caddy 镜像：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">docker</span> pull caddy:latest<br></code></pre></td></tr></table></figure>
+
+<h4 id="1-3-运行-Caddy-容器"><a href="#1-3-运行-Caddy-容器" class="headerlink" title="1.3 运行 Caddy 容器"></a>1.3 运行 Caddy 容器</h4><p>创建一个名为 <code>caddy</code> 的 Docker 容器并启动：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d --name caddy -p <span class="hljs-number">80</span>:<span class="hljs-number">80</span> -p <span class="hljs-number">443</span>:<span class="hljs-number">443</span> caddy<br></code></pre></td></tr></table></figure>
+
+<p>这将启动一个 Caddy 容器，并映射主机的 80 和 443 端口到容器内的对应端口。</p>
+<h3 id="2-配置-HTTPS"><a href="#2-配置-HTTPS" class="headerlink" title="2. 配置 HTTPS"></a>2. 配置 HTTPS</h3><p>Caddy 会自动为你配置 HTTPS，前提是你已正确配置了 DNS 和域名。通过 <code>Caddyfile</code> 配置文件，你可以指定 HTTPS 的配置。</p>
+<h4 id="2-1-创建-Caddyfile-配置文件"><a href="#2-1-创建-Caddyfile-配置文件" class="headerlink" title="2.1 创建 Caddyfile 配置文件"></a>2.1 创建 Caddyfile 配置文件</h4><p>创建一个 <code>Caddyfile</code> 文件（例如，<code>Caddyfile</code>）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">touch</span> Caddyfile<br></code></pre></td></tr></table></figure>
+
+<p>在该文件中配置域名和 HTTPS 设置：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dts">your-domain.<span class="hljs-title class_">com</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-meta"># 自动启用 HTTPS</span><br>    root * <span class="hljs-keyword">/usr/</span>share/caddy<br>    file_server<br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>Caddy 会自动为 <code>your-domain.com</code> 配置 HTTPS，并且通过 Let’s Encrypt 获取 SSL 证书。</p>
+<h4 id="2-2-挂载-Caddyfile-到-Docker-容器"><a href="#2-2-挂载-Caddyfile-到-Docker-容器" class="headerlink" title="2.2 挂载 Caddyfile 到 Docker 容器"></a>2.2 挂载 Caddyfile 到 Docker 容器</h4><p>修改 Docker 启动命令，挂载 <code>Caddyfile</code> 配置文件：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ruby">docker run -d --name caddy -p <span class="hljs-number">80</span><span class="hljs-symbol">:</span><span class="hljs-number">80</span> -p <span class="hljs-number">443</span><span class="hljs-symbol">:</span><span class="hljs-number">443</span> \<br>  -v /path/to/<span class="hljs-title class_">Caddyfile</span><span class="hljs-symbol">:/etc/caddy/Caddyfile</span> \<br>  caddy<br></code></pre></td></tr></table></figure>
+
+<p>请将 <code>/path/to/Caddyfile</code> 替换为你的 <code>Caddyfile</code> 文件的路径。</p>
+<h3 id="3-配置-Web-服务"><a href="#3-配置-Web-服务" class="headerlink" title="3. 配置 Web 服务"></a>3. 配置 Web 服务</h3><p>Caddy 支持静态文件服务和其他 Web 应用的反向代理。这里我们以静态网站为例，配置 Caddy 来提供 Web 服务。</p>
+<h4 id="3-1-配置静态网站"><a href="#3-1-配置静态网站" class="headerlink" title="3.1 配置静态网站"></a>3.1 配置静态网站</h4><p>修改 <code>Caddyfile</code> 以指向你的网站目录：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">your-<span class="hljs-keyword">domain</span>.com &#123;<br>    root * /<span class="hljs-type">path</span>/<span class="hljs-keyword">to</span>/your/site<br>    file_server<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其中，<code>/path/to/your/site</code> 是你的静态网站所在的目录。</p>
+<h4 id="3-2-挂载网站目录到-Docker-容器"><a href="#3-2-挂载网站目录到-Docker-容器" class="headerlink" title="3.2 挂载网站目录到 Docker 容器"></a>3.2 挂载网站目录到 Docker 容器</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker run -d --name caddy -p <span class="hljs-number">80</span>:<span class="hljs-number">80</span> -p <span class="hljs-number">443</span>:<span class="hljs-number">443</span> \<br>  -v <span class="hljs-regexp">/path/</span>to<span class="hljs-regexp">/Caddyfile:/</span>etc<span class="hljs-regexp">/caddy/</span>Caddyfile \<br>  -v <span class="hljs-regexp">/path/</span>to<span class="hljs-regexp">/your/</span>site:<span class="hljs-regexp">/usr/</span>share/caddy \<br>  caddy<br></code></pre></td></tr></table></figure>
+
+<p>这样，Caddy 将提供你的静态网站，并自动为其启用 HTTPS。</p>
+<h3 id="4-配置反向代理"><a href="#4-配置反向代理" class="headerlink" title="4. 配置反向代理"></a>4. 配置反向代理</h3><p>Caddy 可以很容易地配置反向代理，用于将请求转发到后端服务。假设你有一个后端 API 或应用运行在其他服务器或容器中。</p>
+<h4 id="4-1-配置反向代理"><a href="#4-1-配置反向代理" class="headerlink" title="4.1 配置反向代理"></a>4.1 配置反向代理</h4><p>在 <code>Caddyfile</code> 中配置反向代理：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">your-domain.<span class="hljs-keyword">com</span> &#123;<br>    reverse_proxy localhos<span class="hljs-variable">t:5000</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这将把所有访问 <code>your-domain.com</code> 的请求转发到本地的 <code>localhost:5000</code>（假设后端服务运行在 5000 端口）。</p>
+<h4 id="4-2-反向代理多个后端服务"><a href="#4-2-反向代理多个后端服务" class="headerlink" title="4.2 反向代理多个后端服务"></a>4.2 反向代理多个后端服务</h4><p>你还可以配置多个后端服务进行负载均衡：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">your-domain.<span class="hljs-keyword">com</span> &#123;<br>    reverse_proxy /api/* localhos<span class="hljs-variable">t:5000</span> localhos<span class="hljs-variable">t:5001</span><br>    reverse_proxy /app/* localhos<span class="hljs-variable">t:6000</span> localhos<span class="hljs-variable">t:6001</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>此配置会根据请求路径（如 <code>/api/*</code> 和 <code>/app/*</code>）将请求分发到不同的后端服务。</p>
+<h3 id="5-配置负载均衡"><a href="#5-配置负载均衡" class="headerlink" title="5. 配置负载均衡"></a>5. 配置负载均衡</h3><p>Caddy 提供了内置的负载均衡支持。你可以在 <code>reverse_proxy</code> 配置中指定多个后端服务，Caddy 会自动进行负载均衡。</p>
+<h4 id="5-1-配置负载均衡"><a href="#5-1-配置负载均衡" class="headerlink" title="5.1 配置负载均衡"></a>5.1 配置负载均衡</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vim">your-domain.<span class="hljs-keyword">com</span> &#123;<br>    reverse_proxy localhos<span class="hljs-variable">t:5000</span> localhos<span class="hljs-variable">t:5001</span> localhos<span class="hljs-variable">t:5002</span> &#123;<br>        lb_policy round_robin<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面的配置会将请求轮询地分发到 <code>localhost:5000</code>、<code>localhost:5001</code> 和 <code>localhost:5002</code>。</p>
+<h4 id="5-2-负载均衡策略"><a href="#5-2-负载均衡策略" class="headerlink" title="5.2 负载均衡策略"></a>5.2 负载均衡策略</h4><p>Caddy 支持多种负载均衡策略，如：</p>
+<ul>
+<li><code>round_robin</code>（默认）：轮询。</li>
+<li><code>least_conn</code>：最少连接数优先。</li>
+<li><code>random</code>：随机选择。</li>
+</ul>
+<p>你可以通过设置 <code>lb_policy</code> 来选择负载均衡策略：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vim">your-domain.<span class="hljs-keyword">com</span> &#123;<br>    reverse_proxy localhos<span class="hljs-variable">t:5000</span> localhos<span class="hljs-variable">t:5001</span> localhos<span class="hljs-variable">t:5002</span> &#123;<br>        lb_policy least_conn<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-配置-Caddy-以支持-HTTPS-和自动证书续期"><a href="#6-配置-Caddy-以支持-HTTPS-和自动证书续期" class="headerlink" title="6. 配置 Caddy 以支持 HTTPS 和自动证书续期"></a>6. 配置 Caddy 以支持 HTTPS 和自动证书续期</h3><p>Caddy 会自动管理 HTTPS 证书的获取和续期，无需额外配置。只要你的域名指向正确的 IP 地址，Caddy 就会自动通过 Let’s Encrypt 获取证书。</p>
+<h4 id="6-1-配置-DNS"><a href="#6-1-配置-DNS" class="headerlink" title="6.1 配置 DNS"></a>6.1 配置 DNS</h4><p>确保你的域名的 DNS 记录指向运行 Caddy 的服务器的 IP 地址。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">your-<span class="hljs-keyword">domain</span>.com -&gt; &lt;your-<span class="hljs-keyword">server</span>-ip&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="7-使用-Docker-Compose-管理-Caddy"><a href="#7-使用-Docker-Compose-管理-Caddy" class="headerlink" title="7. 使用 Docker Compose 管理 Caddy"></a>7. 使用 Docker Compose 管理 Caddy</h3><p>为了简化部署，可以使用 <code>Docker Compose</code> 来管理 Caddy 服务和配置。</p>
+<h4 id="7-1-创建-docker-compose-yml"><a href="#7-1-创建-docker-compose-yml" class="headerlink" title="7.1 创建 docker-compose.yml"></a>7.1 创建 <code>docker-compose.yml</code></h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span><br><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">caddy:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">caddy:latest</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">caddy</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;80:80&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;443:443&quot;</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./Caddyfile:/etc/caddy/Caddyfile</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./site:/usr/share/caddy</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">caddy_data:/data</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">caddy_config:/config</span><br><br><span class="hljs-attr">volumes:</span><br>  <span class="hljs-attr">caddy_data:</span><br>  <span class="hljs-attr">caddy_config:</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="7-2-启动-Caddy-服务"><a href="#7-2-启动-Caddy-服务" class="headerlink" title="7.2 启动 Caddy 服务"></a>7.2 启动 Caddy 服务</h4><p>运行以下命令启动 Caddy 服务：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose up -d</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过本文，你学会了如何使用 Docker 部署 Caddy，并配置了以下功能：</p>
+<ul>
+<li><strong>自动 HTTPS</strong>：Caddy 会自动为你提供免费的 SSL 证书并进行证书续期。</li>
+<li><strong>Web 服务</strong>：可以通过 Caddy 提供静态网站。</li>
+<li><strong>反向代理</strong>：可以将请求转发到其他后端服务。</li>
+<li><strong>负载均衡</strong>：Caddy 可以在多个后端服务之间进行负载均衡。</li>
+</ul>
+<p>使用 Docker 和 Caddy 可以大大简化 Web 服务的部署与配置。如果需要更多自定义功能，Caddy 的文档中有丰富的选项可供参考。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Caddy/" class="print-no-link">#Caddy</a>
+      
+        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Caddy Docker版本安装部署</div>
+      <div>https://blog.quickso.cn/2025/01/01/CaddyDocker版本安装部署/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年1月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/01/03/%E4%BD%BF%E7%94%A8tunasync%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/" title="使用tunasync搭建自己的开源软件镜像仓库">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用tunasync搭建自己的开源软件镜像仓库</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/12/24/Virtualizor%E9%83%A8%E7%BD%B2%E5%8F%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E5%AF%B9%E6%8E%A5whmcs/" title="Virtualizor部署及安装并对接whmcs">
+                        <span class="hidden-mobile">Virtualizor部署及安装并对接whmcs</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+        <div> <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a>
+<p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp; <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p> </div> <p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a>  </p> <br> 萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2025 欢哥科技</a></p> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://gcore.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://gcore.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://gcore.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://gcore.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://gcore.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
