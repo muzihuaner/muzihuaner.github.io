@@ -29,7 +29,7 @@
 <meta property="og:description" content="Pritunl是一款图形化的OpenVPN软件，提供一个友好的图形WebUI界面，对传统OpenVPN服务端与客户端复杂的安装配置流程进行了极大的简化，并且通过图形界面可以进行人员管理、参数配置，给予用户非常大的便捷性，适合openvpn入门配置。  1.安装Dockerhttps:&#x2F;&#x2F;getdocker.quickso.cn&#x2F; 2.docker-compose 部署123mkdir openv">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-02-06T13:52:46.000Z">
-<meta property="article:modified_time" content="2026-02-06T14:28:39.323Z">
+<meta property="article:modified_time" content="2026-02-06T14:42:03.702Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="OpenVPN">
@@ -472,6 +472,10 @@
 
 <p>重新加载配置并启用</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl daemon-reload<br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> openvpn-client.service<br><span class="hljs-built_in">sudo</span> systemctl start openvpn-client.service<br><span class="hljs-built_in">sudo</span> systemctl status openvpn-client.service<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="Caddy-反向代理"><a href="#Caddy-反向代理" class="headerlink" title="Caddy 反向代理"></a>Caddy 反向代理</h3><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs fsharp">vpn.quickso.<span class="hljs-keyword">cn</span> &#123;<br>    reverse_proxy https<span class="hljs-operator">:</span><span class="hljs-comment">//localhost:8833 &#123;</span><br>        transport <span class="hljs-keyword">http</span> &#123;<br>            tls_insecure_skip_verify<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过 Docker 部署 Pritunl，你可以在几分钟内搭建起一套支持多用户、多组织的 VPN 系统。Pritunl 的可视化界面能极大降低运维成本。</p>
 
