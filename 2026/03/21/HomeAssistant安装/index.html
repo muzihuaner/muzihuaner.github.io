@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://camo.githubusercontent.com/d8ac4e6e791cd4d420e5438690e66a33b26409d097b26aa0dcc9b60b007484a9/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f636f6e6669675f666c6f775f73746172742e737667">
 <meta property="og:image" content="https://camo.githubusercontent.com/fa9db7ce5befc41824211651d3aca5d6887ca4f32e2d20de30f1fea48aab315c/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f696e746567726174696f6e2e737667">
 <meta property="article:published_time" content="2026-03-21T15:05:41.000Z">
-<meta property="article:modified_time" content="2026-03-21T16:06:02.654Z">
+<meta property="article:modified_time" content="2026-03-21T16:17:01.947Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="HomeAssistant">
@@ -517,7 +517,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.9k 字
         
       </span>
     
@@ -528,7 +528,7 @@
         
         
         
-          20 分钟
+          24 分钟
         
       </span>
     
@@ -585,17 +585,21 @@
 <p>HomeAssistant能识别和直接连接的外部设备有将近千项。其中有各种商业化的智能产品（如小米系列产品、Philips智能灯系列、亚马逊的音响、苹果的Siri、Google Assistant、博联的产品、特斯拉汽车等）、有互联网上的各种实时信息（股票、汇率、交通、天气等）、有开源或开放的各种智能软件（人脸识别、车牌识别、文字识别、文字转语音、语音转文字等）、有各种联动机制（短信、Email、IFTTT等）……</p>
 <p><img src="https://design.home-assistant.io/images/brand/logo.png" srcset="/img/loading.gif" lazyload alt="Logo"></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>关于Home Assistant的安装，一般都采用Docker部署的方法实现。</p>
-<p><a target="_blank" rel="noopener" href="https://hub.docker.com/r/homeassistant/home-assistant">Docker Hub</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.home-assistant.io/">官方网站</a></p>
 <h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p>关于Docker的安装，这里就不进行赘述了</p>
 <p>通过以下指令验证Docker是否安装成功，安装成功则会返回Docker的版本号。</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker -v</span><br></code></pre></td></tr></table></figure>
 
 <p>Docker CLI</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">docker run -d --name=<span class="hljs-string">&quot;home-assistants&quot;</span> -v /home/HA:/config -p <span class="hljs-number">8123</span>:<span class="hljs-number">8123</span> homeassistant/home-assistant:latest<br></code></pre></td></tr></table></figure>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d <span class="hljs-string">\</span><br>  --name homeassistant <span class="hljs-string">\</span><br>  --privileged <span class="hljs-string">\</span><br>  --restart=<span class="hljs-keyword">unless</span>-stopped <span class="hljs-string">\</span><br>  -e TZ=Asia/Shanghai <span class="hljs-string">\</span><br>  -v /自定义路径:/config <span class="hljs-string">\</span><br>  -v /run/dbus:/run/dbus:ro <span class="hljs-string">\</span><br>  --network=host <span class="hljs-string">\</span><br>  home-assistant/home-assistant:latest<br></code></pre></td></tr></table></figure>
 
 <p>国内</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">docker <span class="hljs-keyword">run</span><span class="language-bash"> -d --name=<span class="hljs-string">&quot;home-assistants&quot;</span> -v /root/docker/HA/:/config -p 8123:8123 swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/homeassistant/home-assistant:latest</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d <span class="hljs-string">\</span><br>  --name homeassistant <span class="hljs-string">\</span><br>  --privileged <span class="hljs-string">\</span><br>  --restart=<span class="hljs-keyword">unless</span>-stopped <span class="hljs-string">\</span><br>  -e TZ=Asia/Shanghai <span class="hljs-string">\</span><br>  -v /自定义路径:/config <span class="hljs-string">\</span><br>  -v /run/dbus:/run/dbus:ro <span class="hljs-string">\</span><br>  --network=host <span class="hljs-string">\</span><br>  swr.cn-north-<span class="hljs-number">4.myhuaweicloud</span>.com/ddn-k8s/docker.io/homeassistant/home-assistant:latest<br></code></pre></td></tr></table></figure>
+
+<p>Docker Compose</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-symbol">services:</span><br>  <span class="hljs-symbol">homeassistant:</span><br>    <span class="hljs-symbol">container_name:</span> homeassistant<br>    <span class="hljs-symbol">image:</span> <span class="hljs-string">&quot;homeassistant/home-assistant:latest&quot;</span><br>    <span class="hljs-symbol">volumes:</span><br>      - <span class="hljs-regexp">/自定义路径:/config</span><br>      - <span class="hljs-regexp">/etc/localtime</span><span class="hljs-symbol">:/etc/localtime</span><span class="hljs-symbol">:ro</span><br>      - <span class="hljs-regexp">/run/dbus</span><span class="hljs-symbol">:/run/dbus</span><span class="hljs-symbol">:ro</span><br>    <span class="hljs-symbol">restart:</span> <span class="hljs-keyword">unless</span>-stopped<br>    <span class="hljs-symbol">privileged:</span> <span class="hljs-literal">true</span><br>    <span class="hljs-symbol">network_mode:</span> host<br>    <span class="hljs-symbol">environment:</span><br>      <span class="hljs-variable constant_">TZ</span>: <span class="hljs-title class_">Asia</span>/<span class="hljs-title class_">Shanghai</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker compose up -d</span><br></code></pre></td></tr></table></figure>
 
 <p>浏览器输入 <code>ip:8123</code> 进入Home Assistant界面</p>
 <h3 id="安装HACS"><a href="#安装HACS" class="headerlink" title="安装HACS"></a>安装HACS</h3><p>HACS,全称Home Assistant Community Store，意思是 家庭助理社区商店。</p>
