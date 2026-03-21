@@ -19,23 +19,27 @@
   <meta name="author" content="木子欢儿">
   <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
   
-    <meta name="description" content="Hexo-Admin 是一款为 Hexo 博客设计的后台管理插件，它能让你告枯燥的命令行，直接在浏览器里撰写文章、编辑草稿、管理标签，甚至直接发布。  这篇教程将带你从安装到进阶配置，全方位掌握这个插件。 1. 安装与启动首先，确保你已经进入了 Hexo 博客的根目录。执行安装命令： 1npm install --save hexo-admin 启动 Hexo 服务器： 123456789101">
+    <meta name="description" content="Home Assistant介绍HomeAssistant是一个成熟完整的基于 Python 的智能家居系统，设备支持度高，支持自动化（Automation）、群组化（Group）、UI 客制化（Theme）等等高度定制化设置，是构建智慧空间的神器。 基于HomeAssistant，可以方便地连接各种外部设备（智能设备、摄像头、邮件、短消息、云服务等，成熟的可连接组件有近千种），手动或按照自己的需">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo-Admin管理插件使用">
-<meta property="og:url" content="https://blog.quickso.cn/2026/03/18/Hexo-Admin%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="HomeAssistant安装">
+<meta property="og:url" content="https://blog.quickso.cn/2026/03/21/HomeAssistant%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="点滴记忆">
-<meta property="og:description" content="Hexo-Admin 是一款为 Hexo 博客设计的后台管理插件，它能让你告枯燥的命令行，直接在浏览器里撰写文章、编辑草稿、管理标签，甚至直接发布。  这篇教程将带你从安装到进阶配置，全方位掌握这个插件。 1. 安装与启动首先，确保你已经进入了 Hexo 博客的根目录。执行安装命令： 1npm install --save hexo-admin 启动 Hexo 服务器： 123456789101">
+<meta property="og:description" content="Home Assistant介绍HomeAssistant是一个成熟完整的基于 Python 的智能家居系统，设备支持度高，支持自动化（Automation）、群组化（Group）、UI 客制化（Theme）等等高度定制化设置，是构建智慧空间的神器。 基于HomeAssistant，可以方便地连接各种外部设备（智能设备、摄像头、邮件、短消息、云服务等，成熟的可连接组件有近千种），手动或按照自己的需">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-03-18T14:56:43.000Z">
-<meta property="article:modified_time" content="2026-03-18T14:57:01.274Z">
+<meta property="og:image" content="https://design.home-assistant.io/images/brand/logo.png">
+<meta property="og:image" content="https://camo.githubusercontent.com/d8ac4e6e791cd4d420e5438690e66a33b26409d097b26aa0dcc9b60b007484a9/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f636f6e6669675f666c6f775f73746172742e737667">
+<meta property="og:image" content="https://camo.githubusercontent.com/fa9db7ce5befc41824211651d3aca5d6887ca4f32e2d20de30f1fea48aab315c/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f696e746567726174696f6e2e737667">
+<meta property="article:published_time" content="2026-03-21T15:05:41.000Z">
+<meta property="article:modified_time" content="2026-03-21T16:02:37.680Z">
 <meta property="article:author" content="木子欢儿">
-<meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="博客">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="HomeAssistant">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://design.home-assistant.io/images/brand/logo.png">
   
   
   
-  <title>Hexo-Admin管理插件使用 - 点滴记忆</title>
+  <title>HomeAssistant安装 - 点滴记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -485,7 +489,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hexo-Admin管理插件使用"></span>
+            <span id="subtitle" data-typed-text="HomeAssistant安装"></span>
           
         </div>
 
@@ -501,8 +505,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-03-18 22:56" pubdate>
-          2026年3月18日 晚上
+        <time datetime="2026-03-21 23:05" pubdate>
+          2026年3月21日 晚上
         </time>
       </span>
     
@@ -513,7 +517,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2.4k 字
         
       </span>
     
@@ -524,7 +528,7 @@
         
         
         
-          16 分钟
+          20 分钟
         
       </span>
     
@@ -563,12 +567,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Hexo-Admin管理插件使用</h1>
+            <h1 id="seo-header">HomeAssistant安装</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月18日 晚上
+                    本文最后更新于 2026年3月22日 凌晨
                   
                 
               </p>
@@ -576,47 +580,58 @@
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>Hexo-Admin 是一款为 Hexo 博客设计的后台管理插件，它能让你告枯燥的命令行，直接在浏览器里撰写文章、编辑草稿、管理标签，甚至直接发布。</p>
-</blockquote>
-<p>这篇教程将带你从安装到进阶配置，全方位掌握这个插件。</p>
-<h3 id="1-安装与启动"><a href="#1-安装与启动" class="headerlink" title="1. 安装与启动"></a>1. 安装与启动</h3><p>首先，确保你已经进入了 Hexo 博客的根目录。<br>执行安装命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Bash">npm install --save hexo-admin<br></code></pre></td></tr></table></figure>
-<p>启动 Hexo 服务器：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs Bash">hexo server```<br>访问后台：<br>打开浏览器，输入 http://localhost:4000/admin/。<br><span class="hljs-comment">### 2. 功能解析</span><br>进入后台后，你会看到一个简洁的界面<br>- Posts (已发布): 管理你所有的正式文章。<br>- Pages (页面): 管理如“关于我”、“友链”等独立页面。<br>- Deplay(部署):部署你的博客<br><span class="hljs-comment">#### 撰写体验</span><br>Hexo-Admin 提供了侧边预览模式。你在左侧输入 Markdown 源码，右侧会实时渲染出效果。<br><br>- 插入图片： 直接将图片粘贴到编辑器，插件会自动帮你把图片存入 <span class="hljs-built_in">source</span>/images 文件夹并生成路径，非常方便。<br>- 管理元数据： 在侧边栏可以轻松修改 Categories、Tags 和 Date。<br><br><span class="hljs-comment">### 3. 安全配置（必做）</span><br>默认情况下，任何人访问 localhost:4000/admin/ 都能修改你的博客。虽然在本地开发没问题，但如果你将博客部署到了云服务器，必须设置密码。<br><br>在后台点击 `Settings -&gt; Setup authentication`。<br><br>输入你的 Username、Password 和 Secret。<br><br>插件会自动生成一段配置代码，如下所示：<br><br>```YAML<br>admin:<br>  username: my_username<br>  password_hash: $2a$10<span class="hljs-variable">$xxxxxxxxxxxx</span><br>  secret: my_secret<br></code></pre></td></tr></table></figure>
-<p>将这段代码复制到你博客根目录的 _config.yml 文件末尾。</p>
-<p>重启 Hexo 服务，再次访问后台就需要登录了。</p>
-<h3 id="4-自动化部署-Advanced"><a href="#4-自动化部署-Advanced" class="headerlink" title="4. 自动化部署 (Advanced)"></a>4. 自动化部署 (Advanced)</h3><p>Hexo-Admin 最强大的地方在于它支持一键部署。你可以配置一个脚本，让它在后台点击按钮后自动执行 hexo g -d。<br>在博客根目录下创建一个脚本文件<br><strong>Linux &#x2F; macOS 脚本 (deploy.sh)</strong><br>在 Linux 环境下，我们通常使用 bash。为了确保脚本有执行权限，创建后请运行 <code>chmod +x deploy.sh</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;--- 开始自动部署 ---&quot;</span><br><span class="hljs-comment"># 清理缓存并生成静态文件</span><br>hexo clean<br>hexo generate<br><span class="hljs-comment"># 部署到远程仓库（如 GitHub/云服务器）</span><br>hexo deploy<br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;--- 部署完成！ ---&quot;</span>```<br>**Windows 脚本 (deploy.bat)**<br>Windows 下使用批处理脚本。注意，如果你的 hexo 命令在某些环境下失效，可能需要使用 call hexo。<br></code></pre></td></tr></table></figure>
-<p>@echo off<br>echo — Starting Auto Deploy —</p>
-<p>:: 清理并生成<br>call hexo clean<br>call hexo generate</p>
-<p>:: 部署<br>call hexo deploy</p>
-<p>echo — Deploy Finished! —<br>pause</p>
-<pre><code class="hljs">#### 如何在 Hexo 中关联脚本
-脚本准备好后，你需要修改博客根目录下的 _config.yml，找到（或添加）admin 配置项：
+                <h2 id="Home-Assistant介绍"><a href="#Home-Assistant介绍" class="headerlink" title="Home Assistant介绍"></a>Home Assistant介绍</h2><p>HomeAssistant是一个成熟完整的基于 Python 的智能家居系统，设备支持度高，支持自动化（Automation）、群组化（Group）、UI 客制化（Theme）等等高度定制化设置，是构建智慧空间的神器。</p>
+<p>基于HomeAssistant，可以方便地连接各种外部设备（智能设备、摄像头、邮件、短消息、云服务等，成熟的可连接组件有近千种），手动或按照自己的需求自动化地联动这些外部设备，构建随心所欲的智慧空间。HomeAssistant是开源的，它不属于任何商业公司，用户可以无偿使用。</p>
+<p>HomeAssistant能识别和直接连接的外部设备有将近千项。其中有各种商业化的智能产品（如小米系列产品、Philips智能灯系列、亚马逊的音响、苹果的Siri、Google Assistant、博联的产品、特斯拉汽车等）、有互联网上的各种实时信息（股票、汇率、交通、天气等）、有开源或开放的各种智能软件（人脸识别、车牌识别、文字识别、文字转语音、语音转文字等）、有各种联动机制（短信、Email、IFTTT等）……</p>
+<p><img src="https://design.home-assistant.io/images/brand/logo.png" srcset="/img/loading.gif" lazyload alt="Logo"></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>关于Home Assistant的安装，一般都采用Docker部署的方法实现。</p>
+<p><a target="_blank" rel="noopener" href="https://hub.docker.com/r/homeassistant/home-assistant">Docker Hub</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.home-assistant.io/">官方网站</a></p>
+<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p>关于Docker的安装，这里就不进行赘述了</p>
+<p>通过以下指令验证Docker是否安装成功，安装成功则会返回Docker的版本号。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker -v</span><br></code></pre></td></tr></table></figure>
 
-Linux 配置示例：
-```YAML
-admin:
-  deployCommand: &#39;./deploy.sh&#39;```
-Windows 配置示例：
-```YAML
-admin:
-  deployCommand: &#39;deploy.bat&#39;```
-这样，当你写完文章，直接在后台点一下 Deploy，文章就飞向服务器了。
+<p>Docker CLI</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">docker run -d --name=<span class="hljs-string">&quot;home-assistants&quot;</span> -v /home/HA:/config -p <span class="hljs-number">8123</span>:<span class="hljs-number">8123</span> homeassistant/home-assistant:latest<br></code></pre></td></tr></table></figure>
 
-💡 常见小贴士
-图片路径问题： 如果你使用了资源文件夹（post_asset_folder），Hexo-Admin 的图片处理可能需要配合 hexo-asset-image 插件使用，以防路径失效。
+<p>国内</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">docker <span class="hljs-keyword">run</span><span class="language-bash"> -d --name=<span class="hljs-string">&quot;home-assistants&quot;</span> -v /root/docker/HA/:/config -p 8123:8123 swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/homeassistant/home-assistant:latest</span><br></code></pre></td></tr></table></figure>
 
-进程守护： 如果你在服务器上运行，建议配合 pm2 来守护 Hexo 进程，确保后台一直在线。
+<p>浏览器输入 <code>ip:8123</code> 进入Home Assistant界面</p>
+<h3 id="安装HACS"><a href="#安装HACS" class="headerlink" title="安装HACS"></a>安装HACS</h3><p>HACS,全称Home Assistant Community Store，意思是 家庭助理社区商店。</p>
+<p>HACS可以为您提供一个强大的Ul来处理所有自定义需求的下载，可以理解为 Home Assistant 上的一个第三方应用商店。</p>
+<p>关于HACS的安装可以参考官网： <a target="_blank" rel="noopener" href="https://hacs.xyz/docs/setup/download">https://hacs.xyz/docs/setup/download</a></p>
+<p>我们在 homeasststant 目录（&#x2F;root&#x2F;docker&#x2F;HA&#x2F;）下创建一个名为 custom_components 的文件夹，再创建一个hacs文件夹</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/root/</span>docker<span class="hljs-regexp">/HA/</span>custom_components/hacs<br></code></pre></td></tr></table></figure>
 
-避坑指南： Hexo-Admin 主要是为了本地或私有服务器协作设计的。如果你使用的是 GitHub Pages 静态托管，你还是需要在本地电脑上运行管理界面，生成后再推送到 GitHub。
+<p>下载<a target="_blank" rel="noopener" href="https://github.com/hacs/integration/releases/download/2.0.5/hacs.zip">https://github.com/hacs/integration/releases/download/2.0.5/hacs.zip</a> 并解压到<code>/root/docker/HA/custom_components/hacs</code></p>
+<p>重启 Home Assistant.</p>
+<h2 id="添加HACS商店"><a href="#添加HACS商店" class="headerlink" title="添加HACS商店"></a>添加HACS商店</h2><p>点击配置&gt;设备与服务&gt;添加集成&gt;HACS</p>
+<p>全部勾选后点击提交</p>
+<p>在弹出的界面点击GitHub链接，将8位验证码输入GitHub链接进行绑定</p>
+<p>如果提示could_not_register，请在容器内执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> 20.205.243.166  github.com &gt;&gt; /etc/hosts<br></code></pre></td></tr></table></figure>
 
-卸载执行命令并删除_config.yml里的相关配置:
-&#39;&#39;&#39;
-npm uninstall --save hexo-admin
-&#39;&#39;&#39;
-</code></pre>
+<p>刷新网页后就可以点击HACS 安装应用了</p>
+<p>例如xiaomi_home 和xiaomi_miot</p>
+<p>当然你也可以手动安装</p>
+<p>例如下载<a target="_blank" rel="noopener" href="https://ghp.quickso.cn/github.com/al-one/hass-xiaomi-miot/releases/download/v1.1.4/xiaomi_miot.zip">https://ghp.quickso.cn/github.com/al-one/hass-xiaomi-miot/releases/download/v1.1.4/xiaomi_miot.zip</a> 解压到</p>
+<p><code>/root/docker/HA/custom_components/xiaomi_miot/</code></p>
+<h1 id="Home-Assistant-米家集成"><a href="#Home-Assistant-米家集成" class="headerlink" title="Home Assistant 米家集成"></a>Home Assistant 米家集成</h1><p>这里讲一下Home Assistant 米家集成的使用</p>
+<p>米家集成是一个由小米官方提供支持的 Home Assistant 的集成组件，它可以让您在 Home Assistant 中使用小米 IoT 智能设备。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/XiaoMi/ha_xiaomi_home">https://github.com/XiaoMi/ha_xiaomi_home</a></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p><a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/brand/?brand=xiaomi_home">设置 &gt; 设备与服务 &gt; 添加集成</a> &gt; 搜索“<code>Xiaomi Home</code>” &gt; 下一步 &gt; 请点击此处进行登录 &gt; 使用小米账号登录</p>
+<p><a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/config_flow_start/?domain=xiaomi_home"><img src="https://camo.githubusercontent.com/d8ac4e6e791cd4d420e5438690e66a33b26409d097b26aa0dcc9b60b007484a9/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f636f6e6669675f666c6f775f73746172742e737667" srcset="/img/loading.gif" lazyload alt="打开您的 Home Assistant 实例并开始配置一个新的米家集成实例。"></a></p>
+<h3 id="添加-MIoT-设备"><a href="#添加-MIoT-设备" class="headerlink" title="添加 MIoT 设备"></a>添加 MIoT 设备</h3><p>登录成功后，会弹出会话框“选择家庭与设备”。您可以选择需要添加的米家家庭，该家庭内的所有设备将导入 Home Assistant 。</p>
+<h3 id="多账号登录"><a href="#多账号登录" class="headerlink" title="多账号登录"></a>多账号登录</h3><p>用一个小米账号登录并配置完成后，您可以在 Xiaomi Home Integration 页面中继续添加其他小米账号。</p>
+<p>方法：<a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/integration/?domain=xiaomi_home">设置 &gt; 设备与服务 &gt; 已配置 &gt; Xiaomi Home</a> &gt; 添加中枢 &gt; 下一步 &gt; 请点击此处进行登录 &gt; 使用小米账号登录</p>
+<p><a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/integration/?domain=xiaomi_home"><img src="https://camo.githubusercontent.com/fa9db7ce5befc41824211651d3aca5d6887ca4f32e2d20de30f1fea48aab315c/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f696e746567726174696f6e2e737667" srcset="/img/loading.gif" lazyload alt="打开您的 Home Assistant 实例并显示米家集成。"></a></p>
+<h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>在会话框“配置选项”中，可选择需要变更的配置项。您可以修改用户昵称或更新从米家 APP 导入的设备列表。</p>
+<p>方法：<a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/integration/?domain=xiaomi_home">设置 &gt; 设备与服务 &gt; 已配置 &gt; Xiaomi Home</a> &gt; 配置 &gt; 选择需要变更的配置项</p>
+<p>其他具体使用可以参考官网文档<a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/">https://www.home-assistant.io/docs/</a></p>
+<p>或者第三方</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.wghaos.com/">https://wiki.wghaos.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://ha-doc.hasscn.top/">https://ha-doc.hasscn.top/</a></p>
 
                 
               </div>
@@ -650,9 +665,9 @@ npm uninstall --save hexo-admin
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Hexo/" class="print-no-link">#Hexo</a>
+        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
       
-        <a href="/tags/%E5%8D%9A%E5%AE%A2/" class="print-no-link">#博客</a>
+        <a href="/tags/HomeAssistant/" class="print-no-link">#HomeAssistant</a>
       
     </div>
   
@@ -664,8 +679,8 @@ npm uninstall --save hexo-admin
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hexo-Admin管理插件使用</div>
-      <div>https://blog.quickso.cn/2026/03/18/Hexo-Admin管理插件使用/</div>
+      <div>HomeAssistant安装</div>
+      <div>https://blog.quickso.cn/2026/03/21/HomeAssistant安装/</div>
     </div>
     <div class="license-meta">
       
@@ -677,7 +692,7 @@ npm uninstall --save hexo-admin
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年3月18日</div>
+          <div>2026年3月21日</div>
         </div>
       
       
@@ -709,18 +724,12 @@ npm uninstall --save hexo-admin
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/03/21/HomeAssistant%E5%AE%89%E8%A3%85/" title="HomeAssistant安装">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">HomeAssistant安装</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/02/06/Pritunl-OPENVPN-Docker%E9%83%A8%E7%BD%B2/" title="Pritunl-OPENVPN-Docker部署">
-                        <span class="hidden-mobile">Pritunl-OPENVPN-Docker部署</span>
+                      <a href="/2026/03/18/Hexo-Admin%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8/" title="Hexo-Admin管理插件使用">
+                        <span class="hidden-mobile">Hexo-Admin管理插件使用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
