@@ -19,27 +19,25 @@
   <meta name="author" content="木子欢儿">
   <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
   
-    <meta name="description" content="Home Assistant介绍HomeAssistant是一个成熟完整的基于 Python 的智能家居系统，设备支持度高，支持自动化（Automation）、群组化（Group）、UI 客制化（Theme）等等高度定制化设置，是构建智慧空间的神器。 基于HomeAssistant，可以方便地连接各种外部设备（智能设备、摄像头、邮件、短消息、云服务等，成熟的可连接组件有近千种），手动或按照自己的需">
+    <meta name="description" content="折腾 Linux 系统的过程，本质上是一场关于“控制欲”与“审美”的修行。而在众多的发行版中，Fedora 始终占据着一个非常独特的位置：它不像 Ubuntu 那样保守，也不像 Arch 那样狂野。 如果要把 Linux 发行版比作汽车，Ubuntu 是大街上稳重的丰田，Arch 是需要你自己组装的越野车，而 Fedora 更像是一辆装满了各种原型技术的特斯拉——它总是最先搭载最新的引擎和自动驾驶">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HomeAssistant安装">
-<meta property="og:url" content="https://blog.quickso.cn/2026/03/21/HomeAssistant%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:title" content="Fedora折腾记录">
+<meta property="og:url" content="https://blog.quickso.cn/2026/03/23/Fedora%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="点滴记忆">
-<meta property="og:description" content="Home Assistant介绍HomeAssistant是一个成熟完整的基于 Python 的智能家居系统，设备支持度高，支持自动化（Automation）、群组化（Group）、UI 客制化（Theme）等等高度定制化设置，是构建智慧空间的神器。 基于HomeAssistant，可以方便地连接各种外部设备（智能设备、摄像头、邮件、短消息、云服务等，成熟的可连接组件有近千种），手动或按照自己的需">
+<meta property="og:description" content="折腾 Linux 系统的过程，本质上是一场关于“控制欲”与“审美”的修行。而在众多的发行版中，Fedora 始终占据着一个非常独特的位置：它不像 Ubuntu 那样保守，也不像 Arch 那样狂野。 如果要把 Linux 发行版比作汽车，Ubuntu 是大街上稳重的丰田，Arch 是需要你自己组装的越野车，而 Fedora 更像是一辆装满了各种原型技术的特斯拉——它总是最先搭载最新的引擎和自动驾驶">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://design.home-assistant.io/images/brand/logo.png">
-<meta property="og:image" content="https://camo.githubusercontent.com/d8ac4e6e791cd4d420e5438690e66a33b26409d097b26aa0dcc9b60b007484a9/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f636f6e6669675f666c6f775f73746172742e737667">
-<meta property="og:image" content="https://camo.githubusercontent.com/fa9db7ce5befc41824211651d3aca5d6887ca4f32e2d20de30f1fea48aab315c/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f696e746567726174696f6e2e737667">
-<meta property="article:published_time" content="2026-03-21T15:05:41.000Z">
-<meta property="article:modified_time" content="2026-03-21T16:17:01.947Z">
+<meta property="og:image" content="https://www.fedoraproject.org/assets/images/workstation_framework.webp">
+<meta property="article:published_time" content="2026-03-23T13:07:49.000Z">
+<meta property="article:modified_time" content="2026-03-23T14:50:49.646Z">
 <meta property="article:author" content="木子欢儿">
-<meta property="article:tag" content="Docker">
-<meta property="article:tag" content="HomeAssistant">
+<meta property="article:tag" content="Fedora">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://design.home-assistant.io/images/brand/logo.png">
+<meta name="twitter:image" content="https://www.fedoraproject.org/assets/images/workstation_framework.webp">
   
   
   
-  <title>HomeAssistant安装 - 点滴记忆</title>
+  <title>Fedora折腾记录 - 点滴记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -489,7 +487,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="HomeAssistant安装"></span>
+            <span id="subtitle" data-typed-text="Fedora折腾记录"></span>
           
         </div>
 
@@ -505,8 +503,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-03-21 23:05" pubdate>
-          2026年3月21日 晚上
+        <time datetime="2026-03-23 21:07" pubdate>
+          2026年3月23日 晚上
         </time>
       </span>
     
@@ -517,7 +515,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k 字
+          4k 字
         
       </span>
     
@@ -528,7 +526,7 @@
         
         
         
-          24 分钟
+          34 分钟
         
       </span>
     
@@ -567,12 +565,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">HomeAssistant安装</h1>
+            <h1 id="seo-header">Fedora折腾记录</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月22日 凌晨
+                    本文最后更新于 2026年3月23日 晚上
                   
                 
               </p>
@@ -580,64 +578,123 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Home-Assistant介绍"><a href="#Home-Assistant介绍" class="headerlink" title="Home Assistant介绍"></a>Home Assistant介绍</h2><p>HomeAssistant是一个成熟完整的基于 Python 的智能家居系统，设备支持度高，支持自动化（Automation）、群组化（Group）、UI 客制化（Theme）等等高度定制化设置，是构建智慧空间的神器。</p>
-<p>基于HomeAssistant，可以方便地连接各种外部设备（智能设备、摄像头、邮件、短消息、云服务等，成熟的可连接组件有近千种），手动或按照自己的需求自动化地联动这些外部设备，构建随心所欲的智慧空间。HomeAssistant是开源的，它不属于任何商业公司，用户可以无偿使用。</p>
-<p>HomeAssistant能识别和直接连接的外部设备有将近千项。其中有各种商业化的智能产品（如小米系列产品、Philips智能灯系列、亚马逊的音响、苹果的Siri、Google Assistant、博联的产品、特斯拉汽车等）、有互联网上的各种实时信息（股票、汇率、交通、天气等）、有开源或开放的各种智能软件（人脸识别、车牌识别、文字识别、文字转语音、语音转文字等）、有各种联动机制（短信、Email、IFTTT等）……</p>
-<p><img src="https://design.home-assistant.io/images/brand/logo.png" srcset="/img/loading.gif" lazyload alt="Logo"></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>关于Home Assistant的安装，一般都采用Docker部署的方法实现。</p>
-<p><a target="_blank" rel="noopener" href="https://www.home-assistant.io/">官方网站</a></p>
-<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p>关于Docker的安装，这里就不进行赘述了</p>
-<p>通过以下指令验证Docker是否安装成功，安装成功则会返回Docker的版本号。</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker -v</span><br></code></pre></td></tr></table></figure>
+                <p>折腾 Linux 系统的过程，本质上是一场关于“控制欲”与“审美”的修行。而在众多的发行版中，Fedora 始终占据着一个非常独特的位置：它不像 Ubuntu 那样保守，也不像 Arch 那样狂野。</p>
+<p>如果要把 Linux 发行版比作汽车，Ubuntu 是大街上稳重的丰田，Arch 是需要你自己组装的越野车，而 Fedora 更像是一辆装满了各种原型技术的特斯拉——它总是最先搭载最新的引擎和自动驾驶系统。</p>
+<h2 id="🚀-Fedora-简介：站在创新的风口浪尖"><a href="#🚀-Fedora-简介：站在创新的风口浪尖" class="headerlink" title="🚀 Fedora 简介：站在创新的风口浪尖"></a>🚀 Fedora 简介：站在创新的风口浪尖</h2><p>Fedora 是由 Fedora Project 社区开发，并由红帽（Red Hat）赞助的发行版。它最大的标签就是**“激进”与“纯粹”**。</p>
+<p><img src="https://www.fedoraproject.org/assets/images/workstation_framework.webp" srcset="/img/loading.gif" lazyload></p>
+<p>激进（Cutting Edge）： 你总能在 Fedora 上第一时间体验到最新的 Linux 内核、最新的 GNOME 桌面环境以及像 Wayland、PipeWire、Btrfs 这样引领行业标准的新技术。</p>
+<p>纯粹（Freedom）： Fedora 严格遵守开源协议，默认不包含任何闭源驱动或多媒体解码器。这意味着“折腾”的第一步，通常就是亲手打破这些限制。</p>
+<p>官方网址：<a target="_blank" rel="noopener" href="https://www.fedoraproject.org/zh-Hans/">https://www.fedoraproject.org/zh-Hans/</a></p>
+<p>这里使用的是</p>
+<p>Gnome 桌面版本 <a target="_blank" rel="noopener" href="https://www.fedoraproject.org/zh-Hans/workstation/">https://www.fedoraproject.org/zh-Hans/workstation/</a></p>
+<p>你也可以选择</p>
+<p>KDE桌面版本 <a target="_blank" rel="noopener" href="https://www.fedoraproject.org/zh-Hans/kde">https://www.fedoraproject.org/zh-Hans/kde</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h3><p>将 <a target="_blank" rel="noopener" href="https://ventoy.net/">https://ventoy.net/</a> 写入U盘，下载iso镜像丢进去，U盘启动即可。详细步骤略</p>
+<h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>1.修改root密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> passwd root<br></code></pre></td></tr></table></figure>
 
-<p>Docker CLI</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d <span class="hljs-string">\</span><br>  --name homeassistant <span class="hljs-string">\</span><br>  --privileged <span class="hljs-string">\</span><br>  --restart=<span class="hljs-keyword">unless</span>-stopped <span class="hljs-string">\</span><br>  -e TZ=Asia/Shanghai <span class="hljs-string">\</span><br>  -v /自定义路径:/config <span class="hljs-string">\</span><br>  -v /run/dbus:/run/dbus:ro <span class="hljs-string">\</span><br>  --network=host <span class="hljs-string">\</span><br>  home-assistant/home-assistant:latest<br></code></pre></td></tr></table></figure>
+<p>2.升级(root)</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">dnf update</span><br></code></pre></td></tr></table></figure>
 
-<p>国内</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d <span class="hljs-string">\</span><br>  --name homeassistant <span class="hljs-string">\</span><br>  --privileged <span class="hljs-string">\</span><br>  --restart=<span class="hljs-keyword">unless</span>-stopped <span class="hljs-string">\</span><br>  -e TZ=Asia/Shanghai <span class="hljs-string">\</span><br>  -v /自定义路径:/config <span class="hljs-string">\</span><br>  -v /run/dbus:/run/dbus:ro <span class="hljs-string">\</span><br>  --network=host <span class="hljs-string">\</span><br>  swr.cn-north-<span class="hljs-number">4.myhuaweicloud</span>.com/ddn-k8s/docker.io/homeassistant/home-assistant:latest<br></code></pre></td></tr></table></figure>
+<p>3.修改flatpak 国内源</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">flatpak remote-add <span class="hljs-params">--if-not-exists</span> flathub https:<span class="hljs-string">//dl.flathub.org/repo/flathub.flatpakrepo</span><br>flatpak remote-modify flathub <span class="hljs-params">--url=https</span>:<span class="hljs-string">//mirrors.ustc.edu.cn/flathub</span><br></code></pre></td></tr></table></figure>
 
-<p>Docker Compose</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-symbol">services:</span><br>  <span class="hljs-symbol">homeassistant:</span><br>    <span class="hljs-symbol">container_name:</span> homeassistant<br>    <span class="hljs-symbol">image:</span> <span class="hljs-string">&quot;homeassistant/home-assistant:latest&quot;</span><br>    <span class="hljs-symbol">volumes:</span><br>      - <span class="hljs-regexp">/自定义路径:/config</span><br>      - <span class="hljs-regexp">/etc/localtime</span><span class="hljs-symbol">:/etc/localtime</span><span class="hljs-symbol">:ro</span><br>      - <span class="hljs-regexp">/run/dbus</span><span class="hljs-symbol">:/run/dbus</span><span class="hljs-symbol">:ro</span><br>    <span class="hljs-symbol">restart:</span> <span class="hljs-keyword">unless</span>-stopped<br>    <span class="hljs-symbol">privileged:</span> <span class="hljs-literal">true</span><br>    <span class="hljs-symbol">network_mode:</span> host<br>    <span class="hljs-symbol">environment:</span><br>      <span class="hljs-variable constant_">TZ</span>: <span class="hljs-title class_">Asia</span>/<span class="hljs-title class_">Shanghai</span><br></code></pre></td></tr></table></figure>
+<h4 id="zsh-安装与配置"><a href="#zsh-安装与配置" class="headerlink" title="zsh 安装与配置"></a>zsh 安装与配置</h4><p>参考 <a target="_blank" rel="noopener" href="https://www.haoyep.com/posts/zsh-config-oh-my-zsh/">https://www.haoyep.com/posts/zsh-config-oh-my-zsh/</a></p>
+<h4 id="Gnome相关"><a href="#Gnome相关" class="headerlink" title="Gnome相关"></a>Gnome相关</h4><p>安装官方的拓展管理应用</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> gnome-extensions-app<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker compose up -d</span><br></code></pre></td></tr></table></figure>
+<p>安装完成后，你可以在应用程序菜单中找到 “扩展” (Extensions) 图标。它是管理已安装插件的“开关”，支持开启、关闭以及进入插件的详细设置。</p>
+<h5 id="如何获取与安装新扩展"><a href="#如何获取与安装新扩展" class="headerlink" title="如何获取与安装新扩展"></a>如何获取与安装新扩展</h5><p>除了通过 DNF 安装部分系统级扩展外，最灵活的方式是使用浏览器插件：</p>
+<p>访问官网：打开 <a target="_blank" rel="noopener" href="https://extensions.gnome.org./">https://extensions.gnome.org。</a></p>
+<p>安装集成组件：浏览器会提示安装“GNOME Shell integration”扩展，点击允许并安装。</p>
+<p>开启插件：在网页中找到心仪的扩展，直接点击右上角的 ON&#x2F;OFF 开关即可自动下载并启用。</p>
+<h5 id="必装扩展推荐"><a href="#必装扩展推荐" class="headerlink" title="必装扩展推荐"></a>必装扩展推荐</h5><p>针对追求高效、美观与系统监控的用户，以下扩展值得尝试：</p>
+<ol>
+<li>桌面布局与效率类</li>
+</ol>
+<p>​      Dash to Dock：将顶部的收藏栏（Dash）转换为类似 macOS 的固定 Dock 栏，支持自动隐藏。</p>
+<p>​      Dash to Panel：将顶栏与 Dock 合二为一，模仿 Windows 任务栏布局，非常适合习惯单底栏操作的用户。</p>
+<p>​       Just Perfection：GNOME 界的“瑞士军刀”。它可以让你隐藏几乎任何不需要的 UI 元素（如搜索框、顶栏时钟、辅助功能图标等），实现极致纯净的桌面。</p>
+<ol start="2">
+<li>美化与 UI 增强类</li>
+</ol>
+<p>  Blur my Shell：为 GNOME 的活动概览界面、面板和 Dash 添加精美的毛玻璃（高斯模糊）效果，瞬间提升桌面高级感。</p>
+<p>​        User Themes：允许从用户目录下加载自定义的 Shell 主题，是深度定制皮肤的必备前提。</p>
+<ol start="3">
+<li>功能增强类<br>Clipboard Indicator：在顶栏添加剪贴板历史记录。对于开发者和文字工作者来说，这是大幅提升生产力的工具。</li>
+</ol>
+<p>​        Vitals：在顶栏实时监控 CPU 温度、频率、内存使用率、风扇转速以及网络速度。它的 UI 设计非常简洁，不会显得杂乱。</p>
+<p>​         AppIndicator and KStatusNotifierItem Support：让托盘图标（如 Discord、网易云音乐、Telegram）重新出现在顶栏右侧，解决 GNOME 默认不显示第三方应用图标的问题。</p>
+<h5 id="安装rime中文输入法"><a href="#安装rime中文输入法" class="headerlink" title="安装rime中文输入法"></a>安装rime中文输入法</h5><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> ibus-table ibus-rime<br></code></pre></td></tr></table></figure>
 
-<p>浏览器输入 <code>ip:8123</code> 进入Home Assistant界面</p>
-<h3 id="安装HACS"><a href="#安装HACS" class="headerlink" title="安装HACS"></a>安装HACS</h3><p>HACS,全称Home Assistant Community Store，意思是 家庭助理社区商店。</p>
-<p>HACS可以为您提供一个强大的Ul来处理所有自定义需求的下载，可以理解为 Home Assistant 上的一个第三方应用商店。</p>
-<p>关于HACS的安装可以参考官网： <a target="_blank" rel="noopener" href="https://hacs.xyz/docs/setup/download">https://hacs.xyz/docs/setup/download</a></p>
-<p>我们在 homeasststant 目录（&#x2F;root&#x2F;docker&#x2F;HA&#x2F;）下创建一个名为 custom_components 的文件夹，再创建一个hacs文件夹</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/root/</span>docker<span class="hljs-regexp">/HA/</span>custom_components/hacs<br></code></pre></td></tr></table></figure>
+<p><strong>Tips：</strong> </p>
+<p>1.修改文字排列为横列</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dts">nano ~/.config<span class="hljs-keyword">/ibus/</span>rime<span class="hljs-keyword">/build/</span>ibus_rime.yaml<br>修改<br><span class="hljs-symbol">horizontal:</span> true<br></code></pre></td></tr></table></figure>
 
-<p>下载<a target="_blank" rel="noopener" href="https://github.com/hacs/integration/releases/download/2.0.5/hacs.zip">https://github.com/hacs/integration/releases/download/2.0.5/hacs.zip</a> 并解压到<code>/root/docker/HA/custom_components/hacs</code></p>
-<p>重启 Home Assistant.</p>
-<h2 id="添加HACS商店"><a href="#添加HACS商店" class="headerlink" title="添加HACS商店"></a>添加HACS商店</h2><p>点击配置&gt;设备与服务&gt;添加集成&gt;HACS</p>
-<p>全部勾选后点击提交</p>
-<p>在弹出的界面点击GitHub链接，将8位验证码输入GitHub链接进行绑定</p>
-<p>如果提示could_not_register，请在容器内执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> 20.205.243.166  github.com &gt;&gt; /etc/hosts<br></code></pre></td></tr></table></figure>
+<p>2.将候选词从默认的繁体改为简体<br>中文输入法前提下，按F4键或者ctrl+~选择“朙月・简化字”</p>
+<p>3.将候选词从默认的5个改为9个<br>打开配置文件</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">nano ~<span class="hljs-regexp">/.config/i</span>bus/rime/build/luna_pinyin_simp.<span class="hljs-built_in">schema</span>.yaml<br></code></pre></td></tr></table></figure>
 
-<p>刷新网页后就可以点击HACS 安装应用了</p>
-<p>例如xiaomi_home 和xiaomi_miot</p>
-<p>当然你也可以手动安装</p>
-<p>例如下载<a target="_blank" rel="noopener" href="https://ghp.quickso.cn/github.com/al-one/hass-xiaomi-miot/releases/download/v1.1.4/xiaomi_miot.zip">https://ghp.quickso.cn/github.com/al-one/hass-xiaomi-miot/releases/download/v1.1.4/xiaomi_miot.zip</a> 解压到</p>
-<p><code>/root/docker/HA/custom_components/xiaomi_miot/</code></p>
-<h1 id="Home-Assistant-米家集成"><a href="#Home-Assistant-米家集成" class="headerlink" title="Home Assistant 米家集成"></a>Home Assistant 米家集成</h1><p>这里讲一下Home Assistant 米家集成的使用</p>
-<p>米家集成是一个由小米官方提供支持的 Home Assistant 的集成组件，它可以让您在 Home Assistant 中使用小米 IoT 智能设备。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/XiaoMi/ha_xiaomi_home">https://github.com/XiaoMi/ha_xiaomi_home</a></p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p><a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/brand/?brand=xiaomi_home">设置 &gt; 设备与服务 &gt; 添加集成</a> &gt; 搜索“<code>Xiaomi Home</code>” &gt; 下一步 &gt; 请点击此处进行登录 &gt; 使用小米账号登录</p>
-<p><a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/config_flow_start/?domain=xiaomi_home"><img src="https://camo.githubusercontent.com/d8ac4e6e791cd4d420e5438690e66a33b26409d097b26aa0dcc9b60b007484a9/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f636f6e6669675f666c6f775f73746172742e737667" srcset="/img/loading.gif" lazyload alt="打开您的 Home Assistant 实例并开始配置一个新的米家集成实例。"></a></p>
-<h3 id="添加-MIoT-设备"><a href="#添加-MIoT-设备" class="headerlink" title="添加 MIoT 设备"></a>添加 MIoT 设备</h3><p>登录成功后，会弹出会话框“选择家庭与设备”。您可以选择需要添加的米家家庭，该家庭内的所有设备将导入 Home Assistant 。</p>
-<h3 id="多账号登录"><a href="#多账号登录" class="headerlink" title="多账号登录"></a>多账号登录</h3><p>用一个小米账号登录并配置完成后，您可以在 Xiaomi Home Integration 页面中继续添加其他小米账号。</p>
-<p>方法：<a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/integration/?domain=xiaomi_home">设置 &gt; 设备与服务 &gt; 已配置 &gt; Xiaomi Home</a> &gt; 添加中枢 &gt; 下一步 &gt; 请点击此处进行登录 &gt; 使用小米账号登录</p>
-<p><a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/integration/?domain=xiaomi_home"><img src="https://camo.githubusercontent.com/fa9db7ce5befc41824211651d3aca5d6887ca4f32e2d20de30f1fea48aab315c/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f696e746567726174696f6e2e737667" srcset="/img/loading.gif" lazyload alt="打开您的 Home Assistant 实例并显示米家集成。"></a></p>
-<h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>在会话框“配置选项”中，可选择需要变更的配置项。您可以修改用户昵称或更新从米家 APP 导入的设备列表。</p>
-<p>方法：<a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/integration/?domain=xiaomi_home">设置 &gt; 设备与服务 &gt; 已配置 &gt; Xiaomi Home</a> &gt; 配置 &gt; 选择需要变更的配置项</p>
-<p>其他具体使用可以参考官网文档<a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/">https://www.home-assistant.io/docs/</a></p>
-<p>或者第三方</p>
-<p><a target="_blank" rel="noopener" href="https://wiki.wghaos.com/">https://wiki.wghaos.com/</a></p>
-<p><a target="_blank" rel="noopener" href="https://ha-doc.hasscn.top/">https://ha-doc.hasscn.top/</a></p>
-<p><a target="_blank" rel="noopener" href="https://bbs.hassbian.com/forum-38-1.html">https://bbs.hassbian.com/forum-38-1.html</a></p>
+<p>中“menu: page_size: 5”一行中5改为9或其它小于10的数字。</p>
+<p>4.美化拓展 <a target="_blank" rel="noopener" href="https://extensions.gnome.org/extension/2820/ibus-tweaker/">https://extensions.gnome.org/extension/2820/ibus-tweaker/</a></p>
+<p>可以调整 IBus 字体、输入模式、剪贴板历史记录等设置</p>
+<p>5.ctrl+； 输入emoji符号</p>
+<h3 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h3><h4 id="命令行安装软件"><a href="#命令行安装软件" class="headerlink" title="命令行安装软件"></a>命令行安装软件</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">dnf <span class="hljs-keyword">install </span>curl git <span class="hljs-keyword">btop </span>vim vlc gimp fastfetch <br></code></pre></td></tr></table></figure>
 
+<ul>
+<li><p>curl: 命令行数据传输工具。支持 HTTP、FTP 等多种协议，常用于下载文件、调用 API 接口或排查网络连通性。</p>
+</li>
+<li><p>git: 目前最流行的分布式版本控制系统。无论是管理自己的代码脚本，还是从 GitHub 克隆项目，它都是核心工具。</p>
+</li>
+<li><p>btop: 一个颜值极高的终端资源监视器。它比传统的 top 或 htop 更直观，能以图表形式实时展示 CPU、内存、网络和磁盘的使用情况。</p>
+</li>
+<li><p>vim: 极其强大的终端文本编辑器。虽然有一定学习曲线，但在服务器环境或快速修改配置文件时，它的效率极高。</p>
+</li>
+<li><p>vlc: 全能的多媒体播放器。几乎能解码所有格式的视频和音频。在命令行安装后，它也提供 cvlc 这种无界面运行模式。</p>
+</li>
+<li><p>gimp: 开源的图像处理程序（类似 Photoshop）。它是一个功能齐全的 GUI 软件，适合进行照片编辑、绘图或图标制作。</p>
+</li>
+<li><p>fastfetch: 系统信息展示工具（neofetch 的现代化替代品）。运行它会用漂亮的 ASCII 字符展示你的操作系统图标以及硬件配置信息。</p>
+</li>
+</ul>
+<h4 id="flatpak-安装软件"><a href="#flatpak-安装软件" class="headerlink" title="flatpak 安装软件"></a>flatpak 安装软件</h4><p><a target="_blank" rel="noopener" href="https://flathub.org/zh-Hans">https://flathub.org/zh-Hans</a></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">flatpak <span class="hljs-keyword">install</span> flathub org.remmina.Remmina<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">flatpak <span class="hljs-keyword">install</span> flathub org.kde.kdenlive<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">flatpak install flathub <span class="hljs-keyword">com</span>.valvesoftware.Steam<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">flatpak install flathub <span class="hljs-keyword">com</span>.obsproject.Studio<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>Remmina (org.remmina.Remmina)<br>功能：远程桌面客户端</li>
+</ol>
+<p>用途：如果你需要从 Linux 电脑远程连接到 Windows 桌面（使用 RDP 协议）或者其他 Linux 服务器（使用 VNC 或 SSH），Remmina 是首选工具。</p>
+<p>特点：支持多窗口管理、文件传输和剪贴板共享。对于系统管理员来说，它是管理远程服务器集群的利器。</p>
+<ol start="2">
+<li>Kdenlive (org.kde.kdenlive)<br>功能：专业级非线性视频编辑器</li>
+</ol>
+<p>用途：它是 Linux 生态中最强大的开源视频剪辑软件之一，类似于 Adobe Premiere 或剪映。</p>
+<p>特点：支持多轨道编辑、丰富的转场效果、关键帧动画以及 4K 视频导出。它基于 KDE 框架，非常稳定且功能全面。</p>
+<ol start="3">
+<li>Steam (com.valvesoftware.Steam)<br>功能：游戏分发平台</li>
+</ol>
+<p>用途：全球最大的数字游戏发行平台。</p>
+<p>特点：通过内置的 Proton (WINE) 技术，Steam 使得成千上万的原生 Windows 游戏可以完美运行在 Linux 系统上。如果你想在 Linux 上玩 3A 大作，这是必装软件。</p>
+<ol start="4">
+<li>OBS Studio (com.obsproject.Studio)<br>功能：视频录制与直播推流软件</li>
+</ol>
+<p>用途：屏幕录制、网课制作或在 Bilibili&#x2F;YouTube 等平台进行直播。</p>
+<p>特点：支持多源输入（窗口捕获、摄像头、麦克风等），可以进行实时混音和场景切换。它是目前全球主播和录屏用户的行业标准工具。</p>
+<h4 id="安装包安装"><a href="#安装包安装" class="headerlink" title="安装包安装"></a>安装包安装</h4><p><strong>下载rpm格式安装包</strong>，双击安装即可</p>
+<p>Chrome 浏览器 <a target="_blank" rel="noopener" href="https://www.google.cn/chrome/">https://www.google.cn/chrome/</a>  </p>
+<p>QQ  <a target="_blank" rel="noopener" href="https://im.qq.com/linuxqq/index.shtml">https://im.qq.com/linuxqq/index.shtml</a></p>
+<p>微信 <a target="_blank" rel="noopener" href="https://linux.weixin.qq.com/">https://linux.weixin.qq.com/</a></p>
+<p>WPS <a target="_blank" rel="noopener" href="https://www.wps.cn/product/wpslinux">https://www.wps.cn/product/wpslinux</a></p>
+<h4 id="配置安装源安装"><a href="#配置安装源安装" class="headerlink" title="配置安装源安装"></a>配置安装源安装</h4><p>Vscode</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs swift">sudo rpm <span class="hljs-operator">--</span><span class="hljs-keyword">import</span> https:<span class="hljs-comment">//packages.microsoft.com/keys/microsoft.asc &amp;&amp;</span><br>echo <span class="hljs-operator">-</span>e <span class="hljs-string">&quot;[code]<span class="hljs-subst">\n</span>name=Visual Studio Code<span class="hljs-subst">\n</span>baseurl=https://packages.microsoft.com/yumrepos/vscode<span class="hljs-subst">\n</span>enabled=1<span class="hljs-subst">\n</span>autorefresh=1<span class="hljs-subst">\n</span>type=rpm-md<span class="hljs-subst">\n</span>gpgcheck=1<span class="hljs-subst">\n</span>gpgkey=https://packages.microsoft.com/keys/microsoft.asc&quot;</span> <span class="hljs-operator">|</span> sudo tee <span class="hljs-regexp">/etc/</span>yum.repos.d<span class="hljs-regexp">/vscode.repo &gt; /</span>dev<span class="hljs-operator">/</span>null<br><br>dnf check<span class="hljs-operator">-</span>update <span class="hljs-operator">&amp;&amp;</span> sudo dnf install code<br></code></pre></td></tr></table></figure>
+
+<h4 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…"></a>未完待续…</h4>
                 
               </div>
             
@@ -670,9 +727,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
       
-        <a href="/tags/HomeAssistant/" class="print-no-link">#HomeAssistant</a>
+        <a href="/tags/Fedora/" class="print-no-link">#Fedora</a>
       
     </div>
   
@@ -684,8 +741,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>HomeAssistant安装</div>
-      <div>https://blog.quickso.cn/2026/03/21/HomeAssistant安装/</div>
+      <div>Fedora折腾记录</div>
+      <div>https://blog.quickso.cn/2026/03/23/Fedora折腾记录/</div>
     </div>
     <div class="license-meta">
       
@@ -697,7 +754,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年3月21日</div>
+          <div>2026年3月23日</div>
         </div>
       
       
@@ -729,18 +786,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/03/23/Fedora%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/" title="Fedora折腾记录">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Fedora折腾记录</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/03/18/Hexo-Admin%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8/" title="Hexo-Admin管理插件使用">
-                        <span class="hidden-mobile">Hexo-Admin管理插件使用</span>
+                      <a href="/2026/03/21/HomeAssistant%E5%AE%89%E8%A3%85/" title="HomeAssistant安装">
+                        <span class="hidden-mobile">HomeAssistant安装</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
