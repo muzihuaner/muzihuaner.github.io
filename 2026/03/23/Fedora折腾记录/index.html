@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.fedoraproject.org/assets/images/workstation_framework.webp">
 <meta property="article:published_time" content="2026-03-23T13:07:49.000Z">
-<meta property="article:modified_time" content="2026-03-23T14:50:49.646Z">
+<meta property="article:modified_time" content="2026-03-24T14:13:09.700Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Fedora">
 <meta property="article:tag" content="Linux">
@@ -515,7 +515,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          4.5k 字
         
       </span>
     
@@ -526,7 +526,7 @@
         
         
         
-          34 分钟
+          38 分钟
         
       </span>
     
@@ -570,7 +570,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月23日 晚上
+                    本文最后更新于 2026年3月24日 晚上
                   
                 
               </p>
@@ -600,7 +600,10 @@
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">flatpak remote-add <span class="hljs-params">--if-not-exists</span> flathub https:<span class="hljs-string">//dl.flathub.org/repo/flathub.flatpakrepo</span><br>flatpak remote-modify flathub <span class="hljs-params">--url=https</span>:<span class="hljs-string">//mirrors.ustc.edu.cn/flathub</span><br></code></pre></td></tr></table></figure>
 
 <h4 id="zsh-安装与配置"><a href="#zsh-安装与配置" class="headerlink" title="zsh 安装与配置"></a>zsh 安装与配置</h4><p>参考 <a target="_blank" rel="noopener" href="https://www.haoyep.com/posts/zsh-config-oh-my-zsh/">https://www.haoyep.com/posts/zsh-config-oh-my-zsh/</a></p>
-<h4 id="Gnome相关"><a href="#Gnome相关" class="headerlink" title="Gnome相关"></a>Gnome相关</h4><p>安装官方的拓展管理应用</p>
+<h4 id="Gnome相关"><a href="#Gnome相关" class="headerlink" title="Gnome相关"></a>Gnome相关</h4><p>GNOME Tweaks 是一款用于个性化桌面体验的工具，它允许用户自定义默认字体、窗口管理、工作区等多个方面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dnf install gnome-tweaks<br></code></pre></td></tr></table></figure>
+
+<p>安装官方的拓展管理应用</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> gnome-extensions-app<br></code></pre></td></tr></table></figure>
 
 <p>安装完成后，你可以在应用程序菜单中找到 “扩展” (Extensions) 图标。它是管理已安装插件的“开关”，支持开启、关闭以及进入插件的详细设置。</p>
@@ -610,21 +613,24 @@
 <p>开启插件：在网页中找到心仪的扩展，直接点击右上角的 ON&#x2F;OFF 开关即可自动下载并启用。</p>
 <h5 id="必装扩展推荐"><a href="#必装扩展推荐" class="headerlink" title="必装扩展推荐"></a>必装扩展推荐</h5><p>针对追求高效、美观与系统监控的用户，以下扩展值得尝试：</p>
 <ol>
-<li>桌面布局与效率类</li>
+<li><strong>桌面布局与效率类</strong></li>
 </ol>
 <p>​      Dash to Dock：将顶部的收藏栏（Dash）转换为类似 macOS 的固定 Dock 栏，支持自动隐藏。</p>
 <p>​      Dash to Panel：将顶栏与 Dock 合二为一，模仿 Windows 任务栏布局，非常适合习惯单底栏操作的用户。</p>
 <p>​       Just Perfection：GNOME 界的“瑞士军刀”。它可以让你隐藏几乎任何不需要的 UI 元素（如搜索框、顶栏时钟、辅助功能图标等），实现极致纯净的桌面。</p>
 <ol start="2">
-<li>美化与 UI 增强类</li>
+<li><strong>美化与 UI 增强类</strong></li>
 </ol>
-<p>  Blur my Shell：为 GNOME 的活动概览界面、面板和 Dash 添加精美的毛玻璃（高斯模糊）效果，瞬间提升桌面高级感。</p>
-<p>​        User Themes：允许从用户目录下加载自定义的 Shell 主题，是深度定制皮肤的必备前提。</p>
+<p>Blur my Shell：为 GNOME 的活动概览界面、面板和 Dash 添加精美的毛玻璃（高斯模糊）效果，瞬间提升桌面高级感。</p>
+<p>User Themes：允许从用户目录下加载自定义的 Shell 主题，是深度定制皮肤的必备前提。</p>
+<p>AppIndicator and KStatusNotifierItem Support：让托盘图标（如 Discord、网易云音乐、Telegram）重新出现在顶栏右侧，解决 GNOME 默认不显示第三方应用图标的问题。</p>
+<p>Coverflow Alt-Tab: 改进 Alt+Tab 切换窗口的视觉效果，采用类似macOS的Coverflow立体翻转样式。</p>
+<p>compiz-alike-magic-lamp-effect:  为窗口最小化添加类似Compiz的“魔灯”缩放动画效果。</p>
 <ol start="3">
-<li>功能增强类<br>Clipboard Indicator：在顶栏添加剪贴板历史记录。对于开发者和文字工作者来说，这是大幅提升生产力的工具。</li>
+<li><strong>功能增强类</strong><br>Clipboard Indicator：在顶栏添加剪贴板历史记录。对于开发者和文字工作者来说，这是大幅提升生产力的工具。</li>
 </ol>
 <p>​        Vitals：在顶栏实时监控 CPU 温度、频率、内存使用率、风扇转速以及网络速度。它的 UI 设计非常简洁，不会显得杂乱。</p>
-<p>​         AppIndicator and KStatusNotifierItem Support：让托盘图标（如 Discord、网易云音乐、Telegram）重新出现在顶栏右侧，解决 GNOME 默认不显示第三方应用图标的问题。</p>
+<p>​       Caffeine ：关闭屏幕保护程序和自动挂起</p>
 <h5 id="安装rime中文输入法"><a href="#安装rime中文输入法" class="headerlink" title="安装rime中文输入法"></a>安装rime中文输入法</h5><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> ibus-table ibus-rime<br></code></pre></td></tr></table></figure>
 
 <p><strong>Tips：</strong> </p>
@@ -657,35 +663,50 @@
 <li><p>fastfetch: 系统信息展示工具（neofetch 的现代化替代品）。运行它会用漂亮的 ASCII 字符展示你的操作系统图标以及硬件配置信息。</p>
 </li>
 </ul>
+<p>krita：专业绘画软件，也可以当ps使用</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> krita<br></code></pre></td></tr></table></figure>
+
+<p>darktable ：Lightroom替代</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> darktable<br></code></pre></td></tr></table></figure>
+
 <h4 id="flatpak-安装软件"><a href="#flatpak-安装软件" class="headerlink" title="flatpak 安装软件"></a>flatpak 安装软件</h4><p><a target="_blank" rel="noopener" href="https://flathub.org/zh-Hans">https://flathub.org/zh-Hans</a></p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">flatpak <span class="hljs-keyword">install</span> flathub org.remmina.Remmina<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">flatpak <span class="hljs-keyword">install</span> flathub org.kde.kdenlive<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">flatpak install flathub <span class="hljs-keyword">com</span>.valvesoftware.Steam<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">flatpak install flathub <span class="hljs-keyword">com</span>.obsproject.Studio<br></code></pre></td></tr></table></figure>
-
 <ol>
 <li>Remmina (org.remmina.Remmina)<br>功能：远程桌面客户端</li>
 </ol>
 <p>用途：如果你需要从 Linux 电脑远程连接到 Windows 桌面（使用 RDP 协议）或者其他 Linux 服务器（使用 VNC 或 SSH），Remmina 是首选工具。</p>
 <p>特点：支持多窗口管理、文件传输和剪贴板共享。对于系统管理员来说，它是管理远程服务器集群的利器。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">flatpak <span class="hljs-keyword">install</span> flathub org.remmina.Remmina<br></code></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>Kdenlive (org.kde.kdenlive)<br>功能：专业级非线性视频编辑器</li>
 </ol>
 <p>用途：它是 Linux 生态中最强大的开源视频剪辑软件之一，类似于 Adobe Premiere 或剪映。</p>
 <p>特点：支持多轨道编辑、丰富的转场效果、关键帧动画以及 4K 视频导出。它基于 KDE 框架，非常稳定且功能全面。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">flatpak <span class="hljs-keyword">install</span> flathub org.kde.kdenlive<br></code></pre></td></tr></table></figure>
+
 <ol start="3">
 <li>Steam (com.valvesoftware.Steam)<br>功能：游戏分发平台</li>
 </ol>
 <p>用途：全球最大的数字游戏发行平台。</p>
 <p>特点：通过内置的 Proton (WINE) 技术，Steam 使得成千上万的原生 Windows 游戏可以完美运行在 Linux 系统上。如果你想在 Linux 上玩 3A 大作，这是必装软件。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">flatpak install flathub <span class="hljs-keyword">com</span>.valvesoftware.Steam<br></code></pre></td></tr></table></figure>
+
+
+
 <ol start="4">
 <li>OBS Studio (com.obsproject.Studio)<br>功能：视频录制与直播推流软件</li>
 </ol>
 <p>用途：屏幕录制、网课制作或在 Bilibili&#x2F;YouTube 等平台进行直播。</p>
 <p>特点：支持多源输入（窗口捕获、摄像头、麦克风等），可以进行实时混音和场景切换。它是目前全球主播和录屏用户的行业标准工具。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">flatpak install flathub <span class="hljs-keyword">com</span>.obsproject.Studio<br></code></pre></td></tr></table></figure>
+
+<p>LocalSend局域网互传</p>
+<p>此应用程序允许您通过本地局域网发送文件和消息。</p>
+<p>与大多数替代方案不同，它不需要外部服务器。所有操作都在本地 Wi-Fi 网络中完成。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">flatpak <span class="hljs-keyword">install</span> flathub org.localsend.localsend_app<br></code></pre></td></tr></table></figure>
+
+
+
 <h4 id="安装包安装"><a href="#安装包安装" class="headerlink" title="安装包安装"></a>安装包安装</h4><p><strong>下载rpm格式安装包</strong>，双击安装即可</p>
 <p>Chrome 浏览器 <a target="_blank" rel="noopener" href="https://www.google.cn/chrome/">https://www.google.cn/chrome/</a>  </p>
 <p>QQ  <a target="_blank" rel="noopener" href="https://im.qq.com/linuxqq/index.shtml">https://im.qq.com/linuxqq/index.shtml</a></p>
@@ -694,6 +715,10 @@
 <h4 id="配置安装源安装"><a href="#配置安装源安装" class="headerlink" title="配置安装源安装"></a>配置安装源安装</h4><p>Vscode</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs swift">sudo rpm <span class="hljs-operator">--</span><span class="hljs-keyword">import</span> https:<span class="hljs-comment">//packages.microsoft.com/keys/microsoft.asc &amp;&amp;</span><br>echo <span class="hljs-operator">-</span>e <span class="hljs-string">&quot;[code]<span class="hljs-subst">\n</span>name=Visual Studio Code<span class="hljs-subst">\n</span>baseurl=https://packages.microsoft.com/yumrepos/vscode<span class="hljs-subst">\n</span>enabled=1<span class="hljs-subst">\n</span>autorefresh=1<span class="hljs-subst">\n</span>type=rpm-md<span class="hljs-subst">\n</span>gpgcheck=1<span class="hljs-subst">\n</span>gpgkey=https://packages.microsoft.com/keys/microsoft.asc&quot;</span> <span class="hljs-operator">|</span> sudo tee <span class="hljs-regexp">/etc/</span>yum.repos.d<span class="hljs-regexp">/vscode.repo &gt; /</span>dev<span class="hljs-operator">/</span>null<br><br>dnf check<span class="hljs-operator">-</span>update <span class="hljs-operator">&amp;&amp;</span> sudo dnf install code<br></code></pre></td></tr></table></figure>
 
+
+
+<p>安装 达芬奇视频剪辑软件</p>
+<p>参考 <a target="_blank" rel="noopener" href="https://github.com/H3rz3n/How-install-DaVinci-Resolve-in-Fedora-Linux/tree/main">https://github.com/H3rz3n/How-install-DaVinci-Resolve-in-Fedora-Linux/tree/main</a></p>
 <h4 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…"></a>未完待续…</h4>
                 
               </div>
