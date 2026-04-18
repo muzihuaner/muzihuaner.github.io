@@ -27,7 +27,7 @@
 <meta property="og:description" content="DN42网络入坑指南DN42是什么 DN42 全称 Decentralized Network 42（42 号去中心网络），是一个大型、去中心化的 VPN 网络。但是与其它传统 VPN 不同的是，DN42 本身不提供 VPN 出口服务，即不提供规避网络审查、流媒体解锁等类似服务。相反，DN42 的目的是模拟一个互联网。它使用了大量在目前互联网骨干上应用的技术（例如 BGP 和递归 DNS），可以很">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-15T02:09:41.000Z">
-<meta property="article:modified_time" content="2026-04-18T15:10:45.471Z">
+<meta property="article:modified_time" content="2026-04-18T15:25:30.733Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="DN42">
 <meta property="article:tag" content="博客">
@@ -524,7 +524,7 @@
         
         
         
-          140 分钟
+          146 分钟
         
       </span>
     
@@ -620,7 +620,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /home/UserName/.ssh/id_ed25519.pub<br></code></pre></td></tr></table></figure>
 
 <p>PS: 注意是 管理 SSH 密钥 不是 管理 GPG 密钥</p>
-<h2 id="将-Fork-的仓库-Clone-到本地"><a href="#将-Fork-的仓库-Clone-到本地" class="headerlink" title="将 Fork 的仓库 Clone 到本地"></a>将 Fork 的仓库 Clone 到本地</h2><p>将你刚才 Fork 的仓库 Clone 到本地，比如我的 Clone 链接就是 <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#116;&#x2e;&#x64;&#110;&#x34;&#x32;&#x2e;&#x64;&#x65;&#x76;">git@git.dn42.dev</a>:GenshinMinecraft&#x2F;registry.git</p>
+<h2 id="将-Fork-的仓库-Clone-到本地"><a href="#将-Fork-的仓库-Clone-到本地" class="headerlink" title="将 Fork 的仓库 Clone 到本地"></a>将 Fork 的仓库 Clone 到本地</h2><p>将你刚才 Fork 的仓库 Clone 到本地，比如我的 Clone 链接就是 <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#105;&#x74;&#x2e;&#100;&#110;&#52;&#x32;&#x2e;&#100;&#101;&#x76;">git@git.dn42.dev</a>:GenshinMinecraft&#x2F;registry.git</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> git@git.dn42.dev:YourUsername/registry.git &amp;&amp; <span class="hljs-built_in">cd</span> registry<br></code></pre></td></tr></table></figure>
 
 <h2 id="填写注册文件"><a href="#填写注册文件" class="headerlink" title="填写注册文件"></a>填写注册文件</h2><p>注意：</p>
@@ -702,12 +702,15 @@
 <p>这样就算完成了 Peer 的建立，接下来就是配置你自己机器的环境咯！</p>
 <h4 id="配置-WireGuard"><a href="#配置-WireGuard" class="headerlink" title="配置 WireGuard"></a>配置 WireGuard</h4><h5 id="编写配置文件"><a href="#编写配置文件" class="headerlink" title="编写配置文件"></a>编写配置文件</h5><p>这个配置当然是有模板的</p>
 <p>配置文件一般储存于 <code>/etc/wireguard/xxx.conf</code></p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Interface]</span><br><span class="hljs-attr">PrivateKey</span> = &lt;你的 WireGuard 私钥&gt;<br><span class="hljs-attr">Address</span> = &lt;你的 link-local 地址，如果有&gt;<br><span class="hljs-attr">PostUp</span> = ip addr add dev %i &lt;你的IPv4&gt;/<span class="hljs-number">32</span> peer &lt;对方IPv4&gt;/<span class="hljs-number">32</span><br><span class="hljs-attr">PostUp</span> = ip addr add dev %i &lt;你的IPv6&gt;/<span class="hljs-number">128</span> peer &lt;对方IPv6&gt;/<span class="hljs-number">128</span><br><span class="hljs-attr">Table</span> = <span class="hljs-literal">off</span><br><br><span class="hljs-section">[Peer]</span><br><span class="hljs-attr">Endpoint</span> = &lt;对方 wireguard 接入点&gt;<br><span class="hljs-attr">PublicKey</span> = &lt;对方的 WireGuard 公钥&gt;<br><span class="hljs-attr">AllowedIPs</span> = <span class="hljs-number">172.16</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">12</span>, <span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">8</span>, fd00::/<span class="hljs-number">8</span>, fe80::/<span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Interface]</span><br><span class="hljs-attr">PrivateKey</span> = &lt;自己的私钥&gt;<br><span class="hljs-attr">ListenPort</span> = &lt;自己监听的端口，一般是对方ASN后五位&gt;<br><span class="hljs-attr">PostUp</span> = ip addr add &lt;你的DN42 IPv4&gt;/<span class="hljs-number">32</span> peer &lt;对方的DN42 IPv4&gt;/<span class="hljs-number">32</span> dev %i<br><span class="hljs-comment"># 如果用 IPv6 ULA</span><br><span class="hljs-comment"># PostUp = ip addr add &lt;你的DN42 IPv6&gt;/128 peer &lt;对方的DN42 IPv6&gt;/128 dev %i</span><br><span class="hljs-comment"># 如果用 link-local（推荐）</span><br><span class="hljs-attr">PostUp</span> = ip addr add &lt;link-local&gt;/<span class="hljs-number">64</span> dev %i<br><span class="hljs-attr">Table</span> = <span class="hljs-literal">off</span><br><br><span class="hljs-section">[Peer]</span><br><span class="hljs-attr">PublicKey</span> = &lt;对方的公钥&gt;<br><span class="hljs-attr">Endpoint</span> = &lt;对方的公网地址&gt;:&lt;对方的端口，一般是自己ASN后五位&gt;<br><span class="hljs-attr">AllowedIPs</span> = <span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">8</span>, <span class="hljs-number">172.20</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">14</span>, <span class="hljs-number">172.31</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">16</span>, fd00::/<span class="hljs-number">8</span>, fe80::/<span class="hljs-number">64</span><br></code></pre></td></tr></table></figure>
 
-<p>建议将配置文件存于 <code>/etc/wireguard/potat0.conf</code></p>
+<p>注意这里 <code>Table = off</code> 要加上，不然所有的流量，包括公网上的流量就都转发给你的 peer 了，这样可能你就连自己的机器都连不上了。</p>
+<p>这里一般推荐用 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Link-local_address">link-local 地址</a> 进行配置，除非双方约定好是用 ULA。</p>
+<p><strong>链路本地地址</strong>: IPv6 定义在 <strong>fe80::&#x2F;10</strong> 地址块。一般就是 <code>fe80::&lt;你的ASN后四位&gt;</code>。</p>
+<p>potat0配置文件 <code>/etc/wireguard/potat0.conf</code></p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Interface]</span><br><span class="hljs-comment"># 你的 WireGuard 私钥，存储于上方生成 privitekey 文件中</span><br><span class="hljs-attr">PrivateKey</span> = [PrivateKey]<br><br><span class="hljs-comment"># 你的端口号，上方输入的公网 IP 与公网端口</span><br><span class="hljs-attr">ListenPort</span> = [Port]<br><span class="hljs-attr">Table</span> = <span class="hljs-literal">off</span><br><br><span class="hljs-comment"># 第一个是你的 DN42 内的 IP，第二个是我的（或者你的 Peer 的）</span><br><span class="hljs-attr">PostUp</span> = ip addr add [你的 DN42 IP] peer [Potat0 的 DN42 IP] dev %i<br><span class="hljs-attr">PostUp</span> = sysctl -w net.ipv6.conf.%i.autoconf=<span class="hljs-number">0</span><br><br><span class="hljs-section">[Peer]</span><br><span class="hljs-attr">PublicKey</span> = [Potat0 的公钥]<br><span class="hljs-attr">Endpoint</span> = [Potat0 的公网服务器 IP:Port]<br><br><span class="hljs-attr">AllowedIPs</span> = <span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">8</span>, <span class="hljs-number">172.20</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">14</span>, <span class="hljs-number">172.31</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">16</span>, fd00::/<span class="hljs-number">8</span>, fe80::/<span class="hljs-number">64</span><br></code></pre></td></tr></table></figure>
 
-<p>Demo:</p>
+<p>配置示例:</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Interface]</span><br><span class="hljs-attr">PrivateKey</span> = xxxxxxxxxxxxxxxxxxxxxxxxxx<br><br><span class="hljs-attr">ListenPort</span> = <span class="hljs-number">20223</span><br><span class="hljs-attr">Table</span> = <span class="hljs-literal">off</span><br><br><span class="hljs-attr">PostUp</span> = ip addr add <span class="hljs-number">172.21</span>.<span class="hljs-number">70.18</span> peer <span class="hljs-number">172.23</span>.<span class="hljs-number">246.3</span> dev %i<br><span class="hljs-attr">PostUp</span> = sysctl -w net.ipv6.conf.%i.autoconf=<span class="hljs-number">0</span><br><br><span class="hljs-section">[Peer]</span><br><span class="hljs-attr">PublicKey</span> = LUwqKS6QrCPv510Pwt1eAIiHACYDsbMjrkrbGTJfviU=<br><span class="hljs-attr">Endpoint</span> = las.node.potat0.cc:<span class="hljs-number">20223</span><br><br><span class="hljs-attr">AllowedIPs</span> = <span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">8</span>, <span class="hljs-number">172.20</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">14</span>, <span class="hljs-number">172.31</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">16</span>, fd00::/<span class="hljs-number">8</span>, fe80::/<span class="hljs-number">64</span><br><br></code></pre></td></tr></table></figure>
 
 <p>这些配置，均可从上方的 Info 信息中获取到，编辑完保存并退出</p>
@@ -715,6 +718,8 @@
 
 <p>当无报错输出时，即为配置成功</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">[#] ip <span class="hljs-built_in">link</span> add potat0 <span class="hljs-built_in">type</span> wireguard<br>[#] wg setconf potat0 /dev/fd/63<br>[#] ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> mtu 2720 up dev potato<br>[#] ip addr add [你的 DN42 IP] peer [Potat0 的 DN42 IP] dev potat0<br>[#] sysctl -w net.ipv6.conf.potat0.autoconf=0<br>net.ipv6.conf.potato.autoconf = 0<br></code></pre></td></tr></table></figure>
+
+<h5 id="关闭-WireGuard-隧道"><a href="#关闭-WireGuard-隧道" class="headerlink" title="关闭 WireGuard 隧道"></a>关闭 WireGuard 隧道</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wg-quick down potat0<br></code></pre></td></tr></table></figure>
 
 <h5 id="检查连接"><a href="#检查连接" class="headerlink" title="检查连接"></a>检查连接</h5><p>你可以使用 <code>wg</code> 命令来查看目前所有运行着的隧道</p>
 <p>如需开机自启，可以在测试无误后执行 <code>systemctl enable wg-quick@&lt;隧道名&gt;</code> 。</p>
@@ -742,7 +747,7 @@
 <figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs puppet"><span class="hljs-keyword">define</span> <span class="hljs-section">OWNAS</span>       = &lt;AS 号&gt;;<br><span class="hljs-keyword">define</span> <span class="hljs-section">OWNIP</span>       = &lt;DN42 IPv4 地址&gt;;<br><span class="hljs-keyword">define</span> <span class="hljs-section">OWNIPv6</span>     = &lt;DN42 IPv6 地址&gt;;<br><span class="hljs-keyword">define</span> <span class="hljs-section">OWNNET</span>      = &lt;DN42 IPv4 地址块, CIDR 格式&gt;;<br><span class="hljs-keyword">define</span> <span class="hljs-section">OWNNETv6</span>    = &lt;DN42 IPv6 地址块, CIDR 格式&gt;;<br><span class="hljs-keyword">define</span> <span class="hljs-section">OWNNETSET</span>   = [ &lt;DN42 IPv4 地址块, CIDR 格式&gt;+ ];<br><span class="hljs-keyword">define</span> <span class="hljs-section">OWNNETSETv6</span> = [ &lt;DN42 IPv6 地址块, CIDR 格式&gt;+ ];<br></code></pre></td></tr></table></figure>
 
 <p>参阅: <a target="_blank" rel="noopener" href="https://bird.xmsl.dev/docs/user-guide/3-1-introduction.html">https://bird.xmsl.dev/docs/user-guide/3-1-introduction.html</a></p>
-<h1 id="设置对等节点"><a href="#设置对等节点" class="headerlink" title="设置对等节点"></a>设置对等节点</h1><p>请注意：本节假设您已经建立了与对等伙伴之间的WG隧道。</p>
+<h3 id="设置对等节点"><a href="#设置对等节点" class="headerlink" title="设置对等节点"></a>设置对等节点</h3><p>请注意：本节假设您已经建立了与对等伙伴之间的WG隧道。</p>
 <p>首先，创建 &#x2F;etc&#x2F;bird&#x2F;peers 目录：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /etc/bird/peers<br></code></pre></td></tr></table></figure>
 
@@ -795,6 +800,12 @@
 </ul>
 </li>
 </ul>
+<h3 id="MBGP"><a href="#MBGP" class="headerlink" title="MBGP"></a>MBGP</h3><p>BIRD2 是支持 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Multiprotocol_BGP">Multiprotocol BGP</a> 的，也就是可以在单独一个 IPv4&#x2F;IPv6 BGP session 里建立 v4 和 v6 两条 channel</p>
+<p>于是<strong>如果双方都支持 MP-BGP 的话，一般是用 link-local 建立一条 v6 的 BGP session 就好了。</strong></p>
+<p>由于 link-local 只是在连接双方的接口进行的，需要指定好接口。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs conf">protocol bgp dn42_424242xxxx_v6 from dnpeers &#123;<br>    neighbor fe80::xxxx % &#x27;wg_424242xxxx&#x27; as 424242xxxx;<br>    direct;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意 <code>fe80::xxxx</code> 是对方的 link-local address，<code>wg_424242xxxx</code> 是你网络接口的名字。</p>
 <h5 id="Bird2-启动"><a href="#Bird2-启动" class="headerlink" title="Bird2? 启动!"></a>Bird2? 启动!</h5><p>启动 Bird2 仅需一行命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">birdc c<br></code></pre></td></tr></table></figure>
 
@@ -802,6 +813,9 @@
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">peers</span>      BGP        ---        up     <span class="hljs-number">13</span>:<span class="hljs-number">01</span>:<span class="hljs-number">51</span>.<span class="hljs-number">314</span>  Established<br></code></pre></td></tr></table></figure>
 
 <p>当输出显示 <code>Established</code> 时，也配置得差不多了</p>
+<p>查看某条路由配置的详细信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">birdc s p a dn42_424242xxxx_v6 <br></code></pre></td></tr></table></figure>
+
 <h3 id="ALL-DONE"><a href="#ALL-DONE" class="headerlink" title="ALL DONE!"></a>ALL DONE!</h3><p>当你完成上述所有步骤，恭喜你，你即将完成好你第一次 DN42 之旅，现在只需要动动你的小手，在终端输入:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ping 172.20.0.53<br></code></pre></td></tr></table></figure>
 
