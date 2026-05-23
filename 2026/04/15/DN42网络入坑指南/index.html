@@ -27,7 +27,7 @@
 <meta property="og:description" content="DN42网络入坑指南DN42是什么 DN42 全称 Decentralized Network 42（42 号去中心网络），是一个大型、去中心化的 VPN 网络。但是与其它传统 VPN 不同的是，DN42 本身不提供 VPN 出口服务，即不提供规避网络审查、流媒体解锁等类似服务。相反，DN42 的目的是模拟一个互联网。它使用了大量在目前互联网骨干上应用的技术（例如 BGP 和递归 DNS），可以很">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-15T02:09:41.000Z">
-<meta property="article:modified_time" content="2026-04-18T15:25:30.733Z">
+<meta property="article:modified_time" content="2026-05-23T04:39:39.122Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="DN42">
 <meta property="article:tag" content="博客">
@@ -513,7 +513,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          17k 字
+          18k 字
         
       </span>
     
@@ -524,7 +524,7 @@
         
         
         
-          146 分钟
+          150 分钟
         
       </span>
     
@@ -568,7 +568,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年4月18日 晚上
+                    本文最后更新于 2026年5月23日 下午
                   
                 
               </p>
@@ -620,7 +620,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /home/UserName/.ssh/id_ed25519.pub<br></code></pre></td></tr></table></figure>
 
 <p>PS: 注意是 管理 SSH 密钥 不是 管理 GPG 密钥</p>
-<h2 id="将-Fork-的仓库-Clone-到本地"><a href="#将-Fork-的仓库-Clone-到本地" class="headerlink" title="将 Fork 的仓库 Clone 到本地"></a>将 Fork 的仓库 Clone 到本地</h2><p>将你刚才 Fork 的仓库 Clone 到本地，比如我的 Clone 链接就是 <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#105;&#x74;&#x2e;&#100;&#110;&#52;&#x32;&#x2e;&#100;&#101;&#x76;">git@git.dn42.dev</a>:GenshinMinecraft&#x2F;registry.git</p>
+<h2 id="将-Fork-的仓库-Clone-到本地"><a href="#将-Fork-的仓库-Clone-到本地" class="headerlink" title="将 Fork 的仓库 Clone 到本地"></a>将 Fork 的仓库 Clone 到本地</h2><p>将你刚才 Fork 的仓库 Clone 到本地，比如我的 Clone 链接就是 <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#105;&#116;&#x2e;&#x64;&#x6e;&#52;&#x32;&#x2e;&#x64;&#x65;&#x76;">git@git.dn42.dev</a>:GenshinMinecraft&#x2F;registry.git</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> git@git.dn42.dev:YourUsername/registry.git &amp;&amp; <span class="hljs-built_in">cd</span> registry<br></code></pre></td></tr></table></figure>
 
 <h2 id="填写注册文件"><a href="#填写注册文件" class="headerlink" title="填写注册文件"></a>填写注册文件</h2><p>注意：</p>
@@ -800,12 +800,21 @@
 </ul>
 </li>
 </ul>
-<h3 id="MBGP"><a href="#MBGP" class="headerlink" title="MBGP"></a>MBGP</h3><p>BIRD2 是支持 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Multiprotocol_BGP">Multiprotocol BGP</a> 的，也就是可以在单独一个 IPv4&#x2F;IPv6 BGP session 里建立 v4 和 v6 两条 channel</p>
+<h3 id="MBGP（ENH）"><a href="#MBGP（ENH）" class="headerlink" title="MBGP（ENH）"></a>MBGP（ENH）</h3><p>BIRD2 是支持 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Multiprotocol_BGP">Multiprotocol BGP</a> 的，也就是可以在单独一个 IPv4&#x2F;IPv6 BGP session 里建立 v4 和 v6 两条 channel</p>
 <p>于是<strong>如果双方都支持 MP-BGP 的话，一般是用 link-local 建立一条 v6 的 BGP session 就好了。</strong></p>
 <p>由于 link-local 只是在连接双方的接口进行的，需要指定好接口。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs conf">protocol bgp dn42_424242xxxx_v6 from dnpeers &#123;<br>    neighbor fe80::xxxx % &#x27;wg_424242xxxx&#x27; as 424242xxxx;<br>    direct;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>注意 <code>fe80::xxxx</code> 是对方的 link-local address，<code>wg_424242xxxx</code> 是你网络接口的名字。</p>
+<p><strong>示例:</strong></p>
+<p>WG配置</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Interface]</span><br><span class="hljs-comment"># 你的 WireGuard 私钥，存储于上方生成 privitekey 文件中</span><br><span class="hljs-attr">PrivateKey</span> = xxxx<br><br><span class="hljs-comment"># 你的端口号，上方输入的公网 IP 与公网端口</span><br><span class="hljs-attr">ListenPort</span> = <span class="hljs-number">21888</span><br><span class="hljs-attr">Table</span> = <span class="hljs-literal">off</span><br><br><span class="hljs-attr">PostUp</span> = sysctl -w net.ipv6.conf.%i.autoconf=<span class="hljs-number">0</span><br><span class="hljs-attr">PostUp</span> = ip addr add fe80::<span class="hljs-number">1233</span>/<span class="hljs-number">64</span> dev %i<br><br><span class="hljs-section">[Peer]</span><br><span class="hljs-attr">PublicKey</span> = xxx<br><span class="hljs-attr">Endpoint</span> = xxxx:<span class="hljs-number">20223</span><br><br><span class="hljs-attr">AllowedIPs</span> = <span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">8</span>, <span class="hljs-number">172.20</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">14</span>, <span class="hljs-number">172.31</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">16</span>, fd00::/<span class="hljs-number">8</span>, fe80::/<span class="hljs-number">64</span><br><br></code></pre></td></tr></table></figure>
+
+<p>Bird配置</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">protocol<span class="hljs-built_in"> bgp </span>DN42_AS42xxxx <span class="hljs-keyword">from</span> dnpeers &#123;<br>   <span class="hljs-built_in"> neighbor </span>fe80::1888 % <span class="hljs-string">&#x27;AS42424xxxxx&#x27;</span> as 42424xxxx;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
 <h5 id="Bird2-启动"><a href="#Bird2-启动" class="headerlink" title="Bird2? 启动!"></a>Bird2? 启动!</h5><p>启动 Bird2 仅需一行命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">birdc c<br></code></pre></td></tr></table></figure>
 
