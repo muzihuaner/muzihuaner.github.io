@@ -19,39 +19,23 @@
   <meta name="author" content="木子欢儿">
   <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
   
-    <meta name="description" content="使用代理服务进行科学上网，重要的是代理服务端的搭建。在我们搭建过程中，往往需要依照自身情况选择适合自己的搭建方式。如采用官方推荐的脚本进行安装，但官方推荐的脚本一般都对新手不够友好，常常需要自行拓展方可安装成功。也有各路大神实现的多合一一键安装脚本，这些脚本在一定程度上降低了新手搭建服务端的难度。此外还有一类搭建方法，那就是通过面板来搭建。 使用面板来搭建，好处在于：由于拥有UI界面，信息展示相">
+    <meta name="description" content="简介Dokploy 是一款开源的自托管 PaaS（平台即服务），可以在自己的服务器上搭建类似 Vercel&#x2F;Heroku 的部署平台。支持 Git 自动部署、Docker 应用、数据库管理，是个人开发者和小团队的理想选择。 https:&#x2F;&#x2F;github.com&#x2F;dokploy&#x2F;dokploy 功能概览 应用程序部署：支持 Node.js、PHP、Python、Go、Ruby 等多种语言。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN">
-<meta property="og:url" content="https://blog.quickso.cn/2022/02/04/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%EF%BC%9A%E4%BD%BF%E7%94%A8X-UI%E9%9D%A2%E6%9D%BF%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%A4%9A%E5%8D%8F%E8%AE%AE%E3%80%81%E5%A4%9A%E7%94%A8%E6%88%B7%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%EF%BC%8C%E6%94%AF%E6%8C%81CDN/index.html">
+<meta property="og:title" content="Dokploy自托管PaaS平台部署指南">
+<meta property="og:url" content="https://blog.quickso.cn/2026/05/27/Dokploy%E8%87%AA%E6%89%98%E7%AE%A1PaaS%E5%B9%B3%E5%8F%B0%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="点滴记忆">
-<meta property="og:description" content="使用代理服务进行科学上网，重要的是代理服务端的搭建。在我们搭建过程中，往往需要依照自身情况选择适合自己的搭建方式。如采用官方推荐的脚本进行安装，但官方推荐的脚本一般都对新手不够友好，常常需要自行拓展方可安装成功。也有各路大神实现的多合一一键安装脚本，这些脚本在一定程度上降低了新手搭建服务端的难度。此外还有一类搭建方法，那就是通过面板来搭建。 使用面板来搭建，好处在于：由于拥有UI界面，信息展示相">
+<meta property="og:description" content="简介Dokploy 是一款开源的自托管 PaaS（平台即服务），可以在自己的服务器上搭建类似 Vercel&#x2F;Heroku 的部署平台。支持 Git 自动部署、Docker 应用、数据库管理，是个人开发者和小团队的理想选择。 https:&#x2F;&#x2F;github.com&#x2F;dokploy&#x2F;dokploy 功能概览 应用程序部署：支持 Node.js、PHP、Python、Go、Ruby 等多种语言。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://coderfan.net/wp-content/uploads/2021/07/XUI%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/%25E5%25AE%2589%25E8%25A3%2585%25E7%25BB%2593%25E6%259E%259C-1024x505.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/A%E8%AE%B0%E5%BD%95-1024x462.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/XUI%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2-1024x441.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2-1024x311.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E5%85%A5%E7%AB%99%E8%8A%82%E7%82%B9-1024x317.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-1-1024x517.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-2.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-3-1024x221.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/AP%E4%BB%A4%E7%89%8C-1024x574.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E6%9F%A5%E7%9C%8BAPI-1024x499.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85-1-1024x239.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E5%BC%80%E5%90%AFtls.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E9%9D%A2%E6%9D%BF%E7%AB%AF%E5%8F%A3-1024x399.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-4.png">
-<meta property="article:published_time" content="2022-02-04T11:45:27.000Z">
-<meta property="article:modified_time" content="2026-03-18T12:20:00.075Z">
+<meta property="article:published_time" content="2026-05-26T16:56:15.000Z">
+<meta property="article:modified_time" content="2026-05-26T17:07:45.587Z">
 <meta property="article:author" content="木子欢儿">
-<meta property="article:tag" content="X-ui">
-<meta property="article:tag" content="科学上网">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="自托管">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://coderfan.net/wp-content/uploads/2021/07/XUI%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2.png">
   
   
   
-  <title>科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN - 点滴记忆</title>
+  <title>Dokploy自托管PaaS平台部署指南 - 点滴记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -501,7 +485,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN"></span>
+            <span id="subtitle" data-typed-text="Dokploy自托管PaaS平台部署指南"></span>
           
         </div>
 
@@ -517,8 +501,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-02-04 19:45" pubdate>
-          2022年2月4日 晚上
+        <time datetime="2026-05-27 00:56" pubdate>
+          2026年5月27日 凌晨
         </time>
       </span>
     
@@ -529,7 +513,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          3.2k 字
         
       </span>
     
@@ -540,7 +524,7 @@
         
         
         
-          29 分钟
+          27 分钟
         
       </span>
     
@@ -579,12 +563,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN</h1>
+            <h1 id="seo-header">Dokploy自托管PaaS平台部署指南</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月18日 晚上
+                    本文最后更新于 2026年5月27日 凌晨
                   
                 
               </p>
@@ -592,131 +576,162 @@
             
               <div class="markdown-body">
                 
-                <p><img src="https://coderfan.net/wp-content/uploads/2021/07/XUI%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>使用代理服务进行科学上网，重要的是代理服务端的搭建。在我们搭建过程中，往往需要依照自身情况选择适合自己的搭建方式。如采用官方推荐的脚本进行安装，但官方推荐的脚本一般都对新手不够友好，常常需要自行拓展方可安装成功。也有各路大神实现的多合一一键安装脚本，这些脚本在一定程度上降低了新手搭建服务端的难度。此外还有一类搭建方法，那就是通过面板来搭建。</p>
-<p>使用面板来搭建，好处在于：<strong>由于拥有UI界面，信息展示相当直观，更便于我们新手操作（无需命令行）</strong>。那么今天我们就来介绍一下使用X-UI来搭建我们的代理服务。</p>
-<p>使用X-UI搭建代理服务，具有以下优点：</p>
-<ul>
-<li><strong>支持系统状态监控：如CPU、内存、硬盘等状态</strong></li>
-<li><strong>支持多用户多协议，网页可视化操作</strong></li>
-<li><strong>支持流量统计</strong></li>
-<li><strong>支持自定义Xray配置模板</strong></li>
-<li><strong>支持HTTPS访问面板</strong></li>
-<li><strong>支持面板自定义端口，账号与密码</strong></li>
-<li><strong>快速生成分享连接或二维码</strong></li>
-<li><strong>支持CDN套用</strong></li>
-<li><strong>支持Fallback分流设置</strong></li>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Dokploy 是一款开源的自托管 PaaS（平台即服务），可以在自己的服务器上搭建类似 Vercel&#x2F;Heroku 的部署平台。支持 Git 自动部署、Docker 应用、数据库管理，是个人开发者和小团队的理想选择。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/dokploy/dokploy">https://github.com/dokploy/dokploy</a></p>
+<h2 id="功能概览"><a href="#功能概览" class="headerlink" title="功能概览"></a>功能概览</h2><ul>
+<li><strong>应用程序部署</strong>：支持 Node.js、PHP、Python、Go、Ruby 等多种语言。</li>
+<li><strong>数据库管理</strong>：支持 MySQL、PostgreSQL、MongoDB、MariaDB、Redis 等数据库。</li>
+<li><strong>Docker 管理</strong>：轻松部署和管理 Docker 容器。</li>
+<li><strong>Traefik 集成</strong>：自动与 Traefik 集成，实现路由和负载均衡。</li>
+<li><strong>实时监控</strong>：监控 CPU、内存、存储和网络使用情况。</li>
+<li><strong>数据库备份</strong>：支持多种存储目标，实现自动备份。</li>
 </ul>
-<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><ul>
-<li>VPS</li>
-<li>域名</li>
-<li>Cloudfare账号</li>
-<li>ZeroSSL账号</li>
-<li>Github</li>
+<h2 id="为什么选择-Dokploy"><a href="#为什么选择-Dokploy" class="headerlink" title="为什么选择 Dokploy"></a>为什么选择 Dokploy</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>完全开源</td>
+<td>MIT 协议，免费使用</td>
+</tr>
+<tr>
+<td>自托管</td>
+<td>数据完全掌控，无供应商锁定</td>
+</tr>
+<tr>
+<td>简单易用</td>
+<td>Web UI 管理，无需复杂命令</td>
+</tr>
+<tr>
+<td>资源高效</td>
+<td>单机即可运行，低配服务器友好</td>
+</tr>
+<tr>
+<td>功能完整</td>
+<td>应用、数据库、域名、SSL 一站式管理</td>
+</tr>
+</tbody></table>
+<h2 id="部署指南"><a href="#部署指南" class="headerlink" title="部署指南"></a>部署指南</h2><h3 id="服务器要求"><a href="#服务器要求" class="headerlink" title="服务器要求"></a>服务器要求</h3><ul>
+<li>内存：至少 2GB</li>
+<li>磁盘：至少 30GB</li>
 </ul>
-<p>这里需要注意的是，我们注册好的域名必须要先在Cloudfare内增加A记录，方便我们申请SSL证书。</p>
-<p>如果不知道如何添加A记录，请各位自行Google。</p>
-<h3 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h3><ul>
-<li><strong>使用Github进入X-UI官方仓库：<a target="_blank" rel="noopener" href="https://github.com/sprov065/x-ui">https://github.com/sprov065/x-ui</a></strong></li>
-</ul>
-<p>复制官方推荐的脚本：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">bash</span> &lt;(curl -Ls https://raw.githubusercontent.com/sprov065/x-ui/master/install.sh) <span class="hljs-number">0</span>.<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>这是为了保证 Docker 在构建和运行容器时不会消耗过多资源，防止系统崩溃。</p>
+</blockquote>
+<h3 id="Docker-配置"><a href="#Docker-配置" class="headerlink" title="Docker 配置"></a>Docker 配置</h3><p>确保 Docker 已安装，并修改 <code>/etc/docker/daemon.json</code>，以优化日志和启用实验功能：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br><br>    <span class="hljs-attr">&quot;log-driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;json-file&quot;</span><span class="hljs-punctuation">,</span><br><br>    <span class="hljs-attr">&quot;log-opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br><br>        <span class="hljs-attr">&quot;max-size&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;20m&quot;</span><span class="hljs-punctuation">,</span><br><br>        <span class="hljs-attr">&quot;max-file&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3&quot;</span><br><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br><br>    <span class="hljs-attr">&quot;experimental&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br><br>    <span class="hljs-attr">&quot;data-root&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/root/docker_data&quot;</span><br><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>将上述代码复制到你的VPS内执行，<strong>如果提示未安装curl工具，请先安装curl工具</strong></li>
-</ul>
-<p>执行完成后，我们应该能看到以下输出内容</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/%25E5%25AE%2589%25E8%25A3%2585%25E7%25BB%2593%25E6%259E%259C-1024x505.png" srcset="/img/loading.gif" lazyload>安装完成示意图</p>
-<p>面板安装完成后我们在&#x2F;usr&#x2F;local&#x2F;x-ui内可以找到关于面板的配置内容。</p>
-<ul>
-<li><strong>进入Cloudfare官方网站，新增A记录（子域名），指向VPS的IP地址</strong></li>
-</ul>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/A%E8%AE%B0%E5%BD%95-1024x462.png" srcset="/img/loading.gif" lazyload alt="img">添加A记录</p>
-<p>请注意，添加后先不要开启代理，仅限DNS解析。怎样判断是否开启CDN代理呢？很简单，代理状态下方有一片云朵，橙色云朵代表开启CDN，灰色云朵代表仅限DNS解析。</p>
-<p>添加完成后，我们打开新的网页，在网址输入栏内输入你的<strong>域名:54321</strong>（面板初始端口），回车后即可进入到我们的登录界面。</p>
-<p>登录界面是这个样子的：</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/XUI%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2-1024x441.png" srcset="/img/loading.gif" lazyload alt="img">X-UI登录界面</p>
-<p>我们使用默认的用户名与密码登录，即可进入X-UI的设置界面：</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2-1024x311.png" srcset="/img/loading.gif" lazyload alt="img">设置界面</p>
-<p>建议登录之后在立即在<strong>面板设置</strong>内重置面板端口与用户名、登录密码，然后重启面板。</p>
-<ul>
-<li><strong>新建节点</strong></li>
-</ul>
-<p>点击**“入站列表”**，新增入站节点：</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E5%85%A5%E7%AB%99%E8%8A%82%E7%82%B9-1024x317.png" srcset="/img/loading.gif" lazyload alt="img">增加入站节点</p>
-<p>进行节点设置：</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-1-1024x517.png" srcset="/img/loading.gif" lazyload alt="img">节点设置</p>
-<p>如果没有套CDN或其他需求，可以不做其他设置，点击“<strong>添加</strong>”完成添加节点。</p>
-<ul>
-<li><strong>获取链接或者二维码</strong></li>
-</ul>
-<p>添加节点后，我们点击<strong>查看</strong>，点击右下方复制连接获取连接。在V2rayN客户端内添加即可。</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-2.png" srcset="/img/loading.gif" lazyload alt="img">获取链接</p>
-<p>获取二维码，点击二维码图标即可</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-3-1024x221.png" srcset="/img/loading.gif" lazyload alt="img">获取二维码</p>
-<p>至此，使用X-UI搭建的流程就完成了。</p>
-<p>**需要说明的是，以上步骤搭建完成后并不支持CDN套用。**如果想支持CDN套用，则继续参考以下步骤</p>
-<h3 id="CDN套用"><a href="#CDN套用" class="headerlink" title="CDN套用"></a>CDN套用</h3><p>如果需要支持CDN套用，还需要申请一套SSL证书。这一套证书实际上是用于你的子域名的认证的，请不要与主域名的证书混淆！</p>
-<p>在这里我们使用ACME来申请证书。需要说明的是，ACME申请的证书CA方默认为ZeroSSL，需要先去ZeroSSL官网进行注册才能使用。</p>
-<p><strong>2021.11.06更新：</strong></p>
-<p>经实际验证，无需事先在ZeroSSL官网进行注册，使用acme脚本初次申请ZeroSSL证书时会要求个人输入account与password，也可以完成注册。</p>
-<ul>
-<li><strong>安装ACME工具：</strong></li>
-</ul>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">curl https://<span class="hljs-built_in">get</span>.acme.<span class="hljs-keyword">sh</span> | <span class="hljs-keyword">sh</span>	<br></code></pre></td></tr></table></figure>
+<h3 id="安装-Dokploy"><a href="#安装-Dokploy" class="headerlink" title="安装 Dokploy"></a>安装 Dokploy</h3><p>官方提供一键安装脚本：</p>
+<p>Terminal window</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">curl -sSL https://dokploy.<span class="hljs-keyword">com</span>/install.<span class="hljs-keyword">sh</span> | <span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure>
 
-<p>安装后，会在root目录下生成.acme.sh这样的文件夹，使用ls -la命令可以查看。</p>
-<ul>
-<li><strong>设置Cloudfare API：</strong></li>
-</ul>
-<p>登录Cloudfare官网，在左下角的API区域，点击**“获取您的API令牌”**</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/AP%E4%BB%A4%E7%89%8C-1024x574.png" srcset="/img/loading.gif" lazyload alt="img">API令牌</p>
-<p>点击之后进入二级页面，点击API令牌，找到API密钥下方的Global API Key，进行查看</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E6%9F%A5%E7%9C%8BAPI-1024x499.png" srcset="/img/loading.gif" lazyload alt="img">查看API令牌</p>
-<p>请将这份API Key复制到你本地。输入以下命令导入环境变量（复制粘贴时请自行去除掉&#x2F;&#x2F;及之后的内容，在本教程中仅为了注释，实际使用时不需要&#x2F;&#x2F;及之后的内容）：</p>
-<p>export CF_Key&#x3D;”***********************” &#x2F;&#x2F;Global API key</p>
-<p>export CF_Email&#x3D;<a href="mailto:&#53;&#x33;&#48;&#x35;&#52;&#x37;&#49;&#56;&#51;&#64;&#x71;&#113;&#x2e;&#x63;&#x6f;&#x6d;">***************.com</a> &#x2F;&#x2F;Cloudfare 注册邮箱</p>
-<ul>
-<li><strong>申请、安装证书：</strong></li>
-</ul>
-<p>使用以下命令</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">~/<span class="hljs-selector-class">.acme</span>.sh/acme<span class="hljs-selector-class">.sh</span> <span class="hljs-attr">--issue</span> <span class="hljs-attr">--dns</span> dns_cf -d YourDomain -d *<span class="hljs-selector-class">.YourDomain</span><br>mkdir /root/cert<br>~/<span class="hljs-selector-class">.acme</span>.sh/acme<span class="hljs-selector-class">.sh</span> <span class="hljs-attr">--installcert</span> -d YourDomian <span class="hljs-attr">--key-file</span> /root/cert/private<span class="hljs-selector-class">.key</span> <span class="hljs-attr">--fullchain-file</span> /root/cert/cert<span class="hljs-selector-class">.crt</span><br>~/<span class="hljs-selector-class">.acme</span>.sh/acme<span class="hljs-selector-class">.sh</span> <span class="hljs-attr">--upgrade</span> <span class="hljs-attr">--auto-upgrade</span><br>chmod -R <span class="hljs-number">755</span> /root/cert<br></code></pre></td></tr></table></figure>
+<p>完成后，访问 <code>http://your-vps-ip:3000</code> 进行初始设置。</p>
+<h3 id="初始设置"><a href="#初始设置" class="headerlink" title="初始设置"></a>初始设置</h3><ol>
+<li>访问管理界面</li>
+<li>创建管理员账号</li>
+<li>配置服务器信息</li>
+</ol>
+<h2 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h2><h3 id="模板部署"><a href="#模板部署" class="headerlink" title="模板部署"></a>模板部署</h3><p>官方提供各种模板：<a target="_blank" rel="noopener" href="https://templates.dokploy.com/">https://templates.dokploy.com/</a></p>
+<ol>
+<li>选择合适模板</li>
+<li>检查 <code>docker-compose.yml</code> 或其他配置</li>
+<li>点击 <strong>Deploy</strong> 完成部署</li>
+</ol>
+<p>域名设置通过 Traefik 自动反代，无需额外操作，只需解析到服务器即可。</p>
+<h3 id="Git-仓库部署"><a href="#Git-仓库部署" class="headerlink" title="Git 仓库部署"></a>Git 仓库部署</h3><ol>
+<li>项目 → 新建应用 → Git</li>
+<li>配置仓库地址和分支</li>
+<li>设置构建命令和启动命令</li>
+<li>部署</li>
+</ol>
+<p><strong>配置示例（Next.js）</strong>：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript">构建命令: <span class="hljs-built_in">npm</span> install &amp;&amp; <span class="hljs-built_in">npm</span> run build<br><br>启动命令: <span class="hljs-built_in">npm</span> start<br><br>端口: <span class="hljs-number">3000</span><br></code></pre></td></tr></table></figure>
 
-<p>安装成功如下图提示：</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85-1-1024x239.png" srcset="/img/loading.gif" lazyload alt="img">证书安装</p>
-<p>安装好证书后，我们就可以设置开启TLS套用CDN了。</p>
-<p><strong>2021.09.01更新：</strong></p>
-<p>由于acme脚本变更了默认CA方为ZeroSSL，而ZeroSSL存在证书数量的限制（除非加钱），建议大家切换为Let‘sEncrypt的证书。切换方式：</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">~/.acme.<span class="hljs-keyword">sh</span>/acme.<span class="hljs-keyword">sh</span> --<span class="hljs-keyword">set</span>-default-<span class="hljs-keyword">ca</span>  --server  letsencrypt<br></code></pre></td></tr></table></figure>
+<h3 id="Dockerfile-部署"><a href="#Dockerfile-部署" class="headerlink" title="Dockerfile 部署"></a>Dockerfile 部署</h3><p>支持自定义 Dockerfile：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">FROM</span> node:<span class="hljs-number">20</span>-alpine<br><br><span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /app</span><br><br><span class="hljs-keyword">COPY</span><span class="language-bash"> package*.json ./</span><br><br><span class="hljs-keyword">RUN</span><span class="language-bash"> npm install</span><br><br><span class="hljs-keyword">COPY</span><span class="language-bash"> . .</span><br><br><span class="hljs-keyword">RUN</span><span class="language-bash"> npm run build</span><br><br><span class="hljs-keyword">EXPOSE</span> <span class="hljs-number">3000</span><br><br><span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;npm&quot;</span>, <span class="hljs-string">&quot;start&quot;</span>]</span><br></code></pre></td></tr></table></figure>
 
-<p>切换为Let’s Encrypt后，安装证书的命令相应地做变更：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">~<span class="hljs-string">/.acme.sh/acme.sh</span> <span class="hljs-params">--installcert</span>  -d  YourDomain -d *<span class="hljs-string">.YourDomain</span> <span class="hljs-params">--ca-file</span> <span class="hljs-string">/root/cert/ca.cer</span> <span class="hljs-params">--cert-file</span> <span class="hljs-string">/root/cert/YourDomain.cer</span> <span class="hljs-params">--key-file</span>   <span class="hljs-string">/root/cert/YourDomain.key</span> <span class="hljs-params">--fullchain-file</span> <span class="hljs-string">/root/cert/fullchain.cer</span><br></code></pre></td></tr></table></figure>
+<h3 id="Docker-Compose-部署"><a href="#Docker-Compose-部署" class="headerlink" title="Docker Compose 部署"></a>Docker Compose 部署</h3><p>对于复杂应用，支持 Docker Compose：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">version</span>: &#x27;<span class="hljs-number">3</span>.<span class="hljs-number">8</span>&#x27;services:  app:    build: .    ports:      - &#x27;<span class="hljs-number">3000</span>:<span class="hljs-number">3000</span>&#x27;    environment:      - DATABASE_URL=<span class="hljs-variable">$&#123;DATABASE_URL&#125;</span>    depends_on:      - db  db:    image: postgres:<span class="hljs-number">15</span>    environment:      - POSTGRES_PASSWORD=<span class="hljs-variable">$&#123;DB_PASSWORD&#125;</span>    volumes:      - pgdata:/var/lib/postgresql/data<br><span class="hljs-attribute">volumes</span>:  pgdata:<br></code></pre></td></tr></table></figure>
 
-<p>注： <strong>YourDomain</strong> 代表你自己的域名。</p>
-<ul>
-<li><strong>设置TLS</strong></li>
-</ul>
-<p>进入面板界面，添加入站节点，设置如下：</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E5%BC%80%E5%90%AFtls.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>设置过程中需要注意的点：</p>
-<p><strong>1.端口需要是Cloudfare支持分发的端口，如443等</strong></p>
-<p><strong>2.套用CDN需要搭配WebSocket，请在传输设置项呢选择ws</strong></p>
-<p>3**.ws路径可随意，但最好不要为根路径**</p>
-<p><strong>4.公钥文件路径与密钥文件路径请根据你证书安装的实际位置进行填写</strong></p>
-<p><strong>5.在使用证书与密钥时，除了设置路径也可以通过填入certificate file content的内容达到使用的目的</strong></p>
-<p>添加节点后，我们回到Cloudflare，将灰色云朵置为橙色。然后我们回到VPS侧，使用ping +域名查看IP是否变更，如果不再为我们VPS的IP，则表明已经成功套用CDN。</p>
-<ul>
-<li><strong>开启证书自动更新</strong></li>
-</ul>
-<p>本身acme脚本提供了自动更新证书的功能，证书在90天到期后会自动更新，我们需要开启该功能，这样可以保证我们的证书一直不过期，自动更新证书需要使用如下命令：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">~/<span class="hljs-selector-class">.acme</span>.sh/acme<span class="hljs-selector-class">.sh</span> <span class="hljs-attr">--upgrade</span> <span class="hljs-attr">--auto-upgrade</span><br></code></pre></td></tr></table></figure>
+<h3 id="预构建镜像"><a href="#预构建镜像" class="headerlink" title="预构建镜像"></a>预构建镜像</h3><p>直接部署 Docker Hub 镜像：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">镜像: nginx:latest</span><br><br><span class="hljs-section">端口: 80</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="面板套用CDN"><a href="#面板套用CDN" class="headerlink" title="面板套用CDN"></a>面板套用CDN</h3><p>除了我们搭建的节点可以套用CDN，我们的X-UI面板也支持套用CDN。如果需要X-UI面板也套用CDN，我们需要在面板内修改面板监听的端口为Cloudflare支持的端口，同时设置SSL证书密钥路径。<strong>在这里需要注</strong>意，<strong>面板的监听端口一定不要与你的节点共用同一端口。</strong></p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/%E9%9D%A2%E6%9D%BF%E7%AB%AF%E5%8F%A3-1024x399.png" srcset="/img/loading.gif" lazyload alt="img">更改面板设置</p>
-<p>设置完以后记得重启面板，重新输入：<strong>https:&#x2F;&#x2F;域名+端口</strong>,正常进入面板界面。同时我们会发现我们的网页已经是安装加密的。</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/image-4.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>至此，面板也支持套用CDN了。</p>
-<p>以上就是X-UI使用的整个教程，大家可以依照教程自行进行测试使用，如有问题可以在评论区与我沟通。本人在搭建完成后进行了一天的使用，总体使用下来还是非常方便快捷的，很适合新手使用。在这里也要感谢X-UI的开发者们，是他们无私的付出才给我们带来了如此好用的工具，Respect！</p>
+<h2 id="数据库服务"><a href="#数据库服务" class="headerlink" title="数据库服务"></a>数据库服务</h2><p>Dokploy 内置数据库管理：</p>
+<h3 id="PostgreSQL"><a href="#PostgreSQL" class="headerlink" title="PostgreSQL"></a>PostgreSQL</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 数据库 → 新建 → PostgreSQL<br><br><span class="hljs-bullet">2.</span> 设置用户名、密码、数据库名<br><br><span class="hljs-bullet">3.</span> 创建并获取连接信息<br></code></pre></td></tr></table></figure>
+
+<p>连接字符串：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">postgres://user:password@localhost:5432/dbname<br></code></pre></td></tr></table></figure>
+
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 数据库 → 新建 → MySQL<br><br><span class="hljs-bullet">2.</span> 配置参数<br><br><span class="hljs-bullet">3.</span> 获取连接信息<br></code></pre></td></tr></table></figure>
+
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 数据库 → 新建 → Redis<br><br><span class="hljs-bullet">2.</span> 设置密码<br><br><span class="hljs-bullet">3.</span> 获取连接信息<br></code></pre></td></tr></table></figure>
+
+<h3 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 数据库 → 新建 → MongoDB<br><br><span class="hljs-bullet">2.</span> 配置认证<br><br><span class="hljs-bullet">3.</span> 获取连接 URI<br></code></pre></td></tr></table></figure>
+
+<h2 id="域名与-SSL"><a href="#域名与-SSL" class="headerlink" title="域名与 SSL"></a>域名与 SSL</h2><h3 id="配置域名"><a href="#配置域名" class="headerlink" title="配置域名"></a>配置域名</h3><ol>
+<li>应用设置 → 域名</li>
+<li>添加自定义域名</li>
+<li>配置 DNS 指向服务器 IP</li>
+</ol>
+<p>DNS 记录：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">类型: A</span><br><br><span class="hljs-section">名称: @</span><br><br><span class="hljs-section">值: 服务器IP</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="自动-SSL"><a href="#自动-SSL" class="headerlink" title="自动 SSL"></a>自动 SSL</h3><p>Dokploy 集成 Let’s Encrypt，自动申请和续期证书：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">应用设置 → 域名 → 启用 HTTPS<br></code></pre></td></tr></table></figure>
+
+<h3 id="通配符证书"><a href="#通配符证书" class="headerlink" title="通配符证书"></a>通配符证书</h3><p>支持申请 <code>*.example.com</code> 通配符证书，需要配置 DNS 验证。</p>
+<h3 id="安全设置"><a href="#安全设置" class="headerlink" title="安全设置"></a>安全设置</h3><p>如果你不是内网，而是部署在公网vps上的。建议你设置自定义域名后关闭3000端口来保证安全. 你只需要打开80 443通过Traefik访问</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stata">docker service <span class="hljs-keyword">update</span> --publish-<span class="hljs-keyword">rm</span> <span class="hljs-string">&quot;published=3000,target=3000,mode=host&quot;</span> dokploy<br>docker service <span class="hljs-keyword">inspect</span> dokploy --<span class="hljs-keyword">format</span> &#x27;&#123;&#123;.Spec.EndpointSpec&#125;&#125;&#x27;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><h3 id="应用级变量"><a href="#应用级变量" class="headerlink" title="应用级变量"></a>应用级变量</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros">应用设置 → 环境变量<br><span class="hljs-attribute">DATABASE_URL</span>=postgres://...<br><br><span class="hljs-attribute">API_KEY</span>=sk-xxxxx<br><br><span class="hljs-attribute">NODE_ENV</span>=production<br></code></pre></td></tr></table></figure>
+
+<h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><p>可在多个应用间共享：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">设置 → 全局变量<br></code></pre></td></tr></table></figure>
+
+<h3 id="变量引用"><a href="#变量引用" class="headerlink" title="变量引用"></a>变量引用</h3><p>支持引用数据库连接信息：</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="language-xml">DATABASE_URL=</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">postgres.url</span>&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">REDIS_URL=</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">redis.url</span>&#125;&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="持续部署"><a href="#持续部署" class="headerlink" title="持续部署"></a>持续部署</h2><h3 id="Webhook-自动部署"><a href="#Webhook-自动部署" class="headerlink" title="Webhook 自动部署"></a>Webhook 自动部署</h3><p>每个应用提供 Webhook URL：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">应用设置 → 部署 → Webhook <span class="hljs-built_in">URL</span><br></code></pre></td></tr></table></figure>
+
+<p>在 GitHub 仓库设置中添加 Webhook。</p>
+<h3 id="分支自动部署"><a href="#分支自动部署" class="headerlink" title="分支自动部署"></a>分支自动部署</h3><p>可配置特定分支触发部署：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">main</span> → 生产环境<br><br>develop → 测试环境<br></code></pre></td></tr></table></figure>
+
+<h2 id="监控与日志"><a href="#监控与日志" class="headerlink" title="监控与日志"></a>监控与日志</h2><h3 id="应用日志"><a href="#应用日志" class="headerlink" title="应用日志"></a>应用日志</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">应用详情 → 日志<br></code></pre></td></tr></table></figure>
+
+<p>实时查看应用输出。</p>
+<h3 id="资源监控"><a href="#资源监控" class="headerlink" title="资源监控"></a>资源监控</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">应用详情 → 监控<br></code></pre></td></tr></table></figure>
+
+<p>查看 CPU、内存、网络使用。</p>
+<h3 id="部署历史"><a href="#部署历史" class="headerlink" title="部署历史"></a>部署历史</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">应用详情 → 部署记录<br></code></pre></td></tr></table></figure>
+
+<p>支持查看历史部署和回滚。</p>
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><h3 id="数据库备份"><a href="#数据库备份" class="headerlink" title="数据库备份"></a>数据库备份</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">数据库 → 备份 → 创建备份<br></code></pre></td></tr></table></figure>
+
+<p>支持定时自动备份。</p>
+<h3 id="导出配置"><a href="#导出配置" class="headerlink" title="导出配置"></a>导出配置</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">设置 → 导出配置<br></code></pre></td></tr></table></figure>
+
+<p>备份所有应用和数据库配置。</p>
+<h2 id="高级配置"><a href="#高级配置" class="headerlink" title="高级配置"></a>高级配置</h2><h3 id="资源限制"><a href="#资源限制" class="headerlink" title="资源限制"></a>资源限制</h3><p>为每个应用设置资源限制：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">CPU: 1 核</span><br><br><span class="hljs-section">内存: 512 MB</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="健康检查"><a href="#健康检查" class="headerlink" title="健康检查"></a>健康检查</h3><p>配置健康检查确保应用可用：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">路径: /api/health</span><br><br><span class="hljs-section">间隔: 30 秒</span><br><br><span class="hljs-section">超时: 10 秒</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="自定义启动"><a href="#自定义启动" class="headerlink" title="自定义启动"></a>自定义启动</h3><p>使用 Procfile 定义启动方式：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">web:</span> npm start<br><br><span class="hljs-symbol">worker:</span> npm run worker<br></code></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Dokploy 通过简单的一键安装和图形化界面，极大降低了容器部署门槛，同时集成了 Git CI&#x2F;CD、数据库管理、自动备份、监控等功能，是个人开发者和小型团队部署应用的理想选择。</p>
+<p>参考:</p>
+<p><a target="_blank" rel="noopener" href="https://catcat.blog/dokploy-deploy">https://catcat.blog/dokploy-deploy</a></p>
+<p><a target="_blank" rel="noopener" href="https://dokploy.com/docs">https://dokploy.com/docs</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.wangshengliang.cn/blog/%E6%9D%82%E8%B0%88/dokploy/">https://www.wangshengliang.cn/blog/%E6%9D%82%E8%B0%88/dokploy/</a></p>
 
                 
               </div>
@@ -750,9 +765,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" class="print-no-link">#科学上网</a>
+        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
       
-        <a href="/tags/X-ui/" class="print-no-link">#X-ui</a>
+        <a href="/tags/%E8%87%AA%E6%89%98%E7%AE%A1/" class="print-no-link">#自托管</a>
       
     </div>
   
@@ -764,8 +779,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN</div>
-      <div>https://blog.quickso.cn/2022/02/04/科学上网：使用X-UI面板快速搭建多协议、多用户代理服务，支持CDN/</div>
+      <div>Dokploy自托管PaaS平台部署指南</div>
+      <div>https://blog.quickso.cn/2026/05/27/Dokploy自托管PaaS平台部署指南/</div>
     </div>
     <div class="license-meta">
       
@@ -777,7 +792,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年2月4日</div>
+          <div>2026年5月27日</div>
         </div>
       
       
@@ -809,18 +824,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/02/12/FileBrowser%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/" title="FileBrowser安装及使用">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">FileBrowser安装及使用</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/30/Searx%EF%BC%9A%E6%90%AD%E5%BB%BA%E7%A7%81%E4%BA%BA%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%B9%B3%E5%8F%B0%EF%BC%8C%E5%8F%AF%E5%B1%95%E7%8E%B0Google-Bing%E7%AD%8970%E5%A4%9A%E7%A7%8D%E6%90%9C%E7%B4%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/" title="Searx：搭建私人的搜索引擎平台，可展现Google/Bing等70多种搜索网站的搜索结果">
-                        <span class="hidden-mobile">Searx：搭建私人的搜索引擎平台，可展现Google/Bing等70多种搜索网站的搜索结果</span>
+                      <a href="/2026/04/15/DN42%E7%BD%91%E7%BB%9C%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/" title="DN42网络入坑指南">
+                        <span class="hidden-mobile">DN42网络入坑指南</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
