@@ -19,12 +19,12 @@
   <meta name="author" content="木子欢儿">
   <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
   
-    <meta name="description" content="AnyLink是一个企业级远程办公 ssl vpn 软件，可以支持多人同时在线使用。基于 openconnect 协议开发，并且借鉴了 ocserv 的开发思路，可以完全兼容 AnyConnect 客户端。   开源仓库：https:&#x2F;&#x2F;github.com&#x2F;bjdgyc&#x2F;anylink AnyLink 最主要的功能莫过于用户分组功能.通过设置分组权限可以使不同用户或员工能访问的网段和路由也不同">
+    <meta name="description" content="AnyLink是一个企业级远程办公 ssl v*n 软件，可以支持多人同时在线使用。基于 openconnect 协议开发，并且借鉴了 ocserv 的开发思路，可以完全兼容 AnyConnect 客户端。   开源仓库：https:&#x2F;&#x2F;github.com&#x2F;bjdgyc&#x2F;anylink AnyLink 最主要的功能莫过于用户分组功能.通过设置分组权限可以使不同用户或员工能访问的网段和路由也不同">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用 Docker 构建 AnyLink 企业级 VPN 及客户端配置全攻略">
-<meta property="og:url" content="https://blog.quickso.cn/2025/02/11/%E4%BD%BF%E7%94%A8%20Docker%20%E6%9E%84%E5%BB%BA%20AnyLink%20%E4%BC%81%E4%B8%9A%E7%BA%A7%20VPN%20%E5%8F%8A%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E5%85%A8%E6%94%BB%E7%95%A5/index.html">
+<meta property="og:title" content="使用 Docker 构建 AnyLink 企业级异地组网 及客户端配置全攻略">
+<meta property="og:url" content="https://blog.quickso.cn/2025/02/11/%E4%BD%BF%E7%94%A8%20Docker%20%E6%9E%84%E5%BB%BA%20AnyLink%20%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%8F%8A%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E5%85%A8%E6%94%BB%E7%95%A5/index.html">
 <meta property="og:site_name" content="点滴记忆">
-<meta property="og:description" content="AnyLink是一个企业级远程办公 ssl vpn 软件，可以支持多人同时在线使用。基于 openconnect 协议开发，并且借鉴了 ocserv 的开发思路，可以完全兼容 AnyConnect 客户端。   开源仓库：https:&#x2F;&#x2F;github.com&#x2F;bjdgyc&#x2F;anylink AnyLink 最主要的功能莫过于用户分组功能.通过设置分组权限可以使不同用户或员工能访问的网段和路由也不同">
+<meta property="og:description" content="AnyLink是一个企业级远程办公 ssl v*n 软件，可以支持多人同时在线使用。基于 openconnect 协议开发，并且借鉴了 ocserv 的开发思路，可以完全兼容 AnyConnect 客户端。   开源仓库：https:&#x2F;&#x2F;github.com&#x2F;bjdgyc&#x2F;anylink AnyLink 最主要的功能莫过于用户分组功能.通过设置分组权限可以使不同用户或员工能访问的网段和路由也不同">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/online.jpg">
 <meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/3933217940.jpg">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250211191743260.png">
 <meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250209113446838.png">
 <meta property="article:published_time" content="2025-02-11T11:01:27.000Z">
-<meta property="article:modified_time" content="2026-03-18T12:28:50.575Z">
+<meta property="article:modified_time" content="2026-06-08T08:35:41.918Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Anylink">
 <meta property="article:tag" content="Docker">
@@ -44,7 +44,7 @@
   
   
   
-  <title>使用 Docker 构建 AnyLink 企业级 VPN 及客户端配置全攻略 - 点滴记忆</title>
+  <title>使用 Docker 构建 AnyLink 企业级异地组网 及客户端配置全攻略 - 点滴记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -474,7 +474,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="使用 Docker 构建 AnyLink 企业级 VPN 及客户端配置全攻略"></span>
+            <span id="subtitle" data-typed-text="使用 Docker 构建 AnyLink 企业级异地组网 及客户端配置全攻略"></span>
           
         </div>
 
@@ -552,12 +552,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">使用 Docker 构建 AnyLink 企业级 VPN 及客户端配置全攻略</h1>
+            <h1 id="seo-header">使用 Docker 构建 AnyLink 企业级异地组网 及客户端配置全攻略</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月18日 晚上
+                    本文最后更新于 2026年6月8日 下午
                   
                 
               </p>
@@ -566,7 +566,7 @@
               <div class="markdown-body">
                 
                 <blockquote>
-<p>AnyLink是一个企业级远程办公 ssl vpn 软件，可以支持多人同时在线使用。基于 openconnect 协议开发，并且借鉴了 ocserv 的开发思路，可以完全兼容 AnyConnect 客户端。</p>
+<p>AnyLink是一个企业级远程办公 ssl v*n 软件，可以支持多人同时在线使用。基于 openconnect 协议开发，并且借鉴了 ocserv 的开发思路，可以完全兼容 AnyConnect 客户端。</p>
 </blockquote>
 <p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/online.jpg" srcset="/img/loading.gif" lazyload alt="online"></p>
 <p>开源仓库：<a target="_blank" rel="noopener" href="https://github.com/bjdgyc/anylink">https://github.com/bjdgyc/anylink</a></p>
@@ -701,8 +701,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>使用 Docker 构建 AnyLink 企业级 VPN 及客户端配置全攻略</div>
-      <div>https://blog.quickso.cn/2025/02/11/使用 Docker 构建 AnyLink 企业级 VPN 及客户端配置全攻略/</div>
+      <div>使用 Docker 构建 AnyLink 企业级异地组网 及客户端配置全攻略</div>
+      <div>https://blog.quickso.cn/2025/02/11/使用 Docker 构建 AnyLink 企业级异地组网及客户端配置全攻略/</div>
     </div>
     <div class="license-meta">
       
