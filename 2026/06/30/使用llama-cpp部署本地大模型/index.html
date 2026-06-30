@@ -19,31 +19,26 @@
   <meta name="author" content="木子欢儿">
   <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
   
-    <meta name="description" content="近期，杭州深度求索人工智能基础技术研究有限公司正式发布了其最新研发的高性能AI推理模型——DeepSeekR1。该模型在数学、代码和自然语言推理等任务上表现卓越，性能直接对标OpenAI的o1正式版，同时以开源形式向全球开发者开放，并使用MIT协议开源，支持免费商用，无需申请授权，为LLM大模型开源世界又补给了满满一仓库弹药。  DeepSeek R1的核心优势DeepSeek R1的最大亮点在于">
+    <meta name="description" content="前言随着 Qwen、Llama、DeepSeek 等开源大模型越来越成熟，本地部署已经成为很多开发者的选择。 目前最轻量、最流行的推理框架之一就是 llama.cpp。  https:&#x2F;&#x2F;llama.app&#x2F; https:&#x2F;&#x2F;github.com&#x2F;ggml-org&#x2F;llama.cpp 它具有以下特点：  支持 Windows、Linux、macOS 支持 CPU 推理 支持 NVIDIA CUDA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="本地部署免费开源DeepSeek-R1大模型">
-<meta property="og:url" content="https://blog.quickso.cn/2025/01/27/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%85%8D%E8%B4%B9%E5%BC%80%E6%BA%90DeepSeek-R1%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:title" content="使用llama.cpp部署本地大模型">
+<meta property="og:url" content="https://blog.quickso.cn/2026/06/30/%E4%BD%BF%E7%94%A8llama-cpp%E9%83%A8%E7%BD%B2%E6%9C%AC%E5%9C%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="点滴记忆">
-<meta property="og:description" content="近期，杭州深度求索人工智能基础技术研究有限公司正式发布了其最新研发的高性能AI推理模型——DeepSeekR1。该模型在数学、代码和自然语言推理等任务上表现卓越，性能直接对标OpenAI的o1正式版，同时以开源形式向全球开发者开放，并使用MIT协议开源，支持免费商用，无需申请授权，为LLM大模型开源世界又补给了满满一仓库弹药。  DeepSeek R1的核心优势DeepSeek R1的最大亮点在于">
+<meta property="og:description" content="前言随着 Qwen、Llama、DeepSeek 等开源大模型越来越成熟，本地部署已经成为很多开发者的选择。 目前最轻量、最流行的推理框架之一就是 llama.cpp。  https:&#x2F;&#x2F;llama.app&#x2F; https:&#x2F;&#x2F;github.com&#x2F;ggml-org&#x2F;llama.cpp 它具有以下特点：  支持 Windows、Linux、macOS 支持 CPU 推理 支持 NVIDIA CUDA">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250127133659012.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250127130112854.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250127130631788.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250127131814855.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250127131814855.png">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250127130936244.png">
-<meta property="article:published_time" content="2025-01-27T04:47:32.000Z">
-<meta property="article:modified_time" content="2026-03-18T12:20:00.070Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/ggml-org/llama.brand/refs/heads/master/cover/llama-cpp/cover-llama-cpp-dark.svg">
+<meta property="article:published_time" content="2026-06-30T04:31:27.000Z">
+<meta property="article:modified_time" content="2026-06-30T04:59:42.575Z">
 <meta property="article:author" content="木子欢儿">
-<meta property="article:tag" content="Deepseek">
+<meta property="article:tag" content="llama.cpp">
 <meta property="article:tag" content="人工智能">
 <meta property="article:tag" content="大模型">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250127133659012.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ggml-org/llama.brand/refs/heads/master/cover/llama-cpp/cover-llama-cpp-dark.svg">
   
   
   
-  <title>本地部署免费开源DeepSeek-R1大模型 - 点滴记忆</title>
+  <title>使用llama.cpp部署本地大模型 - 点滴记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -473,7 +468,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="本地部署免费开源DeepSeek-R1大模型"></span>
+            <span id="subtitle" data-typed-text="使用llama.cpp部署本地大模型"></span>
           
         </div>
 
@@ -489,8 +484,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-01-27 12:47" pubdate>
-          2025年1月27日 下午
+        <time datetime="2026-06-30 12:31" pubdate>
+          2026年6月30日 下午
         </time>
       </span>
     
@@ -501,7 +496,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k 字
+          4.1k 字
         
       </span>
     
@@ -512,7 +507,7 @@
         
         
         
-          30 分钟
+          34 分钟
         
       </span>
     
@@ -551,12 +546,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">本地部署免费开源DeepSeek-R1大模型</h1>
+            <h1 id="seo-header">使用llama.cpp部署本地大模型</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月18日 晚上
+                    本文最后更新于 2026年6月30日 下午
                   
                 
               </p>
@@ -564,512 +559,319 @@
             
               <div class="markdown-body">
                 
-                <p>近期，杭州深度求索人工智能基础技术研究有限公司正式发布了其最新研发的高性能AI推理模型——<strong>DeepSeekR1</strong>。该模型在数学、代码和自然语言推理等任务上表现卓越，性能直接对标OpenAI的o1正式版，同时以开源形式向全球开发者开放，并使用MIT协议开源，支持免费商用，无需申请授权，为LLM大模型开源世界又补给了满满一仓库弹药。</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250127133659012.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="DeepSeek-R1的核心优势"><a href="#DeepSeek-R1的核心优势" class="headerlink" title="DeepSeek R1的核心优势"></a>DeepSeek R1的核心优势</h4><p>DeepSeek R1的最大亮点在于其通过强化学习（RL）技术显著提升了模型的推理能力，且仅需极少量标注数据即可实现高效训练。与OpenAI的o1相比，R1在多个基准测试中表现优异，同时价格仅为o1的几十分之一，具有极高的性价比。</p>
-<ol>
-<li><strong>强化学习驱动的推理能力</strong><br>R1在后训练阶段大规模应用了强化学习技术，无需依赖大量监督微调（SFT）数据，即可显著提升模型的推理能力。这一创新方法不仅降低了训练成本，还使模型在复杂任务中表现出色。</li>
-<li><strong>长链推理与模型蒸馏</strong><br>R1采用了长链推理（Chain-of-Thought, CoT）技术，能够逐步分解复杂问题，并通过多步骤逻辑推理解决问题。此外，R1支持模型蒸馏，开发者可以将其推理能力迁移到更小型的模型中，满足特定场景需求。</li>
-<li><strong>开源与灵活的许可证</strong><br>R1遵循MIT License开源协议，允许用户自由使用、修改和商用。同时，DeepSeek还开源了R1-Zero和多个蒸馏后的小模型，进一步推动了AI技术的普及与创新。</li>
-</ol>
-<p>各项性能指标更是和OpenAI-o1 模型不相上下，甚至做到了小部分的超越，关键是开源的，我们可以本地部署使用</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250127130112854.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="1、本地部署"><a href="#1、本地部署" class="headerlink" title="1、本地部署"></a>1、本地部署</h2><p>我们这里使用Ollama来进行模型部署,安装你的系统对应的客户端</p>
-<h3 id="安装Ollama"><a href="#安装Ollama" class="headerlink" title="安装Ollama"></a>安装Ollama</h3><p>Ollama 官方版：<a target="_blank" rel="noopener" href="https://ollama.com/">ollama.com&#x2F;</a></p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/20250127130631788.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="安装模型"><a href="#安装模型" class="headerlink" title="安装模型"></a>安装模型</h3><blockquote>
-<p>如果使用 <strong>4-bit 量化</strong>，显存需求：</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>随着 Qwen、Llama、DeepSeek 等开源大模型越来越成熟，本地部署已经成为很多开发者的选择。</p>
+<p>目前最轻量、最流行的推理框架之一就是 <strong>llama.cpp</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/ggml-org/llama.brand/refs/heads/master/cover/llama-cpp/cover-llama-cpp-dark.svg" srcset="/img/loading.gif" lazyload></p>
+<p><a target="_blank" rel="noopener" href="https://llama.app/">https://llama.app/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ggml-org/llama.cpp">https://github.com/ggml-org/llama.cpp</a></p>
+<p>它具有以下特点：</p>
 <ul>
-<li><p><strong>1.5B</strong>：约 <strong>1 GB</strong></p>
-</li>
-<li><p><strong>7B</strong>：约 <strong>4 GB</strong></p>
-</li>
-<li><p><strong>8B</strong>：约 <strong>4.5 GB</strong></p>
-</li>
-<li><p><strong>14B</strong>：约 <strong>8 GB</strong></p>
-</li>
-<li><p><strong>32B</strong>：约 <strong>18 GB</strong></p>
-</li>
-<li><p><strong>70B</strong>：约 <strong>40 GB</strong> </p>
-</li>
-<li><p>对于资源有限的用户，推荐使用 <strong>1.5B</strong> 或 <strong>7B</strong> 模型，它们可以在单张消费级显卡上运行。</p>
-</li>
-<li><p>如果需要更高的性能，可以选择 <strong>14B</strong> 或 <strong>32B</strong> 模型，但需要多 GPU 配置。</p>
-</li>
-<li><p><strong>70B</strong> 模型适合高端计算环境，需要多张高端 GPU 支持。</p>
-</li>
+<li>支持 Windows、Linux、macOS</li>
+<li>支持 CPU 推理</li>
+<li>支持 NVIDIA CUDA</li>
+<li>支持 AMD ROCm</li>
+<li>支持 Apple Metal</li>
+<li>支持 OpenAI API</li>
+<li>支持 GGUF 模型</li>
+<li>部署简单，占用资源少</li>
 </ul>
-</blockquote>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250127131814855.png" srcset="/img/loading.gif" lazyload alt="image-20250127131814855"></p>
-<p><strong>1.5B Qwen DeepSeek R1</strong></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ollama</span> run deepseek-r1:<span class="hljs-number">1</span>.<span class="hljs-number">5</span>b<br></code></pre></td></tr></table></figure>
+<p>本文介绍如何使用 <strong>llama.cpp</strong> 完整部署本地大模型。</p>
+<h1 id="一、什么是-GGUF"><a href="#一、什么是-GGUF" class="headerlink" title="一、什么是 GGUF"></a>一、什么是 GGUF</h1><p>GGUF 是 llama.cpp 官方推荐的模型格式。</p>
+<p>优点：</p>
+<ul>
+<li>加载速度快</li>
+<li>支持量化</li>
+<li>节省内存</li>
+<li>CPU&#x2F;GPU 都支持</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Qwen3</span>-<span class="hljs-number">4</span>B-Q4_K_M.gguf<br></code></pre></td></tr></table></figure>
 
-<p><strong>7B Qwen DeepSeek R1</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ollama <span class="hljs-built_in">run</span> deepseek-r1:7b<br></code></pre></td></tr></table></figure>
-
-<p><strong>8B Llama DeepSeek R1</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ollama <span class="hljs-built_in">run</span> deepseek-r1:8b<br></code></pre></td></tr></table></figure>
-
-<p><strong>14B Qwen DeepSeek R1</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ollama <span class="hljs-built_in">run</span> deepseek-r1:14b<br></code></pre></td></tr></table></figure>
-
-<p><strong>32B Qwen DeepSeek R1</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ollama <span class="hljs-built_in">run</span> deepseek-r1:32b<br></code></pre></td></tr></table></figure>
-
-<p><strong>70B Llama DeepSeek R1</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ollama <span class="hljs-built_in">run</span> deepseek-r1:70b<br></code></pre></td></tr></table></figure>
-
-
-
-<p>安装完就可以使用终端去聊天了</p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250127131814855.png" srcset="/img/loading.gif" lazyload alt="image-20250127131814855"></p>
-<h3 id="安装控制端"><a href="#安装控制端" class="headerlink" title="安装控制端"></a>安装控制端</h3><p>为了更方便使用我们安装一个控制端，也可以使用其他的</p>
-<p>浏览器<strong>Web UI 控制端【<a target="_blank" rel="noopener" href="https://chromewebstore.google.com/detail/page-assist-%E6%9C%AC%E5%9C%B0-ai-%E6%A8%A1%E5%9E%8B%E7%9A%84-web/jfgfiigpkhlkbnfnbobbkinehhfdhndo">点击安装</a>】</strong></p>
-<p><img src="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn@main/img/image-20250127130936244.png" srcset="/img/loading.gif" lazyload alt="image-20250127130936244"></p>
-<h2 id="2-更多模型下载"><a href="#2-更多模型下载" class="headerlink" title="2. 更多模型下载"></a>2. 更多模型下载</h2><h3 id="DeepSeek-R1"><a href="#DeepSeek-R1" class="headerlink" title="DeepSeek-R1"></a>DeepSeek-R1</h3><table>
-<thead>
-<tr>
-<th align="center"><strong>模型</strong></th>
-<th align="center"><strong>#总参数</strong></th>
-<th align="center"><strong>#已激活参数</strong></th>
-<th align="center"><strong>上下文长度</strong></th>
-<th align="center"><strong>下载</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">DeepSeek-R1-Zero</td>
-<td align="center">671B</td>
-<td align="center">37B</td>
-<td align="center">128千</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Zero">🤗 HuggingFace</a></td>
-</tr>
-<tr>
-<td align="center">DeepSeek-R1</td>
-<td align="center">671B</td>
-<td align="center">37B</td>
-<td align="center">128千</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-R1">🤗 HuggingFace</a></td>
-</tr>
-</tbody></table>
-<p>DeepSeek-R1-Zero 和 DeepSeek-R1 基于 DeepSeek-V3-Base 进行训练。有关模型架构的更多详细信息，请参阅<a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/DeepSeek-V3">DeepSeek-V3</a>存储库。</p>
-<h3 id="DeepSeek-R1-Distill-模型"><a href="#DeepSeek-R1-Distill-模型" class="headerlink" title="DeepSeek-R1-Distill 模型"></a>DeepSeek-R1-Distill 模型</h3><table>
-<thead>
-<tr>
-<th align="center"><strong>模型</strong></th>
-<th align="center"><strong>基础模型</strong></th>
-<th align="center"><strong>下载</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">DeepSeek-R1-Distill-Qwen-1.5B</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/Qwen/Qwen2.5-Math-1.5B">Qwen2.5-Math-1.5B</a></td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B">🤗 HuggingFace</a></td>
-</tr>
-<tr>
-<td align="center">DeepSeek-R1-Distill-Qwen-7B</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/Qwen/Qwen2.5-Math-7B">Qwen2.5-Math-7B</a></td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B">🤗 HuggingFace</a></td>
-</tr>
-<tr>
-<td align="center">DeepSeek-R1-Distill-Llama-8B</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/meta-llama/Llama-3.1-8B">Llama-3.1-8B</a></td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-8B">🤗 HuggingFace</a></td>
-</tr>
-<tr>
-<td align="center">DeepSeek-R1-Distill-Qwen-14B</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/Qwen/Qwen2.5-14B">Qwen2.5-14B</a></td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B">🤗 HuggingFace</a></td>
-</tr>
-<tr>
-<td align="center">DeepSeek-R1-Distill-Qwen-32B</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/Qwen/Qwen2.5-32B">Qwen2.5-32B</a></td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B">🤗 HuggingFace</a></td>
-</tr>
-<tr>
-<td align="center">DeepSeek-R1-Distill-Llama-70B</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct">Llama-3.3-70B-Instruct</a></td>
-<td align="center"><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B">🤗 HuggingFace</a></td>
-</tr>
-</tbody></table>
-<p>DeepSeek-R1-Distill 模型基于开源模型进行了微调，使用了 DeepSeek-R1 生成的样本。我们对其配置和分词器进行了轻微更改。请使用我们的设置来运行这些模型。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="4-评估结果"><a href="#4-评估结果" class="headerlink" title="4.评估结果"></a>4.评估结果</h2><h3 id="DeepSeek-R1-评估"><a href="#DeepSeek-R1-评估" class="headerlink" title="DeepSeek-R1-评估"></a>DeepSeek-R1-评估</h3><p>对于我们所有的模型，最大生成长度设置为 32,768 个 token。对于需要采样的基准，我们使用的温度为0.6，top-p 值为0.95，并为每个查询生成 64 个响应来估计 pass@1。</p>
+<p>其中：</p>
 <table>
 <thead>
 <tr>
-<th align="center">类别</th>
-<th align="center">基准（公制）</th>
-<th align="center">克劳德-3.5-十四行诗-1022</th>
-<th align="center">GPT-4o 0513</th>
-<th align="center">DeepSeek V3</th>
-<th align="center">OpenAI o1-mini</th>
-<th align="center">OpenAI o1-1217</th>
-<th align="center">DeepSeek R1</th>
+<th>后缀</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"></td>
-<td align="center">建筑学</td>
-<td align="center">–</td>
-<td align="center">–</td>
-<td align="center">教育部</td>
-<td align="center">–</td>
-<td align="center">–</td>
-<td align="center">教育部</td>
+<td>Q2</td>
+<td>最小，占用最低</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"># 激活参数</td>
-<td align="center">–</td>
-<td align="center">–</td>
-<td align="center">37B</td>
-<td align="center">–</td>
-<td align="center">–</td>
-<td align="center">37B</td>
+<td>Q3</td>
+<td>精度一般</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"># 总参数</td>
-<td align="center">–</td>
-<td align="center">–</td>
-<td align="center">671B</td>
-<td align="center">–</td>
-<td align="center">–</td>
-<td align="center">671B</td>
+<td>Q4_K_M</td>
+<td>推荐（速度和效果平衡）</td>
 </tr>
 <tr>
-<td align="center">英语</td>
-<td align="center">MMLU（通过@1）</td>
-<td align="center">88.3</td>
-<td align="center">87.2</td>
-<td align="center">88.5</td>
-<td align="center">85.2</td>
-<td align="center"><strong>91.8</strong></td>
-<td align="center">90.8</td>
+<td>Q5_K_M</td>
+<td>精度更高</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center">MMLU-Redux（EM）</td>
-<td align="center">88.9</td>
-<td align="center">88.0</td>
-<td align="center">89.1</td>
-<td align="center">86.7</td>
-<td align="center">–</td>
-<td align="center"><strong>92.9</strong></td>
+<td>Q6</td>
+<td>更高精度</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center">MMLU-Pro（EM）</td>
-<td align="center">78.0</td>
-<td align="center">72.6</td>
-<td align="center">75.9</td>
-<td align="center">80.3</td>
-<td align="center">–</td>
-<td align="center"><strong>84.0</strong></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">掉落 (3 发 F1)</td>
-<td align="center">88.3</td>
-<td align="center">83.7</td>
-<td align="center">91.6</td>
-<td align="center">83.9</td>
-<td align="center">90.2</td>
-<td align="center"><strong>92.2</strong></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">IF-Eval（提示严格）</td>
-<td align="center"><strong>86.5</strong></td>
-<td align="center">84.3</td>
-<td align="center">86.1</td>
-<td align="center">84.8</td>
-<td align="center">–</td>
-<td align="center">83.3</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">GPQA-钻石级 (Pass@1)</td>
-<td align="center">65.0</td>
-<td align="center">49.9</td>
-<td align="center">59.1</td>
-<td align="center">60.0</td>
-<td align="center"><strong>75.7</strong></td>
-<td align="center">71.5</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">SimpleQA（正确）</td>
-<td align="center">28.4</td>
-<td align="center">38.2</td>
-<td align="center">24.9</td>
-<td align="center">7.0</td>
-<td align="center"><strong>47.0</strong></td>
-<td align="center">30.1</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">框架（配件）</td>
-<td align="center">72.5</td>
-<td align="center">80.5</td>
-<td align="center">73.3</td>
-<td align="center">76.9</td>
-<td align="center">–</td>
-<td align="center"><strong>82.5</strong></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">AlpacaEval2.0 (LC-胜率)</td>
-<td align="center">52.0</td>
-<td align="center">51.1</td>
-<td align="center">70.0</td>
-<td align="center">57.8</td>
-<td align="center">–</td>
-<td align="center"><strong>87.6</strong></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">ArenaHard（GPT-4-1106）</td>
-<td align="center">85.2</td>
-<td align="center">80.4</td>
-<td align="center">85.5</td>
-<td align="center">92.0</td>
-<td align="center">–</td>
-<td align="center"><strong>92.3</strong></td>
-</tr>
-<tr>
-<td align="center">代码</td>
-<td align="center">LiveCodeBench (Pass@1-COT)</td>
-<td align="center">33.8</td>
-<td align="center">34.2</td>
-<td align="center">–</td>
-<td align="center">53.8</td>
-<td align="center">63.4</td>
-<td align="center"><strong>65.9</strong></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Codeforces（百分位数）</td>
-<td align="center">20.3</td>
-<td align="center">23.6</td>
-<td align="center">58.7</td>
-<td align="center">93.4</td>
-<td align="center"><strong>96.6</strong></td>
-<td align="center">96.3</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Codeforces（评级）</td>
-<td align="center">717</td>
-<td align="center">759</td>
-<td align="center">1134</td>
-<td align="center">1820</td>
-<td align="center"><strong>2061</strong></td>
-<td align="center">2029</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">SWE 已验证（已解决）</td>
-<td align="center"><strong>50.8</strong></td>
-<td align="center">38.8</td>
-<td align="center">42.0</td>
-<td align="center">41.6</td>
-<td align="center">48.9</td>
-<td align="center">49.2</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Aider-Polyglot (Acc.)</td>
-<td align="center">45.3</td>
-<td align="center">16.0</td>
-<td align="center">49.6</td>
-<td align="center">32.9</td>
-<td align="center"><strong>61.7</strong></td>
-<td align="center">53.3</td>
-</tr>
-<tr>
-<td align="center">数学</td>
-<td align="center">AIME 2024（通行证@1）</td>
-<td align="center">16.0</td>
-<td align="center">9.3</td>
-<td align="center">39.2</td>
-<td align="center">63.6</td>
-<td align="center">79.2</td>
-<td align="center"><strong>79.8</strong></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">数学-500 (通过@1)</td>
-<td align="center">78.3</td>
-<td align="center">74.6</td>
-<td align="center">90.2</td>
-<td align="center">90.0</td>
-<td align="center">96.4</td>
-<td align="center"><strong>97.3</strong></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">CNMO 2024 (通行证@1)</td>
-<td align="center">13.1</td>
-<td align="center">10.8</td>
-<td align="center">43.2</td>
-<td align="center">67.6</td>
-<td align="center">–</td>
-<td align="center"><strong>78.8</strong></td>
-</tr>
-<tr>
-<td align="center">中文</td>
-<td align="center">CLUEWSC（EM）</td>
-<td align="center">85.4</td>
-<td align="center">87.9</td>
-<td align="center">90.9</td>
-<td align="center">89.9</td>
-<td align="center">–</td>
-<td align="center"><strong>92.8</strong></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">C-评估（EM）</td>
-<td align="center">76.7</td>
-<td align="center">76.0</td>
-<td align="center">86.5</td>
-<td align="center">68.9</td>
-<td align="center">–</td>
-<td align="center"><strong>91.8</strong></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">C-SimpleQA（正确）</td>
-<td align="center">55.4</td>
-<td align="center">58.7</td>
-<td align="center"><strong>68.0</strong></td>
-<td align="center">40.3</td>
-<td align="center">–</td>
-<td align="center">63.7</td>
+<td>Q8</td>
+<td>接近 FP16</td>
 </tr>
 </tbody></table>
-<h3 id="蒸馏模型评估"><a href="#蒸馏模型评估" class="headerlink" title="蒸馏模型评估"></a>蒸馏模型评估</h3><table>
+<p>一般推荐：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">Q4_K_M<br></code></pre></td></tr></table></figure>
+
+<h1 id="二、安装依赖"><a href="#二、安装依赖" class="headerlink" title="二、安装依赖"></a>二、安装依赖</h1><p>Debian &#x2F; Ubuntu：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs livescript">sudo apt update<br><br>sudo apt install -y <span class="hljs-string">\</span><br>git <span class="hljs-string">\</span><br>cmake <span class="hljs-string">\</span><br>build-essential <span class="hljs-string">\</span><br>libopenblas-dev <span class="hljs-string">\</span><br>numactl<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="三、下载-llama-cpp"><a href="#三、下载-llama-cpp" class="headerlink" title="三、下载 llama.cpp"></a>三、下载 llama.cpp</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/ggml-org/llama.cpp.git<br><br><span class="hljs-built_in">cd</span> llama.cpp<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="四、编译"><a href="#四、编译" class="headerlink" title="四、编译"></a>四、编译</h1><h2 id="CPU-版本"><a href="#CPU-版本" class="headerlink" title="CPU 版本"></a>CPU 版本</h2><p>使用</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">lscpu</span><br></code></pre></td></tr></table></figure>
+<p>查看CPU是否支持 AVX2&#x2F;AVX512<br>如果 CPU 支持 AVX2&#x2F;AVX512 使用下面编译</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">cmake -<span class="hljs-keyword">B </span><span class="hljs-keyword">build </span>-DCMAKE_BUILD_TYPE=Release<br><br>cmake --<span class="hljs-keyword">build </span><span class="hljs-keyword">build </span>-<span class="hljs-keyword">j$(nproc)</span><br></code></pre></td></tr></table></figure>
+<p>如果你的 CPU 不支持 AVX2&#x2F;AVX512，不用强行开启相关优化，直接使用：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">cmake -<span class="hljs-keyword">B </span><span class="hljs-keyword">build </span>-DCMAKE_BUILD_TYPE=Release<br><br>cmake --<span class="hljs-keyword">build </span><span class="hljs-keyword">build </span>-<span class="hljs-keyword">j40</span><br></code></pre></td></tr></table></figure>
+
+<p>编译完成：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">build<span class="hljs-regexp">/bin/</span>llama-cli<br>build<span class="hljs-regexp">/bin/</span>llama-server<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>为了缩短时间，你还可以根据你的CPU核心数开启并行编译，例如：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">cmake --<span class="hljs-keyword">build </span><span class="hljs-keyword">build </span>--<span class="hljs-built_in">config</span> Release -<span class="hljs-keyword">j </span><span class="hljs-number">8</span><br></code></pre></td></tr></table></figure>
+
+<p>这将以8个并行编译任务来构建程序。</p>
+<h2 id="NVIDIA-GPU（CUDA）"><a href="#NVIDIA-GPU（CUDA）" class="headerlink" title="NVIDIA GPU（CUDA）"></a>NVIDIA GPU（CUDA）</h2><p>如果安装好了 CUDA：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">cmake -<span class="hljs-keyword">B </span><span class="hljs-keyword">build </span>\<br>-DGGML_CUDA=ON \<br>-DCMAKE_BUILD_TYPE=Release<br><br>cmake --<span class="hljs-keyword">build </span><span class="hljs-keyword">build </span>-<span class="hljs-keyword">j$(nproc)</span><br></code></pre></td></tr></table></figure>
+
+<p>即可启用 GPU 推理。</p>
+<hr>
+<h2 id="AMD-显卡（ROCm）"><a href="#AMD-显卡（ROCm）" class="headerlink" title="AMD 显卡（ROCm）"></a>AMD 显卡（ROCm）</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">cmake -<span class="hljs-keyword">B </span><span class="hljs-keyword">build </span>\<br>-DGGML_HIPBLAS=ON<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Apple-Silicon"><a href="#Apple-Silicon" class="headerlink" title="Apple Silicon"></a>Apple Silicon</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">cmake -<span class="hljs-keyword">B </span><span class="hljs-keyword">build </span>\<br>-DGGML_METAL=ON<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="五、下载模型"><a href="#五、下载模型" class="headerlink" title="五、下载模型"></a>五、下载模型</h1><p>必须下载 <strong>GGUF</strong>。</p>
+<p>推荐来源：</p>
+<h2 id="1、ModelScope（国内推荐）"><a href="#1、ModelScope（国内推荐）" class="headerlink" title="1、ModelScope（国内推荐）"></a>1、ModelScope（国内推荐）</h2><p><a target="_blank" rel="noopener" href="https://modelscope.cn/">https://modelscope.cn</a></p>
+<p>搜索：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">Qwen GGUF</span><br></code></pre></td></tr></table></figure>
+
+<p>在下载前，请先通过如下命令安装ModelScope</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> python3 python3-pip<br>pip <span class="hljs-keyword">install</span> modelscope<br></code></pre></td></tr></table></figure>
+
+<p>下载：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">modelscope download <span class="hljs-params">--model</span> unsloth/Qwen3-4B-GGUF Qwen3-4B-Q4_K_M.gguf <span class="hljs-params">--local_dir</span> <span class="hljs-string">/root/llama.cpp/models</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2、Hugging-Face"><a href="#2、Hugging-Face" class="headerlink" title="2、Hugging Face"></a>2、Hugging Face</h2><p><a target="_blank" rel="noopener" href="https://huggingface.co/">https://huggingface.co</a></p>
+<p>国内镜像站:<a target="_blank" rel="noopener" href="https://hf-mirror.com/">https://hf-mirror.com/</a></p>
+<p>搜索：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">Qwen GGUF</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">huggingface-cli download <span class="hljs-tag">&lt;<span class="hljs-name">model_repo</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">gguf_file</span>&gt;</span> --local-dir <span class="hljs-tag">&lt;<span class="hljs-name">local_dir</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>下载完成后放入：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">llama</span>.cpp/<br>    <span class="hljs-attribute">models</span>/<br>        <span class="hljs-attribute">Qwen3</span>-<span class="hljs-number">4</span>B-Q4_K_M.gguf<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="六、CPU推理"><a href="#六、CPU推理" class="headerlink" title="六、CPU推理"></a>六、CPU推理</h1><p>例如：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">./build/bin/llama-cli</span> -m <span class="hljs-string">./models/Qwen3-4B-Q4_K_M.gguf</span> -t 20 -c 8192 <span class="hljs-params">--color</span> auto <span class="hljs-params">--chat-template</span> chatml <span class="hljs-params">--temp</span> 0.7 <span class="hljs-params">--top-p</span> 0.9<br></code></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<table>
 <thead>
 <tr>
-<th align="center">模型</th>
-<th align="center">AIME 2024 通行证@1</th>
-<th align="center">AIME 2024 缺点@64</th>
-<th align="center">MATH-500 通过@1</th>
-<th align="center">GPQA 钻石通行证@1</th>
-<th align="center">LiveCodeBench 通行证@1</th>
-<th align="center">CodeForces 评级</th>
+<th>参数</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">GPT-4o-0513</td>
-<td align="center">9.3</td>
-<td align="center">13.4</td>
-<td align="center">74.6</td>
-<td align="center">49.9</td>
-<td align="center">32.9</td>
-<td align="center">759</td>
+<td>-t</td>
+<td>CPU线程数</td>
 </tr>
 <tr>
-<td align="center">克劳德-3.5-十四行诗-1022</td>
-<td align="center">16.0</td>
-<td align="center">26.7</td>
-<td align="center">78.3</td>
-<td align="center">65.0</td>
-<td align="center">38.9</td>
-<td align="center">717</td>
+<td>-c 8192</td>
+<td>设置上下文窗口大小单位token，数值越大记忆对话内容越多</td>
 </tr>
 <tr>
-<td align="center">o1-迷你</td>
-<td align="center">63.6</td>
-<td align="center">80.0</td>
-<td align="center">90.0</td>
-<td align="center">60.0</td>
-<td align="center">53.8</td>
-<td align="center"><strong>1820</strong></td>
+<td>–color auto</td>
+<td>终端颜色输出自动适配终端配色，区分交互信息</td>
 </tr>
 <tr>
-<td align="center">QwQ-32B-预览</td>
-<td align="center">44.0</td>
-<td align="center">60.0</td>
-<td align="center">90.6</td>
-<td align="center">54.5</td>
-<td align="center">41.9</td>
-<td align="center">1316</td>
+<td>–chat-template chatml</td>
+<td>设定对话格式模板适配主流大模型对话交互规范</td>
 </tr>
 <tr>
-<td align="center">DeepSeek-R1-Distill-Qwen-1.5B</td>
-<td align="center">28.9</td>
-<td align="center">52.7</td>
-<td align="center">83.9</td>
-<td align="center">33.8</td>
-<td align="center">16.9</td>
-<td align="center">954</td>
+<td>–temp 0.7</td>
+<td>生成温度值0严谨固定，1自由发散，0.7通用均衡值</td>
 </tr>
 <tr>
-<td align="center">DeepSeek-R1-Distill-Qwen-7B</td>
-<td align="center">55.5</td>
-<td align="center">83.3</td>
-<td align="center">92.8</td>
-<td align="center">49.1</td>
-<td align="center">37.6</td>
-<td align="center">1189</td>
+<td>–top-p 0.9</td>
+<td>核采样概率阈值筛选高概率词汇，减少无效乱码输出</td>
 </tr>
 <tr>
-<td align="center">DeepSeek-R1-Distill-Qwen-14B</td>
-<td align="center">69.7</td>
-<td align="center">80.0</td>
-<td align="center">93.9</td>
-<td align="center">59.1</td>
-<td align="center">53.1</td>
-<td align="center">1481</td>
-</tr>
-<tr>
-<td align="center">DeepSeek-R1-Distill-Qwen-32B</td>
-<td align="center"><strong>72.6</strong></td>
-<td align="center">83.3</td>
-<td align="center">94.3</td>
-<td align="center">62.1</td>
-<td align="center">57.2</td>
-<td align="center">1691</td>
-</tr>
-<tr>
-<td align="center">DeepSeek-R1-Distill-Llama-8B</td>
-<td align="center">50.4</td>
-<td align="center">80.0</td>
-<td align="center">89.1</td>
-<td align="center">49.0</td>
-<td align="center">39.6</td>
-<td align="center">1205</td>
-</tr>
-<tr>
-<td align="center">DeepSeek-R1-Distill-Llama-70B</td>
-<td align="center">70.0</td>
-<td align="center"><strong>86.7</strong></td>
-<td align="center"><strong>94.5</strong></td>
-<td align="center"><strong>65.2</strong></td>
-<td align="center"><strong>57.5</strong></td>
-<td align="center">1633</td>
+<td>更多参数</td>
+<td>输入 .&#x2F;build&#x2F;bin&#x2F;llama-cli –help 查看</td>
 </tr>
 </tbody></table>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="模型加载失败"><a href="#模型加载失败" class="headerlink" title="模型加载失败"></a>模型加载失败</h3><ul>
-<li>确保模型名称正确。</li>
-<li>检查网络连接，确保能够访问模型仓库。</li>
-</ul>
-<h3 id="GPU-不支持"><a href="#GPU-不支持" class="headerlink" title="GPU 不支持"></a>GPU 不支持</h3><ul>
-<li>检查 CUDA 和驱动是否安装正确。</li>
-<li>确保 Ollama 版本支持 GPU。</li>
-</ul>
-<h3 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h3><ul>
-<li>尝试减少批量大小或使用更小的模型变体。</li>
-<li>确保硬件资源充足。</li>
-</ul>
 <hr>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://ollama.ai/docs">Ollama 官方文档</a></li>
-<li><a target="_blank" rel="noopener" href="https://huggingface.co/models">Hugging Face 模型仓库</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/DeepSeek-R1">DeepSeek-R1官方仓库</a></li>
-</ul>
+<h1 id="七、GPU-推理"><a href="#七、GPU-推理" class="headerlink" title="七、GPU 推理"></a>七、GPU 推理</h1><p>如果使用 CUDA：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs diff">./build/bin/llama-cli \<br><span class="hljs-deletion">-m models/Qwen3-4B-Q4_K_M.gguf \</span><br><span class="hljs-deletion">-ngl 999</span><br></code></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-ngl 999</span><br></code></pre></td></tr></table></figure>
+
+<p>表示尽可能把模型放到 GPU。</p>
+<p>如果显存不足：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-ngl 20</span><br></code></pre></td></tr></table></figure>
+
+<p>只加载部分层。</p>
 <hr>
-<p>使用 Ollama 客户端轻松部署和运行 DeepSeek-R1 模型。如果有任何问题，可以参考官方文档或联系支持团队。</p>
+<h1 id="八、启动-API-服务"><a href="#八、启动-API-服务" class="headerlink" title="八、启动 API 服务"></a>八、启动 API 服务</h1><p>推荐：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs diff">./build/bin/llama-server \<br><span class="hljs-deletion">-m models/Qwen3-4B-Q4_K_M.gguf \</span><br><span class="hljs-deletion">-t 20 \</span><br><span class="hljs-deletion">-c 4096 \</span><br><span class="hljs-deletion">-b 256 \</span><br><span class="hljs-deletion">--host 0.0.0.0 \</span><br><span class="hljs-deletion">--port 8000</span><br></code></pre></td></tr></table></figure>
+
+<p>启动成功：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//服务器IP:8000</span><br></code></pre></td></tr></table></figure>
+
+<p>OpenAI API：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">POST /v1/chat/completions<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="九、测试-API"><a href="#九、测试-API" class="headerlink" title="九、测试 API"></a>九、测试 API</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp">curl http:<span class="hljs-comment">//127.0.0.1:8000/v1/chat/completions \</span><br><span class="hljs-comment">-H &quot;Content-Type: application/json&quot; \</span><br><span class="hljs-comment">-d &#x27;&#123;</span><br><span class="hljs-string">&quot;model&quot;</span>:<span class="hljs-string">&quot;Qwen&quot;</span>,<br><span class="hljs-string">&quot;messages&quot;</span>:[<br>&#123;<span class="hljs-string">&quot;role&quot;</span>:<span class="hljs-string">&quot;user&quot;</span>,<span class="hljs-string">&quot;content&quot;</span>:<span class="hljs-string">&quot;你好&quot;</span>&#125;<br>]<br>&#125;&#x27;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="十、开机启动（systemd）"><a href="#十、开机启动（systemd）" class="headerlink" title="十、开机启动（systemd）"></a>十、开机启动（systemd）</h1><p>创建：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo nano <span class="hljs-regexp">/etc/</span>systemd<span class="hljs-regexp">/system/</span>llama.service<br></code></pre></td></tr></table></figure>
+
+<p>内容：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs routeros">[Unit]<br><span class="hljs-attribute">Description</span>=llama.cpp API<span class="hljs-built_in"> Server</span><br><span class="hljs-built_in"></span><span class="hljs-attribute">After</span>=network.target<br><br>[Service]<br><span class="hljs-attribute">Type</span>=simple<br><span class="hljs-attribute">User</span>=root<br><span class="hljs-attribute">WorkingDirectory</span>=/opt/llama.cpp<br><br><span class="hljs-attribute">ExecStart</span>=/opt/llama.cpp/build/bin/llama-server \<br>-m /opt/llama.cpp/models/Qwen3-4B-Q4_K_M.gguf \<br>-t 20 \<br>-c 4096 \<br>-b 256 \<br>--host 0.0.0.0 \<br>--port 8000<br><br><span class="hljs-attribute">Restart</span>=always<br><br>[Install]<br><span class="hljs-attribute">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure>
+
+<p>启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl daemon-reload<br><br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> llama<br><br><span class="hljs-built_in">sudo</span> systemctl start llama<br></code></pre></td></tr></table></figure>
+
+<p>查看日志：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">journalctl </span>-u <span class="hljs-keyword">llama </span>-f<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="十一、CPU-参数建议"><a href="#十一、CPU-参数建议" class="headerlink" title="十一、CPU 参数建议"></a>十一、CPU 参数建议</h1><p>推荐：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">-t</span> = 物理核心数<br></code></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<table>
+<thead>
+<tr>
+<th>CPU</th>
+<th>推荐线程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8核16线程</td>
+<td>8</td>
+</tr>
+<tr>
+<td>12核24线程</td>
+<td>12</td>
+</tr>
+<tr>
+<td>20核40线程</td>
+<td>20</td>
+</tr>
+<tr>
+<td>32核64线程</td>
+<td>32</td>
+</tr>
+</tbody></table>
+<p>一般不要直接使用超线程数量。</p>
+<hr>
+<h1 id="十二、GPU-参数建议"><a href="#十二、GPU-参数建议" class="headerlink" title="十二、GPU 参数建议"></a>十二、GPU 参数建议</h1><p>RTX4060：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Qwen3</span>-<span class="hljs-number">4</span>B<br><span class="hljs-attribute">Qwen3</span>-<span class="hljs-number">8</span>B<br></code></pre></td></tr></table></figure>
+
+<p>RTX3090：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Qwen3</span>-<span class="hljs-number">14</span>B<br><span class="hljs-attribute">Qwen3</span>-<span class="hljs-number">32</span>B<br></code></pre></td></tr></table></figure>
+
+<p>RTX4090：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">DeepSeek</span>-R1 Distill<br><span class="hljs-attribute">Qwen3</span>-<span class="hljs-number">32</span>B<br><span class="hljs-attribute">Llama3</span>-<span class="hljs-number">70</span>B（量化）<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="十三、模型推荐"><a href="#十三、模型推荐" class="headerlink" title="十三、模型推荐"></a>十三、模型推荐</h1><table>
+<thead>
+<tr>
+<th>内存&#x2F;显存</th>
+<th>推荐模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8GB</td>
+<td>Qwen3-1.7B</td>
+</tr>
+<tr>
+<td>16GB</td>
+<td>Qwen3-4B</td>
+</tr>
+<tr>
+<td>32GB</td>
+<td>Qwen3-8B</td>
+</tr>
+<tr>
+<td>64GB</td>
+<td>Qwen3-14B</td>
+</tr>
+<tr>
+<td>128GB</td>
+<td>Qwen3-32B</td>
+</tr>
+</tbody></table>
+<p>推荐量化：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">Q4_K_M<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="十四、性能优化"><a href="#十四、性能优化" class="headerlink" title="十四、性能优化"></a>十四、性能优化</h1><p>安装 OpenBLAS：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install libopenblas-dev<br></code></pre></td></tr></table></figure>
+
+<p>NUMA：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">numactl <span class="hljs-params">--interleave=all</span> \<br><span class="hljs-string">./build/bin/llama-server</span> <span class="hljs-string">...</span><br></code></pre></td></tr></table></figure>
+
+<p>CPU 性能模式：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams">sudo cpupower frequency-<span class="hljs-keyword">set</span> -g <span class="hljs-comment">performance</span><br></code></pre></td></tr></table></figure>
+
+<p>大内存服务器可以考虑：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-comment">--mlock</span><br></code></pre></td></tr></table></figure>
+
+<p>减少模型被交换到磁盘。</p>
+<hr>
+<h1 id="十五、常见问题"><a href="#十五、常见问题" class="headerlink" title="十五、常见问题"></a>十五、常见问题</h1><h3 id="找不到模型"><a href="#找不到模型" class="headerlink" title="找不到模型"></a>找不到模型</h3><p>确认：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-m models/Qwen3-4B-Q4_K_M.gguf</span><br></code></pre></td></tr></table></figure>
+
+<p>路径正确。</p>
+<h3 id="CPU-很慢"><a href="#CPU-很慢" class="headerlink" title="CPU 很慢"></a>CPU 很慢</h3><ul>
+<li>使用 <code>Q4_K_M</code> 量化。</li>
+<li>线程数设置为物理核心数。</li>
+<li>安装 OpenBLAS。</li>
+<li>使用 <code>numactl</code> 优化双路服务器。</li>
+</ul>
+<h3 id="GPU-未生效"><a href="#GPU-未生效" class="headerlink" title="GPU 未生效"></a>GPU 未生效</h3><p>确认编译时启用了 CUDA：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">cmake -<span class="hljs-keyword">B </span><span class="hljs-keyword">build </span>-DGGML_CUDA=ON<br></code></pre></td></tr></table></figure>
+
+<p>启动时：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-ngl 999</span><br></code></pre></td></tr></table></figure>
+
+<p>并通过 <code>nvidia-smi</code> 检查显存占用。</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><code>llama.cpp</code> 是目前本地部署大模型最轻量、兼容性最好的推理框架之一，无论是仅有 CPU 的服务器还是配备 NVIDIA GPU 的工作站，都可以快速部署 GGUF 模型，并提供 OpenAI 兼容 API，方便与 Cherry Studio、Open WebUI、LangChain 等工具集成。</p>
+<p>对于生产环境，建议：</p>
+<ul>
+<li><strong>CPU 环境</strong>：选择 <code>Q4_K_M</code> 量化模型，线程数设置为物理核心数，配合 OpenBLAS 与 <code>numactl</code> 优化。</li>
+<li><strong>GPU 环境</strong>：启用 CUDA 编译，并使用 <code>-ngl 999</code> 尽可能将模型加载到显卡。</li>
+<li><strong>服务部署</strong>：通过 <code>llama-server</code> 提供 OpenAI API，并结合 <code>systemd</code> 实现开机自启动，便于长期稳定运行。</li>
+</ul>
+<p>这套方案适合个人开发、企业内部知识库、AI 助手和本地推理服务等多种场景。</p>
 
                 
               </div>
@@ -1105,9 +907,9 @@
       
         <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="print-no-link">#大模型</a>
       
-        <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="print-no-link">#人工智能</a>
+        <a href="/tags/llama-cpp/" class="print-no-link">#llama.cpp</a>
       
-        <a href="/tags/Deepseek/" class="print-no-link">#Deepseek</a>
+        <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="print-no-link">#人工智能</a>
       
     </div>
   
@@ -1119,8 +921,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>本地部署免费开源DeepSeek-R1大模型</div>
-      <div>https://blog.quickso.cn/2025/01/27/本地部署免费开源DeepSeek-R1大模型/</div>
+      <div>使用llama.cpp部署本地大模型</div>
+      <div>https://blog.quickso.cn/2026/06/30/使用llama-cpp部署本地大模型/</div>
     </div>
     <div class="license-meta">
       
@@ -1132,7 +934,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年1月27日</div>
+          <div>2026年6月30日</div>
         </div>
       
       
@@ -1164,18 +966,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/02/02/Termux%20+%20Debian%20+%20Ollama%20%E5%AE%9E%E7%8E%B0%E5%9C%A8%E6%89%8B%E6%9C%BA%E4%B8%8A%E9%83%A8%E7%BD%B2%20DeepSeek-R1-1.5B/" title="Termux + Debian + Ollama 实现在手机上部署 DeepSeek-R1-1.5B">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Termux + Debian + Ollama 实现在手机上部署 DeepSeek-R1-1.5B</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/01/03/%E4%BD%BF%E7%94%A8tunasync%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/" title="使用tunasync搭建自己的开源软件镜像仓库">
-                        <span class="hidden-mobile">使用tunasync搭建自己的开源软件镜像仓库</span>
+                      <a href="/2026/06/08/Fedora&amp;Ubuntu%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/" title="Fedora&amp;Ubuntu折腾记录">
+                        <span class="hidden-mobile">Fedora&amp;Ubuntu折腾记录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
