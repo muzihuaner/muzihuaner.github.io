@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740113513927.webp">
 <meta property="og:image" content="https://www.hicairo.com/zb_users/upload/2024/05/202405031714740129381098.webp">
 <meta property="article:published_time" content="2025-07-26T13:11:18.000Z">
-<meta property="article:modified_time" content="2026-03-27T13:53:50.686Z">
+<meta property="article:modified_time" content="2026-07-16T03:01:36.353Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Armbian">
 <meta property="article:tag" content="Linux">
@@ -516,7 +516,7 @@
         
         
         
-          100 分钟
+          98 分钟
         
       </span>
     
@@ -560,7 +560,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月27日 晚上
+                    本文最后更新于 2026年7月16日 上午
                   
                 
               </p>
@@ -643,7 +643,23 @@
 <p>然后</p>
 <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">apt install <span class="hljs-keyword">task</span>-xfce-desktop<br></code></pre></td></tr></table></figure>
 
+<p>XFCE 桌面插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install xfce4-goodies<br></code></pre></td></tr></table></figure>
+
+<h4 id="Wi-Fi-网络管理器"><a href="#Wi-Fi-网络管理器" class="headerlink" title="Wi-Fi 网络管理器"></a>Wi-Fi 网络管理器</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> network-manager network-manager-gnome<br></code></pre></td></tr></table></figure>
+
 <h4 id="安装音量管理器"><a href="#安装音量管理器" class="headerlink" title="安装音量管理器"></a>安装音量管理器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install pulseaudio<br></code></pre></td></tr></table></figure>
+
+<p>问题:</p>
+<p>failed to execute child process pavucontrol(没有那个文件或目录)</p>
+<p>解决办法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install pavucontrol<br></code></pre></td></tr></table></figure>
+
+<p>问题：</p>
+<p>pavucontrol 卡在“正在建立与 PulseAudio 的连接。请稍候…”</p>
+<p>解决办法：</p>
+<p>端口依次运行（注意登录身份，root用户登录无法使用第二个命令，但不影响操作）</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada">pulseaudio <span class="hljs-comment">--check</span><br>pulseaudio -D<br></code></pre></td></tr></table></figure>
 
 <h4 id="安装浏览器"><a href="#安装浏览器" class="headerlink" title="安装浏览器"></a>安装浏览器</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> firefox-esr<br></code></pre></td></tr></table></figure>
 
@@ -668,11 +684,6 @@
 <p> 设置系统语言为中文桌面</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dpkg-reconfigure locales<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo update-locale <span class="hljs-attribute">LANG</span>=zh_CN.UTF-8 <span class="hljs-attribute">LC_ALL</span>=zh_CN.UTF-8<br></code></pre></td></tr></table></figure>
-
-<p>编辑 <code>/etc/default/locale</code>，确保内容如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">LANG=zh_CN.UTF-8<br>LC_ALL=zh_CN.UTF-8<br></code></pre></td></tr></table></figure>
-
 <h4 id="其他软件"><a href="#其他软件" class="headerlink" title="其他软件"></a>其他软件</h4><p>新立得软件包管理器，一个图形化的软件安装工具（比命令行更直观）</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> synaptic<br></code></pre></td></tr></table></figure>
 
@@ -685,30 +696,9 @@
 <p><strong>quodlibet</strong>: 一个功能强大的音乐管理和播放软件。</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> quodlibet<br></code></pre></td></tr></table></figure>
 
-<h4 id="远程桌面"><a href="#远程桌面" class="headerlink" title="远程桌面"></a><strong>远程桌面</strong></h4><p>安装包 (root)</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">sudo apt <span class="hljs-keyword">install </span><span class="hljs-keyword">xorg </span>x11vnc<br></code></pre></td></tr></table></figure>
+<h4 id="远程桌面"><a href="#远程桌面" class="headerlink" title="远程桌面"></a><strong>远程桌面</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs none">apt install xorgxrdp xrdp <br>systemctl status xrdp<br>adduser xrdp ssl-cert<br></code></pre></td></tr></table></figure>
 
-<p>设置密码(普通用户)</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs arcade">设置 VNC 密码（<span class="hljs-number">8</span>位）<br>x11vnc -storepasswd<br>👉 一定要选：y<br>生成：<br>~<span class="hljs-regexp">/.vnc/</span>passwd<br></code></pre></td></tr></table></figure>
-
-<p>设置开机自启（root）</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo nano <span class="hljs-regexp">/etc/</span>systemd<span class="hljs-regexp">/system/</span>x11vnc.service<br></code></pre></td></tr></table></figure>
-
-<p>User改为你的普通用户名</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=x11vnc<br><span class="hljs-attr">After</span>=display-manager.service<br><br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">ExecStart</span>=/usr/bin/x11vnc -display :<span class="hljs-number">0</span> -auth /var/run/lightdm/root/:<span class="hljs-number">0</span> -forever -rfbauth /home/User/.vnc/passwd -noxdamage -ncache <span class="hljs-number">10</span><br><span class="hljs-attr">Restart</span>=always<br><br><span class="hljs-section">[Install]</span><br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure>
-
-<p>启用：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl daemon-reexec<br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> x11vnc<br><span class="hljs-built_in">sudo</span> systemctl start x11vnc<br></code></pre></td></tr></table></figure>
-
-<p><strong>客户端连接</strong></p>
-<p>用：</p>
-<ul>
-<li>VNC Viewer</li>
-<li>TigerVNC Viewer</li>
-</ul>
-<p>连接：</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm">你的<span class="hljs-built_in">IP</span>:<span class="hljs-number">5900</span><br></code></pre></td></tr></table></figure>
-
+<p>xrdp默认监听3389，可以使用windows rdp服务连接</p>
 <h4 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h4><h5 id="1-更新系统并安装软件包"><a href="#1-更新系统并安装软件包" class="headerlink" title="1.更新系统并安装软件包"></a>1.更新系统并安装软件包</h5><p>首先打开终端，安装 Fcitx5 核心组件及中文拼音输入法（如果需要五笔等，可以加装对应的 addons）：</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">sudo apt update<br>sudo apt <span class="hljs-keyword">install </span>fcitx5 fcitx5-chinese-<span class="hljs-keyword">addons </span>fcitx5-frontend-gtk3 fcitx5-frontend-qt5 im-<span class="hljs-built_in">config</span> zenity -y<br></code></pre></td></tr></table></figure>
 
@@ -735,15 +725,22 @@
 <li>现在你可以按 <code>Ctrl + Space</code> 切换输入法了。</li>
 </ol>
 <hr>
-<h5 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h5><ul>
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ul>
 <li><p><strong>无法调出输入法：</strong> 确认 <code>fcitx5</code> 进程是否正在运行。可以在终端输入 <code>fcitx5 &amp;</code> 手动启动观察报错。</p>
 </li>
 <li><p><strong>Qt 软件（如 WPS）无法输入：</strong> 确保安装了 <code>fcitx5-frontend-qt5</code> 插件。</p>
 </li>
 <li><p><strong>中文字体显示为方块：</strong> 如果系统缺少中文字体，请安装文泉驿或谷歌思源字体：</p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gauss">sudo apt install <span class="hljs-built_in">fonts</span>-wqy-zenhei <span class="hljs-built_in">fonts</span>-noto-cjk -y<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gauss">sudo apt install <span class="hljs-built_in">fonts</span>-wqy-zenhei <span class="hljs-built_in">fonts</span>-noto-cjk -y<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>Thunar「无法浏览网络 Operation not supported」</p>
+</li>
 </ul>
-<h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h4><p><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/802#top">Phicomm-n1刷入后lightdm无法正常启动</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install -y gvfs gvfs-backends gvfs-fuse<br><span class="hljs-built_in">sudo</span> usermod -aG fuse <span class="hljs-variable">$USER</span><br>init 6<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/802#top">Phicomm-n1刷入后lightdm无法正常启动</a></li>
+</ul>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">cat</span> &lt;&lt; <span class="hljs-string">&#x27;_EOF_&#x27;</span> &gt; /etc/<span class="hljs-built_in">X11</span>/xorg.conf.d/<span class="hljs-number">02</span>-dietpi-aml-s905.conf<br><span class="hljs-symbol">Section</span> <span class="hljs-string">&quot;OutputClass&quot;</span><br>    Identifier <span class="hljs-string">&quot;Amlogic&quot;</span><br>    MatchDriver <span class="hljs-string">&quot;meson&quot;</span><br>    Driver <span class="hljs-string">&quot;modesetting&quot;</span><br>    Option <span class="hljs-string">&quot;PrimaryGPU&quot;</span> <span class="hljs-string">&quot;true&quot;</span><br><span class="hljs-symbol">EndSection</span><br><span class="hljs-symbol">Section</span> <span class="hljs-string">&quot;Screen&quot;</span><br>    Identifier <span class="hljs-string">&quot;Default Screen&quot;</span><br>    Device <span class="hljs-string">&quot;Meson&quot;</span><br>    Monitor <span class="hljs-string">&quot;foo&quot;</span><br>    DefaultDepth <span class="hljs-number">24</span><br>    SubSection <span class="hljs-string">&quot;Display&quot;</span><br>        Depth <span class="hljs-number">24</span><br>        Modes <span class="hljs-string">&quot;1920x1080&quot;</span> <span class="hljs-string">&quot;1440x900&quot;</span> <span class="hljs-string">&quot;1280x720&quot;</span> <span class="hljs-string">&quot;1280x1024&quot;</span> <span class="hljs-string">&quot;1280x960&quot;</span> <span class="hljs-string">&quot;1024x768&quot;</span> <span class="hljs-string">&quot;800x600&quot;</span> <span class="hljs-string">&quot;640x480&quot;</span> <span class="hljs-string">&quot;720x400&quot;</span><br>    EndSubSection<br><span class="hljs-symbol">EndSection</span><br><span class="hljs-symbol">_EOF_</span><br></code></pre></td></tr></table></figure>
 
 <p>如果还不行的话：</p>
