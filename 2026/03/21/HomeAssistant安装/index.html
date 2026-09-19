@@ -1,0 +1,1113 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="Home Assistant介绍HomeAssistant是一个成熟完整的基于 Python 的智能家居系统，设备支持度高，支持自动化（Automation）、群组化（Group）、UI 客制化（Theme）等等高度定制化设置，是构建智慧空间的神器。 基于HomeAssistant，可以方便地连接各种外部设备（智能设备、摄像头、邮件、短消息、云服务等，成熟的可连接组件有近千种），手动或按照自己的需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HomeAssistant安装">
+<meta property="og:url" content="https://blog.quickso.cn/2026/03/21/HomeAssistant%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="Home Assistant介绍HomeAssistant是一个成熟完整的基于 Python 的智能家居系统，设备支持度高，支持自动化（Automation）、群组化（Group）、UI 客制化（Theme）等等高度定制化设置，是构建智慧空间的神器。 基于HomeAssistant，可以方便地连接各种外部设备（智能设备、摄像头、邮件、短消息、云服务等，成熟的可连接组件有近千种），手动或按照自己的需">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://design.home-assistant.io/images/brand/logo.png">
+<meta property="og:image" content="https://camo.githubusercontent.com/d8ac4e6e791cd4d420e5438690e66a33b26409d097b26aa0dcc9b60b007484a9/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f636f6e6669675f666c6f775f73746172742e737667">
+<meta property="og:image" content="https://camo.githubusercontent.com/fa9db7ce5befc41824211651d3aca5d6887ca4f32e2d20de30f1fea48aab315c/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f696e746567726174696f6e2e737667">
+<meta property="article:published_time" content="2026-03-21T15:05:41.000Z">
+<meta property="article:modified_time" content="2026-09-19T09:50:52.874Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="HomeAssistant">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://design.home-assistant.io/images/brand/logo.png">
+  
+  
+  
+  <title>HomeAssistant安装 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>自留地</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://status.quickso.cn" target="_self">
+                    
+                    <span>探针</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/atom.xml" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-rss-fill"></i>
+                  <span>Rss</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            
+            <div class="col-12 mobile-grid-group-header">
+              <i class="iconfont icon-books"></i>
+              <span>自留地</span>
+            </div>
+            
+              
+              
+              
+              <div class="col-4 mobile-grid-cell">
+                <a href="https://quickso.cn" target="_self">
+                  <div class="mobile-grid-item">
+                    <i class="iconfont icon-link-fill"></i>
+                    <span>快点搜</span>
+                  </div>
+                </a>
+              </div>
+            
+              
+              
+              
+              <div class="col-4 mobile-grid-cell">
+                <a href="https://ham.quickso.cn" target="_self">
+                  <div class="mobile-grid-item">
+                    <i class="iconfont icon-link-fill"></i>
+                    <span>快点HAM工具箱</span>
+                  </div>
+                </a>
+              </div>
+            
+              
+              
+              
+              <div class="col-4 mobile-grid-cell">
+                <a href="https://huancloud.cn" target="_self">
+                  <div class="mobile-grid-item">
+                    <i class="iconfont icon-link-fill"></i>
+                    <span>欢云</span>
+                  </div>
+                </a>
+              </div>
+            
+              
+              
+              
+              <div class="col-4 mobile-grid-cell">
+                <a href="https://status.quickso.cn" target="_self">
+                  <div class="mobile-grid-item">
+                    <i class="iconfont icon-link-fill"></i>
+                    <span>探针</span>
+                  </div>
+                </a>
+              </div>
+            
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.paugram.com/wallpaper/') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HomeAssistant安装"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        木子欢儿
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-21 23:05" pubdate>
+          2026年3月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HomeAssistant安装</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年9月19日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Home-Assistant介绍"><a href="#Home-Assistant介绍" class="headerlink" title="Home Assistant介绍"></a>Home Assistant介绍</h2><p>HomeAssistant是一个成熟完整的基于 Python 的智能家居系统，设备支持度高，支持自动化（Automation）、群组化（Group）、UI 客制化（Theme）等等高度定制化设置，是构建智慧空间的神器。</p>
+<p>基于HomeAssistant，可以方便地连接各种外部设备（智能设备、摄像头、邮件、短消息、云服务等，成熟的可连接组件有近千种），手动或按照自己的需求自动化地联动这些外部设备，构建随心所欲的智慧空间。HomeAssistant是开源的，它不属于任何商业公司，用户可以无偿使用。</p>
+<p>HomeAssistant能识别和直接连接的外部设备有将近千项。其中有各种商业化的智能产品（如小米系列产品、Philips智能灯系列、亚马逊的音响、苹果的Siri、Google Assistant、博联的产品、特斯拉汽车等）、有互联网上的各种实时信息（股票、汇率、交通、天气等）、有开源或开放的各种智能软件（人脸识别、车牌识别、文字识别、文字转语音、语音转文字等）、有各种联动机制（短信、Email、IFTTT等）……</p>
+<p><img src="https://design.home-assistant.io/images/brand/logo.png" srcset="/img/loading.gif" lazyload alt="Logo"></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>关于Home Assistant的安装，一般都采用Docker部署的方法实现。</p>
+<p><a target="_blank" rel="noopener" href="https://www.home-assistant.io/">官方网站</a></p>
+<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p>关于Docker的安装，这里就不进行赘述了</p>
+<p>通过以下指令验证Docker是否安装成功，安装成功则会返回Docker的版本号。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker -v</span><br></code></pre></td></tr></table></figure>
+
+<p>Docker CLI</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d <span class="hljs-string">\</span><br>  --name homeassistant <span class="hljs-string">\</span><br>  --privileged <span class="hljs-string">\</span><br>  --restart=<span class="hljs-keyword">unless</span>-stopped <span class="hljs-string">\</span><br>  -e TZ=Asia/Shanghai <span class="hljs-string">\</span><br>  -v /自定义路径:/config <span class="hljs-string">\</span><br>  -v /run/dbus:/run/dbus:ro <span class="hljs-string">\</span><br>  --network=host <span class="hljs-string">\</span><br>  home-assistant/home-assistant:latest<br></code></pre></td></tr></table></figure>
+
+<p>国内</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d <span class="hljs-string">\</span><br>  --name homeassistant <span class="hljs-string">\</span><br>  --privileged <span class="hljs-string">\</span><br>  --restart=<span class="hljs-keyword">unless</span>-stopped <span class="hljs-string">\</span><br>  -e TZ=Asia/Shanghai <span class="hljs-string">\</span><br>  -v /自定义路径:/config <span class="hljs-string">\</span><br>  -v /run/dbus:/run/dbus:ro <span class="hljs-string">\</span><br>  --network=host <span class="hljs-string">\</span><br>  swr.cn-north-<span class="hljs-number">4.myhuaweicloud</span>.com/ddn-k8s/docker.io/homeassistant/home-assistant:latest<br></code></pre></td></tr></table></figure>
+
+<p>Docker Compose</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-symbol">services:</span><br>  <span class="hljs-symbol">homeassistant:</span><br>    <span class="hljs-symbol">container_name:</span> homeassistant<br>    <span class="hljs-symbol">image:</span> <span class="hljs-string">&quot;homeassistant/home-assistant:latest&quot;</span><br>    <span class="hljs-symbol">volumes:</span><br>      - <span class="hljs-regexp">/自定义路径:/config</span><br>      - <span class="hljs-regexp">/etc/localtime</span><span class="hljs-symbol">:/etc/localtime</span><span class="hljs-symbol">:ro</span><br>      - <span class="hljs-regexp">/run/dbus</span><span class="hljs-symbol">:/run/dbus</span><span class="hljs-symbol">:ro</span><br>    <span class="hljs-symbol">restart:</span> <span class="hljs-keyword">unless</span>-stopped<br>    <span class="hljs-symbol">privileged:</span> <span class="hljs-literal">true</span><br>    <span class="hljs-symbol">network_mode:</span> host<br>    <span class="hljs-symbol">environment:</span><br>      <span class="hljs-variable constant_">TZ</span>: <span class="hljs-title class_">Asia</span>/<span class="hljs-title class_">Shanghai</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker compose up -d</span><br></code></pre></td></tr></table></figure>
+
+<p>浏览器输入 <code>ip:8123</code> 进入Home Assistant界面</p>
+<h3 id="安装HACS"><a href="#安装HACS" class="headerlink" title="安装HACS"></a>安装HACS</h3><p>HACS,全称Home Assistant Community Store，意思是 家庭助理社区商店。</p>
+<p>HACS可以为您提供一个强大的Ul来处理所有自定义需求的下载，可以理解为 Home Assistant 上的一个第三方应用商店。</p>
+<p>关于HACS的安装可以参考官网： <a target="_blank" rel="noopener" href="https://hacs.xyz/docs/setup/download">https://hacs.xyz/docs/setup/download</a></p>
+<p>我们在 homeasststant 目录（&#x2F;root&#x2F;docker&#x2F;HA&#x2F;）下创建一个名为 custom_components 的文件夹，再创建一个hacs文件夹</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/root/</span>docker<span class="hljs-regexp">/HA/</span>custom_components/hacs<br></code></pre></td></tr></table></figure>
+
+<p>下载<a target="_blank" rel="noopener" href="https://github.com/hacs/integration/releases/download/2.0.5/hacs.zip">https://github.com/hacs/integration/releases/download/2.0.5/hacs.zip</a> 并解压到<code>/root/docker/HA/custom_components/hacs</code></p>
+<p>重启 Home Assistant.</p>
+<h2 id="添加HACS商店"><a href="#添加HACS商店" class="headerlink" title="添加HACS商店"></a>添加HACS商店</h2><p>点击配置&gt;设备与服务&gt;添加集成&gt;HACS</p>
+<p>全部勾选后点击提交</p>
+<p>在弹出的界面点击GitHub链接，将8位验证码输入GitHub链接进行绑定</p>
+<p>如果提示could_not_register，请在容器内执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> 20.205.243.166  github.com &gt;&gt; /etc/hosts<br></code></pre></td></tr></table></figure>
+
+<p>刷新网页后就可以点击HACS 安装应用了</p>
+<p>例如xiaomi_home 和xiaomi_miot</p>
+<p>当然你也可以手动安装</p>
+<p>例如下载<a target="_blank" rel="noopener" href="https://ghp.quickso.cn/github.com/al-one/hass-xiaomi-miot/releases/download/v1.1.4/xiaomi_miot.zip">https://ghp.quickso.cn/github.com/al-one/hass-xiaomi-miot/releases/download/v1.1.4/xiaomi_miot.zip</a> 解压到</p>
+<p><code>/root/docker/HA/custom_components/xiaomi_miot/</code></p>
+<h1 id="Home-Assistant-米家集成"><a href="#Home-Assistant-米家集成" class="headerlink" title="Home Assistant 米家集成"></a>Home Assistant 米家集成</h1><p>这里讲一下Home Assistant 米家集成的使用</p>
+<p>米家集成是一个由小米官方提供支持的 Home Assistant 的集成组件，它可以让您在 Home Assistant 中使用小米 IoT 智能设备。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/XiaoMi/ha_xiaomi_home">https://github.com/XiaoMi/ha_xiaomi_home</a></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p><a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/brand/?brand=xiaomi_home">设置 &gt; 设备与服务 &gt; 添加集成</a> &gt; 搜索“<code>Xiaomi Home</code>” &gt; 下一步 &gt; 请点击此处进行登录 &gt; 使用小米账号登录</p>
+<p><a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/config_flow_start/?domain=xiaomi_home"><img src="https://camo.githubusercontent.com/d8ac4e6e791cd4d420e5438690e66a33b26409d097b26aa0dcc9b60b007484a9/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f636f6e6669675f666c6f775f73746172742e737667" srcset="/img/loading.gif" lazyload alt="打开您的 Home Assistant 实例并开始配置一个新的米家集成实例。"></a></p>
+<h3 id="添加-MIoT-设备"><a href="#添加-MIoT-设备" class="headerlink" title="添加 MIoT 设备"></a>添加 MIoT 设备</h3><p>登录成功后，会弹出会话框“选择家庭与设备”。您可以选择需要添加的米家家庭，该家庭内的所有设备将导入 Home Assistant 。</p>
+<h3 id="多账号登录"><a href="#多账号登录" class="headerlink" title="多账号登录"></a>多账号登录</h3><p>用一个小米账号登录并配置完成后，您可以在 Xiaomi Home Integration 页面中继续添加其他小米账号。</p>
+<p>方法：<a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/integration/?domain=xiaomi_home">设置 &gt; 设备与服务 &gt; 已配置 &gt; Xiaomi Home</a> &gt; 添加中枢 &gt; 下一步 &gt; 请点击此处进行登录 &gt; 使用小米账号登录</p>
+<p><a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/integration/?domain=xiaomi_home"><img src="https://camo.githubusercontent.com/fa9db7ce5befc41824211651d3aca5d6887ca4f32e2d20de30f1fea48aab315c/68747470733a2f2f6d792e686f6d652d617373697374616e742e696f2f6261646765732f696e746567726174696f6e2e737667" srcset="/img/loading.gif" lazyload alt="打开您的 Home Assistant 实例并显示米家集成。"></a></p>
+<h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>在会话框“配置选项”中，可选择需要变更的配置项。您可以修改用户昵称或更新从米家 APP 导入的设备列表。</p>
+<p>方法：<a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/integration/?domain=xiaomi_home">设置 &gt; 设备与服务 &gt; 已配置 &gt; Xiaomi Home</a> &gt; 配置 &gt; 选择需要变更的配置项</p>
+<p>其他具体使用可以参考官网文档<a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/">https://www.home-assistant.io/docs/</a></p>
+<p>或者第三方</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.wghaos.com/">https://wiki.wghaos.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://ha-doc.hasscn.top/">https://ha-doc.hasscn.top/</a></p>
+<p><a target="_blank" rel="noopener" href="https://bbs.hassbian.com/forum-38-1.html">https://bbs.hassbian.com/forum-38-1.html</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
+      
+        <a href="/tags/HomeAssistant/" class="print-no-link">#HomeAssistant</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HomeAssistant安装</div>
+      <div>https://blog.quickso.cn/2026/03/21/HomeAssistant安装/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/03/31/VOLMET%E8%88%AA%E7%A9%BA%E6%B0%94%E8%B1%A1%E8%B5%84%E6%96%99%E6%8E%A5%E6%94%B6/" title="VOLMET航空气象资料接收">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VOLMET航空气象资料接收</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/03/18/Hexo-Admin%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8/" title="Hexo-Admin管理插件使用">
+                        <span class="hidden-mobile">Hexo-Admin管理插件使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div><a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"></a><p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 | 由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp;<a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p></div><p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a> </p><br>萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2026 欢哥科技</a></p> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
