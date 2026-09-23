@@ -1,0 +1,1351 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  <link rel="icon" href="https://gcore.jsdelivr.net/gh/muzihuaner/huancdn/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="木子欢儿">
+  <meta name="keywords" content="欢哥,欢哥科技,木子欢儿,技术分享，免费资源，影视资源，活动资源，薅羊毛，软件分享">
+  
+    <meta name="description" content="RustDesk 是一款著名的开源、跨平台远程桌面控制软件，被广泛视为 TeamViewer 和 AnyDesk 的最佳免费替代方案。它主要使用 Rust 语言编写，核心亮点在于支持端到端加密 P2P 连接与完全自主的服务器自建（Self-Hosting），让用户能 100% 掌控自己的数据安全 核心功能与特性  🌐 超强跨平台支持：全面覆盖 Windows、macOS、Linux、Androi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RustDesk远程桌面自建服务教程">
+<meta property="og:url" content="https://blog.quickso.cn/2026/09/23/RustDesk%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%87%AA%E5%BB%BA%E6%9C%8D%E5%8A%A1%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="点滴记忆">
+<meta property="og:description" content="RustDesk 是一款著名的开源、跨平台远程桌面控制软件，被广泛视为 TeamViewer 和 AnyDesk 的最佳免费替代方案。它主要使用 Rust 语言编写，核心亮点在于支持端到端加密 P2P 连接与完全自主的服务器自建（Self-Hosting），让用户能 100% 掌控自己的数据安全 核心功能与特性  🌐 超强跨平台支持：全面覆盖 Windows、macOS、Linux、Androi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-23T08:52:59.000Z">
+<meta property="article:modified_time" content="2026-09-23T09:03:23.741Z">
+<meta property="article:author" content="木子欢儿">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="RustDesk">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>RustDesk远程桌面自建服务教程 - 点滴记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.quickso.cn","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"vCSfhscKm7pmw1cq1x3LTIMN-gzGzoHsz","app_key":"dztAP0R9o4XPmG8S66HGeHc7","server_url":"https://vcsfhsck.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="点滴记忆" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>点滴记忆</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss-fill"></i>
+                <span>Rss</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>自留地</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://quickso.cn" target="_self">
+                    
+                    <span>快点搜</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://ham.quickso.cn" target="_self">
+                    
+                    <span>快点HAM工具箱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://huancloud.cn" target="_self">
+                    
+                    <span>欢云</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://status.quickso.cn" target="_self">
+                    
+                    <span>探针</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/atom.xml" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-rss-fill"></i>
+                  <span>Rss</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            
+            <div class="col-12 mobile-grid-group-header">
+              <i class="iconfont icon-books"></i>
+              <span>自留地</span>
+            </div>
+            
+              
+              
+              
+              <div class="col-4 mobile-grid-cell">
+                <a href="https://quickso.cn" target="_self">
+                  <div class="mobile-grid-item">
+                    <i class="iconfont icon-link-fill"></i>
+                    <span>快点搜</span>
+                  </div>
+                </a>
+              </div>
+            
+              
+              
+              
+              <div class="col-4 mobile-grid-cell">
+                <a href="https://ham.quickso.cn" target="_self">
+                  <div class="mobile-grid-item">
+                    <i class="iconfont icon-link-fill"></i>
+                    <span>快点HAM工具箱</span>
+                  </div>
+                </a>
+              </div>
+            
+              
+              
+              
+              <div class="col-4 mobile-grid-cell">
+                <a href="https://huancloud.cn" target="_self">
+                  <div class="mobile-grid-item">
+                    <i class="iconfont icon-link-fill"></i>
+                    <span>欢云</span>
+                  </div>
+                </a>
+              </div>
+            
+              
+              
+              
+              <div class="col-4 mobile-grid-cell">
+                <a href="https://status.quickso.cn" target="_self">
+                  <div class="mobile-grid-item">
+                    <i class="iconfont icon-link-fill"></i>
+                    <span>探针</span>
+                  </div>
+                </a>
+              </div>
+            
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://api.paugram.com/wallpaper/') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="RustDesk远程桌面自建服务教程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        木子欢儿
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-09-23 16:52" pubdate>
+          2026年9月23日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">RustDesk远程桌面自建服务教程</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年9月23日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>RustDesk</strong> <strong>是一款著名的开源、跨平台远程桌面控制软件</strong>，被广泛视为 TeamViewer 和 AnyDesk 的最佳免费替代方案。它主要使用 <strong>Rust 语言</strong>编写，核心亮点在于支持<strong>端到端加密 P2P 连接</strong>与<strong>完全自主的服务器自建（Self-Hosting）</strong>，让用户能 100% 掌控自己的数据安全</p>
+<p>核心功能与特性</p>
+<ul>
+<li>🌐 <strong>超强跨平台支持</strong>：全面覆盖 Windows、macOS、Linux、Android、iOS 和 Web 网页端。由于系统限制，iOS 设备仅支持投屏，无法作为被控端。</li>
+<li>🔒 <strong>安全与自托管</strong>：提供免费的中继服务器程序，用户可在自己的 VPS 或本地 NAS（支持 Docker）上自建 RustDesk 中继服务器，彻底摆脱第三方 SaaS 平台的稳定性和隐私限制。</li>
+<li>🚀 <strong>高效编解码</strong>：支持 H.264&#x2F;H.265 硬件加速以及 VP8&#x2F;VP9&#x2F;AV1 软件编解码，即使在低带宽下也能通过调整画质和帧率来保证流畅度。</li>
+<li>🛠️ <strong>免安装与高级功能</strong>：在 Windows 系统上支持免管理员权限</li>
+</ul>
+<h2 id="为什么自建-RustDesk-服务端"><a href="#为什么自建-RustDesk-服务端" class="headerlink" title="为什么自建 RustDesk 服务端"></a>为什么自建 RustDesk 服务端</h2><table>
+<thead>
+<tr>
+<th>自建服务端</th>
+<th>vs</th>
+<th>官方公共服务器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🚀 国内服务器，延迟 10-30ms</td>
+<td></td>
+<td>海外节点，延迟 200ms+</td>
+</tr>
+<tr>
+<td>🔒 数据经过你自己的服务器</td>
+<td></td>
+<td>数据经过公共中继</td>
+</tr>
+<tr>
+<td>🆓 服务端开源，完全免费</td>
+<td></td>
+<td>免费但有速率限制</td>
+</tr>
+<tr>
+<td>👥 Web 后台统一管理设备</td>
+<td></td>
+<td>无管理面板</td>
+</tr>
+</tbody></table>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p><strong>两个核心组件</strong>：</p>
+<ul>
+<li><strong>hbbs（ID 服务器）</strong>：端口 <code>21114-21116</code>。负责设备注册、发现，提供 Web 后台和 API 服务</li>
+<li><strong>hbbr（中继服务器）</strong>：端口 <code>21117-21119</code>。P2P 直连失败时盲转发加密数据包</li>
+</ul>
+<p><strong>连接流程</strong>：</p>
+<ol>
+<li>被控端启动 → 向 hbbs 注册（提交设备 ID 和网络信息）</li>
+<li>控制端向 hbbs 查询目标设备 → 尝试 <strong>P2P 直连</strong>（低延迟）</li>
+<li>直连失败（NAT 穿透失败）→ 双方通过 <strong>hbbr 中继转发</strong>，端到端加密，hbbr 无法解密</li>
+</ol>
+<h2 id="步骤-1：准备服务器"><a href="#步骤-1：准备服务器" class="headerlink" title="步骤 1：准备服务器"></a>步骤 1：准备服务器</h2><p>需一台有<strong>公网 IP</strong> 的 Linux 服务器：</p>
+<p> 2 核 2G</p>
+<p>带宽建议 ≥ 5Mbps</p>
+<h2 id="步骤-2：安装-Docker"><a href="#步骤-2：安装-Docker" class="headerlink" title="步骤 2：安装 Docker"></a>步骤 2：安装 Docker</h2><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">ssh <span class="hljs-symbol">root@</span>你的服务器IP<br></code></pre></td></tr></table></figure>
+
+<p>访问 <a target="_blank" rel="noopener" href="https://getdocker.quickso.cn/">https://getdocker.quickso.cn</a></p>
+<p>一键安装Docker</p>
+<h2 id="步骤-3：部署服务端"><a href="#步骤-3：部署服务端" class="headerlink" title="步骤 3：部署服务端"></a>步骤 3：部署服务端</h2><h3 id="创建项目目录"><a href="#创建项目目录" class="headerlink" title="创建项目目录"></a>创建项目目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /opt/rustdesk-server &amp;&amp; <span class="hljs-built_in">cd</span> /opt/rustdesk-server<br></code></pre></td></tr></table></figure>
+
+<h3 id="编写-docker-compose-yaml"><a href="#编写-docker-compose-yaml" class="headerlink" title="编写 docker-compose.yaml"></a>编写 docker-compose.yaml</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">nano</span> docker-compose.yaml<br></code></pre></td></tr></table></figure>
+
+<p>写入（<strong>将 <code>&lt;IP&gt;</code> 替换为服务器公网 IP或者你的域名</strong>）：</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">services</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">rustdesk</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">image</span><span class="hljs-punctuation">:</span> <span class="hljs-string">lejianwen/rustdesk-server-s6:latest</span><br>    <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">21114:21114</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">21115:21115</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">21116:21116</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">21116:21116/udp</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">21117:21117</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">21118:21118</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">21119:21119</span><br>    <span class="hljs-attribute">environment</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RELAY=&lt;IP&gt;:21117</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">ENCRYPTED_ONLY=1</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">MUST_LOGIN=N</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">TZ=Asia/Shanghai</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTDESK_API_RUSTDESK_ID_SERVER=&lt;IP&gt;:21116</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTDESK_API_RUSTDESK_RELAY_SERVER=&lt;IP&gt;:21117</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTDESK_API_RUSTDESK_API_SERVER=http://&lt;IP&gt;:21114</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTDESK_API_KEY_FILE=/data/id_ed25519.pub</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">RUSTDESK_API_JWT_KEY=</span><br>    <span class="hljs-attribute">volumes</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./data/server:/data</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./data/api:/app/data</span><br>    <span class="hljs-attribute">networks</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">rustdesk-net</span><br>    <span class="hljs-attribute">restart</span><span class="hljs-punctuation">:</span> <span class="hljs-string">unless-stopped</span><br><br><span class="hljs-attribute">networks</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">rustdesk-net</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">external</span><span class="hljs-punctuation">:</span> <span class="hljs-string">false</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📝 <strong>关键变量说明</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ENCRYPTED_ONLY=1</code></td>
+<td>仅允许加密连接（强烈推荐保留）</td>
+</tr>
+<tr>
+<td><code>MUST_LOGIN=N</code></td>
+<td><code>N</code> &#x3D; 允许匿名连接；<code>Y</code> &#x3D; 必须登录账户才能用</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker compose up -d</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="开放防火墙"><a href="#开放防火墙" class="headerlink" title="开放防火墙"></a>开放防火墙</h3><table>
+<thead>
+<tr>
+<th>端口</th>
+<th>协议</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>21114</td>
+<td>TCP</td>
+<td>Web 后台 + API</td>
+</tr>
+<tr>
+<td>21115</td>
+<td>TCP</td>
+<td>NAT 类型测试</td>
+</tr>
+<tr>
+<td>21116</td>
+<td>TCP + UDP</td>
+<td>ID 服务器</td>
+</tr>
+<tr>
+<td>21117</td>
+<td>TCP</td>
+<td>中继服务器</td>
+</tr>
+<tr>
+<td>21118</td>
+<td>TCP</td>
+<td>WebSocket</td>
+</tr>
+<tr>
+<td>21119</td>
+<td>TCP</td>
+<td>WebSocket</td>
+</tr>
+</tbody></table>
+<p><strong>云控制台</strong>：安全组 → 入方向 → 添加 TCP 21114-21119 + UDP 21116，来源 <code>0.0.0.0/0</code>。</p>
+<p><strong>服务器本地</strong>：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># Ubuntu/Debian</span><br><span class="hljs-attribute">ufw</span> <span class="hljs-literal">allow</span> <span class="hljs-number">21114</span>:<span class="hljs-number">21119</span>/tcp &amp;&amp; ufw <span class="hljs-literal">allow</span> <span class="hljs-number">21116</span>/udp<br><br><span class="hljs-comment"># CentOS/RHEL</span><br><span class="hljs-attribute">firewall</span>-cmd --add-port=<span class="hljs-number">21114</span>-<span class="hljs-number">21119</span>/tcp --permanent<br><span class="hljs-attribute">firewall</span>-cmd --add-port=<span class="hljs-number">21116</span>/udp --permanent<br><span class="hljs-attribute">firewall</span>-cmd --reload<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="步骤-4：获取-Key-和密码"><a href="#步骤-4：获取-Key-和密码" class="headerlink" title="步骤 4：获取 Key 和密码"></a>步骤 4：获取 Key 和密码</h2><h3 id="Key（公钥）"><a href="#Key（公钥）" class="headerlink" title="Key（公钥）"></a>Key（公钥）</h3><p>所有客户端连接服务端的凭证，<strong>必须妥善保存</strong>：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">cat</span> /<span class="hljs-meta">opt</span>/rustdesk-server/<span class="hljs-meta">data</span>/server/id_ed25519.pub<br></code></pre></td></tr></table></figure>
+
+<p>输出类似 <code>OQd8dJxxxxxxxxxxxxxxxxxxxxxxx=</code>，复制到安全位置备用。</p>
+<h3 id="管理员密码"><a href="#管理员密码" class="headerlink" title="管理员密码"></a>管理员密码</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">docker compose logs <span class="hljs-string">| grep Password</span><br></code></pre></td></tr></table></figure>
+
+<p>输出类似 <code>Initial admin password: AbCd1234</code>。<strong>此密码仅首次启动生成，建议立即登录后台修改。</strong></p>
+<hr>
+<h2 id="步骤-5：后台管理"><a href="#步骤-5：后台管理" class="headerlink" title="步骤 5：后台管理"></a>步骤 5：后台管理</h2><p>浏览器访问 <code>http://你的服务器IP:21114</code>。</p>
+<ul>
+<li>用户名：<code>admin</code></li>
+<li>密码：上一步获取的随机密码</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>常用操作</th>
+<th>路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>修改密码</td>
+<td>系统 → 用户管理 → 点击 admin</td>
+</tr>
+<tr>
+<td>创建子账户</td>
+<td>系统 → 用户管理 → 新建</td>
+</tr>
+<tr>
+<td>查看&#x2F;删除设备</td>
+<td>系统 → 设备管理</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 登录后立即修改默认密码，并为家人&#x2F;同事创建独立子账户。</p>
+</blockquote>
+<hr>
+<h2 id="步骤-6：客户端配置（Windows-MacOS-Linux-安卓-iOS）"><a href="#步骤-6：客户端配置（Windows-MacOS-Linux-安卓-iOS）" class="headerlink" title="步骤 6：客户端配置（Windows\MacOS\Linux\安卓\iOS）"></a>步骤 6：客户端配置（Windows\MacOS\Linux\安卓\iOS）</h2><h3 id="①-下载-RustDesk"><a href="#①-下载-RustDesk" class="headerlink" title="① 下载 RustDesk"></a>① 下载 RustDesk</h3><p><a target="_blank" rel="noopener" href="https://github.com/rustdesk/rustdesk/releases/latest">https://github.com/rustdesk/rustdesk/releases/latest</a></p>
+<p>选择 你的客户端版本。</p>
+<h3 id="②-网络设置（两端都需要）"><a href="#②-网络设置（两端都需要）" class="headerlink" title="② 网络设置（两端都需要）"></a>② 网络设置（两端都需要）</h3><ol>
+<li>打开 RustDesk → 左侧「网络」→ 右上角「解锁」</li>
+<li>填写：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ID 服务器</td>
+<td><code>你的IP:21116</code></td>
+</tr>
+<tr>
+<td>中继服务器</td>
+<td><code>你的IP:21117</code></td>
+</tr>
+<tr>
+<td>API 服务器</td>
+<td><code>http://你的IP:21114</code></td>
+</tr>
+<tr>
+<td>Key</td>
+<td>粘贴 <code>id_ed25519.pub</code> 完整内容</td>
+</tr>
+</tbody></table>
+<ol>
+<li>点击「应用」</li>
+</ol>
+<blockquote>
+<p>右上角可复制&#x2F;粘贴配置，多设备快速部署。</p>
+</blockquote>
+<h3 id="③-被控端设置"><a href="#③-被控端设置" class="headerlink" title="③ 被控端设置"></a>③ 被控端设置</h3><p>「安全」→ 解锁 → 密码 → 选择「使用固定密码」→ 设置强密码。</p>
+<h3 id="④-账户登录（两端）"><a href="#④-账户登录（两端）" class="headerlink" title="④ 账户登录（两端）"></a>④ 账户登录（两端）</h3><p>点击底部用户图标 → 用 <code>admin</code> 或子账户登录。登录后可在设备列表直接看到在线设备，双击连接。</p>
+<h3 id="⑤-仅控制他人时"><a href="#⑤-仅控制他人时" class="headerlink" title="⑤ 仅控制他人时"></a>⑤ 仅控制他人时</h3><p>「常规」→ 服务 → 点击「停止」，避免自身成为被控端。</p>
+<hr>
+<h2 id="步骤-7：安全加固与维护"><a href="#步骤-7：安全加固与维护" class="headerlink" title="步骤 7：安全加固与维护"></a>步骤 7：安全加固与维护</h2><h3 id="强制账户登录"><a href="#强制账户登录" class="headerlink" title="强制账户登录"></a>强制账户登录</h3><p>编辑 <code>docker-compose.yaml</code>：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">- <span class="hljs-attribute">MUST_LOGIN</span>=Y<br></code></pre></td></tr></table></figure>
+
+<p>重启：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">docker compose <span class="hljs-meta">down</span> &amp;&amp; docker compose <span class="hljs-meta">up</span> -d<br></code></pre></td></tr></table></figure>
+
+<p>之后未登录用户无法使用，防止未授权接入。</p>
+<h3 id="定期备份"><a href="#定期备份" class="headerlink" title="定期备份"></a>定期备份</h3><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">tar -czf rustdesk-backup-$(<span class="hljs-keyword">date</span> +%Y%m%d).tar.gz /opt/rustdesk-server/data/<br></code></pre></td></tr></table></figure>
+
+<h3 id="更新服务端"><a href="#更新服务端" class="headerlink" title="更新服务端"></a>更新服务端</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> /<span class="hljs-keyword">opt</span>/rustdesk-server<br>docker compose pull<br>docker compose down &amp;&amp; docker compose <span class="hljs-keyword">up</span> -d<br></code></pre></td></tr></table></figure>
+
+<h3 id="安全速查"><a href="#安全速查" class="headerlink" title="安全速查"></a>安全速查</h3><table>
+<thead>
+<tr>
+<th>措施</th>
+<th>重要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>修改默认管理员密码</td>
+<td>🔴 必须</td>
+</tr>
+<tr>
+<td>启用 MUST_LOGIN&#x3D;Y</td>
+<td>🟡 推荐</td>
+</tr>
+<tr>
+<td>被控端使用强固定密码</td>
+<td>🔴 必须</td>
+</tr>
+<tr>
+<td>定期更新镜像</td>
+<td>🟡 推荐</td>
+</tr>
+<tr>
+<td>定期备份 data 目录</td>
+<td>🟡 推荐</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="在-RemoteDesk-中使用"><a href="#在-RemoteDesk-中使用" class="headerlink" title="在 RemoteDesk 中使用"></a>在 RemoteDesk 中使用</h2><h3 id="配置自建服务器"><a href="#配置自建服务器" class="headerlink" title="配置自建服务器"></a>配置自建服务器</h3><p>在 RemoteDesk 的 RustDesk 设置中填写：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ID 服务器</td>
+<td><code>你的IP:21116</code></td>
+</tr>
+<tr>
+<td>中继服务器</td>
+<td><code>你的IP:21117</code></td>
+</tr>
+<tr>
+<td>API 服务器</td>
+<td><code>http://你的IP:21114</code></td>
+</tr>
+<tr>
+<td>Key</td>
+<td><code>id_ed25519.pub</code> 内容</td>
+</tr>
+</tbody></table>
+<h3 id="添加主机"><a href="#添加主机" class="headerlink" title="添加主机"></a>添加主机</h3><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>填写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主机名称</td>
+<td>我的 Windows</td>
+</tr>
+<tr>
+<td>协议</td>
+<td>RustDesk</td>
+</tr>
+<tr>
+<td>地址</td>
+<td>目标设备 RustDesk ID（客户端首页 9 位数字）</td>
+</tr>
+<tr>
+<td>密码</td>
+<td>被控端固定密码</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h2><p><strong>Q: 客户端显示「未连接到服务器」？</strong></p>
+<p>→ ① 确认云安全组已开放全部 7 个端口（TCP 21114-21119 + UDP 21116）<br>→ ② 确认 Key 完整粘贴，无多余空格换行<br>→ ③ 确认 ID 服务器格式为 <code>IP:21116</code>（不带 <code>http://</code>）<br>→ ④ <code>docker compose ps</code> 确认容器状态为 Up</p>
+<p><strong>Q: 连接上了但非常卡？</strong></p>
+<p>→ P2P 直连失败，走了中继转发。优化：确保安全组开放 UDP 21116（打洞依赖），临时关闭 Windows 防火墙测试，升级服务器带宽。</p>
+<p><strong>Q: Web 后台 502 &#x2F; 无法访问？</strong></p>
+<p>→ <code>docker compose ps</code> 确认运行中 → 安全组确认 TCP 21114 开放 → 浏览器用 <code>http://</code> 而非 <code>https://</code></p>
+<p><strong>Q: 如何查看当前连接状态？</strong></p>
+<p>→ <code>docker compose logs --tail=50</code> 查看实时日志。</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a target="_blank" rel="noopener" href="https://lijiong.online/2026/06/22/RustDesk%E8%87%AA%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%99%E7%A8%8B/">https://lijiong.online/2026/06/22/RustDesk%E8%87%AA%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%99%E7%A8%8B/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.liups.net/2026/05/docker-%E8%87%AA%E5%BB%BA-rustdesk-%E8%BF%9C%E7%A8%8B%E5%92%8C-api-%E6%9C%8D%E5%8A%A1/">https://www.liups.net/2026/05/docker-%E8%87%AA%E5%BB%BA-rustdesk-%E8%BF%9C%E7%A8%8B%E5%92%8C-api-%E6%9C%8D%E5%8A%A1/</a></p>
+<p><a target="_blank" rel="noopener" href="https://hoshiroko.com/posts/course/rustdesk">https://hoshiroko.com/posts/course/rustdesk</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
+      
+        <a href="/tags/RustDesk/" class="print-no-link">#RustDesk</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>RustDesk远程桌面自建服务教程</div>
+      <div>https://blog.quickso.cn/2026/09/23/RustDesk远程桌面自建服务教程/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>木子欢儿</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年9月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/08/07/llama-cpp%E7%BA%AFCPU%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97/" title="llama.cpp纯CPU部署指南">
+                        <span class="hidden-mobile">llama.cpp纯CPU部署指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appKey":"tSIHHyoyQELmnHfrpSpoBaFc","path":"window.location.pathname","placeholder":"快来评论吧~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true,"appid":"glYUMlWRKXEjw3OeqcDDTv9P-gzGzoHsz","appkey":"tSIHHyoyQELmnHfrpSpoBaFc"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div><a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://www.travellings.cn/assets/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"></a><p>本站使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluid-dev/hexo-theme-fluid" data-pjax-state="">Fluid</a> 作为主题 |  由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-cn/" data-pjax-state="">Hexo</a> 强力驱动 | 由 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com" data-pjax-state="">Github</a> 托管 &amp;<a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.cloudflare.com/" data-pjax-state="">Cloudflare</a>提供加速服务</p></div><p><a target="_blank" rel="noopener external nofollow noreferrer" href="/sitemap.xml" data-pjax-state="">Sitemap</a> </p><br>萌ICP备 <a href="https://icp.gov.moe/?keyword=20219946" target="_blank"> 20219946号</a> <br><div class="copyright"> <p><a target="_blank" rel="noopener" href="https://huangetech.github.io">Copyright © 2016-2026 欢哥科技</a></p> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
