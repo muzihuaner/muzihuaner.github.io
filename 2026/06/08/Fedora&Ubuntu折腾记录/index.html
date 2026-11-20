@@ -27,7 +27,7 @@
 <meta property="og:description" content="Fedora https:&#x2F;&#x2F;www.fedoraproject.org&#x2F;zh-Hans&#x2F; Ubuntu https:&#x2F;&#x2F;cn.ubuntu.com&#x2F;desktop 这里我们使用Gnome桌面版本，体验比较像MacOS 安装安装系统将 https:&#x2F;&#x2F;ventoy.net&#x2F; 写入U盘，下载iso镜像丢进去，U盘启动即可。详细步骤略 配置系统1.修改root密码 1sudo passwd root">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-08T02:44:49.000Z">
-<meta property="article:modified_time" content="2026-09-19T09:50:52.866Z">
+<meta property="article:modified_time" content="2026-11-20T12:05:57.679Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Fedora">
 <meta property="article:tag" content="Linux">
@@ -494,7 +494,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.6k 字
+          5.3k 字
         
       </span>
     
@@ -505,7 +505,7 @@
         
         
         
-          39 分钟
+          45 分钟
         
       </span>
     
@@ -549,7 +549,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年9月19日 下午
+                    本文最后更新于 2026年11月20日 晚上
                   
                 
               </p>
@@ -575,7 +575,7 @@
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">flatpak remote-add <span class="hljs-params">--if-not-exists</span> flathub https:<span class="hljs-string">//dl.flathub.org/repo/flathub.flatpakrepo</span><br>flatpak remote-modify flathub <span class="hljs-params">--url=https</span>:<span class="hljs-string">//mirrors.ustc.edu.cn/flathub</span><br></code></pre></td></tr></table></figure>
 
 <h4 id="zsh-安装与配置"><a href="#zsh-安装与配置" class="headerlink" title="zsh 安装与配置"></a>zsh 安装与配置</h4><p>参考 <a target="_blank" rel="noopener" href="https://www.haoyep.com/posts/zsh-config-oh-my-zsh/">https://www.haoyep.com/posts/zsh-config-oh-my-zsh/</a></p>
-<h4 id="Gnome相关"><a href="#Gnome相关" class="headerlink" title="Gnome相关"></a>Gnome相关</h4><p>GNOME Tweaks 是一款用于个性化桌面体验的工具，它允许用户自定义默认字体、窗口管理、工作区等多个方面。</p>
+<h4 id="Gnome拓展"><a href="#Gnome拓展" class="headerlink" title="Gnome拓展"></a>Gnome拓展</h4><p>GNOME Tweaks 是一款用于个性化桌面体验的工具，它允许用户自定义默认字体、窗口管理、工作区等多个方面。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dnf install gnome-tweaks<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install gnome-tweaks<br></code></pre></td></tr></table></figure>
@@ -611,7 +611,7 @@
 </li>
 <li><p>User Themes：允许从用户目录下加载自定义的 Shell 主题，是深度定制皮肤的必备前提。</p>
 </li>
-<li><p>AppIndicator and KStatusNotifierItem Support：让托盘图标（如 Discord、网易云音乐、Telegram）重新出现在顶栏右侧，解决 GNOME 默认不显示第三方应用图标的问题。</p>
+<li><p>AppIndicator and KStatusNotifierItem Support：让托盘图标（如 Discord、网易云音乐、Telegram）重新出现在顶栏右侧，解决 GNOME 默认不显示第三方应用图标的问题(最新系统貌似修复了)。</p>
 </li>
 <li><p>Coverflow Alt-Tab: 改进 Alt+Tab 切换窗口的视觉效果，采用类似macOS的Coverflow立体翻转样式。</p>
 </li>
@@ -627,6 +627,8 @@
 <li><p>Vitals：在顶栏实时监控 CPU 温度、频率、内存使用率、风扇转速以及网络速度。它的 UI 设计非常简洁，不会显得杂乱。</p>
 </li>
 <li><p>Caffeine ：关闭屏幕保护程序和自动挂起</p>
+</li>
+<li><p>weatherpanel ：一款现代化的 GNOME Shell 天气扩展，包含详细的当前状况、每小时和多日预报，以及离线感知。</p>
 </li>
 </ul>
 <h5 id="安装rime中文输入法"><a href="#安装rime中文输入法" class="headerlink" title="安装rime中文输入法"></a>安装rime中文输入法</h5><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> ibus-table ibus-rime<br></code></pre></td></tr></table></figure>
@@ -668,9 +670,10 @@
 <p>krita：专业绘画软件，也可以当ps使用</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> krita<br></code></pre></td></tr></table></figure>
 
-<p>darktable ：Lightroom替代</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> darktable<br></code></pre></td></tr></table></figure>
-
+<p>ArtCraft全家桶 ：代替Adobe全家桶</p>
+<p><a target="_blank" rel="noopener" href="https://getartcraft.com/">https://getartcraft.com/</a></p>
+<p>ArtCraft 应用	对标商业软件	核心用途<br>PhotoCraft	Adobe Photoshop	像素级图像编辑、图层处理（支持读写 PSD）<br>VectorCraft	Adobe Illustrator	矢量插画与平面图形设计<br>FilmCraft	Adobe Premiere Pro	非线性视频剪辑与多轨时间线编辑<br>EffectCraft	Adobe After Effects	动态图形设计与视觉特效合成<br>LightCraft	Adobe Lightroom	摄影照片管理与 RAW 调色<br>DesignCraft	Adobe InDesign	杂志、画册与多页出版物排版<br>PdfCraft &#x2F; PrintCraft	Adobe Acrobat	本地 PDF 阅读、编辑与批注（免云端上传）<br>SoundCraft	Adobe Audition	音频编辑与数字音频工作站<br>WordCraft	Microsoft Word	文字处理与文档排版<br>GridCraft	Microsoft Excel	电子表格与数据处理<br>DeckCraft	Microsoft PowerPoint	演示文稿与幻灯片制作<br>CADCraft	AutoCAD	计算机辅助工程与二维制图</p>
+<h4 id="星火应用商店"><a href="#星火应用商店" class="headerlink" title="星火应用商店"></a>星火应用商店</h4><p><a target="_blank" rel="noopener" href="https://www.spark-app.store/">https://www.spark-app.store/</a></p>
 <h4 id="flatpak-安装软件"><a href="#flatpak-安装软件" class="headerlink" title="flatpak 安装软件"></a>flatpak 安装软件</h4><p><a target="_blank" rel="noopener" href="https://flathub.org/zh-Hans">https://flathub.org/zh-Hans</a></p>
 <ol>
 <li>Remmina (org.remmina.Remmina)<br>功能：远程桌面客户端</li>
@@ -700,7 +703,7 @@
 <p>特点：支持多源输入（窗口捕获、摄像头、麦克风等），可以进行实时混音和场景切换。它是目前全球主播和录屏用户的行业标准工具。</p>
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">flatpak install flathub <span class="hljs-keyword">com</span>.obsproject.Studio<br></code></pre></td></tr></table></figure>
 
-<p>LocalSend局域网互传</p>
+<p>  5.LocalSend局域网互传</p>
 <p>此应用程序允许您通过本地局域网发送文件和消息。</p>
 <p>与大多数替代方案不同，它不需要外部服务器。所有操作都在本地 Wi-Fi 网络中完成。</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">flatpak <span class="hljs-keyword">install</span> flathub org.localsend.localsend_app<br></code></pre></td></tr></table></figure>
@@ -734,10 +737,13 @@
 <p>Chrome 浏览器 <a target="_blank" rel="noopener" href="https://www.google.cn/chrome/">https://www.google.cn/chrome/</a>  </p>
 <p>QQ  <a target="_blank" rel="noopener" href="https://im.qq.com/linuxqq/index.shtml">https://im.qq.com/linuxqq/index.shtml</a></p>
 <p>微信 <a target="_blank" rel="noopener" href="https://linux.weixin.qq.com/">https://linux.weixin.qq.com/</a></p>
+<p>飞书 <a target="_blank" rel="noopener" href="https://www.feishu.cn/download">https://www.feishu.cn/download</a></p>
 <p>WPS <a target="_blank" rel="noopener" href="https://www.wps.cn/product/wpslinux">https://www.wps.cn/product/wpslinux</a></p>
 <p>Vscode <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
-<p>安装 达芬奇视频剪辑软件</p>
-<p>参考 <a target="_blank" rel="noopener" href="https://github.com/H3rz3n/How-install-DaVinci-Resolve-in-Fedora-Linux/tree/main">https://github.com/H3rz3n/How-install-DaVinci-Resolve-in-Fedora-Linux/tree/main</a></p>
+<p>Open Orpheus（网易云三方客户端） <a target="_blank" rel="noopener" href="https://github.com/YUCLing/open-orpheus">https://github.com/YUCLing/open-orpheus</a></p>
+<p>XMCL （我的世界启动器） <a target="_blank" rel="noopener" href="https://xmcl.app/zh/">https://xmcl.app/zh/</a></p>
+<p>RustDesk（远程桌面） <a target="_blank" rel="noopener" href="https://rustdesk.com/zh-cn/">https://rustdesk.com/zh-cn/</a></p>
+<p>electerm SSH客户端  <a target="_blank" rel="noopener" href="https://electerm.org/">https://electerm.org/</a></p>
 <h4 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…"></a>未完待续…</h4>
                 
               </div>
