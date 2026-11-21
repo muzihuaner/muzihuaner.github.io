@@ -27,7 +27,7 @@
 <meta property="og:description" content="Fedora https:&#x2F;&#x2F;www.fedoraproject.org&#x2F;zh-Hans&#x2F; Ubuntu https:&#x2F;&#x2F;cn.ubuntu.com&#x2F;desktop 这里我们使用Gnome桌面版本，体验比较像MacOS 安装安装系统将 https:&#x2F;&#x2F;ventoy.net&#x2F; 写入U盘，下载iso镜像丢进去，U盘启动即可。详细步骤略 配置系统1.修改root密码 1sudo passwd root">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-08T02:44:49.000Z">
-<meta property="article:modified_time" content="2026-11-20T12:05:57.679Z">
+<meta property="article:modified_time" content="2026-11-21T04:22:37.915Z">
 <meta property="article:author" content="木子欢儿">
 <meta property="article:tag" content="Fedora">
 <meta property="article:tag" content="Linux">
@@ -494,7 +494,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.3k 字
+          6.2k 字
         
       </span>
     
@@ -505,7 +505,7 @@
         
         
         
-          45 分钟
+          52 分钟
         
       </span>
     
@@ -549,7 +549,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月20日 晚上
+                    本文最后更新于 2026年11月21日 中午
                   
                 
               </p>
@@ -631,10 +631,41 @@
 <li><p>weatherpanel ：一款现代化的 GNOME Shell 天气扩展，包含详细的当前状况、每小时和多日预报，以及离线感知。</p>
 </li>
 </ul>
-<h5 id="安装rime中文输入法"><a href="#安装rime中文输入法" class="headerlink" title="安装rime中文输入法"></a>安装rime中文输入法</h5><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> ibus-table ibus-rime<br></code></pre></td></tr></table></figure>
+<h4 id="安装rime中文输入法"><a href="#安装rime中文输入法" class="headerlink" title="安装rime中文输入法"></a>安装rime中文输入法</h4><h5 id="ibus版本："><a href="#ibus版本：" class="headerlink" title="ibus版本："></a>ibus版本：</h5><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> ibus-table ibus-rime<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">apt <span class="hljs-keyword">install</span> ibus-table ibus-rime<br></code></pre></td></tr></table></figure>
 
+<h5 id="Fcitx5版本："><a href="#Fcitx5版本：" class="headerlink" title="Fcitx5版本："></a>Fcitx5版本：</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">sudo apt install -<span class="hljs-attribute">y</span> fcitx5 fcitx5-rime fcitx5-configtool fcitx5-frontend-<span class="hljs-attribute">all</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>将 Fcitx5 设为系统默认输入法框架</strong> </p>
+<p>  在终端运行：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">im-config -n fcitx5<br></code></pre></td></tr></table></figure>
+
+<p>(或者直接运行 im-config，在弹窗中一路确认并选择 fcitx5。)</p>
+<p><strong>配置环境变量</strong></p>
+<p>（确保在浏览器、Electron 应用、Qt&#x2F;GTK 程序及 Wayland&#x2F;X11 下都能正常呼出输入框）：</p>
+<p>编辑 &#x2F;etc&#x2F;environment 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> nano /etc/environment<br></code></pre></td></tr></table></figure>
+
+<p>在文件末尾添加以下内容（如果已有则修改）：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">GTK_IM_MODULE</span>=fcitx<br><span class="hljs-attr">QT_IM_MODULE</span>=fcitx<br><span class="hljs-attr">XMODIFIERS</span>=@im=fcitx<br></code></pre></td></tr></table></figure>
+
+<p>按 Ctrl + O 保存，Enter 确认，Ctrl + X 退出。注销（Log Out）或重启电脑，使环境变量和输入法框架生效。</p>
+<p><strong>在 Fcitx5 中添加 Rime</strong></p>
+<p>重新登录后，在应用菜单中打开 Fcitx 5 配置（或在终端运行 fcitx5-configtool）。   在右侧「可用输入法」列表中搜索 Rime，选中它并点击中间的左箭头（&lt;），将其添加到左侧的「当前输入法」中。  </p>
+<p> 建议保留「键盘 - 英语」在第一位，Rime 在第二位，方便中英文切换。   </p>
+<p><strong>安装「雾凇拼音」词库</strong></p>
+<p>Rime 默认自带的词库较为基础。如果你希望获得接近现代商业输入法的词库体验，可以配置社区最流行的 雾凇拼音 (rime-ice)：</p>
+<p>备份原有配置（如果有）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> ~/.local/share/fcitx5/rime ~/.local/share/fcitx5/rime.bak<br></code></pre></td></tr></table></figure>
+
+<p>克隆雾凇拼音配置到 Rime 目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> --depth=1 https://github.com/iDvel/rime-ice.git ~/.local/share/fcitx5/rime<br></code></pre></td></tr></table></figure>
+
+<p>触发重新部署（也可在右上角托盘图标右键点击“重新部署”）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">fcitx5-remote -<span class="hljs-attribute">r</span><br></code></pre></td></tr></table></figure>
+
+<p>中文输入法前提下，按F4键或者ctrl+~选择“雾凇拼音”</p>
 <p><strong>Tips：</strong> </p>
 <p>1.修改文字排列为横列</p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dts">nano ~/.config<span class="hljs-keyword">/ibus/</span>rime<span class="hljs-keyword">/build/</span>ibus_rime.yaml<br>修改<br><span class="hljs-symbol">horizontal:</span> true<br></code></pre></td></tr></table></figure>
